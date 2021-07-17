@@ -1,6 +1,6 @@
 <?php namespace App\Controllers;
 
-class View extends BaseController
+class SchoolView extends BaseController
 {
 	public function index()
 	{
@@ -9,7 +9,7 @@ class View extends BaseController
 
     public function home()
 	{
-		return view('admin/home');
+		return view('school/home');
 	}
 
 	//--------------------------------------------------------------------
