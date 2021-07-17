@@ -2,7 +2,7 @@
 <aside class="main-sidebar elevation-4 sidebar-light-info">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link navbar-light">
-        <img src="design/AdminLTE/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="<?php echo base_url().'/public/';?>design/AdminLTE/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">School System</span>
     </a>
 
@@ -11,7 +11,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mx-2 mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="design/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="<?php echo base_url().'/public/';?>design/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">اسم المستخدم</a>
@@ -25,8 +25,8 @@
                         with font-awesome or any other icon font library -->
                 <li class="nav-header">اعدادات النظام</li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                    <a href="school/globalMessageForms" class="nav-link">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
                             قوالب الرسائل العامة
                         </p>
@@ -34,7 +34,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
                             جداول الاختبارات
                         </p>
@@ -42,7 +42,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
                             الجدول المدرسي العام
                         </p>
@@ -50,7 +50,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
                             إضافة مادة
                         </p>
@@ -59,7 +59,7 @@
                 <li class="nav-header">البيانات الأساسية</li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-chevron-left"></i>
                         <p>
                             بيانات الطلاب
                         </p>
@@ -67,7 +67,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-chevron-left"></i>
                         <p>
                             بيانات المعلمين
                         </p>
@@ -75,7 +75,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-chevron-left"></i>
                         <p>
                             بيانات الإداريين
                         </p>
@@ -83,7 +83,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-chevron-left"></i>
                         <p>
                             بيانات نظام المقررات
 
@@ -93,7 +93,7 @@
                 <li class="nav-header">الإشعارات المدرسية</li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-bell"></i>
                         <p>
                             اشعارات الغياب والتأخر
 
@@ -102,7 +102,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-bell"></i>
                         <p>
                             اشعارات الرسائل العامة
 
@@ -113,7 +113,7 @@
                 <li class="nav-header">الأرشيف العام</li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-inbox"></i>
                         <p>
                             أرشيف اشعارات الغياب والتأخر
                         </p>
@@ -121,7 +121,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-inbox"></i>
                         <p>
                             أرشيف الرسائل العامة
                         </p>
@@ -131,7 +131,7 @@
                 <li class="nav-header">نظام الرد لولي الامر</li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-inbox"></i>
                         <p>
                             أرشيف نظام الرد
                         </p>
@@ -141,7 +141,7 @@
                 <li class="nav-header">تذاكر الدعم الفني</li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-comments"></i>
                         <p>
                             مراسلة مدير النظام
                         </p>
@@ -149,7 +149,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-comments"></i>
                         <p>
                             مراسلة أولياء الأمور
                         </p>
@@ -162,7 +162,7 @@
                 <li class="nav-header">خدمات إضافية</li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-question"></i>
                         <p>
                             الاستبانات الإلكترونية
                         </p>
@@ -170,7 +170,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
                             النماذج الالكترونية
                         </p>
@@ -178,7 +178,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-link"></i>
                         <p>
                             اختصار الروابط
                         </p>
@@ -186,7 +186,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-file-upload"></i>
                         <p>
                             رفع صورة /اعلان
                         </p>
@@ -196,7 +196,7 @@
                 <li class="nav-header">متجر شريك النجاح</li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-star"></i>
                         <p>
                             العروض
                         </p>
@@ -204,7 +204,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-envelope-open-text"></i>
                         <p>
                             نظام الدعم الفني
                         </p>

@@ -12,6 +12,12 @@ class SchoolView extends BaseController
 		return view('school/home');
 	}
 
+
+    public function messageForms()
+	{
+		return view('school/system-settings/global-messages-forms');
+	}
+
 	//--------------------------------------------------------------------
 
 }
