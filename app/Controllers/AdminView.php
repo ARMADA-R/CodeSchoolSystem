@@ -1,6 +1,6 @@
 <?php namespace App\Controllers;
 
-class SchoolView extends BaseController
+class AdminView extends BaseController
 {
 	public function index()
 	{
