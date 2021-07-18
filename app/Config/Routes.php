@@ -34,6 +34,8 @@ $routes->setAutoRoute(true);
 
 $routes->get('/school', 'SchoolView::home');
 $routes->get('/school/messageForms/global', 'SchoolView::messageForms');
+$routes->get('/school/messageForms/global', 'SchoolView::messageForms');
+
 
 /**
  * --------------------------------------------------------------------
