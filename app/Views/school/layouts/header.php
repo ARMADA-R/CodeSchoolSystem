@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 
 <head> 
     <meta charset="utf-8">
@@ -39,7 +39,15 @@
             font-family: 'Tajawal', sans-serif !important;
             font-weight: 500;
         }
+        .m-right-auto {
+            margin-right: auto!important;
+        }
+         
+        .m-left-auto {
+            margin-right: auto!important;
+        }
     </style>
+   
 </head>
 
 

@@ -25,7 +25,7 @@
                         with font-awesome or any other icon font library -->
                 <li class="nav-header">اعدادات النظام</li>
                 <li class="nav-item">
-                    <a href="school/globalMessageForms" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/messageForms/global" class="nav-link">
                         <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
                             قوالب الرسائل العامة
@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/exams/tables" class="nav-link">
                         <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
                             جداول الاختبارات
@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/global/table" class="nav-link">
                         <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
                             الجدول المدرسي العام
@@ -49,7 +49,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/course/add" class="nav-link">
                         <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
                             إضافة مادة
@@ -58,7 +58,7 @@
                 </li>
                 <li class="nav-header">البيانات الأساسية</li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/students/info" class="nav-link">
                         <i class="nav-icon fas fa-chevron-left"></i>
                         <p>
                             بيانات الطلاب
@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/teachers/info" class="nav-link">
                         <i class="nav-icon fas fa-chevron-left"></i>
                         <p>
                             بيانات المعلمين
@@ -74,7 +74,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/employees/info" class="nav-link">
                         <i class="nav-icon fas fa-chevron-left"></i>
                         <p>
                             بيانات الإداريين
@@ -82,7 +82,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/subjects/info" class="nav-link">
                         <i class="nav-icon fas fa-chevron-left"></i>
                         <p>
                             بيانات نظام المقررات
@@ -92,7 +92,7 @@
                 </li>
                 <li class="nav-header">الإشعارات المدرسية</li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/notifications/absence-tardiness" class="nav-link">
                         <i class="nav-icon fas fa-bell"></i>
                         <p>
                             اشعارات الغياب والتأخر
@@ -101,7 +101,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/subjects/info" class="nav-link">
                         <i class="nav-icon fas fa-bell"></i>
                         <p>
                             اشعارات الرسائل العامة
@@ -112,7 +112,7 @@
 
                 <li class="nav-header">الأرشيف العام</li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/subjects/info" class="nav-link">
                         <i class="nav-icon fas fa-inbox"></i>
                         <p>
                             أرشيف اشعارات الغياب والتأخر
@@ -120,7 +120,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/subjects/info" class="nav-link">
                         <i class="nav-icon fas fa-inbox"></i>
                         <p>
                             أرشيف الرسائل العامة
@@ -130,7 +130,7 @@
 
                 <li class="nav-header">نظام الرد لولي الامر</li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/subjects/info" class="nav-link">
                         <i class="nav-icon fas fa-inbox"></i>
                         <p>
                             أرشيف نظام الرد
@@ -140,7 +140,7 @@
 
                 <li class="nav-header">تذاكر الدعم الفني</li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/subjects/info" class="nav-link">
                         <i class="nav-icon fas fa-comments"></i>
                         <p>
                             مراسلة مدير النظام
@@ -148,7 +148,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/subjects/info" class="nav-link">
                         <i class="nav-icon fas fa-comments"></i>
                         <p>
                             مراسلة أولياء الأمور
@@ -161,7 +161,7 @@
 
                 <li class="nav-header">خدمات إضافية</li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/subjects/info" class="nav-link">
                         <i class="nav-icon fas fa-question"></i>
                         <p>
                             الاستبانات الإلكترونية
@@ -169,7 +169,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/subjects/info" class="nav-link">
                         <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
                             النماذج الالكترونية
@@ -177,7 +177,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/subjects/info" class="nav-link">
                         <i class="nav-icon fas fa-link"></i>
                         <p>
                             اختصار الروابط
@@ -185,7 +185,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/subjects/info" class="nav-link">
                         <i class="nav-icon fas fa-file-upload"></i>
                         <p>
                             رفع صورة /اعلان
@@ -195,7 +195,7 @@
 
                 <li class="nav-header">متجر شريك النجاح</li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/subjects/info" class="nav-link">
                         <i class="nav-icon fas fa-star"></i>
                         <p>
                             العروض
@@ -203,7 +203,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="<?php echo base_url().'/public/';?>school/subjects/info" class="nav-link">
                         <i class="nav-icon fas fa-envelope-open-text"></i>
                         <p>
                             نظام الدعم الفني

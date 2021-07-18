@@ -48,6 +48,14 @@ $routes->get('/admin', 'AdminView::home');
 
 $routes->get('/school', 'SchoolView::home');
 $routes->get('/school/messageForms/global', 'SchoolView::messageForms');
+$routes->get('/school/exams/tables', 'SchoolView::examsTables');
+$routes->get('/school/global/table', 'SchoolView::globalTable');
+$routes->get('/school/course/add', 'SchoolView::addCourse');
+$routes->get('school/students/info', 'SchoolView::studentsInfo');
+$routes->get('school/teachers/info', 'SchoolView::teachersInfo');
+$routes->get('school/employees/info', 'SchoolView::employeesInfo');
+$routes->get('school/subjects/info', 'SchoolView::subjectsInfo');
+$routes->get('school/notifications/absence-tardiness', 'SchoolView::absenceAndTardiness');
 
 
 /**
