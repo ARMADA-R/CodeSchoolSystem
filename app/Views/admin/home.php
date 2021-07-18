@@ -1,4 +1,4 @@
-<?php include_once('layouts/preContent.php') ?>
+<?php require(APPPATH . 'views/admin/layouts/preContent.php') ?>
 
 
 <div class="row">
@@ -23,4 +23,5 @@
 <!-- /.row -->
 
 
-<?php include_once('layouts/postContent.php') ?>
+<?php require(APPPATH . 'views/admin/layouts/postContent.php') ?>
+
