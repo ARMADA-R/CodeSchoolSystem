@@ -15,9 +15,8 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-body text-center">
-                <h3>
-                    Content
-                </h3>
+                <span>23,508</span>
+                <span>رصيد الإشعارات « خدمة الرسائل القصيرة »</span>
             </div>
             <!-- /.card-body -->
         </div>
