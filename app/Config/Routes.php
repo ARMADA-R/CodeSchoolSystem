@@ -28,6 +28,20 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  */
 
+// Yousef Route
+$routes->get('/admin', 'AdminView::home');
+
+
+
+
+
+
+
+
+
+
+
+
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 // $routes->get('/', 'Home::index');
