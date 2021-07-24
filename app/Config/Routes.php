@@ -56,6 +56,18 @@ $routes->get('school/teachers/info', 'SchoolView::teachersInfo');
 $routes->get('school/employees/info', 'SchoolView::employeesInfo');
 $routes->get('school/subjects/info', 'SchoolView::subjectsInfo');
 $routes->get('school/notifications/absence-tardiness', 'SchoolView::absenceAndTardiness');
+$routes->get('school/notifications/public-messages', 'SchoolView::publicMesssages');
+$routes->get('school/archive/absence-tardiness', 'SchoolView::absenceAndTardinessArchive');
+$routes->get('school/archive/public-messages', 'SchoolView::publicMesssagesArchive');
+$routes->get('school/parents-responce/responce-archive', 'SchoolView::parentsResponceArchive');
+$routes->get('school/support/technical/tickets/sys-managers', 'SchoolView::systemManagersTichnicalSupportTickets');
+$routes->get('school/support/technical/tickets/parents', 'SchoolView::parentsTichnicalSupportTickets');
+$routes->get('school/support/technical/ticket/(:num)', 'SchoolView::viewTicket/$1');
+$routes->get('school/services/questionnaires', 'SchoolView::questionnaires');
+$routes->get('school/services/questionnaires/add', 'SchoolView::addQuestionnaires');
+$routes->get('school/services/forms', 'SchoolView::forms');
+$routes->get('school/partners/offers', 'SchoolView::partnersOffers');
+$routes->get('school/partners/support', 'SchoolView::partnersSupport');
 
 
 /**

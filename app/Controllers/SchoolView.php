@@ -72,6 +72,103 @@ class SchoolView extends BaseController
 
 
 
+
+    public function publicMesssages()
+	{
+		return view('school/notifications/public-messages');
+	}
+
+
+
+
+    public function absenceAndTardinessArchive()
+	{
+		return view('school/archive/absence-tardiness');
+	}
+
+
+
+
+    public function publicMesssagesArchive()
+	{
+		return view('school/archive/public-messages');
+	}
+
+
+
+
+
+    public function parentsResponceArchive()
+	{
+		return view('school/parents-responce/responce-archive');
+	}
+
+
+
+
+    public function systemManagersTichnicalSupportTickets()
+	{
+		return view('school/technical-support-tickets/system-managers');
+	}
+
+
+
+
+
+    public function parentsTichnicalSupportTickets()
+	{
+		return view('school/technical-support-tickets/parents');
+	}
+
+
+
+
+    public function viewTicket($seg6)
+	{
+		return view('school/technical-support-tickets/tickets',['id' => $seg6]);
+	}
+
+
+
+
+    public function questionnaires()
+	{
+		return view('school/services/questionnaires');
+	}
+
+
+
+
+    public function addQuestionnaires()
+	{
+		return view('school/services/add-questionnaires');
+	}
+
+
+
+
+    public function forms()
+	{
+		return view('school/services/forms');
+	}
+
+
+
+
+    public function partnersOffers()
+	{
+		return view('school/partners/offers');
+	}
+
+
+
+    public function partnersSupport()
+	{
+		return view('school/partners/support');
+	}
+
+
+
 	//--------------------------------------------------------------------
 
 }

@@ -5,84 +5,40 @@
 
     <div class="row ">
         <div class="col ">
-            بيانات طلاب نظام المقررات
+        أرشيف الرسائل العامة 
         </div>
     </div>
 </div>
 <!-- /.content-header -->
 
 
-
 <?php require(APPPATH . 'views/school/layouts/notifications-service-status.php') ?>
 
 
-<div class="modal fade" id="add-temblate" tabindex="-1" aria-labelledby="add-temblateLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="add-temblateLabel">اضف طالب</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body p-4">
-                <form>
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="stud_num">رقم الطالب</label>
-                                <input type="number" class="form-control" name="stud_num" id="stud_num">
-                            </div>
-                        </div>
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="full-name">اسم الطالب</label>
-                                <input type="text" class="form-control" name="full_name" id="full-name">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="phone">رقم الجوال</label>
-                                <input type="number" class="form-control" name="phone" id="phone">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="level">المستوى</label>
-                                <input type="text" class="form-control" name="level" id="level">
-                            </div>
-                        </div>
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="division">الشعبة</label>
-                                <input type="text" class="form-control" name="division" id="division">
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                <button type="button" class="btn btn-primary">حفظ</button>
-            </div>
+<div class="row mt-4  mb-4 justify-content-between" style="font-size: 1rem;">
+    <div class="col-md-4">
+        <div class="form-group">
+            <select required class="form-control" name="submit-type" id="submit-type">
+                <option value="">المجموعة</option>
+                <option value="students">الطلاب</option>
+                <option value="teachers">المعلمين</option>
+                <option value="managers">الاداريين</option>
+            </select>
         </div>
+
     </div>
+    
+    <div class="col-md-4">
+        <button type="button" style="width: inherit; background-color: #fff;" class="btn btn-light" data-toggle="modal" data-target="#add-temblate">ارسال الى المحدد</button>
+    </div>
+    <!-- /.col -->
 </div>
+<!-- /.row -->
+
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header p-2 d-flex align-items-center bg-white">
-                <div class="m-left-auto">
-                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#add-temblate">اضف طالب</button>
-                </div>
-            </div>
+            
             <div class="card-body p-2" style="overflow: scroll;">
                 <table id="messages_forms" class="table table-striped table-bordered" style="width:100%">
                     <thead>
