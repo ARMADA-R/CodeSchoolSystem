@@ -22,6 +22,7 @@ class App extends BaseConfig
 	|
 	*/
 	public $baseURL = 'http://localhost/codeigniter/CodeSchoolSystem';
+//    public $baseURL = 'http://localhost/codeigniter/CodeSchoolSystem';
 
 	/*
 	|--------------------------------------------------------------------------

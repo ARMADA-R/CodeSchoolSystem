@@ -1,0 +1,29 @@
+    .la1 {
+    display: inline;
+        display: flex;
+        justify-content: flex-end;
+}
+
+   .l1{
+
+       white-space: nowrap;
+        margin-bottom: 100px;
+        margin-top: 30px;
+    }
+   .sp1{
+
+       font-size: .9rem;
+       font-weight: 400;
+       color: #b5b5c3!important
+   }
+   .a1{
+
+       margin-bottom: 8px;
+
+
+   }
+
+.nember{
+
+
+}

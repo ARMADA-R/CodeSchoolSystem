@@ -7,11 +7,21 @@ class AdminView extends BaseController
 		return view('welcome_message');
 	}
 
+
     public function home()
 	{
 		return view('admin/home');
 	}
 
+    public function info()
+	{
+		return view('admin/info');
+	}
+
+    public function slider()
+    {
+        return view('admin/home');
+    }
 	//--------------------------------------------------------------------
 
 }

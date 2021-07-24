@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="<?php echo base_url().'/public/';?>design/AdminLTE/RTL/dist/css/adminlte.min.css">
     <!-- Custom style for RTL -->
     <link rel="stylesheet" href="<?php echo base_url().'/public/';?>design/AdminLTE/RTL/dist/css/custom.css">
+    <link rel="stylesheet" href="<?php echo base_url().'/public/';?>design/AdminLTE/frontend.css">
+
 
     <style>
         .card-title {

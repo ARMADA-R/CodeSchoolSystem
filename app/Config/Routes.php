@@ -30,6 +30,9 @@ $routes->setAutoRoute(true);
 
 // Yousef Route
 $routes->get('/admin', 'AdminView::home');
+$routes->get('/admin/info', 'AdminView::info');
+
+$routes->get('/admin/slider', 'AdminView::slider');
 
 
 
