@@ -5,7 +5,7 @@
 
     <div class="row ">
         <div class="col ">
-        إشعارات الغياب والتأخر
+        إشعارات الرسائل العامة
         </div>
     </div>
 </div>
@@ -51,24 +51,19 @@
 <!-- /.row -->
 
 
-<div class="row mt-4  mb-4" style="font-size: 1rem;">
+<div class="row mt-4  mb-4 justify-content-between" style="font-size: 1rem;">
     <div class="col-md-4">
         <div class="form-group">
             <select required class="form-control" name="submit-type" id="submit-type">
-                <option value="">الصف</option>
-
+                <option value="">المجموعة</option>
+                <option value="students">الطلاب</option>
+                <option value="teachers">المعلمين</option>
+                <option value="managers">الاداريين</option>
             </select>
         </div>
 
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <select required class="form-control" name="submit-type" id="submit-type">
-                <option value="">الفصل</option>
-            </select>
-        </div>
-
-    </div>
+    
     <div class="col-md-4">
         <button type="button" style="width: inherit; background-color: #fff;" class="btn btn-light" data-toggle="modal" data-target="#add-temblate">ارسال الى المحدد</button>
     </div>

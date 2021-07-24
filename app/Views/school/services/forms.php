@@ -4,8 +4,13 @@
 <div class="content-header my-2 bg-white">
 
     <div class="row ">
-        <div class="col ">
-        إشعارات الغياب والتأخر
+        <div class="col  d-flex align-items-center ">
+            النماذج الإلكترونية
+        </div>
+        <div class="col-3">
+            <a href="<?php echo base_url() . '/public/'; ?>school/questionnaires/add" style="width: inherit;" class="btn btn-light" data-toggle="modal" data-target="#add-temblate">
+                إضافة نموذج
+            </a>
         </div>
     </div>
 </div>
@@ -51,93 +56,34 @@
 <!-- /.row -->
 
 
-<div class="row mt-4  mb-4" style="font-size: 1rem;">
-    <div class="col-md-4">
-        <div class="form-group">
-            <select required class="form-control" name="submit-type" id="submit-type">
-                <option value="">الصف</option>
-
-            </select>
-        </div>
-
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <select required class="form-control" name="submit-type" id="submit-type">
-                <option value="">الفصل</option>
-            </select>
-        </div>
-
-    </div>
-    <div class="col-md-4">
-        <button type="button" style="width: inherit; background-color: #fff;" class="btn btn-light" data-toggle="modal" data-target="#add-temblate">ارسال الى المحدد</button>
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
-
 <div class="modal fade" id="add-temblate" tabindex="-1" aria-labelledby="add-temblateLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-temblateLabel">اضف جدول</h5>
+                <h5 class="modal-title" id="add-temblateLabel">اضف نموذج</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form>
-
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="attendance_status">حالة الرصد</label>
-                                <select required class="form-control" name="attendance_status" id="attendance_status">
-                                    <option value=""></option>
-                                    <option value="غائب">غائب</option>
-                                    <option value="غائب بعذر">غائب بعذر</option>
-                                    <option value="متأخر">متأخر</option>
-                                    <option value="متأخر بعذر">متأخر بعذر</option>
-                                </select>
+                                <label for="title" class="col-form-label">عنوان النموذج</label>
+                                <input type="text" class="form-control" id="title">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="group">الحصة</label>
-                                <select required class="form-control" name="group" id="group">
-                                    <option value=""></option>
-                                </select>
+                                <label for="link" class="col-form-label">رابط النموذج</label>
+                                <input type="text" name="link" class="form-control" id="link">
+                                <small id="link" class="form-text text-muted">اضف الرابط كاملا ابتداءً من http  او https</small>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="group">اليوم</label>
-                                <select required class="form-control" name="group" id="group">
-                                    <option value=""></option>
-                                    <option value="sat">السبت</option>
-                                    <option value="sun">الاحد</option>
-                                    <option value="mon">الاثنين</option>
-                                    <option value="tue">الثلاثاء</option>
-                                    <option value="wed">الاربعاء</option>
-                                    <option value="thu">الخميس</option>
-                                    <option value="fri">الجمعة</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="date" class="col-form-label">التاريخ</label>
-                                <input type="date" class="form-control" id="date">
-                            </div>
-                        </div>
-                    </div>
-
                 </form>
             </div>
             <div class="modal-footer">
@@ -147,10 +93,11 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-12">
         <div class="card">
-            
+
             <div class="card-body p-2" style="overflow: scroll;">
                 <table id="messages_forms" class="table table-striped table-bordered" style="width:100%">
                     <thead>

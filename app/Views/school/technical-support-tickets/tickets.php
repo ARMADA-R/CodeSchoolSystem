@@ -1,16 +1,5 @@
 <?php require(APPPATH . 'views/school/layouts/preContent.php') ?>
 
-<!-- Content Header (Page header) -->
-<div class="content-header my-2 bg-white">
-
-    <div class="row ">
-        <div class="col ">
-        إشعارات الغياب والتأخر
-        </div>
-    </div>
-</div>
-<!-- /.content-header -->
-
 
 
 <div class="row mt-4 pb-5" style="font-size: 1rem;">
@@ -49,104 +38,8 @@
     <!-- /.col -->
 </div>
 <!-- /.row -->
+<?php //echo $id; ?>
 
-
-<div class="row mt-4  mb-4" style="font-size: 1rem;">
-    <div class="col-md-4">
-        <div class="form-group">
-            <select required class="form-control" name="submit-type" id="submit-type">
-                <option value="">الصف</option>
-
-            </select>
-        </div>
-
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <select required class="form-control" name="submit-type" id="submit-type">
-                <option value="">الفصل</option>
-            </select>
-        </div>
-
-    </div>
-    <div class="col-md-4">
-        <button type="button" style="width: inherit; background-color: #fff;" class="btn btn-light" data-toggle="modal" data-target="#add-temblate">ارسال الى المحدد</button>
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
-
-<div class="modal fade" id="add-temblate" tabindex="-1" aria-labelledby="add-temblateLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="add-temblateLabel">اضف جدول</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="attendance_status">حالة الرصد</label>
-                                <select required class="form-control" name="attendance_status" id="attendance_status">
-                                    <option value=""></option>
-                                    <option value="غائب">غائب</option>
-                                    <option value="غائب بعذر">غائب بعذر</option>
-                                    <option value="متأخر">متأخر</option>
-                                    <option value="متأخر بعذر">متأخر بعذر</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="group">الحصة</label>
-                                <select required class="form-control" name="group" id="group">
-                                    <option value=""></option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="group">اليوم</label>
-                                <select required class="form-control" name="group" id="group">
-                                    <option value=""></option>
-                                    <option value="sat">السبت</option>
-                                    <option value="sun">الاحد</option>
-                                    <option value="mon">الاثنين</option>
-                                    <option value="tue">الثلاثاء</option>
-                                    <option value="wed">الاربعاء</option>
-                                    <option value="thu">الخميس</option>
-                                    <option value="fri">الجمعة</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="date" class="col-form-label">التاريخ</label>
-                                <input type="date" class="form-control" id="date">
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                <button type="button" class="btn btn-primary">حفظ</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="row">
     <div class="col-12">
         <div class="card">

@@ -4,9 +4,14 @@
 <div class="content-header my-2 bg-white">
 
     <div class="row ">
-        <div class="col ">
-        إشعارات الغياب والتأخر
+        <div class="col  d-flex align-items-center ">
+                مراسلة مدير النظام
         </div>
+        <div class="col-3">
+        <button type="button" style="width: inherit; padding: .375rem .75rem;" class="btn btn-light" data-toggle="modal" data-target="#add-temblate">
+        إضافة تذكرة جديدة
+    </button>
+    </div>
     </div>
 </div>
 <!-- /.content-header -->
@@ -51,28 +56,18 @@
 <!-- /.row -->
 
 
-<div class="row mt-4  mb-4" style="font-size: 1rem;">
-    <div class="col-md-4">
+<div class="row mt-4  mb-4  d-flex justify-content-center " style="font-size: 1rem;">
+    <div class="col-4">
         <div class="form-group">
             <select required class="form-control" name="submit-type" id="submit-type">
-                <option value="">الصف</option>
+                <option value="">حالة التذكرة</option>
+                <option value="opened">مفتوحة</option>
+                <option value="closed">مغلقة</option>
 
             </select>
         </div>
 
     </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <select required class="form-control" name="submit-type" id="submit-type">
-                <option value="">الفصل</option>
-            </select>
-        </div>
-
-    </div>
-    <div class="col-md-4">
-        <button type="button" style="width: inherit; background-color: #fff;" class="btn btn-light" data-toggle="modal" data-target="#add-temblate">ارسال الى المحدد</button>
-    </div>
-    <!-- /.col -->
 </div>
 <!-- /.row -->
 
@@ -87,53 +82,35 @@
             </div>
             <div class="modal-body">
                 <form>
-
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="attendance_status">حالة الرصد</label>
-                                <select required class="form-control" name="attendance_status" id="attendance_status">
-                                    <option value=""></option>
-                                    <option value="غائب">غائب</option>
-                                    <option value="غائب بعذر">غائب بعذر</option>
-                                    <option value="متأخر">متأخر</option>
-                                    <option value="متأخر بعذر">متأخر بعذر</option>
-                                </select>
+                                <label for="text" class="col-form-label">نص التذكرة</label>
+                                <input type="text" class="form-control" id="text">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="group">الحصة</label>
-                                <select required class="form-control" name="group" id="group">
-                                    <option value=""></option>
-                                </select>
+                                <label for="department" class="col-form-label">القسم</label>
+                                <input type="text" name="department" class="form-control" id="department">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="group">اليوم</label>
-                                <select required class="form-control" name="group" id="group">
-                                    <option value=""></option>
-                                    <option value="sat">السبت</option>
-                                    <option value="sun">الاحد</option>
-                                    <option value="mon">الاثنين</option>
-                                    <option value="tue">الثلاثاء</option>
-                                    <option value="wed">الاربعاء</option>
-                                    <option value="thu">الخميس</option>
-                                    <option value="fri">الجمعة</option>
-                                </select>
+                                <label for="type" class="col-form-label">النمط</label>
+                                <input type="text" name="type" class="form-control" id="type">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="date" class="col-form-label">التاريخ</label>
-                                <input type="date" class="form-control" id="date">
+                                <label for="prority" class="col-form-label">الأولوية</label>
+                                <input type="text" name="prority" class="form-control" id="prority">
                             </div>
                         </div>
                     </div>
