@@ -134,12 +134,12 @@
                 <table id="messages_forms" class="table table-striped " style="width:100%">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>#</th>
+                            <th>البرنامج</th>
+                            <th>المادة</th>
+                            <th>الصف</th>
+                            <th>اليوم</th>
+                            <th>التاريخ</th>
                         </tr>
                     </thead>
                     <tbody>
