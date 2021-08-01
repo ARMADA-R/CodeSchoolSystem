@@ -31,11 +31,20 @@ $routes->setAutoRoute(true);
 // Yousef Route
 $routes->get('/admin', 'AdminView::home');
 $routes->get('/admin/info', 'AdminView::info');
-
 $routes->get('/admin/slider', 'AdminView::slider');
+$routes->get('/admin/filter', 'AdminView::filter');
 
-
-
+$routes->get('/admin/ticket', 'AdminView::ticket');
+$routes->get('/admin/parent', 'AdminView::parent');
+$routes->get('/admin/partner', 'AdminView::partner');
+$routes->get('/admin/schooledit', 'AdminView::schooledit');
+$routes->get('/admin/adminemail', 'AdminView::adminemail');
+$routes->get('/admin/user', 'AdminView::user');
+$routes->get('/admin/mangeschool', 'AdminView::mangeschool');
+$routes->get('/admin/callus', 'AdminView::callus');
+$routes->get('/admin/gets', 'AdminView::gets');
+$routes->get('/admin/viewticket', 'AdminView::viewticket');
+$routes->get('/admin/problem', 'AdminView::problem');
 
 
 
@@ -71,6 +80,7 @@ $routes->get('school/services/questionnaires/add', 'SchoolView::addQuestionnaire
 $routes->get('school/services/forms', 'SchoolView::forms');
 $routes->get('school/partners/offers', 'SchoolView::partnersOffers');
 $routes->get('school/partners/support', 'SchoolView::partnersSupport');
+
 
 
 /**
