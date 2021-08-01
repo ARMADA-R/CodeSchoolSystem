@@ -19,7 +19,7 @@
         <div class="card">
             
             <div class="card-body p-2" style="overflow: scroll;">
-                <table id="messages_forms" class="table table-striped table-bordered" style="width:100%">
+                <table id="messages_forms" class="table table-striped " style="width:100%">
                     <thead>
                         <tr>
                             <th>Name</th>

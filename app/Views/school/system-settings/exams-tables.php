@@ -131,15 +131,15 @@
                 </div>
             </div>
             <div class="card-body p-2" style="overflow: scroll;">
-                <table id="messages_forms" class="table table-striped table-bordered" style="width:100%">
+                <table id="messages_forms" class="table table-striped " style="width:100%">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>#</th>
+                            <th>البرنامج</th>
+                            <th>المادة</th>
+                            <th>الصف</th>
+                            <th>اليوم</th>
+                            <th>التاريخ</th>
                         </tr>
                     </thead>
                     <tbody>

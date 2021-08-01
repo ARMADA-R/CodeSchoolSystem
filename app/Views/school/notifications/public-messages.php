@@ -75,7 +75,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-temblateLabel">اضف جدول</h5>
+                <h5 class="modal-title" id="add-temblateLabel">ارسل اشعار</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -147,7 +147,7 @@
         <div class="card">
             
             <div class="card-body p-2" style="overflow: scroll;">
-                <table id="messages_forms" class="table table-striped table-bordered" style="width:100%">
+                <table id="messages_forms" class="table table-striped " style="width:100%">
                     <thead>
                         <tr>
                             <th>Name</th>
