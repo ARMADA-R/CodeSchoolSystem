@@ -61,7 +61,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="title">عنوان الاستبانة</label>
-                                <input type="text" class="form-control" id="title" name="title">
+                                <input type="text" class="form-control" id="survey-title" name="title">
                             </div>
                         </div>
                         <div class="col-md-6 d-flex">
@@ -76,13 +76,13 @@
                 </div>
 
                 <div id="questions">
-                    <div id="Q1">
+                    <div class="question-row">
                         <hr>
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label for="title"> السؤال</label>
-                                    <textarea class="form-control" rows="1" id="title"></textarea>
+                                    <textarea class="form-control questions" rows="1"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-4 d-flex">
@@ -98,7 +98,7 @@
                             <div class="row">
                                 <div class="col-md-8 ml-1">
                                     <div class="form-group">
-                                        <input class="form-control" id="">
+                                        <input class="form-control answer">
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                 </p>
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary">حفظ</button>
+                <button id="send-survey-btn" onclick="addSurvey()" class="btn btn-primary">حفظ</button>
             </div>
         </div>
     </div>
@@ -124,6 +124,9 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <script>
+    var questions = '';
+    var qAnswers = '';
+    var school_id = 24;
     $(document).ready(function() {
 
 
@@ -131,13 +134,13 @@
 
     function addQuestion() {
         $('#questions').append(`
-                    <div id="Q1">
+                    <div class="question-row">
                         <hr>
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label for="title"> السؤال</label>
-                                    <textarea class="form-control" rows="1" id="title"></textarea>
+                                    <textarea class="form-control questions" rows="1"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-4 d-flex">
@@ -153,7 +156,7 @@
                             <div class="row">
                                 <div class="col-md-8 ml-1">
                                     <div class="form-group">
-                                        <input class="form-control" id="">
+                                        <input class="form-control answer" >
                                     </div>
                                 </div>
                             </div>
@@ -166,9 +169,85 @@
                             <div class="row">
                                 <div class="col-md-8 ml-1">
                                     <div class="form-group">
-                                        <input class="form-control" id="">
+                                        <input class="form-control answer" >
                                     </div>
                                 </div>
                             </div>`);
+    }
+
+
+    function getQustions() {
+        questions = '';
+        qAnswers = '';
+
+        $('.questions').each(function(index, element) {
+            if ($(element).val() != '') {
+                if (index != 0) {
+                    questions += "," + $(element).val();
+                } else {
+                    questions += $(element).val();
+                }
+                getAnswers(element);
+            }
+
+        });
+    }
+
+    function getAnswers(element) {
+
+        var anss = $(element).closest('.question-row').find(".answer");
+        var ansVal = '';
+
+        anss.each(function(index, element) {
+            var eleVal = $(element).val();
+            if (eleVal) {
+                if (ansVal == '') {
+                    ansVal += eleVal;
+                } else {
+                    ansVal += "|" + eleVal;
+                }
+            }
+        });
+
+        if (ansVal != '') {
+            if (qAnswers == '') {
+                qAnswers += ansVal;
+            } else {
+                qAnswers += "," + ansVal;
+            }
+        }
+    }
+
+    function addSurvey() {
+        getQustions();
+        $("#send-survey-btn").attr('disabled', 'true');
+        $("#send-survey-btn").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    <span class="sr-only">جارٍ الارسال...</span>`);
+        $.ajax({
+                "url": "https://sa.arsail.net/schools/Servies/AddSurvey",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI5IiwiZXhwIjoiMjAyMi0wMS0yOSIsImRhdGEiOnsidXNlcl9pZCI6MTh9fQ.1EfRPKk8zdCvjmn7qkVRKflJDtJjaoN0R_xvphe1No0",
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                "data": {
+                    "school_id": school_id,
+                    "title": $('#survey-title').val(),
+                    "questions": questions,
+                    "anwsers": qAnswers,
+                    "status": "1"
+                }
+            }).done(function(response) {
+                toastr.success('تم اضافة تذكرة!');
+                $("#send-survey-btn").html('حفظ');
+                $("#send-survey-btn").removeAttr('disabled');
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error(response.responseJSON.msg, 'خطأ');
+                $("#send-survey-btn").html('حفظ');
+                $("#send-survey-btn").removeAttr('disabled');
+            });
     }
 </script>

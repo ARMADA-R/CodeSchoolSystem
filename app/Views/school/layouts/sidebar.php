@@ -1,22 +1,22 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar elevation-4 sidebar-light-info">
+<aside class="main-sidebar elevation-4 sidebar-light-info ">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link navbar-light">
+    <a href="index3.html" class="brand-link navbar-light-">
         <img src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">School System</span>
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar hide-scrollbar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mx-2 mt-3 pb-3 mb-3 d-flex">
+        <!-- <div class="user-panel mx-2 mt-3 pb-3 mb-3 d-flex">
             <div class="image">
                 <img src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">اسم المستخدم</a>
             </div>
-        </div>
+        </div> -->
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -49,10 +49,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url() . '/public/'; ?>school/course/add" class="nav-link">
+                    <a href="<?php echo base_url() . '/public/'; ?>school/gates/link" class="nav-link">
                         <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
-                            إضافة مادة
+                            ربط بوابات الاشعارات
                         </p>
                     </a>
                 </li>
@@ -231,14 +231,14 @@
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="title" class="col-form-label">الرابط</label>
+                                <label for="link-to-short" class="col-form-label">الرابط</label>
                                 <div class="row">
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="title">
-                                        <small id="link" class="form-text text-muted">اضف الرابط كاملا ابتداءً من http او https</small>
+                                        <input type="text" class="form-control" id="link-to-short">
+                                        <small class="form-text text-muted">اضف الرابط كاملا ابتداءً من http او https</small>
                                     </div>
                                     <div class="col-sm-2">
-                                        <button type="button" class="btn btn-primary">اختصر</button>
+                                        <button type="button" onclick="getShortenLink()" id="get-shorrten-btn" class="btn btn-primary">اختصر</button>
                                     </div>
                                 </div>
                             </div>
@@ -265,22 +265,22 @@
             <div class="modal-body">
                 <form>
                     <div class="row">
-                        <div class="col-sm-10">
+                        <div class="col-sm-9">
                             <div class="form-group">
-                                <label for="image" class="col-form-label">الملف</label>
-                                <input id="image" type="file" class="form-control" size="1025" accept="image/*">
-                                <small id="link" class="form-text text-muted">الحجم الأعظمي المسموح للصورة 1MB.</small>
+                                <label for="image-to-upload" class="col-form-label">الملف</label>
+                                <input id="image-to-upload" type="file" class="form-control" size="1025" accept="image/*">
+                                <small class="form-text text-muted">الحجم الأعظمي المسموح للصورة 1MB.</small>
                             </div>
                         </div>
-                        <div class="col-sm-2 align-self-center">
-                            <button type="button" style="width: inherit;" class="btn btn-outline-primary">معالجة</button>
+                        <div class="col-sm-3 align-self-center">
+                            <button type="button" id="image-to-upload-btn" style="width: inherit;" onclick="uploadImage()" class="btn btn-outline-primary">معالجة</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm">
                             <div class="form-group">
-                                <label for="link" class="col-form-label">الرابط</label>
-                                <input id="link" type="text" class="form-control">
+                                <label for="uploaded-image-link" class="col-form-label">الرابط</label>
+                                <input id="uploaded-image-link" type="text" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -292,3 +292,4 @@
         </div>
     </div>
 </div>
+
