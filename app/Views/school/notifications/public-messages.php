@@ -1262,7 +1262,6 @@
     }
 
     function selects() {
-        alert(0);
         var ele = document.getElementsByName('selected_data[]');
         for (var i = 0; i < ele.length; i++) {
             if (ele[i].type == 'checkbox')

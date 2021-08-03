@@ -1,76 +1,32 @@
-<?php require(APPPATH . 'views/school/layouts/preContent.php') ?>
+<?php require(APPPATH . 'views/parents/layouts/preContent.php') ?>
 
 <!-- Content Header (Page header) -->
 <div class="content-header my-2 bg-white">
 
     <div class="row ">
-        <div class="col  ">
-            عروض شريك النجاح
+        <div class="col ">
+            جداول الاختبارات
         </div>
     </div>
 </div>
 <!-- /.content-header -->
-
-
-
-<div class="row mt-4 pb-5" style="font-size: 1rem;">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
+<div class="p-5"></div>
 
 <div class="row">
     <div class="col-12">
         <div class="card">
-
+            
             <div class="card-body p-2">
-                <table id="content-table" class="table table-striped " style="width:100%">
+                <table id="messages_forms" class="table table-striped " style="width:100%">
                     <thead>
 
                         <tr>
                             <th></th>
                             <th>م</th>
-                            <th>الشريك</th>
-                            <th>المدينة</th>
-                            <th>المنطقة</th>
-                            <th> اسم الخدمة</th>
-                            <th> توضيح الخدمة</th>
-                            <th>سعر الخدمة</th>
-                            <th>السعر بعد الخصم</th>
-                            <th>مقدار الخصم</th>
-                            <th>انشاء كوبون الخصم</th>
-                            <th>تاريخ الانتهاء</th>
+                            <th>اليوم</th>
+                            <th>المادة</th>
+                            <th>التاريخ</th>
+                            <th>المدرسة</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -82,43 +38,34 @@
 </div>
 <?php include_once(APPPATH . 'views/school/layouts/postContent.php') ?>
 
+
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.bootstrap4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-
-<script src="<?php echo base_url() . '/public/'; ?>design/pdfMake/pdfmake.min.js"></script>
-<script src="<?php echo base_url() . '/public/'; ?>design/pdfMake/vfs_fonts.js"></script>
-<script src="<?php echo base_url() . '/public/'; ?>Excel/jquery.table2excel.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.colVis.min.js"></script>
 
-
-
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" />
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.bootstrap4.min.css" />
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" />
 
 <script>
     var school_id = 24;
-    var user_id = 24;
     var dataTable = null;
-    var studentsData = [];
 
     $(document).ready(function() {
-
-        dataTable = $('#content-table').DataTable({
+        dataTable = $('#messages_forms').DataTable({
             dom: `<"row d-flex justify-content-end mx-1 my-1 mb-3 "B><"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
-                [25, 50, 100, 500, -1],
-                [25, 50, 100, 500, 'الكل']
+                [10, 20, 50],
+                [10, 20, 50]
             ],
             order: [
                 [1, 'asc']
@@ -126,26 +73,19 @@
 
             responsive: true,
             autoWidth: false,
-            rowId: 'id',
-            createdRow: function(row, data, index) {
-                $(row).addClass('datatable-row');
-                $(row).addClass('notToExcel');
-            },
+
             columns: [{
-                    "className": 'details-control',
+                    "className": 'details-control align-middle',
                     "orderable": false,
                     searchable: false,
                     exportable: false,
                     "data": null,
                     "defaultContent": ''
-                },
-
-                {
-                    data: 'id',
-                    name: 'id',
+                },{
+                    name: 'null',
                     title: 'م',
                     className: 'text-center t-id',
-                    // orderable: false,
+                    orderable: false,
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
@@ -153,74 +93,42 @@
                     }
                 },
                 {
-                    data: 'username',
-                    name: 'username',
-                    className: 'text-center t-username',
-                    title: 'الشريك'
+                    data: 'day',
+                    name: 'day',
+                    className: 'text-center t-day',
+                    title: 'اليوم'
                 },
                 {
-                    data: 'city',
-                    name: 'city',
-                    className: 'text-center t-city',
-                    title: 'المدينة'
+                    data: 'subject_name',
+                    name: 'subject_name',
+                    className: 'text-center t-subject_name',
+                    title: `المادة`,
                 },
                 {
-                    data: 'area',
-                    name: 'area',
-                    className: 'text-center t-area',
-                    title: 'المنطقة'
-                },
-                {
-                    data: 'service_name',
-                    name: 'service_name',
-                    className: 'text-center t-service_name',
-                    title: ' اسم الخدمة'
-                },
-                {
-                    data: 'image_url',
-                    name: 'image_url',
-                    className: 'text-center t-image_url align-middle w-100',
-                    title: `توضيح الخدمة `,
+                    data: 'date',
+                    name: 'date',
+                    className: 'text-center t-date',
+                    title: 'التاريخ',
                     render: function(data, type, row, meta) {
-                        return `<a href='${data}'></a>`;
+                        return moment(data).format("DD-MM-YYYY");
                     }
                 },
                 {
-                    data: 'service_price',
-                    name: 'service_price',
-                    className: 'text-center t-service_price',
-                    title: 'سعر الخدمة'
-                },
-                {
-                    data: 'price_after_discount',
-                    name: 'price_after_discount',
-                    className: 'text-center t-price_after_discount',
-                    title: 'السعر بعد الخصم'
-                },
-                {
-                    data: 'discount',
-                    name: 'discount',
-                    className: 'text-center t-discount',
-                    title: 'مقدار الخصم'
-                },
-                {
-                    data: 'cubon',
-                    name: 'cubon',
-                    className: 'text-center t-cubon',
-                    title: 'انشاء كوبون الخصم'
-                },
-                {
-                    data: 'end_date',
-                    name: 'end_date',
-                    className: 'text-center t-end_date',
-                    title: 'تاريخ الانتهاء'
+                    data: 'school_name',
+                    name: 'school_name',
+                    className: 'text-center t-school_name',
+                    title: 'المدرسة'
                 },
             ],
             buttons: [{
                     extend: 'collection',
                     text: 'تصدير',
                     className: 'btn btn-sm',
-                    buttons: ['excel', ]
+                    buttons: [{
+                        extend: 'excel',
+                    }, {
+                        extend: 'csv',
+                    }]
                 },
                 'colvis'
             ],
@@ -419,19 +327,22 @@
         });
     });
 
-
     $(document).ready(function() {
-        getArchiveData();
+        refreshExamsTable();
     });
 
-
-    function getArchiveData() {
+    function refreshExamsTable() {
         var jqxhr = $.ajax({
-                "url": "https://sa.arsail.net/schools/Partners/GetPartners?page=1&limit=2",
-                "method": "GET",
-                "timeout": 0,
-                "headers": {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI1IiwiZXhwIjoiMjAyMi0wMS0yNSIsImRhdGEiOiIxNCJ9.IN0TgoaZbO3b9NiH1eRO7eTmEwvV4ymVpVQR_h_g-Ww"
+                url: "https://sa.arsail.net/schools/Schools/GetParentExamTable",
+                method: "GET",
+                timeout: 0,
+                data: {
+                    school_id: school_id,
+                    page: "1",
+                    limit: "10000",
+                },
+                headers: {
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAyLTIyIiwiZXhwIjoiMjAyMi0wMi0yMiIsImRhdGEiOiIyMyJ9.ZITmmvk9fnZXo8Bfy30vw8uYK2kGZeN_M8XFPErmr_w"
                 },
             })
             .done(function(response) {
@@ -442,4 +353,5 @@
                 toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
             });
     }
+
 </script>

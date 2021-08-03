@@ -1,54 +1,17 @@
-<?php require(APPPATH . 'views/school/layouts/preContent.php') ?>
+<?php require(APPPATH . 'views/parents/layouts/preContent.php') ?>
 
 <!-- Content Header (Page header) -->
 <div class="content-header my-2 bg-white">
 
     <div class="row ">
         <div class="col  ">
-            عروض شريك النجاح
+            عروض شركاء النجاح
         </div>
     </div>
 </div>
 <!-- /.content-header -->
 
 
-
-<div class="row mt-4 pb-5" style="font-size: 1rem;">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
 
 <div class="row">
     <div class="col-12">
@@ -180,7 +143,7 @@
                     data: 'image_url',
                     name: 'image_url',
                     className: 'text-center t-image_url align-middle w-100',
-                    title: `توضيح الخدمة `,
+                    title: ` توضيح الخدمة <br> «<sm all> صورة/فيديو قصير جدا /نص</small>»`,
                     render: function(data, type, row, meta) {
                         return `<a href='${data}'></a>`;
                     }
@@ -421,13 +384,13 @@
 
 
     $(document).ready(function() {
-        getArchiveData();
+        getPartnersData();
     });
 
 
-    function getArchiveData() {
+    function getPartnersData() {
         var jqxhr = $.ajax({
-                "url": "https://sa.arsail.net/schools/Partners/GetPartners?page=1&limit=2",
+                "url": "https://sa.arsail.net/schools/Partners/GetPartners?page=1&limit=2000",
                 "method": "GET",
                 "timeout": 0,
                 "headers": {

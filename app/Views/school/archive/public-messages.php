@@ -891,13 +891,13 @@
                     data: 'message_text',
                     name: 'message_text',
                     className: 'text-center t-message_text align-middle',
-                    title: 'الجوال'
+                    title: 'نص الرسالة'
                 },
                 {
                     data: 'send_date',
                     name: 'send_date',
                     className: 'text-center t-send_date align-middle',
-                    title: 'الجوال'
+                    title: 'تاريخ الارسال'
                 },
                 {
                     data: null,

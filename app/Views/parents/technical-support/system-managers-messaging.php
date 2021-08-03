@@ -1,19 +1,15 @@
-<?php require(APPPATH . 'views/school/layouts/preContent.php') ?>
+<?php require(APPPATH . 'views/parents/layouts/preContent.php') ?>
 
 <!-- Content Header (Page header) -->
 <div class="content-header my-2 bg-white">
 
     <div class="row ">
         <div class="col  d-flex align-items-center ">
-            الاستبانات الإلكترونية
-
+            مراسلة مدير النظام
         </div>
         <div class="col-3">
-            <!-- <a href="<?php echo base_url() . '/public/'; ?>school/services/questionnaires/add" style="width: inherit;" class="btn btn-light">
-                إضافة استبانة
-            </a> -->
-            <button data-toggle="modal" data-target="#add-surveysModal" style="width: inherit;" class="btn btn-light">
-                إضافة استبانة
+            <button type="button" style="width: inherit; padding: .375rem .75rem;" class="btn btn-light" data-toggle="modal" data-target="#add-ticket">
+                إضافة تذكرة جديدة
             </button>
         </div>
     </div>
@@ -59,44 +55,156 @@
 </div>
 <!-- /.row -->
 
-<div class="modal fade" id="add-surveysModal" tabindex="-1" aria-labelledby="add-surveysModalLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-lg">
+
+<div class="row mt-4  mb-4  d-flex justify-content-center " style="font-size: 1rem;">
+    <div class="col-4">
+        <div class="form-group">
+            <select required class="form-control" id="status">
+                <option value="">حالة التذكرة</option>
+                <option value="1">مفتوحة</option>
+                <option value="2">مغلقة</option>
+
+            </select>
+        </div>
+
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="modal fade" id="add-ticket" tabindex="-1" aria-labelledby="add-ticketLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-surveysModalLabel">اضافة استبيان</h5>
+                <h5 class="modal-title" id="add-ticketLabel">إضافة تذكرة</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form onsubmit="addSurvey(this); return false;">
+            <form onsubmit="addTicket(); return false">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="survey-title" class="col-form-label">عنوان الاستبانة</label>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <input required type="text" class="form-control" name="survey_title" id="survey-title">
-                                    </div>
-                                </div>
+                                <label for="text" class="col-form-label">نص التذكرة</label>
+                                <input required type="text" class="form-control" id="ticket_text">
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
                             <div class="form-group">
-                                <label for="survey-link" class="col-form-label">رابط الاستبانة</label>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <input required type="text" class="form-control" name="survey_link" id="survey-link">
-                                        <small class="form-text text-muted">اضف الرابط كاملا ابتداءً من http او https</small>
-                                    </div>
-                                </div>
+                                <label for="department" class="col-form-label">القسم</label>
+                                <input required type="text" name="department" class="form-control" id="department">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="type" class="col-form-label">النمط</label>
+                                <input required type="text" name="type" class="form-control" id="type">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="prority" class="col-form-label">الأولوية</label>
+                                <input required type="text" name="prority" class="form-control" id="prority">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                    <button type="submit" id="send-ticket-btn" class="btn btn-primary">حفظ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<button id="reply-to-ticket-btn" type="button" style="display: none;" class="btn btn-light" data-toggle="modal" data-target="#reply-to-ticket"></button>
+
+<!-- Modal -->
+<div class="modal fade" id="reply-to-ticket" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="reply-to-ticketLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reply-to-ticketLabel">عرض تذكرة</h5>
+                <div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <button type="button" style="padding: 2px;" class="btn btn-link" onclick="refreshTicketReplies()">
+                        <span aria-hidden="true" style="font-size: .9rem; font-weight: bolder;"><i class="fas fa-redo"></i></span>
+                    </button>
+                </div>
+                <input type="hidden" name="" id="modal-id">
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 id="modal-ticket-text">
+                        </h4>
+                        <small id="modal-date"></small>
+                    </div>
+                </div>
+                <!-- <hr class="pt-3"> -->
+                <div class="row">
+                    <div class="col-sm-3" id="">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>القسم</h6>
+                                <small id="modal-department"></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3" id="">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>النوع</h6>
+                                <small id="modal-type"></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3" id="">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>الحالة</h6>
+                                <small id="modal-status"></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3" id="">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>الأولوية</h6>
+                                <small id="modal-prority"></small>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                    <button type="submit" class="btn btn-primary">حفظ</button>
+                <div id="spinner-control" class="d-flex justify-content-center">
+                    <div class="spinner-border m-5" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
                 </div>
-            </form>
+                <div id="modal-replies">
+                </div>
+                <div id="">
+                    <div class="form-group">
+                        <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
+                        <textarea class="form-control" placeholder="اكتب ردك هنا..." id="user-reply" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="sendTicketReply()">ارسال</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">اغلاق</button>
+                <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+            </div>
         </div>
     </div>
 </div>
@@ -110,14 +218,15 @@
                 <table id="content-table" class="table table-striped " style="width:100%">
                     <thead>
                         <tr>
-                            <th>م</th>
-                            <th> عنوان الاستبانة</th>
-                            <th>رابط الاستبانة</th>
-                            <th>الرابط المختصر</th>
-                            <th>تاريخ رفع الاستبانة</th>
-                            <th>عدد المجاوبين</th>
-                            <!-- <th>استعراض</th> -->
-                            <!-- <th>الحالة</th> -->
+                            <th></th>
+                            <th>رقم التذكرة</th>
+                            <th>النص</th>
+                            <th>آخر تحديث</th>
+                            <th>آخر من رد</th>
+                            <th>القسم</th>
+                            <th>النوع</th>
+                            <th>الحالة</th>
+                            <th>الأولوية</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -171,20 +280,20 @@
 
 <script>
     var school_id = 24;
-    var user_id = 24;
+    var parent_id = 23;
     var dataTable = null;
     var studentsData = [];
 
     $(document).ready(function() {
 
         dataTable = $('#content-table').DataTable({
-            dom: `<"row d-flex justify-content-end mx-1 my-1 mb-3 "B><"row d-flex justify-content-between mx-1 "fl>rtip`,
+            dom: `<"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
                 [25, 50, 100, 500, -1],
                 [25, 50, 100, 500, 'الكل']
             ],
             order: [
-                [0, 'asc']
+                [1, 'asc']
             ],
 
             responsive: true,
@@ -194,67 +303,64 @@
                 // $(row).addClass('clickable-row');
             },
             columns: [{
-                    data: null,
-                    name: 'id',
-                    title: 'م',
-                    className: 'text-center t-id align-middle',
-                    // orderable: false,
+                    "className": 'details-control align-middle ',
+                    "orderable": false,
                     searchable: false,
                     exportable: false,
+                    "data": null,
+                    "defaultContent": ''
+                },
+                {
+                    data: 'id',
+                    name: 'id',
+                    title: 'رقم التذكرة',
+                    className: 'text-center t-id align-middle',
+                },
+                {
+                    data: 'ticket_text',
+                    name: 'ticket_text',
+                    className: 'text-center t-ticket_text align-middle',
+                    title: '<div class="px-5 mx-5">النص</div>',
                     render: function(data, type, row, meta) {
-                        return meta.row + meta.settings._iDisplayStart + 1;
+                        return `<button class="btn btn-link" onclick="showReplyModal('${row.id}','${row.ticket_text}','${row.date}','${row.username}','${row.department}','${row.type}','${row.status}','${row.prority}')">${data}</button>`;
                     }
                 },
                 {
-                    data: 'title',
-                    name: 'title',
-                    className: 'text-center t-title align-middle',
-                    title: 'عنوان الاستبانة'
-                },
-                {
-                    data: null,
-                    "defaultContent": '',
-                    name: 'link',
-                    className: 'text-center t-link align-middle',
-                    title: 'رابط طويل'
-                },
-                {
-                    data: null,
-                    "defaultContent": '',
-                    name: 'short_link',
-                    className: 'text-center t-short_link align-middle',
-                    title: 'رابط قصير'
-                },
-                {
-                    data: null,
-                    "defaultContent": '',
+                    data: 'date',
                     name: 'date',
                     className: 'text-center t-date align-middle',
-                    title: 'تاريخ الرفع'
+                    title: 'اخر تحديث'
                 },
                 {
-                    data: 'count',
-                    name: 'count',
-                    className: 'text-center t-count align-middle',
-                    title: 'عدد المجاوبين',
-                    render: function(data, type, row, meta) {
-                        return data ? data : '';
-                    }
+                    data: 'username',
+                    name: 'username',
+                    className: 'text-center t-username align-middle',
+                    title: 'اخر من رد'
                 },
-                
-            ],
-
-            buttons: [{
-                    extend: 'collection',
-                    text: 'تصدير',
-                    className: 'btn btn-sm',
-                    buttons: [
-                        {
-                            extend: 'excel'
-                        },
-                    ]
+                {
+                    data: 'department',
+                    name: 'department',
+                    className: 'text-center t-department align-middle',
+                    title: 'القسم'
                 },
-                'colvis'
+                {
+                    data: 'type',
+                    name: 'type',
+                    className: 'text-center t-type align-middle',
+                    title: 'النوع'
+                },
+                {
+                    data: 'status',
+                    name: 'status',
+                    className: 'text-center t-status align-middle',
+                    title: 'الحالة'
+                },
+                {
+                    data: 'prority',
+                    name: 'prority',
+                    className: 'text-center t-prority align-middle',
+                    title: 'الاولوية'
+                },
             ],
 
             "language": {
@@ -452,24 +558,37 @@
         });
     });
 
+    function readReply(id, reply) {
+        $('#modal-text').html(reply);
+        $('#showReplyModalButton').click();
+        // sendReadMark(id);
+    }
 
+    function setListeners() {
+
+
+    }
     $(document).ready(function() {
+
         $('#status').change(function() {
-            getSurveyData();
+            getTicketsData();
         });
-        getSurveyData();
+
+        getTicketsData();
+
     });
 
 
-    function getSurveyData() {
+    function getTicketsData() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Servies/GetSurvey",
+                url: "https://sa.arsail.net/schools/Tickets/GetParentAdminTicketsById",
                 method: "GET",
                 timeout: 0,
                 data: {
-                    school_id: school_id,
+                    parent_id: parent_id,
                     page: "1",
                     limit: "7000",
+                    status: $('#status').val(),
                 },
                 headers: {
                     "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAyLTIyIiwiZXhwIjoiMjAyMi0wMi0yMiIsImRhdGEiOiIyMyJ9.ZITmmvk9fnZXo8Bfy30vw8uYK2kGZeN_M8XFPErmr_w"
@@ -484,15 +603,9 @@
             });
     }
 
-    function addSurvey(element) {
-
-        formData = $(element).serializeArray().reduce(function(obj, item) {
-            obj[item.name] = item.value;
-            return obj;
-        }, {});
-
+    function sendReadMark(id, reply) {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Servies/addSurveysss",
+                url: "",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -505,14 +618,139 @@
                 },
             })
             .done(function(response) {
-                
-                
+                $('reply-icon-' + id).parent().html(reply);
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء اضافة البيانات!', 'خطأ');
             });
 
-        console.log(formData);
+    }
+
+    function showReplyModal(id, ticket_text, date, username, department, type, status, prority) {
+        $('#modal-ticket-text').html(ticket_text);
+        $('#modal-department').html(department);
+        $('#modal-type').html(type);
+        $('#modal-status').html(status);
+        $('#modal-prority').html(prority);
+        $('#modal-date').html(date);
+        $('#modal-id').val(id);
+
+        $('#reply-to-ticket-btn').click();
+
+        getTicketReplies(id);
+    }
+
+    function getTicketReplies(id) {
+        $("#modal-replies").html('');
+        $("#spinner-control").attr('style', 'display: .');
+
+        var jqxhr = $.ajax({
+                url: "https://sa.arsail.net/schools/Tickets/GetTicketsReply",
+                method: "GET",
+                timeout: 0,
+                data: {
+                    ticket_id: id,
+                },
+                headers: {
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAyLTIyIiwiZXhwIjoiMjAyMi0wMi0yMiIsImRhdGEiOiIyMyJ9.ZITmmvk9fnZXo8Bfy30vw8uYK2kGZeN_M8XFPErmr_w"
+                },
+            })
+            .done(function(response) {
+                $("#spinner-control").attr('style', 'display: none !important');
+                setReplies(response.data);
+            })
+            .fail(function(response) {
+                $("#spinner-control").attr('style', 'display: none !important');
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء تحميل بيانات الردود!', 'خطأ');
+            });
+
+    }
+
+    function setReplies(replies) {
+        // typeof()
+        if ((replies =! 'undefined')) {
+            for (let i = 0; i < replies.reply.length; i++) {
+                // console.log(replies[i]);
+                $("#modal-replies").append(`<div class="card">
+                        <div class="card-header" style="background-color: rgb(0 0 0 / 0%);">
+                            <h6 class="">مستخدم
+                                <<<small>${replies.reply[i].username}</small>>>
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <h6>${replies.reply[i].reply}</h6>
+
+                            <div class="float-right">
+                                <small>${moment(replies.reply[i].date).format("YYYY-MM-DD")}</small>
+                            </div>
+                        </div>
+                    </div>`);
+            }
+        }
+    }
+
+    function sendTicketReply() {
+        var reply = $("#user-reply").val();
+
+        $.ajax({
+                "url": "https://sa.arsail.net/schools/Tickets/ReplyTicket",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI5IiwiZXhwIjoiMjAyMi0wMS0yOSIsImRhdGEiOnsidXNlcl9pZCI6MTh9fQ.1EfRPKk8zdCvjmn7qkVRKflJDtJjaoN0R_xvphe1No0",
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                "data": {
+                    "ticket_id": $("#modal-id").val(),
+                    "user_id": school_id,
+                    "reply": reply
+                }
+            }).done(function(response) {
+                refreshTicketReplies();
+                toastr.success('تم اضافة رد!')
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء ارسال الرد!', 'خطأ');
+            });
+    }
+
+    function refreshTicketReplies() {
+        var id = $("#modal-id").val();
+        getTicketReplies(id)
+    }
+
+    function addTicket() {
+        $("#send-ticket-btn").attr('disabled', 'true');
+        $("#send-ticket-btn").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    <span class="sr-only">جارٍ الارسال...</span>`);
+        $.ajax({
+                "url": "https://sa.arsail.net/schools/Tickets/AddParentAdminTicket",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAyLTIyIiwiZXhwIjoiMjAyMi0wMi0yMiIsImRhdGEiOiIyMyJ9.ZITmmvk9fnZXo8Bfy30vw8uYK2kGZeN_M8XFPErmr_w",
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                "data": {
+                    "ticket_text": $("#ticket_text").val(),
+                    "parent_id": parent_id,
+                    "department": $("#department").val(),
+                    "type": $("#type").val(),
+                    "prority": $("#prority").val()
+                }
+            }).done(function(response) {
+                toastr.success('تم اضافة تذكرة!');
+                $("#send-ticket-btn").html('حفظ');
+                $("#send-ticket-btn").removeAttr('disabled');
+                getTicketsData();
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء اضافة تذكرة!', 'خطأ');
+                $("#send-ticket-btn").html('حفظ');
+                $("#send-ticket-btn").removeAttr('disabled');
+            });
     }
 </script>

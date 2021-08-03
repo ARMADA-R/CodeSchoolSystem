@@ -84,6 +84,43 @@ $routes->get('school/partner/support/technical/ticket/(:num)', 'SchoolView::view
 
 
 
+
+
+// parents routes
+
+$routes->get('/parent', 'ParentsView::home');
+
+$routes->get('/parent/school/exams/tables', 'ParentsView::examsTables');
+$routes->get('/parent/school/global/table', 'ParentsView::globalTable');
+$routes->get('parent/school/questionnaires', 'ParentsView::questionnaires');
+$routes->get('parent/school/forms', 'ParentsView::forms');
+$routes->get('parent/school/notification', 'ParentsView::schoolNotifications');
+
+$routes->get('parent/support/technical/sys-managers/messaging', 'ParentsView::messagingSystemManagers');
+$routes->get('parent/support/technical/school-management/messaging', 'ParentsView::messagingSchoolManagement');
+$routes->get('parent/support/technical/ticket/(:num)', 'ParentsView::viewTicket/$1');
+
+$routes->get('parent/partners/offers', 'ParentsView::partnersOffers');
+$routes->get('parent/partners/support', 'ParentsView::partnersSupport');
+$routes->get('parent/partner/support/technical/ticket/(:num)', 'ParentsView::viewPartnerTicket/$1');
+
+// $routes->get('/parent/gates/link', 'ParentsView::linkGates');
+// $routes->get('parent/students/info', 'ParentsView::studentsInfo');
+// $routes->get('parent/teachers/info', 'ParentsView::teachersInfo');
+// $routes->get('parent/employees/info', 'ParentsView::employeesInfo');
+// $routes->get('parent/subjects/info', 'ParentsView::subjectsInfo');
+// $routes->get('parent/notifications/absence-tardiness', 'ParentsView::absenceAndTardiness');
+// $routes->get('parent/notifications/public-messages', 'ParentsView::publicMesssages');
+// $routes->get('parent/archive/absence-tardiness', 'ParentsView::absenceAndTardinessArchive');
+// $routes->get('parent/archive/public-messages', 'ParentsView::publicMesssagesArchive');
+// $routes->get('parent/parents-responce/responce-archive', 'ParentsView::parentsResponceArchive');
+// $routes->get('parent/support/technical/tickets/parents', 'ParentsView::parentsTichnicalSupportTickets');
+// $routes->get('parent/support/technical/ticket/(:num)', 'ParentsView::viewTicket/$1');
+// $routes->get('parent/services/questionnaires/add', 'ParentsView::addQuestionnaires');
+
+
+
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

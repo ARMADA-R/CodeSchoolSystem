@@ -1,86 +1,71 @@
-<?php require(APPPATH . 'views/school/layouts/preContent.php') ?>
+<?php require(APPPATH . 'views/parents/layouts/preContent.php') ?>
 
 <!-- Content Header (Page header) -->
 <div class="content-header my-2 bg-white">
 
     <div class="row ">
-        <div class="col  ">
-            عروض شريك النجاح
+        <div class="col  d-flex align-items-center ">
+            التنبيهات المدرسية
         </div>
     </div>
 </div>
+
 <!-- /.content-header -->
-
-
-
-<div class="row mt-4 pb-5" style="font-size: 1rem;">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
-
+<div class="p-4"></div>
 <div class="row">
     <div class="col-12">
         <div class="card">
+            <div class="card-header" style="background-color: rgb(0 0 0 / 0%);">
+                <h6 class="">تنبيه
+                « <small>1</small> »
+                </h6>
+            </div>
+            <div class="card-body">
+                <h6>المحتوى النصي لتنبيه.</h6>
 
-            <div class="card-body p-2">
-                <table id="content-table" class="table table-striped " style="width:100%">
-                    <thead>
+                <div class="float-right">
+                    <small>21-12-2020:11:30</small>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" style="background-color: rgb(0 0 0 / 0%);">
+                <h6 class="">تنبيه
+                « <small>1</small> »
+                </h6>
+            </div>
+            <div class="card-body">
+                <h6>المحتوى النصي لتنبيه.</h6>
 
-                        <tr>
-                            <th></th>
-                            <th>م</th>
-                            <th>الشريك</th>
-                            <th>المدينة</th>
-                            <th>المنطقة</th>
-                            <th> اسم الخدمة</th>
-                            <th> توضيح الخدمة</th>
-                            <th>سعر الخدمة</th>
-                            <th>السعر بعد الخصم</th>
-                            <th>مقدار الخصم</th>
-                            <th>انشاء كوبون الخصم</th>
-                            <th>تاريخ الانتهاء</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-
-                </table>
+                <div class="float-right">
+                    <small>21-12-2020:11:30</small>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <?php include_once(APPPATH . 'views/school/layouts/postContent.php') ?>
+<style>
+    .clickable-row {
+        cursor: pointer;
+    }
+
+    .clickable-row:hover {
+        background-color: #00000030 !important;
+    }
+
+    .clickable {
+        cursor: pointer;
+    }
+
+    .clickable:hover {
+        background-color: #00000030 !important;
+    }
+
+    .display-none {
+        display: none;
+    }
+</style>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
@@ -110,41 +95,27 @@
     var school_id = 24;
     var user_id = 24;
     var dataTable = null;
-    var studentsData = [];
 
     $(document).ready(function() {
 
         dataTable = $('#content-table').DataTable({
-            dom: `<"row d-flex justify-content-end mx-1 my-1 mb-3 "B><"row d-flex justify-content-between mx-1 "fl>rtip`,
+            dom: `f`,
             "lengthMenu": [
                 [25, 50, 100, 500, -1],
                 [25, 50, 100, 500, 'الكل']
             ],
             order: [
-                [1, 'asc']
+                [0, 'asc']
             ],
 
             responsive: true,
             autoWidth: false,
             rowId: 'id',
-            createdRow: function(row, data, index) {
-                $(row).addClass('datatable-row');
-                $(row).addClass('notToExcel');
-            },
             columns: [{
-                    "className": 'details-control',
-                    "orderable": false,
-                    searchable: false,
-                    exportable: false,
-                    "data": null,
-                    "defaultContent": ''
-                },
-
-                {
-                    data: 'id',
+                    data: null,
                     name: 'id',
                     title: 'م',
-                    className: 'text-center t-id',
+                    className: 'text-center t-id align-middle',
                     // orderable: false,
                     searchable: false,
                     exportable: false,
@@ -153,77 +124,44 @@
                     }
                 },
                 {
-                    data: 'username',
-                    name: 'username',
-                    className: 'text-center t-username',
-                    title: 'الشريك'
+                    data: 'title',
+                    name: 'title',
+                    className: 'text-center t-title align-middle',
+                    title: 'عنوان النموذج'
                 },
                 {
-                    data: 'city',
-                    name: 'city',
-                    className: 'text-center t-city',
-                    title: 'المدينة'
-                },
-                {
-                    data: 'area',
-                    name: 'area',
-                    className: 'text-center t-area',
-                    title: 'المنطقة'
-                },
-                {
-                    data: 'service_name',
-                    name: 'service_name',
-                    className: 'text-center t-service_name',
-                    title: ' اسم الخدمة'
-                },
-                {
-                    data: 'image_url',
-                    name: 'image_url',
-                    className: 'text-center t-image_url align-middle w-100',
-                    title: `توضيح الخدمة `,
+                    data: 'hits',
+                    name: 'hits',
+                    className: 'text-center t-hits align-middle',
+                    title: 'عدد المجاوبين',
                     render: function(data, type, row, meta) {
-                        return `<a href='${data}'></a>`;
+                        return data ? data : '';
                     }
                 },
                 {
-                    data: 'service_price',
-                    name: 'service_price',
-                    className: 'text-center t-service_price',
-                    title: 'سعر الخدمة'
+                    data: 'link',
+                    name: 'link',
+                    className: 'text-center t-link align-middle',
+                    title: 'استعراض',
+                    render: function(data, type, row, meta) {
+                        return `<a style="color: #212529;" href="${row.link}"><i class="far fa-eye"></i></a>`;
+                    }
                 },
-                {
-                    data: 'price_after_discount',
-                    name: 'price_after_discount',
-                    className: 'text-center t-price_after_discount',
-                    title: 'السعر بعد الخصم'
-                },
-                {
-                    data: 'discount',
-                    name: 'discount',
-                    className: 'text-center t-discount',
-                    title: 'مقدار الخصم'
-                },
-                {
-                    data: 'cubon',
-                    name: 'cubon',
-                    className: 'text-center t-cubon',
-                    title: 'انشاء كوبون الخصم'
-                },
-                {
-                    data: 'end_date',
-                    name: 'end_date',
-                    className: 'text-center t-end_date',
-                    title: 'تاريخ الانتهاء'
-                },
+                // {
+                //     data: 'status',
+                //     name: 'status',
+                //     className: 'text-center t-status align-middle',
+                //     title: 'الحالة',
+                //     render: function(data, type, row, meta) {
+                //         var checked = (row.form_status == 0) ? `checked` : ``;
+                //         return `<div class="custom-control custom-switch">
+                //                     <input type="checkbox" class="custom-control-input"  ${checked} onchange="updateFormStatus(${row.id},this.checked)" id="customSwitch-${row.id}">
+                //                     <label class="custom-control-label" for="customSwitch-${row.id}">${data}</label>
+                //                 </div>`;
+                //     }
+                // },
             ],
-            buttons: [{
-                    extend: 'collection',
-                    text: 'تصدير',
-                    className: 'btn btn-sm',
-                    buttons: ['excel', ]
-                },
-                'colvis'
-            ],
+
             "language": {
                 "emptyTable": "ليست هناك بيانات متاحة في الجدول",
                 "loadingRecords": "جارٍ التحميل...",
@@ -421,17 +359,25 @@
 
 
     $(document).ready(function() {
-        getArchiveData();
+        $('#status').change(function() {
+            getFormsData();
+        });
+        getFormsData();
     });
 
 
-    function getArchiveData() {
+    function getFormsData() {
         var jqxhr = $.ajax({
-                "url": "https://sa.arsail.net/schools/Partners/GetPartners?page=1&limit=2",
-                "method": "GET",
-                "timeout": 0,
-                "headers": {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI1IiwiZXhwIjoiMjAyMi0wMS0yNSIsImRhdGEiOiIxNCJ9.IN0TgoaZbO3b9NiH1eRO7eTmEwvV4ymVpVQR_h_g-Ww"
+                url: "https://sa.arsail.net/schools/Servies/GetForms",
+                method: "GET",
+                timeout: 0,
+                data: {
+                    school_id: school_id,
+                    page: "1",
+                    limit: "7000",
+                },
+                headers: {
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAyLTIyIiwiZXhwIjoiMjAyMi0wMi0yMiIsImRhdGEiOiIyMyJ9.ZITmmvk9fnZXo8Bfy30vw8uYK2kGZeN_M8XFPErmr_w"
                 },
             })
             .done(function(response) {
@@ -440,6 +386,55 @@
             .fail(function(response) {
                 console.log(response);
                 toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+            });
+    }
+
+    function updateFormStatus(id, status) {
+        var jqxhr = $.ajax({
+                "url": "https://sa.arsail.net/schools/Servies/UpdateFormStatus",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI1IiwiZXhwIjoiMjAyMi0wMS0yNSIsImRhdGEiOiIxNCJ9.IN0TgoaZbO3b9NiH1eRO7eTmEwvV4ymVpVQR_h_g-Ww",
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                "data": {
+                    "id": id,
+                    "status": status ? 1 : 0,
+                }
+            })
+            .done(function(response) {
+                toastr.success('تم تحديث حالة النموذج');
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
+            });
+    }
+
+
+    function addForm() {
+
+        var jqxhr = $.ajax({
+                "url": "https://sa.arsail.net/schools/Servies/AddForms",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI5IiwiZXhwIjoiMjAyMi0wMS0yOSIsImRhdGEiOnsidXNlcl9pZCI6MTh9fQ.1EfRPKk8zdCvjmn7qkVRKflJDtJjaoN0R_xvphe1No0",
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                "data": {
+                    "school_id": school_id,
+                    "title": $("#form-title").val(),
+                    "link": $("#form-link").val()
+                }
+            })
+            .done(function(response) {
+                toastr.success('تم اضافة النموذج');
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء اضافة البيانات!', 'خطأ');
             });
     }
 </script>

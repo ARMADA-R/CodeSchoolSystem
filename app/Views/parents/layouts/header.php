@@ -86,18 +86,6 @@
             border-color: #334c65;
             background-color: #001f3f;
         }
-
-        .btn-primary {
-            color: #fff;
-            background-color: #001f3f;
-            border-color: #001f3f;
-        }
-
-        .btn-primary:hover {
-            color: #fff;
-            background-color: #001a35;
-            border-color: #001a35;
-        }
     </style>
 
 </head>
