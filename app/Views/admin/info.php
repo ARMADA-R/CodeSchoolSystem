@@ -24,11 +24,11 @@
                         <img id="image" src="<?php echo (base_url() . '/public/12.png'); ?>" class="img-thumbnail img2" style="width: 50%;box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 15%);">
 
                         <div class="input-group" style="display: block;">
-                            <label for="file1" class="btn btn-success" style="margin-top: 6px;color: #fff;
+                            <label for="file" class="btn btn-success" style="margin-top: 6px;color: #fff;
                           background-color: #5883ba;width: 50%;
                            border-color: #ffffff; ">أختر صورة <i class="far fa-folder-open"></i></label>
 
-                            <input class="btn btn-success a1" type="file" name="" style="margin-top: 6px;display:none;" id="file1">
+                            <input class="btn btn-success a1" type="file" name="" style="margin-top: 6px;display:none;" id="file">
                             <h6 class="help-block sp1" style="display: block">أضف PNG أو JPG فقط
                             </h6>
 
@@ -55,7 +55,7 @@
             <a class="btn btn-success m-2" style="color: #fff;
     background-color: #1bc5bd;
     border-color: #1bc5bd;">الغاء</a>
-            <a class="btn btn-success m-2" onclick=" basicInfos()" id="update" style="color: #fff;
+            <a class="btn btn-success m-2" onclick="setBasicData()" id="" style="color: #fff;
     background-color: #1bc5bd;
     border-color: #1bc5bd;">تحديث</a>
         </div>
@@ -70,41 +70,41 @@
 <?php require(APPPATH . 'views/admin/layouts/postContent.php'); ?>
 
 <script>
-    function basicInfos(value) {
-        var myrq = new XMLHttpRequest();
-        myrq.onreadystatechange = function() {
+    // function basicInfos(value) {
+    //     var myrq = new XMLHttpRequest();
+    //     myrq.onreadystatechange = function() {
 
-            if (this.readyState === 4 && this.status === 200) {
+    //         if (this.readyState === 4 && this.status === 200) {
 
-                console.log(myrq);
-                document.getElementById("phone").innerHTML = this.responseText;
+    //             console.log(myrq);
+    //             document.getElementById("phone").innerHTML = this.responseText;
 
-                document.getElementById("copyright").innerHTML = this.responseText;
-                document.getElementById("file1").innerHTML = this.value
-
-
-
-
-
-            }
+    //             document.getElementById("copyright").innerHTML = this.responseText;
+    //             document.getElementById("file1").innerHTML = this.value
 
 
 
 
 
+    //         }
 
-        };
+
+
+
+
+
+    //     };
         // var data = {
         //     "phone": phone,
         //     "file": file,
         //     "copyright": copyright
         // };
 
-        myrq.open("GET", "https://sa.arsail.net/admin/basicInfos", true);
-        myrq.setRequestHeader("Content-type", "text/html");
+    //     myrq.open("GET", "https://sa.arsail.net/admin/basicInfos", true);
+    //     myrq.setRequestHeader("Content-type", "text/html");
 
-        myrq.send();
-    }
+    //     myrq.send();
+    // }
 
     $(document).ready(function() {
         $.ajax({
@@ -112,31 +112,30 @@
             method: "GET",
 
         }).done(function(response) {
-            alert("success");
+            // toastr.success('تم تحديث البيانات بنجاح')
         }).fail(function(response) {
-            alert("error");
+            toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
         });
     });
 
-    function setBasicData(phone, copyright, file) {
+    function setBasicData() {
         $.ajax({
             url: "https://sa.arsail.net/schools/Info/EditInfo",
             method: "POST",
-
+            // timeout: 0,
             headers: {
-                'authorization': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAxIiwiZXhwIjoiMjAyMi0wOC0wMSIsImRhdGEiOiIxNyJ9.wb3NNCYPAdtG3qnvJiELl0mEhQ9tshj5T6AQvAHcDQU",
-                'content-type': 'multipart/form-data'
+                'authorization': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAyIiwiZXhwIjoiMjAyMi0wOC0wMiIsImRhdGEiOiIxNyJ9.xH9VpqElqG-dIbZPO3zEfC68qmQ1xoBWGpQTuh5WrBU",
+                'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary4mNmbXjLH5bIyIUi'
             },
             data: {
-                "phone": phone,
-                "copyright": copyright,
-                "file": file,
-            }
+                "phone":$("#phone").val(),
+                "copyright":$("#copyright").val(),
+                "file": $("#file").val(),},
                 
         }).done(function(response) {
-            alert("success");
+            toastr.success('تم تحديث البيانات بنجاح')
         }).fail(function(response) {
-            alert("error");
+            toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
         });
     }
 

@@ -44,8 +44,8 @@ return	$this->respond($data, 200);
             $input2 = $this->validate([
                 'file' => [
                     'uploaded[file]',
-                    'mime_in[file,image/jpg,image/jpeg,image/png]',
-                    'max_size[file,1024]',
+                    // 'mime_in[file,image/jpg,image/jpeg,image/png]',
+                    // 'max_size[file,1024]',
                 ]
             ]);
     

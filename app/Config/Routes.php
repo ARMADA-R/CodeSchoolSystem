@@ -37,7 +37,7 @@ $routes->get('/admin/filter', 'AdminView::filter');
 $routes->get('/admin/ticket', 'AdminView::ticket');
 $routes->get('/admin/parent', 'AdminView::parent');
 $routes->get('/admin/partner', 'AdminView::partner');
-$routes->get('/admin/schooledit', 'AdminView::schooledit');
+$routes->get('/admin/schooledit/(:num)', 'AdminView::schooledit/$1');
 $routes->get('/admin/adminemail', 'AdminView::adminemail');
 $routes->get('/admin/user', 'AdminView::user');
 $routes->get('/admin/mangeschool', 'AdminView::mangeschool');
@@ -45,6 +45,7 @@ $routes->get('/admin/callus', 'AdminView::callus');
 $routes->get('/admin/gets', 'AdminView::gets');
 $routes->get('/admin/viewticket', 'AdminView::viewticket');
 $routes->get('/admin/problem', 'AdminView::problem');
+$routes->get('/admin/tebel', 'AdminView::tebel');
 
 
 
