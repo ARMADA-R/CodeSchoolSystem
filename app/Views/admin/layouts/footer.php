@@ -32,6 +32,39 @@
 
 
 
+<!-- tostar -->
+<script src="<?php echo base_url() . '/public/'; ?>design/js/toastr.js"></script>
+
+<script>
+  toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "7000",
+    "extendedTimeOut": "4000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut",
+    "toastClass": 'toastr'
+  };
+
+  // pdfMake.fonts = {
+  //   Tajawal: {
+  //     normal: '<?php echo base_url() . '/public/'; ?>design/fonts/Tajawal/Tajawal-Black.ttf',
+  //     bold: '<?php echo base_url() . '/public/'; ?>design/fonts/Tajawal/Tajawal-Bold.ttf',
+  //   },
+
+    
+  // }
+</script>
+
 <script>
   $("img.lazyload").lazyload();
 </script>

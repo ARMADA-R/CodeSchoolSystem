@@ -48,7 +48,9 @@
                      <!-- اتصل بنا-->
                      
                 <li class="nav-item">
-                <a href="<?php echo base_url().'/public/admin/callus';?>" class="nav-link">
+                <!-- <a href="//<?php //echo base_url().'/public/admin/callus';?>" class="nav-link"> -->
+
+                <a href="<?php echo base_url().'/public/admin/tebel';?>" class="nav-link">
                     <i class="nav-icon fas fa-phone"></i>
                     <p>
                         أتصل بنا
@@ -57,7 +59,7 @@
                 </li>
                 <!-- end المحددات الرئيسية-->
 
-                
+                    
                 <li class="nav-header">إعدادات النظام</li>
                 <li class="nav-item">
                     <a href="<?php echo base_url().'/public/admin/gets';?>" class="nav-link">

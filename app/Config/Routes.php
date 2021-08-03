@@ -45,6 +45,7 @@ $routes->get('/admin/callus', 'AdminView::callus');
 $routes->get('/admin/gets', 'AdminView::gets');
 $routes->get('/admin/viewticket', 'AdminView::viewticket');
 $routes->get('/admin/problem', 'AdminView::problem');
+$routes->get('/admin/tebel', 'AdminView::tebel');
 
 
 

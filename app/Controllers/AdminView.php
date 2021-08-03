@@ -81,8 +81,12 @@ public function partner()
         return view('admin/problem');
         
     }
-    
+    public function tebel()
+    {
+        return view('admin/tebel');
+        
+    }   
     
 	//--------------------------------------------------------------------
-
+    
 }
