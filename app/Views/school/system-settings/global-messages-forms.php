@@ -659,56 +659,5 @@
         return false;
     }
 
-    function test() {
-
-        // with no title
-        // toastr.warning('Warning')
-        toastr.success('Success')
-        // toastr.info('Info')
-        // // with a title
-        toastr.error('Error', 'Error Title')
-
-    }
-    var fonts = {
-        Courier: {
-            normal: 'Courier',
-            bold: 'Courier-Bold',
-            italics: 'Courier-Oblique',
-            bolditalics: 'Courier-BoldOblique'
-        },
-        Helvetica: {
-            normal: 'Helvetica',
-            bold: 'Helvetica-Bold',
-            italics: 'Helvetica-Oblique',
-            bolditalics: 'Helvetica-BoldOblique'
-        },
-        Times: {
-            normal: 'Times-Roman',
-            bold: 'Times-Bold',
-            italics: 'Times-Italic',
-            bolditalics: 'Times-BoldItalic'
-        },
-        Symbol: {
-            normal: 'Symbol'
-        },
-        ZapfDingbats: {
-            normal: 'ZapfDingbats'
-        },
-        Tajawal: {
-          normal: '<?php echo base_url() . '/public/'; ?>design/fonts/Tajawal/Tajawal-Black.ttf',
-          bold: '<?php echo base_url() . '/public/'; ?>design/fonts/Tajawal/Tajawal-Bold.ttf',
-        },
-    };
-    //     pdfMake.fonts = {
-    //     Tajawal: {
-    //       normal: '<?php echo base_url() . '/public/'; ?>design/fonts/Tajawal/Tajawal-Black.ttf',
-    //       bold: '<?php echo base_url() . '/public/'; ?>design/fonts/Tajawal/Tajawal-Bold.ttf',
-    //     },
-    //     Roboto: {
-    //     normal: 'Roboto-Regular.ttf',
-    //     bold: 'Roboto-Medium.ttf',
-    //     italics: 'Roboto-Italic.ttf',
-    //     bolditalics: 'Roboto-MediumItalic.ttf'
-    //   }
-    //   }
+ 
 </script>

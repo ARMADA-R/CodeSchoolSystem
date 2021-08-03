@@ -5,12 +5,36 @@
 
     <div class="row ">
         <div class="col ">
-        أرشيف الرد لولي الأمر
+            أرشيف الرد لولي الأمر
         </div>
     </div>
 </div>
 <!-- /.content-header -->
+<button type="button" id="showReplyModalButton" class="btn btn-primary" style="display: none;" data-toggle="modal" data-target="#showReplyModal">
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="showReplyModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="showReplyModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="showReplyModalLabel">رد ولي الامر</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6 id="modal-text">
+
+        </h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">تم</button>
+        <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <div class="row mt-4 pb-5" style="font-size: 1rem;">
@@ -53,487 +77,28 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            
-            <div class="card-body p-2" style="overflow: scroll;">
-                <table id="messages_forms" class="table table-striped " style="width:100%">
+
+            <div class="card-body p-2">
+                <table id="content-table" class="table table-striped " style="width:100%">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th></th>
+                            <th></th>
+                            <th>م</th>
+                            <th>اسم الطالب</th>
+                            <th>رقم الطالب</th>
+                            <th>الصف</th>
+                            <th>الفصل</th>
+                            <th>الجوال</th>
+                            <th>حالة الرصد</th>
+                            <th>الحصة</th>
+                            <th>تاريخ الرصد</th>
+                            <th>نص الرسالة</th>
+                            <th>رد ولي الأمر</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>2009/01/12</td>
-                            <td>$86,000</td>
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012/03/29</td>
-                            <td>$433,060</td>
-                        </tr>
-                        <tr>
-                            <td>Airi Satou</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>33</td>
-                            <td>2008/11/28</td>
-                            <td>$162,700</td>
-                        </tr>
-                        <tr>
-                            <td>Brielle Williamson</td>
-                            <td>Integration Specialist</td>
-                            <td>New York</td>
-                            <td>61</td>
-                            <td>2012/12/02</td>
-                            <td>$372,000</td>
-                        </tr>
-                        <tr>
-                            <td>Herrod Chandler</td>
-                            <td>Sales Assistant</td>
-                            <td>San Francisco</td>
-                            <td>59</td>
-                            <td>2012/08/06</td>
-                            <td>$137,500</td>
-                        </tr>
-                        <tr>
-                            <td>Rhona Davidson</td>
-                            <td>Integration Specialist</td>
-                            <td>Tokyo</td>
-                            <td>55</td>
-                            <td>2010/10/14</td>
-                            <td>$327,900</td>
-                        </tr>
-                        <tr>
-                            <td>Colleen Hurst</td>
-                            <td>Javascript Developer</td>
-                            <td>San Francisco</td>
-                            <td>39</td>
-                            <td>2009/09/15</td>
-                            <td>$205,500</td>
-                        </tr>
-                        <tr>
-                            <td>Sonya Frost</td>
-                            <td>Software Engineer</td>
-                            <td>Edinburgh</td>
-                            <td>23</td>
-                            <td>2008/12/13</td>
-                            <td>$103,600</td>
-                        </tr>
-                        <tr>
-                            <td>Jena Gaines</td>
-                            <td>Office Manager</td>
-                            <td>London</td>
-                            <td>30</td>
-                            <td>2008/12/19</td>
-                            <td>$90,560</td>
-                        </tr>
-                        <tr>
-                            <td>Quinn Flynn</td>
-                            <td>Support Lead</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2013/03/03</td>
-                            <td>$342,000</td>
-                        </tr>
-                        <tr>
-                            <td>Charde Marshall</td>
-                            <td>Regional Director</td>
-                            <td>San Francisco</td>
-                            <td>36</td>
-                            <td>2008/10/16</td>
-                            <td>$470,600</td>
-                        </tr>
-                        <tr>
-                            <td>Haley Kennedy</td>
-                            <td>Senior Marketing Designer</td>
-                            <td>London</td>
-                            <td>43</td>
-                            <td>2012/12/18</td>
-                            <td>$313,500</td>
-                        </tr>
-                        <tr>
-                            <td>Tatyana Fitzpatrick</td>
-                            <td>Regional Director</td>
-                            <td>London</td>
-                            <td>19</td>
-                            <td>2010/03/17</td>
-                            <td>$385,750</td>
-                        </tr>
-                        <tr>
-                            <td>Michael Silva</td>
-                            <td>Marketing Designer</td>
-                            <td>London</td>
-                            <td>66</td>
-                            <td>2012/11/27</td>
-                            <td>$198,500</td>
-                        </tr>
-                        <tr>
-                            <td>Paul Byrd</td>
-                            <td>Chief Financial Officer (CFO)</td>
-                            <td>New York</td>
-                            <td>64</td>
-                            <td>2010/06/09</td>
-                            <td>$725,000</td>
-                        </tr>
-                        <tr>
-                            <td>Gloria Little</td>
-                            <td>Systems Administrator</td>
-                            <td>New York</td>
-                            <td>59</td>
-                            <td>2009/04/10</td>
-                            <td>$237,500</td>
-                        </tr>
-                        <tr>
-                            <td>Bradley Greer</td>
-                            <td>Software Engineer</td>
-                            <td>London</td>
-                            <td>41</td>
-                            <td>2012/10/13</td>
-                            <td>$132,000</td>
-                        </tr>
-                        <tr>
-                            <td>Dai Rios</td>
-                            <td>Personnel Lead</td>
-                            <td>Edinburgh</td>
-                            <td>35</td>
-                            <td>2012/09/26</td>
-                            <td>$217,500</td>
-                        </tr>
-                        <tr>
-                            <td>Jenette Caldwell</td>
-                            <td>Development Lead</td>
-                            <td>New York</td>
-                            <td>30</td>
-                            <td>2011/09/03</td>
-                            <td>$345,000</td>
-                        </tr>
-                        <tr>
-                            <td>Yuri Berry</td>
-                            <td>Chief Marketing Officer (CMO)</td>
-                            <td>New York</td>
-                            <td>40</td>
-                            <td>2009/06/25</td>
-                            <td>$675,000</td>
-                        </tr>
-                        <tr>
-                            <td>Caesar Vance</td>
-                            <td>Pre-Sales Support</td>
-                            <td>New York</td>
-                            <td>21</td>
-                            <td>2011/12/12</td>
-                            <td>$106,450</td>
-                        </tr>
-                        <tr>
-                            <td>Doris Wilder</td>
-                            <td>Sales Assistant</td>
-                            <td>Sydney</td>
-                            <td>23</td>
-                            <td>2010/09/20</td>
-                            <td>$85,600</td>
-                        </tr>
-                        <tr>
-                            <td>Angelica Ramos</td>
-                            <td>Chief Executive Officer (CEO)</td>
-                            <td>London</td>
-                            <td>47</td>
-                            <td>2009/10/09</td>
-                            <td>$1,200,000</td>
-                        </tr>
-                        <tr>
-                            <td>Gavin Joyce</td>
-                            <td>Developer</td>
-                            <td>Edinburgh</td>
-                            <td>42</td>
-                            <td>2010/12/22</td>
-                            <td>$92,575</td>
-                        </tr>
-                        <tr>
-                            <td>Jennifer Chang</td>
-                            <td>Regional Director</td>
-                            <td>Singapore</td>
-                            <td>28</td>
-                            <td>2010/11/14</td>
-                            <td>$357,650</td>
-                        </tr>
-                        <tr>
-                            <td>Brenden Wagner</td>
-                            <td>Software Engineer</td>
-                            <td>San Francisco</td>
-                            <td>28</td>
-                            <td>2011/06/07</td>
-                            <td>$206,850</td>
-                        </tr>
-                        <tr>
-                            <td>Fiona Green</td>
-                            <td>Chief Operating Officer (COO)</td>
-                            <td>San Francisco</td>
-                            <td>48</td>
-                            <td>2010/03/11</td>
-                            <td>$850,000</td>
-                        </tr>
-                        <tr>
-                            <td>Shou Itou</td>
-                            <td>Regional Marketing</td>
-                            <td>Tokyo</td>
-                            <td>20</td>
-                            <td>2011/08/14</td>
-                            <td>$163,000</td>
-                        </tr>
-                        <tr>
-                            <td>Michelle House</td>
-                            <td>Integration Specialist</td>
-                            <td>Sydney</td>
-                            <td>37</td>
-                            <td>2011/06/02</td>
-                            <td>$95,400</td>
-                        </tr>
-                        <tr>
-                            <td>Suki Burks</td>
-                            <td>Developer</td>
-                            <td>London</td>
-                            <td>53</td>
-                            <td>2009/10/22</td>
-                            <td>$114,500</td>
-                        </tr>
-                        <tr>
-                            <td>Prescott Bartlett</td>
-                            <td>Technical Author</td>
-                            <td>London</td>
-                            <td>27</td>
-                            <td>2011/05/07</td>
-                            <td>$145,000</td>
-                        </tr>
-                        <tr>
-                            <td>Gavin Cortez</td>
-                            <td>Team Leader</td>
-                            <td>San Francisco</td>
-                            <td>22</td>
-                            <td>2008/10/26</td>
-                            <td>$235,500</td>
-                        </tr>
-                        <tr>
-                            <td>Martena Mccray</td>
-                            <td>Post-Sales support</td>
-                            <td>Edinburgh</td>
-                            <td>46</td>
-                            <td>2011/03/09</td>
-                            <td>$324,050</td>
-                        </tr>
-                        <tr>
-                            <td>Unity Butler</td>
-                            <td>Marketing Designer</td>
-                            <td>San Francisco</td>
-                            <td>47</td>
-                            <td>2009/12/09</td>
-                            <td>$85,675</td>
-                        </tr>
-                        <tr>
-                            <td>Howard Hatfield</td>
-                            <td>Office Manager</td>
-                            <td>San Francisco</td>
-                            <td>51</td>
-                            <td>2008/12/16</td>
-                            <td>$164,500</td>
-                        </tr>
-                        <tr>
-                            <td>Hope Fuentes</td>
-                            <td>Secretary</td>
-                            <td>San Francisco</td>
-                            <td>41</td>
-                            <td>2010/02/12</td>
-                            <td>$109,850</td>
-                        </tr>
-                        <tr>
-                            <td>Vivian Harrell</td>
-                            <td>Financial Controller</td>
-                            <td>San Francisco</td>
-                            <td>62</td>
-                            <td>2009/02/14</td>
-                            <td>$452,500</td>
-                        </tr>
-                        <tr>
-                            <td>Timothy Mooney</td>
-                            <td>Office Manager</td>
-                            <td>London</td>
-                            <td>37</td>
-                            <td>2008/12/11</td>
-                            <td>$136,200</td>
-                        </tr>
-                        <tr>
-                            <td>Jackson Bradshaw</td>
-                            <td>Director</td>
-                            <td>New York</td>
-                            <td>65</td>
-                            <td>2008/09/26</td>
-                            <td>$645,750</td>
-                        </tr>
-                        <tr>
-                            <td>Olivia Liang</td>
-                            <td>Support Engineer</td>
-                            <td>Singapore</td>
-                            <td>64</td>
-                            <td>2011/02/03</td>
-                            <td>$234,500</td>
-                        </tr>
-                        <tr>
-                            <td>Bruno Nash</td>
-                            <td>Software Engineer</td>
-                            <td>London</td>
-                            <td>38</td>
-                            <td>2011/05/03</td>
-                            <td>$163,500</td>
-                        </tr>
-                        <tr>
-                            <td>Sakura Yamamoto</td>
-                            <td>Support Engineer</td>
-                            <td>Tokyo</td>
-                            <td>37</td>
-                            <td>2009/08/19</td>
-                            <td>$139,575</td>
-                        </tr>
-                        <tr>
-                            <td>Thor Walton</td>
-                            <td>Developer</td>
-                            <td>New York</td>
-                            <td>61</td>
-                            <td>2013/08/11</td>
-                            <td>$98,540</td>
-                        </tr>
-                        <tr>
-                            <td>Finn Camacho</td>
-                            <td>Support Engineer</td>
-                            <td>San Francisco</td>
-                            <td>47</td>
-                            <td>2009/07/07</td>
-                            <td>$87,500</td>
-                        </tr>
-                        <tr>
-                            <td>Serge Baldwin</td>
-                            <td>Data Coordinator</td>
-                            <td>Singapore</td>
-                            <td>64</td>
-                            <td>2012/04/09</td>
-                            <td>$138,575</td>
-                        </tr>
-                        <tr>
-                            <td>Zenaida Frank</td>
-                            <td>Software Engineer</td>
-                            <td>New York</td>
-                            <td>63</td>
-                            <td>2010/01/04</td>
-                            <td>$125,250</td>
-                        </tr>
-                        <tr>
-                            <td>Zorita Serrano</td>
-                            <td>Software Engineer</td>
-                            <td>San Francisco</td>
-                            <td>56</td>
-                            <td>2012/06/01</td>
-                            <td>$115,000</td>
-                        </tr>
-                        <tr>
-                            <td>Jennifer Acosta</td>
-                            <td>Junior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>43</td>
-                            <td>2013/02/01</td>
-                            <td>$75,650</td>
-                        </tr>
-                        <tr>
-                            <td>Cara Stevens</td>
-                            <td>Sales Assistant</td>
-                            <td>New York</td>
-                            <td>46</td>
-                            <td>2011/12/06</td>
-                            <td>$145,600</td>
-                        </tr>
-                        <tr>
-                            <td>Hermione Butler</td>
-                            <td>Regional Director</td>
-                            <td>London</td>
-                            <td>47</td>
-                            <td>2011/03/21</td>
-                            <td>$356,250</td>
-                        </tr>
-                        <tr>
-                            <td>Lael Greer</td>
-                            <td>Systems Administrator</td>
-                            <td>London</td>
-                            <td>21</td>
-                            <td>2009/02/27</td>
-                            <td>$103,500</td>
-                        </tr>
-                        <tr>
-                            <td>Jonas Alexander</td>
-                            <td>Developer</td>
-                            <td>San Francisco</td>
-                            <td>30</td>
-                            <td>2010/07/14</td>
-                            <td>$86,500</td>
-                        </tr>
-                        <tr>
-                            <td>Shad Decker</td>
-                            <td>Regional Director</td>
-                            <td>Edinburgh</td>
-                            <td>51</td>
-                            <td>2008/11/13</td>
-                            <td>$183,000</td>
-                        </tr>
-                        <tr>
-                            <td>Michael Bruce</td>
-                            <td>Javascript Developer</td>
-                            <td>Singapore</td>
-                            <td>29</td>
-                            <td>2011/06/27</td>
-                            <td>$183,000</td>
-                        </tr>
-                        <tr>
-                            <td>Donna Snider</td>
-                            <td>Customer Support</td>
-                            <td>New York</td>
-                            <td>27</td>
-                            <td>2011/01/25</td>
-                            <td>$112,000</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                        </tr>
-                    </tfoot>
+                    <tbody></tbody>
+
                 </table>
             </div>
         </div>
@@ -541,85 +106,264 @@
 </div>
 <?php include_once(APPPATH . 'views/school/layouts/postContent.php') ?>
 
-
-<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
-<!-- <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet"> -->
-<!-- <link href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.bootstrap4.min.css" rel="stylesheet"> -->
-
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.bootstrap4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
+<script src="<?php echo base_url() . '/public/'; ?>design/pdfMake/pdfmake.min.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>design/pdfMake/vfs_fonts.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Excel/jquery.table2excel.js"></script>
+
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.colVis.min.js"></script>
 
 
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/autofill/2.3.7/css/autoFill.dataTables.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.1.0/css/dataTables.dateTime.min.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.9/css/fixedHeader.dataTables.min.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowgroup/1.1.3/css/rowGroup.dataTables.min.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/searchbuilder/1.1.0/css/searchBuilder.dataTables.min.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/searchpanes/1.3.0/css/searchPanes.dataTables.min.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.3/css/select.dataTables.min.css" /> -->
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" />
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.bootstrap4.min.css" />
-
-
-<!-- <script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script> -->
-<!-- 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/autofill/2.3.7/js/dataTables.autoFill.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.colVis.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/datetime/1.1.0/js/dataTables.dateTime.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/rowgroup/1.1.3/js/dataTables.rowGroup.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/searchbuilder/1.1.0/js/dataTables.searchBuilder.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/searchpanes/1.3.0/js/dataTables.searchPanes.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script> -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" />
 
 <script>
-    // `
-    // <"row"<"col"B>>
-    // <"row"<"col-md-6"<"row"<"col"f>><"row"<"col"B>>><"col-md-6"<"row"<"col"l>>>>
-    // `
+    var school_id = 24;
+    var user_id = 24;
+    var dataTable = null;
+    var studentsData = [];
+
     $(document).ready(function() {
-        var table = $('#messages_forms').DataTable({
-            dom: `<"row d-flex"<"col-md-6 d-flex"fl><"col-md-6  d-flex align-items-center "<"m-right-auto"B>>>rtip`,
-            fixedHeader: true,
+
+        dataTable = $('#content-table').DataTable({
+            dom: `<"row d-flex justify-content-end mx-1 my-1 mb-3 "B><"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
-                [25, 50, 100, 500],
-                [25, 50, 100, 500]
+                [25, 50, 100, 500, -1],
+                [25, 50, 100, 500, 'الكل']
+            ],
+            order: [
+                [2, 'asc']
+            ],
+
+            responsive: true,
+            autoWidth: false,
+            rowId: 'id',
+            createdRow: function(row, data, index) {
+                $(row).addClass('datatable-row');
+                $(row).addClass('notToExcel');
+            },
+            columns: [{
+                    "className": 'details-control align-middle',
+                    "orderable": false,
+                    searchable: false,
+                    exportable: false,
+                    "data": null,
+                    "defaultContent": ''
+                },
+                {
+                    data: 'id',
+                    className: 'text-center align-middle',
+                    title: `<input type="checkbox" class="select-all"  id="select-all">`,
+                    orderable: false,
+                    searchable: false,
+                    exportable: false,
+                    render: function(data, type, row, meta) {
+                        return `<input type="checkbox" class='align-middle selected_data' value='${data}' name="selected_data[]" id="${data}"/>`;
+                    }
+                },
+                {
+                    data: 'id',
+                    name: 'id',
+                    title: 'م',
+                    className: 'text-center t-id align-middle',
+                    // orderable: false,
+                    searchable: false,
+                    exportable: false,
+                    render: function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    data: 'full_name',
+                    name: 'full_name',
+                    className: 'text-center t-full_name align-middle',
+                    title: 'اسم الطالب'
+                },
+                {
+                    data: 'student_number',
+                    name: 'student_number',
+                    className: 'text-center t-student_number align-middle',
+                    title: 'رقم الطالب'
+                },
+                {
+                    data: 'class_name',
+                    name: 'class_name',
+                    className: 'text-center t-class_name align-middle',
+                    title: 'الصف'
+                },
+                {
+                    data: 'semaster_name',
+                    name: 'semaster_name',
+                    className: 'text-center t-semaster_name align-middle',
+                    title: 'الفصل'
+                },
+                {
+                    data: 'parent_phone',
+                    name: 'parent_phone',
+                    className: 'text-center t-parent_phone align-middle',
+                    title: 'الجوال'
+                },
+                {
+                    data: 'monitoring_case',
+                    name: 'monitoring_case',
+                    className: 'text-center t-monitoring_case align-middle',
+                    title: 'حالة الرصد'
+                },
+                {
+                    data: 'period',
+                    name: 'period',
+                    className: 'text-center t-period align-middle',
+                    title: 'الحصة'
+                },
+                {
+                    data: 'date',
+                    name: 'date',
+                    className: 'text-center t-date align-middle',
+                    title: 'تاريخ الرصد'
+                },
+                {
+                    data: 'message',
+                    name: 'message',
+                    className: 'text-center t-message align-middle',
+                    title: '<div class="px-5 mx-5">نص الرسالة</div>'
+                },
+                {
+                    data: 'reply',
+                    name: 'reply',
+                    className: 'text-center t-reply align-middle',
+                    title: 'رد ولي الامر',
+                    render: function(data, type, row, meta) {
+                        return `<i id="reply-icon-${row.id}" onclick="readReply(${row.id}, ${row.reply})" style="transform: scale(1.5); cursor: pointer;" class="fas fa-envelope m-2"></i>`;
+                        if(data) {                            
+                            if (row.is_read) {
+                                return data;
+                            } else {
+                                return `<i id="reply-icon-${row.id}" onclick="readReply(${row.id}, ${row.reply})" style="transform: scale(1.5); cursor: pointer;" class="fas fa-envelope m-2"></i>`;
+                            }
+                        } else{
+                            return 'لا يوجد رد!'
+                        }
+                    }
+                },
             ],
             buttons: [{
                     extend: 'collection',
                     text: 'تصدير',
                     className: 'btn btn-sm',
-                    buttons: [{
-                        extend: 'excel',
+                    buttons: [
+                        {
+                            text: 'Excel',
+                            action: function(e, dt, node, config) {
+                                $("#content-table").table2excel({
+                                    // exclude CSS class
+                                    exclude: ".noExl",
+                                    name: "تقرير",
+                                    filename: "أرشيف الرسائل العامة (طلاب)-" + moment().format('DD-MM-YYYY'), //do not include extension
+                                    fileext: ".xlsx", // file extension
+                                    exclude_inputs: true
+                                });
+                            }
+                        },
+                        {
+                            text: 'للمحدد Excel',
+                            action: function(e, dt, node, config) {
+                                $("#content-table").table2excel({
+                                    // exclude CSS class
+                                    exclude: ".notToExcel",
+                                    name: "تقرير",
+                                    filename: "أرشيف الرسائل العامة (طلاب)-" + moment().format('DD-MM-YYYY'), //do not include extension
+                                    fileext: ".xlsx", // file extension
+                                    exclude_inputs: true
+                                });
+                            }
+                        },
+                        {
+                            text: 'طباعة',
+                            action: function(e, dt, node, config) {
+                                var tableContainer = $('#content-table').clone();
+                                tableContainer.css('border-collapse', 'collapse');
+                                tableContainer.css('font-family', 'Arial, Helvetica, sans-serif');
 
-                    }, {
-                        extend: 'pdf',
+                                tableContainer.find('td').each(function(index, value) {
+                                    $(value).css('border', ' 0.6px solid #dee2e6');
+                                    $(value).css('padding', ' 8px');
+                                    $(value).css('display', '');
 
-                    }, {
-                        extend: 'csv',
+                                });
 
-                    }]
+                                tableContainer.find('th').each(function(index, value) {
+                                    $(value).css('border', ' 1px solid #dee2e6');
+                                    $(value).css('display', '');
+                                });
+
+
+                                var pageTitle = 'أرشيف إشعارات الغياب والتأخر' + ' (طلاب)',
+                                    win = window.open('', 'Print');
+                                win.document.write(`<html dir="rtl" lang="ar"><head><title>` + pageTitle + '</title>' +
+                                    `<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+                                    <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+                                    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
+                                    <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
+                                    <style>table {width: 100%;margin-bottom: 1rem;color: #212529;background-color: transparent;text-align: center!important;}table th,table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}table tbody + tbody {border-top: 2px solid #dee2e6;}table {border: 1px solid #dee2e6;}table th,table td {border: 1px solid #dee2e6;}table thead th,table thead td {border-bottom-width: 2px;}table tbody tr:nth-of-type(odd) {background-color: rgba(0, 0, 0, 0.05);}</style>` +
+                                    '</head><body style="padding-top: 4rem">' + tableContainer[0].outerHTML + '</body></html>');
+                                win.document.close();
+                                win.print();
+                                win.close();
+                            }
+                        },
+                        {
+                            text: 'طباعة المحدد',
+                            action: function(e, dt, node, config) {
+                                var tableContainer = $('#content-table').clone();
+                                tableContainer.css('border-collapse', 'collapse');
+                                tableContainer.css('font-family', 'Arial, Helvetica, sans-serif');
+
+                                tableContainer.find('td').each(function(index, value) {
+                                    $(value).css('border', ' 0.6px solid #dee2e6');
+                                    $(value).css('padding', ' 8px');
+                                    $(value).css('display', '');
+
+                                });
+                                tableContainer.find('tr').each(function(index, value) {
+                                    if (!$(value).hasClass('toprint') && index != 0) {
+                                        $(value).remove();
+                                    }
+                                });
+
+                                tableContainer.find('th').each(function(index, value) {
+                                    $(value).css('border', ' 1px solid #dee2e6');
+                                    $(value).css('display', '');
+                                });
+
+
+                                var pageTitle = 'أرشيف إشعارات الغياب والتأخر' + ' (طلاب)',
+                                    win = window.open('', 'Print');
+                                win.document.write(`<html dir="rtl" lang="ar"><head><title>` + pageTitle + '</title>' +
+                                    `<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+                                    <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+                                    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
+                                    <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
+                                    <style>table {width: 100%;margin-bottom: 1rem;color: #212529;background-color: transparent;text-align: center!important;}table th,table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}table tbody + tbody {border-top: 2px solid #dee2e6;}table {border: 1px solid #dee2e6;}table th,table td {border: 1px solid #dee2e6;}table thead th,table thead td {border-bottom-width: 2px;}table tbody tr:nth-of-type(odd) {background-color: rgba(0, 0, 0, 0.05);}</style>` +
+                                    '</head><body style="padding-top: 4rem">' + tableContainer[0].outerHTML + '</body></html>');
+                                win.document.close();
+                                win.print();
+                                win.close();
+                            }
+                        }
+                    ]
                 },
                 'colvis'
             ],
@@ -816,6 +560,110 @@
                 }
             }
         });
-
     });
+
+    function readReply(id, reply) {
+        $('#modal-text').html(reply);
+        $('#showReplyModalButton').click();
+        // sendReadMark(id);
+    }
+
+    function setListeners() {
+
+        $('#select-all').change(function() {
+            if (this.checked) {
+                selects();
+            } else {
+                deSelect();
+            }
+        });
+
+        $('.selected_data').change(function() {
+
+            if (this.checked) {
+                $(this).closest('.datatable-row').addClass('toprint');
+                $(this).closest('.datatable-row').removeClass('notToExcel');
+            } else {
+                $(this).closest('.datatable-row').removeClass('toprint');
+                $(this).closest('.datatable-row').addClass('notToExcel');
+            }
+        });
+
+        
+    }
+    $(document).ready(function() {
+        setListeners();
+        dataTable.on('draw', function() {
+            setListeners();
+        });
+
+        getArchiveData();
+    });
+
+
+    function getArchiveData() {
+        var jqxhr = $.ajax({
+                url: "https://sa.arsail.net/schools/Schools/GetParentArchiveAbsenceAndLag",
+                method: "GET",
+                timeout: 0,
+                data: {
+                    school_id: school_id,
+                    page: "1",
+                    limit: "7000",
+                },
+                headers: {
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAyLTIyIiwiZXhwIjoiMjAyMi0wMi0yMiIsImRhdGEiOiIyMyJ9.ZITmmvk9fnZXo8Bfy30vw8uYK2kGZeN_M8XFPErmr_w"
+                },
+            })
+            .done(function(response) {
+                dataTable.clear().rows.add(response.data).draw()
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+            });
+    }
+
+    function selects() {
+        var ele = document.getElementsByName('selected_data[]');
+        for (var i = 0; i < ele.length; i++) {
+            if (ele[i].type == 'checkbox')
+                ele[i].checked = true;
+            $(ele[i]).closest('.datatable-row').addClass('toprint');
+            $(ele[i]).closest('.datatable-row').removeClass('notToExcel');
+        }
+    }
+    
+    function deSelect() {
+        var ele = document.getElementsByName('selected_data[]');
+        for (var i = 0; i < ele.length; i++) {
+            if (ele[i].type == 'checkbox')
+            ele[i].checked = false;
+            $(ele[i]).closest('.datatable-row').removeClass('toprint');
+            $(ele[i]).closest('.datatable-row').addClass('notToExcel');
+        }
+    }
+
+    function sendReadMark(id, reply) {
+        var jqxhr = $.ajax({
+                url: "",
+                method: "GET",
+                timeout: 0,
+                data: {
+                    school_id: school_id,
+                    page: "1",
+                    limit: "7000",
+                },
+                headers: {
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAyLTIyIiwiZXhwIjoiMjAyMi0wMi0yMiIsImRhdGEiOiIyMyJ9.ZITmmvk9fnZXo8Bfy30vw8uYK2kGZeN_M8XFPErmr_w"
+                },
+            })
+            .done(function(response) {
+                $('reply-icon-'+id).parent().html(reply);
+            })
+            .fail(function(response) {
+                console.log(response);
+            });
+
+    }
 </script>

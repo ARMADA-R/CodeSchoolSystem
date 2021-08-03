@@ -63,7 +63,7 @@ $routes->get('/school', 'SchoolView::home');
 $routes->get('/school/messageForms/global', 'SchoolView::messageForms');
 $routes->get('/school/exams/tables', 'SchoolView::examsTables');
 $routes->get('/school/global/table', 'SchoolView::globalTable');
-$routes->get('/school/course/add', 'SchoolView::addCourse');
+$routes->get('/school/gates/link', 'SchoolView::linkGates');
 $routes->get('school/students/info', 'SchoolView::studentsInfo');
 $routes->get('school/teachers/info', 'SchoolView::teachersInfo');
 $routes->get('school/employees/info', 'SchoolView::employeesInfo');
@@ -81,6 +81,7 @@ $routes->get('school/services/questionnaires/add', 'SchoolView::addQuestionnaire
 $routes->get('school/services/forms', 'SchoolView::forms');
 $routes->get('school/partners/offers', 'SchoolView::partnersOffers');
 $routes->get('school/partners/support', 'SchoolView::partnersSupport');
+$routes->get('school/partner/support/technical/ticket/(:num)', 'SchoolView::viewPartnerTicket/$1');
 
 
 
