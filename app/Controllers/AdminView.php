@@ -40,9 +40,9 @@ public function partner()
     {
         return view('admin/partner');
     }
-	public function schooledit()
+	public function schooledit($seg6)
     {
-        return view('admin/schooledit');
+        return view('admin/schooledit',['id' => $seg6]);
     }
     public function adminemail()
     {

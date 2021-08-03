@@ -48,9 +48,8 @@
                      <!-- اتصل بنا-->
                      
                 <li class="nav-item">
-                <!-- <a href="//<?php //echo base_url().'/public/admin/callus';?>" class="nav-link"> -->
+                <a href="<?php echo base_url().'/public/admin/callus';?>" class="nav-link">
 
-                <a href="<?php echo base_url().'/public/admin/tebel';?>" class="nav-link">
                     <i class="nav-icon fas fa-phone"></i>
                     <p>
                         أتصل بنا
@@ -104,9 +103,9 @@
                 </li>
             
                 <li class="nav-item">
-                <!-- <a href="<?php echo base_url().'/public/admin/user';?>" class="nav-link"> -->
 
-                    <a href="<?php echo base_url().'/public/admin/schooledit';?>" class="nav-link">
+                <a href="<?php echo base_url().'/public/admin/user';?>" class="nav-link">
+
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                            الأعضاء
