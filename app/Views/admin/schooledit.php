@@ -17,7 +17,7 @@
 
 
 
-        <div class="card" style="">
+        <div class="card">
           <div class="">
             <h6 class="text-center text-bold">مدرسة الاحلام</h6>
           </div>
@@ -422,7 +422,7 @@
       <div class="col-xl-6"> 
     
 
-      <div class="card" style="">
+      <div class="card">
           <div class="">
             <h6 class="text-center text-bold">الخدمات المفعلة
                </h6>
