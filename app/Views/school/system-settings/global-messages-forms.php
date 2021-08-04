@@ -1,4 +1,4 @@
-<?php require(APPPATH . 'views/school/layouts/preContent.php') ?>
+<?php require(APPPATH . 'Views/school/layouts/preContent.php') ?>
 
 <!-- Content Header (Page header) -->
 <div class="content-header my-2 bg-white">
@@ -12,7 +12,7 @@
 </div>
 <!-- /.content-header -->
 
-<?php require(APPPATH . 'views/school/layouts/notifications-service-status.php') ?>
+<?php require(APPPATH . 'Views/school/layouts/notifications-service-status.php') ?>
 
 <button type="button" id="edit-temblate-btn" class="btn" style="display: none;" data-toggle="modal" data-target="#edit-temblate"></button>
 
@@ -164,7 +164,7 @@
         max-width: 200px;
     }
 </style>
-<?php include_once(APPPATH . 'views/school/layouts/postContent.php') ?>
+<?php include_once(APPPATH . 'Views/school/layouts/postContent.php') ?>
 
 
 

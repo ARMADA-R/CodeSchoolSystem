@@ -1,4 +1,4 @@
-<?php require(APPPATH . 'views/school/layouts/preContent.php') ?>
+<?php require(APPPATH . 'Views/school/layouts/preContent.php') ?>
 
 <!-- Content Header (Page header) -->
 <div class="content-header my-2 bg-white">
@@ -12,7 +12,7 @@
 <!-- /.content-header -->
 
 
-<?php require(APPPATH . 'views/school/layouts/notifications-service-status.php') ?>
+<?php require(APPPATH . 'Views/school/layouts/notifications-service-status.php') ?>
 
 <div class="row">
     <div class="col-12">
@@ -42,7 +42,7 @@
         </div>
     </div>
 </div>
-<?php include_once(APPPATH . 'views/school/layouts/postContent.php') ?>
+<?php include_once(APPPATH . 'Views/school/layouts/postContent.php') ?>
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

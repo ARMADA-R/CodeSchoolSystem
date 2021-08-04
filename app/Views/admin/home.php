@@ -233,7 +233,7 @@
 
 
 
-            <?php require(APPPATH . 'views/admin/layouts/postContent.php') ?>
+            <?php require(APPPATH . 'Views/admin/layouts/postContent.php') ?>
 
 <script>
   $(document).ready(function() {

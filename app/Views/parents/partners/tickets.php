@@ -1,4 +1,4 @@
-<?php require(APPPATH . 'views/parents/layouts/preContent.php') ?>
+<?php require(APPPATH . 'Views/parents/layouts/preContent.php') ?>
 
 
 
@@ -148,7 +148,7 @@
         </div>
     </div>
 </div>
-<?php include_once(APPPATH . 'views/school/layouts/postContent.php') ?>
+<?php include_once(APPPATH . 'Views/school/layouts/postContent.php') ?>
 <style>
     .clickable-row {
         cursor: pointer;

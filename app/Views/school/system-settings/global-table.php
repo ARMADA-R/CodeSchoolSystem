@@ -1,4 +1,4 @@
-<?php require(APPPATH . 'views/school/layouts/preContent.php') ?>
+<?php require(APPPATH . 'Views/school/layouts/preContent.php') ?>
 
 <!-- Content Header (Page header) -->
 <div class="content-header my-2 bg-white">
@@ -13,7 +13,7 @@
 
 
 
-<?php require(APPPATH . 'views/school/layouts/notifications-service-status.php') ?>
+<?php require(APPPATH . 'Views/school/layouts/notifications-service-status.php') ?>
 
 
 <div class="modal fade" id="add-temblate" tabindex="-1" aria-labelledby="add-temblateLabel" aria-hidden="true">
@@ -119,7 +119,7 @@
         </div>
     </div>
 </div>
-<?php include_once(APPPATH . 'views/school/layouts/postContent.php') ?>
+<?php include_once(APPPATH . 'Views/school/layouts/postContent.php') ?>
 
 
 <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
