@@ -99,7 +99,7 @@
 
 
 
-<?php require(APPPATH . 'views/admin/layouts/postContent.php'); ?>
+<?php require(APPPATH . 'Views/admin/layouts/postContent.php'); ?>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>

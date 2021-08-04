@@ -1,4 +1,4 @@
-<?php require(APPPATH . 'views/school/layouts/preContent.php') ?>
+<?php require(APPPATH . 'Views/school/layouts/preContent.php') ?>
 
 <!-- Content Header (Page header) -->
 <div class="content-header my-2 bg-white">
@@ -373,7 +373,7 @@
         background-color: rgba(0, 0, 0, 0.05);
     }
 </style> -->
-<?php include_once(APPPATH . 'views/school/layouts/postContent.php') ?>
+<?php include_once(APPPATH . 'Views/school/layouts/postContent.php') ?>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>

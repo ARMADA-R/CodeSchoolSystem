@@ -1,4 +1,4 @@
-<?php require(APPPATH . 'views/parents/layouts/preContent.php') ?>
+<?php require(APPPATH . 'Views/parents/layouts/preContent.php') ?>
 
 <!-- Content Header (Page header) -->
 <div class="content-header my-2 bg-white">
@@ -122,7 +122,7 @@
 </div>
 
 
-<?php include_once(APPPATH . 'views/school/layouts/postContent.php') ?>
+<?php include_once(APPPATH . 'Views/school/layouts/postContent.php') ?>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
