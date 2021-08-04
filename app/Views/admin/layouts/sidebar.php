@@ -153,8 +153,8 @@
                 
                 <li class="nav-item">
 
-                    <!-- <a href="<?php echo base_url().'/public/admin/adminemail';?>" class="nav-link"> -->
-                    <a href="<?php echo base_url().'/public/admin/problem';?>" class="nav-link">
+                    <a href="<?php echo base_url().'/public/admin/adminemail';?>" class="nav-link">
+                    <!-- <a href="<?php echo base_url().'/public/admin/problem';?>" class="nav-link"> -->
 
                         <i class="nav-icon fas fa-mail-bulk"></i>
                         <p>
