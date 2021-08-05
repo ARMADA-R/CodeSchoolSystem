@@ -106,7 +106,6 @@
 
                 <?php require(APPPATH . 'views/admin/layouts/postContent.php'); ?>
 
-<<<<<<< HEAD
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -480,6 +479,4 @@ function btnmasseg(msg) {
 }
    
 </script>
-=======
 <?php require(APPPATH . 'Views/admin/layouts/postContent.php'); ?>
->>>>>>> eba81e9b9308f33e4ffa797ec42093b923cb64ca

@@ -183,7 +183,7 @@
                                     </div>
 
                                     <div class="m-1">
-                                        <a type="button" class="btn btn-sm btn-danger " title="delete" style="margin: 0px;" >
+                                        <a type="button" class="btn btn-sm btn-danger nonn " title="delete" style="margin: 0px;" onclick="Deletetebel('${row.id}')" id="${row.id}">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
                                     </div>
@@ -422,6 +422,39 @@
             .fail(function(response) {
                 console.log(response);
                 toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+            });
+
+    }
+
+
+
+    
+    function Deletetebel(id) {
+        var jqxhr = $.ajax({
+                url: "https://sa.arsail.net/schools//Schools/DeleteSchool",
+                method: "DELETE",
+                timeout: 0,
+                data: {
+                    id: $('.nonn').attr('id')
+                    
+                },
+                headers: {
+                  
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAzIiwiZXhwIjoiMjAyMi0wOC0wMyIsImRhdGEiOiIxNyJ9.nbG_Ip9QZLCa4yA0jFothG4Wd1lupOqB1M7GSd4PP9I",
+                    "content-type": "application/x-www-form-urlencoded",
+
+                },
+            })
+            .done(function(response) {
+                // dataTable.clear().rows.add(response.data).draw()
+                toastr.success('تم حذف  البيانات محددة بنجاح  ', 'صح ');
+                manegTable();
+
+
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء حذف  البيانات!', 'خطأ');
             });
 
     }
