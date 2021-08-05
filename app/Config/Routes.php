@@ -59,7 +59,7 @@ $routes->get('/admin/tebel', 'AdminView::tebel');
 // route since we don't have to scan directories.
 // $routes->get('/', 'Home::index');
 
-$routes->get('/school', 'SchoolView::home');
+$routes->get('/school', 'SchoolView::messageForms');
 $routes->get('/school/messageForms/global', 'SchoolView::messageForms');
 $routes->get('/school/exams/tables', 'SchoolView::examsTables');
 $routes->get('/school/global/table', 'SchoolView::globalTable');
@@ -89,7 +89,7 @@ $routes->get('school/partner/support/technical/ticket/(:num)', 'SchoolView::view
 
 // parents routes
 
-$routes->get('/parent', 'ParentsView::home');
+$routes->get('/parent', 'ParentsView::examsTables');
 
 $routes->get('/parent/school/exams/tables', 'ParentsView::examsTables');
 $routes->get('/parent/school/global/table', 'ParentsView::globalTable');
@@ -105,20 +105,29 @@ $routes->get('parent/partners/offers', 'ParentsView::partnersOffers');
 $routes->get('parent/partners/support', 'ParentsView::partnersSupport');
 $routes->get('parent/partner/support/technical/ticket/(:num)', 'ParentsView::viewPartnerTicket/$1');
 
-// $routes->get('/parent/gates/link', 'ParentsView::linkGates');
-// $routes->get('parent/students/info', 'ParentsView::studentsInfo');
-// $routes->get('parent/teachers/info', 'ParentsView::teachersInfo');
-// $routes->get('parent/employees/info', 'ParentsView::employeesInfo');
-// $routes->get('parent/subjects/info', 'ParentsView::subjectsInfo');
-// $routes->get('parent/notifications/absence-tardiness', 'ParentsView::absenceAndTardiness');
-// $routes->get('parent/notifications/public-messages', 'ParentsView::publicMesssages');
-// $routes->get('parent/archive/absence-tardiness', 'ParentsView::absenceAndTardinessArchive');
-// $routes->get('parent/archive/public-messages', 'ParentsView::publicMesssagesArchive');
-// $routes->get('parent/parents-responce/responce-archive', 'ParentsView::parentsResponceArchive');
-// $routes->get('parent/support/technical/tickets/parents', 'ParentsView::parentsTichnicalSupportTickets');
-// $routes->get('parent/support/technical/ticket/(:num)', 'ParentsView::viewTicket/$1');
-// $routes->get('parent/services/questionnaires/add', 'ParentsView::addQuestionnaires');
 
+
+
+// partner routes
+
+$routes->get('/partner', 'PartnerView::partnersOffers');
+$routes->get('partner/offers', 'PartnerView::partnersOffers');
+
+$routes->get('partner/support/technical/sys-managers/messaging', 'PartnerView::messagingSystemManagers');
+$routes->get('partner/support/technical/schools/messaging', 'PartnerView::messagingSchoolManagement');
+$routes->get('partner/support/technical/parents/messaging', 'PartnerView::messagingParents');
+$routes->get('partner/support/technical/parent-tickets/(:num)', 'PartnerView::viewTicket/$1');
+$routes->get('partner/support/technical/school-tickets/(:num)', 'PartnerView::viewSchoolTicket/$1');
+
+$routes->get('partner/school/exams/tables', 'PartnerView::examsTables');
+$routes->get('partner/school/global/table', 'PartnerView::globalTable');
+$routes->get('partner/school/questionnaires', 'PartnerView::questionnaires');
+$routes->get('partner/school/forms', 'PartnerView::forms');
+$routes->get('partner/school/notification', 'PartnerView::schoolNotifications');
+
+
+$routes->get('partner/partners/support', 'PartnerView::partnersSupport');
+$routes->get('partner/partner/support/technical/ticket/(:num)', 'PartnerView::viewPartnerTicket/$1');
 
 
 

@@ -11,17 +11,18 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/jquery/jquery.min.js"></script>
+<!-- <script src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/jquery/jquery.min.js"></script> -->
 
 <!-- jQuery 3.4.1 -->
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+<script src="<?php echo base_url() . '/public/'; ?>design/js/jquery-3.4.1.min.js"></script>
+
 
 <!-- Lazy Load -->
 <script src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/lazyload/lazyload.js"></script>
 
 
 <!-- Bootstrap 4 rtl -->
-<script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"></script>
+<!-- <script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"></script> -->
 <!-- overlayScrollbars -->
 <!-- <script src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script> -->
 

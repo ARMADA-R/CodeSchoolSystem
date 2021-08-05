@@ -4,12 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>School Managment System | School Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
 
     <!-- overlayScrollbars -->
@@ -97,6 +96,59 @@
             color: #fff;
             background-color: #001a35;
             border-color: #001a35;
+        }
+        .btn-primary.focus,
+        .btn-primary:focus {
+            color: #fff;
+            background-color: #001f3f;
+            border-color: #001f3f;
+            box-shadow: 0 0 0 0.2rem rgb(0 31 63 / 34%);
+        }
+
+        .btn-primary:not(:disabled):not(.disabled).active,
+        .btn-primary:not(:disabled):not(.disabled):active,
+        .show>.btn-primary.dropdown-toggle {
+            color: #fff;
+            background-color: #001f3f;
+            border-color: #001831;
+        }
+
+        .btn-primary.disabled,
+        .btn-primary:disabled {
+            color: #fff;
+            background-color: #001f3f;
+            border-color: #001f3f;
+            border-top-color: rgb(0, 31, 63);
+            border-right-color: rgb(0, 31, 63);
+            border-bottom-color: rgb(0, 31, 63);
+            border-left-color: rgb(0, 31, 63);
+        }
+
+        .btn-outline-primary {
+            color: #001f3f;
+            border-color: #001f3f;
+        }
+
+        .btn-outline-primary:hover {
+            color: #fff;
+            background-color: #001f3f;
+            border-color: #001f3f;
+        }
+
+        .btn-outline-primary:not(:disabled):not(.disabled).active,
+        .btn-outline-primary:not(:disabled):not(.disabled):active,
+        .show>.btn-outline-primary.dropdown-toggle {
+            color: #fff;
+            background-color: #001f3f;
+            border-color: #001f3f;
+        }
+
+        .btn-outline-primary.focus,
+        .btn-outline-primary:focus {
+            box-shadow: 0 0 0 0.2rem rgb(0 31 63 / 19%);
+        }
+        .page-link {
+            color: #001f3f;
         }
     </style>
 

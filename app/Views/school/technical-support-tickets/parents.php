@@ -19,49 +19,14 @@
 
 
 
-<div class="row mt-4 pb-5" style="font-size: 1rem;">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
+<?php require(APPPATH . 'Views/school/layouts/notifications-service-status.php') ?>
 
 
 
 <div class="row mt-4  mb-4  d-flex justify-content-center " style="font-size: 1rem;">
     <div class="col-4">
         <div class="form-group">
-            <select required class="form-control" id="status">
+            <select required class="form-control dependencies" id="status">
                 <option value="">حالة التذكرة</option>
                 <option value="1">مفتوحة</option>
                 <option value="2">مغلقة</option>
@@ -69,6 +34,16 @@
             </select>
         </div>
 
+    </div>
+    <div class="col-4">
+        <div class="form-group">
+            <input type="date" id="date" class="form-control dependencies" placeholder="التاريخ">
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="form-group">
+            <input type="text" id="name" class="form-control dependencies" placeholder="الاسم">
+        </div>
     </div>
 </div>
 <!-- /.row -->
@@ -155,7 +130,8 @@
 
 <?php include_once(APPPATH . 'Views/school/layouts/postContent.php') ?>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
 
 <script>
     var school_id = 24;
@@ -163,7 +139,7 @@
 
     $(document).ready(function() {
         getTickets();
-        $('#status').change(function() {
+        $('.dependencies').change(function() {
             getTickets();
         });
     });
@@ -181,8 +157,8 @@
                     page: 1,
                     limit: 10000,
                     status: $('#status').val(),
-                    date: "",
-                    parent_name: "",
+                    date: $('#date').val(),
+                    parent_name: $('#name').val(),
                 }
             }).done(function(response) {
                 displayTickets(response.data);

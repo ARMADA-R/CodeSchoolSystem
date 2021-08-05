@@ -14,7 +14,8 @@
 <script src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/jquery/jquery.min.js"></script>
 
 <!-- jQuery 3.4.1 -->
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+<!-- <script src="<?php echo base_url() . '/public/'; ?>design/js/jquery-3.4.1.min.js"></script>
+ -->
 
 <!-- Lazy Load -->
 <script src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/lazyload/lazyload.js"></script>
