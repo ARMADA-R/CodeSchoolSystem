@@ -44,7 +44,7 @@
             <div class="col-md-6 d-flex align-self-baseline">
 
                 <label class="m-2" style="white-space: nowrap;">جملة الحقوق: </label>
-                <textarea name="" id="copyright" class="form-control " rows="3" style="box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 15%);">الحقوق محفوظة لمؤسسة إرسال</textarea>
+                <textarea name="" id="copyright" class="form-control " rows="3" style="box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 15%);  "></textarea>
             </div>
 
 
@@ -70,49 +70,20 @@
 <?php require(APPPATH . 'Views/admin/layouts/postContent.php'); ?>
 
 <script>
-    // function basicInfos(value) {
-    //     var myrq = new XMLHttpRequest();
-    //     myrq.onreadystatechange = function() {
-
-    //         if (this.readyState === 4 && this.status === 200) {
-
-    //             console.log(myrq);
-    //             document.getElementById("phone").innerHTML = this.responseText;
-
-    //             document.getElementById("copyright").innerHTML = this.responseText;
-    //             document.getElementById("file1").innerHTML = this.value
-
-
-
-
-
-    //         }
-
-
-
-
-
-
-    //     };
-        // var data = {
-        //     "phone": phone,
-        //     "file": file,
-        //     "copyright": copyright
-        // };
-
-    //     myrq.open("GET", "https://sa.arsail.net/admin/basicInfos", true);
-    //     myrq.setRequestHeader("Content-type", "text/html");
-
-    //     myrq.send();
-    // }
+   
 
     $(document).ready(function() {
         $.ajax({
             url: "https://sa.arsail.net/schools/Info/GetInfo",
             method: "GET",
+            data: {
+                "phone":"",
+                "copyright":'',
+                "file":"" },
 
         }).done(function(response) {
-            // toastr.success('تم تحديث البيانات بنجاح')
+            toastr.success('تم تحديث البيانات بنجاح')
+          $("#copyright").val(response.data.copyright);
         }).fail(function(response) {
             toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
         });
@@ -141,5 +112,11 @@
 
     function getAndsend() {
         setBasicData($("#phone").val(),$("#copyright").val() ,$("#file").val() );
+    }
+
+    function print(msg) {
+
+        $("#copyright").html(msg)
+        
     }
 </script>
