@@ -8,7 +8,6 @@
     <div class="card-header ">
         <i class="fas fa-door-open "></i>
         <h6 class=" text-bold d-inline-flex">البوابات</h6>
-
     </div>
     <!-- start card body1 -->
 
@@ -21,17 +20,14 @@
                         <tr>
                             <th>م</th>
                                 <th></th>
-                                <th ></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
-
                                 <th></th>
-
-
+                                <th></th>
                         </tr>
                     </thead>
                 </table>
