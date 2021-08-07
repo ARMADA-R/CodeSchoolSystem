@@ -146,7 +146,7 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
 
             },
             data: {
-                ticket_id:""
+                ticket_id:<?php  echo $id; ?>
                 
             },
             
@@ -159,88 +159,8 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
         });
     });
 
-    function AddSlider() {
-        $.ajax({
-            url: "https://sa.arsail.net/schools/Slider_Api/AddSlider",
-            method: "POST",
-          //  timeout: 0,
-            headers: {
-                'authorization': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAxIiwiZXhwIjoiMjAyMi0wOC0wMSIsImRhdGEiOiIxNyJ9.wb3NNCYPAdtG3qnvJiELl0mEhQ9tshj5T6AQvAHcDQU",
-                'content-type': "multipart/form-data"
-
-            },
-            data: {
-               text: $("#text8").val() ,
-                file: $("#file8").val(),
-            },
-                
-        }).done(function(response) {
-            toastr.success('تم تحديث البيانات بنجاح')
-        }).fail(function(response) {
-            toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
-        });
-    }
-
-    function Slider() {
-      AddSlider($("#text").val() ,$("#file").val());
-    }
 
 
-
-
-    function EditSlider(text2,file2) {
-        $.ajax({
-            url: "https://sa.arsail.net/schools/Slider_Api/EditSlider",
-            method: "POST",
-          //  timeout: 0,
-            headers: {
-                'authorization': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAxIiwiZXhwIjoiMjAyMi0wOC0wMSIsImRhdGEiOiIxNyJ9.wb3NNCYPAdtG3qnvJiELl0mEhQ9tshj5T6AQvAHcDQU",
-                 'contentType:': "multipart/form-data"
-
-            },
-            data: {
-                "text": text2,
-                "file": file2
-            },
-                
-        }).done(function(response) {
-            toastr.success('تم تحديث البيانات بنجاح')
-        }).fail(function(response) {
-            toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
-        });
-    }
-
-    function  EditSliderseet() {
-      EditSlider($("#text2").val() ,$("#file2").val());
-    }
-
-    function DeleteSlider() {
-        $.ajax({
-            url: "https://sa.arsail.net/schools/Slider_Api/DeleteSlider",
-            method: "DELETE",
-          //  timeout: 0,
-            headers: {
-                'authorization': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAxIiwiZXhwIjoiMjAyMi0wOC0wMSIsImRhdGEiOiIxNyJ9.wb3NNCYPAdtG3qnvJiELl0mEhQ9tshj5T6AQvAHcDQU",
-                 'contentType:': "application/x-www-form-urlencoded"
-
-            },
-            data: {
-                
-                
-                "id":$("#id").val(),
-                
-            },
-                
-        }).done(function(response) {
-            toastr.success('تم تحديث البيانات بنجاح')
-        }).fail(function(response) {
-            toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
-        });
-    }
-
-    function  Deleteset() {
-      DeleteSlider($("#file").val());
-    }
 
 
 

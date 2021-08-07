@@ -125,21 +125,12 @@ $.ajax({
             "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAyIiwiZXhwIjoiMjAyMi0wOC0wMiIsImRhdGEiOiIxNyJ9.xH9VpqElqG-dIbZPO3zEfC68qmQ1xoBWGpQTuh5WrBU"
         },
         data: {
-   school_name: "",
-    username: "",
-    image_url:"" ,
-    category: "",
-    email: "",
-    phone: "",
-    city: "",
-    area: "",
+        
     page: 1,
     limit: 10000,
            
-            date: "",
-            parent_name: "",
-    status: $('#status').val(),
-        }
+           
+        },
     }).done(function(response) {
         displayTickets(response.data);
     })
@@ -209,7 +200,7 @@ ${data[i].city},${data[i].area}</a></div>
 <div class="d-flex justify-content-center">
     <a class="btn btn-success m-2" style="color: #fff;
 background-color: #1bc5bd;
-border-color: #1bc5bd;" href="<?php echo base_url() . '/public/';?>admin/viewticket">استعراض التذاكر</a>
+border-color: #1bc5bd;" href="<?php echo base_url() . '/public/';?>admin/viewticketparther/${data[i].id}" onclick="viewtpr('${data[i].id}')">استعراض التذاكر</a>
 
 
 </div>     
@@ -223,6 +214,32 @@ border-color: #1bc5bd;" href="<?php echo base_url() . '/public/';?>admin/viewtic
 
 }
 }
+ 
+function viewtpr(id) {
+        var jqxhr = $.ajax({
+                url: "https://sa.arsail.net/schools/Tickets/GetAdminPartnersTicketsById",
+                method: "GET",
+                timeout: 0,
+                data: {
+               
+                    partner_id:id, 
+                    page: "1",
+                    limit: "10000",
+                    status: $('#status').val(),
+                },
+                headers: {
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE"
+                },
+            })
+            .done(function(response) {
+               // dataTable.clear().rows.add(response.data).draw()
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+            });
+
+        }
 
 </script>
 

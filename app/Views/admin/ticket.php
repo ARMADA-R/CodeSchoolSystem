@@ -208,7 +208,7 @@
         <div class="d-flex justify-content-center">
             <a class="btn btn-success m-2" style="color: #fff;
     background-color: #1bc5bd;
-    border-color: #1bc5bd;" href="<?php echo base_url() . '/public/';?>admin/viewticket">استعراض التذاكر</a>
+    border-color: #1bc5bd;" href="<?php echo base_url() . '/public/';?>admin/viewticketschool/${data[i].id}" onclick="viewt()">استعراض التذاكر</a>
 
 
 </div>     
@@ -219,9 +219,35 @@
 
 </div>
 <!--  end  tiket1 -->`);
+  
+function viewt() {
+        var jqxhr = $.ajax({
+                url: "https://sa.arsail.net/schools/Tickets/GetSchoolsAdminTicketsBySchoolId",
+                method: "GET",
+                timeout: 0,
+                data: {
+               
+                    school_id :id,                  
+                     page: "1",
+                    limit: "10000",
+                    status: $('#status').val()
+                },
+                headers: {
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA1IiwiZXhwIjoiMjAyMi0wOC0wNSIsImRhdGEiOiIxNyJ9.q_84FctB4e2pP_u86yOe6LZUw11Cl2PehycED_x3G-I"
+                },
+            })
+            .done(function(response) {
+               // dataTable.clear().rows.add(response.data).draw()
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+            });
 
         }
+        }
     }
+
 
 </script>
 

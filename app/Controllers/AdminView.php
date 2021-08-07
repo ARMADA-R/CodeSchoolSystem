@@ -71,14 +71,14 @@ public function partner()
         return view('admin/gets');
         
     }
-    public function viewticket()
+    public function viewticketschool($seg6)
     {
-        return view('admin/viewticket');
+        return view('admin/viewticketschool',['id' => $seg6]);
         
     }
-    public function problem()
+    public function problem($seg6)
     {
-        return view('admin/problem');
+        return view('admin/problem',['id' => $seg6]);
         
     }
     public function tebel()
@@ -88,5 +88,16 @@ public function partner()
     }   
     
 	//--------------------------------------------------------------------
+    public function viewticketparther($seg6)
+    {
+        return view('admin/viewticketparther',['id' => $seg6]);
+        
+    }
+    public function viewticketparent ($seg6)
+    {
+        return view('admin/viewticketparent',['id' => $seg6]);
+        
+    }
     
+
 }

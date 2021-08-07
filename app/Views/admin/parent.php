@@ -103,6 +103,7 @@
 
         <?php require(APPPATH . 'Views/admin/layouts/postContent.php'); ?>
         <script>
+    var id= <?php echo $id; ?>
 
 
         
@@ -124,20 +125,11 @@
                     "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAyIiwiZXhwIjoiMjAyMi0wOC0wMiIsImRhdGEiOiIxNyJ9.xH9VpqElqG-dIbZPO3zEfC68qmQ1xoBWGpQTuh5WrBU"
                 },
                 data: {
-           school_name: "",
-            username: "",
-            image_url:"" ,
-            category: "",
-            email: "",
-            phone: "",
-            city: "",
-            area: "",
+                   
+
             page: 1,
             limit: 10000,
-                   
-                    date: "",
-                    parent_name: "",
-            status: $('#status').val(),
+                
                 }
             }).done(function(response) {
                 displayTickets(response.data);
@@ -212,7 +204,7 @@
         <div class="d-flex justify-content-center">
             <a class="btn btn-success m-2" style="color: #fff;
     background-color: #1bc5bd;
-    border-color: #1bc5bd;" href="<?php echo base_url() . '/public/';?>admin/viewticket">استعراض التذاكر</a>
+    border-color: #1bc5bd;" href="<?php echo base_url() . '/public/' ;?>admin/viewticketparent/${data[i].id}" onclick="viewt()">استعراض التذاكر</a>
 
 
 </div>     
@@ -226,6 +218,32 @@
 
         }
     }
+    
+ function viewt() {
+        var jqxhr = $.ajax({
+                url: "https://sa.arsail.net/schools/Tickets/GetSchoolsParentsTicketsBySchoolId",
+                method: "GET",
+                timeout: 0,
+                data: {
+               
+                    parent_id:id, 
+                    page: "1",
+                    limit: "10000",
+                    status: $('#status').val()
+                },
+                headers: {
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA1IiwiZXhwIjoiMjAyMi0wOC0wNSIsImRhdGEiOiIxNyJ9.q_84FctB4e2pP_u86yOe6LZUw11Cl2PehycED_x3G-I"
+                },
+            })
+            .done(function(response) {
+               // dataTable.clear().rows.add(response.data).draw()
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+            });
+
+        }
 
 </script>
 
