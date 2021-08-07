@@ -1064,3 +1064,155 @@
 
 
 <?php require(APPPATH . 'Views/admin/layouts/postContent.php'); ?>
+
+
+
+<script>
+   
+
+    $(document).ready(function() {
+      getschoolbyid();
+      GetServicesSchools();
+      GetServicesBySchoolID();
+    });
+ function getschoolbyid() {
+  $.ajax({
+            url: "https://sa.arsail.net/schools/Schools/GetSchoolByID",
+            method: "GET",
+            data: {
+                id:<?php echo $id;?>
+              },
+              headers: {
+                authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
+               
+            },
+
+        }).done(function(response) {
+            toastr.success('تم تحديث البيانات بنجاح')
+          $("#copyright").val(response.data.copyright);
+        }).fail(function(response) {
+            toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
+        });
+ }
+
+
+ function GetServicesSchools() {
+  $.ajax({
+            url: "https://sa.arsail.net/schools/Schools/GetServicesSchools",
+            method: "GET",
+          
+              headers: {
+                authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
+               
+            },
+
+        }).done(function(response) {
+            toastr.success('تم تحديث البيانات  2بنجاح')
+          $("#copyright").val(response.data.copyright);
+        }).fail(function(response) {
+            toastr.error('حدث خطأ ما اثناء تحديث البيانات!2', 'خطأ');
+        });
+ }
+ function GetServicesBySchoolID() {
+  $.ajax({
+            url: "https://sa.arsail.net/schools/Schools/GetServicesBySchoolID",
+            method: "GET",
+           
+            data: {
+              school_id:<?php echo $id;?>
+              },
+              headers: {
+                authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
+               
+            },
+
+        }).done(function(response) {
+            toastr.success('تم تحديث البيانات  3بنجاح')
+          $("#copyright").val(response.data.copyright);
+        }).fail(function(response) {
+            toastr.error('حدث خطأ ما اثناء تحديث البيانات!2', 'خطأ');
+        });
+ }
+
+
+
+
+
+
+
+
+
+
+
+    function saveedite() {
+        $.ajax({
+            url: "https://sa.arsail.net/schools/Schools/EditSchool",
+            method: "POST",
+            // timeout: 0,
+            headers: {
+                authorization: "yJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
+               'content-type': ' multipart/form-data; boundary=----WebKitFormBoundaryDAALBdeF0LIEqm9x'
+
+            },
+            data: {
+                "id":$("#phone").val(),
+                "email":$("#copyright").val(),
+                "password": $("#file").val(),
+                "city": $("#file").val(),
+                "phone": $("#file").val(),
+                "education_type": $("#file").val(),
+                "school_number": $("#file").val(),
+                "username": $("#file").val(),
+                "school_name": $("#file").val(),
+                "category": $("#file").val(),
+
+
+              
+              },
+                
+        }).done(function(response) {
+            toastr.success('تم حفظ البيانات بنجاح')
+        }).fail(function(response) {
+            toastr.error('حدث خطأ ما اثناء حفظ البيانات!', 'خطأ');
+        });
+    }
+
+    function getAndsend() {
+        setBasicData($("#phone").val(),$("#copyright").val() ,$("#file").val() );
+    }
+
+    function print(msg) {
+
+        $("#copyright").html(msg)
+        
+    }
+
+
+
+
+    function SendAdminEmailtoSchool() {
+  $.ajax({
+            url: "https://sa.arsail.net/schools/Schools/SendAdminEmailtoSchool",
+            method: "POST",
+           
+            data: {
+              "id":$("#phone").val(),
+                "email":$("#copyright").val(),
+              },
+              headers: {
+                authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
+              "content-type": "application/x-www-form-urlencoded"
+            },
+
+        }).done(function(response) {
+            toastr.success('تم ارسال  الرسالة  بنجاح')
+          $("#copyright").val(response.data.copyright);
+        }).fail(function(response) {
+            toastr.error('حدث خطأ ما اثناء ارسال الرسالة !', 'خطأ');
+        });
+ }
+
+
+
+    
+</script>
