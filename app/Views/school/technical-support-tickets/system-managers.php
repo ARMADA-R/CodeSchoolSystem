@@ -18,42 +18,7 @@
 
 
 
-<div class="row mt-4 pb-5" style="font-size: 1rem;">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
+<?php require(APPPATH . 'Views/school/layouts/notifications-service-status.php') ?>
 
 
 <div class="row mt-4  mb-4  d-flex justify-content-center " style="font-size: 1rem;">
@@ -86,7 +51,7 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="text" class="col-form-label">نص التذكرة</label>
-                                <input  required  type="text" class="form-control" id="ticket_text">
+                                <input required type="text" class="form-control" id="ticket_text">
                             </div>
                         </div>
                     </div>
@@ -94,7 +59,7 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="department" class="col-form-label">القسم</label>
-                                <input  required  type="text" name="department" class="form-control" id="department">
+                                <input required type="text" name="department" class="form-control" id="department">
                             </div>
                         </div>
                     </div>
@@ -102,7 +67,7 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="type" class="col-form-label">النمط</label>
-                                <input  required  type="text" name="type" class="form-control" id="type">
+                                <input required type="text" name="type" class="form-control" id="type">
                             </div>
                         </div>
                     </div>
@@ -110,7 +75,7 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="prority" class="col-form-label">الأولوية</label>
-                                <input  required  type="text" name="prority" class="form-control" id="prority">
+                                <input required type="text" name="prority" class="form-control" id="prority">
                             </div>
                         </div>
                     </div>
@@ -138,7 +103,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <button type="button" style="padding: 2px;" class="btn btn-link" onclick="refreshTicketReplies()">
-                        <span aria-hidden="true" style="font-size: .9rem; font-weight: bolder;"><i class="fas fa-redo"></i></span>
+                        <span aria-hidden="true" style="font-size: .9rem; font-weight: bolder;"><i class="text-navy fas fa-redo"></i></span>
                     </button>
                 </div>
                 <input type="hidden" name="" id="modal-id">
@@ -213,8 +178,7 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-
-            <div class="card-body p-2">
+            <div class="card-body p-2" style="overflow-x: scroll;">
                 <table id="content-table" class="table table-striped " style="width:100%">
                     <thead>
                         <tr>
@@ -254,29 +218,16 @@
     }
 </style>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.bootstrap4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 
-<script src="<?php echo base_url() . '/public/'; ?>design/pdfMake/pdfmake.min.js"></script>
-<script src="<?php echo base_url() . '/public/'; ?>design/pdfMake/vfs_fonts.js"></script>
+
+
+
 <script src="<?php echo base_url() . '/public/'; ?>Excel/jquery.table2excel.js"></script>
 
-<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.colVis.min.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>design/js/datatable.all.js"></script>
 
 
-
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" />
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.bootstrap4.min.css" />
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
     var school_id = 24;
@@ -688,25 +639,24 @@
     }
 
     function setReplies(replies) {
-        console.log(replies.reply);
 
+        if (replies.reply) {
+            for (let i = 0; i < replies.reply.length; i++) {
+                $("#modal-replies").append(`<div class="card">
+                    <div class="card-header" style="background-color: rgb(0 0 0 / 0%);">
+                        <h6 class="">مستخدم
+                            <<<small>${replies.reply[i].username}</small>>>
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <h6>${replies.reply[i].reply}</h6>
 
-        for (let i = 0; i < replies.reply.length; i++) {
-            // console.log(replies[i]);
-            $("#modal-replies").append(`<div class="card">
-                        <div class="card-header" style="background-color: rgb(0 0 0 / 0%);">
-                            <h6 class="">مستخدم
-                                <<<small>${replies.reply[i].username}</small>>>
-                            </h6>
+                        <div class="float-right">
+                            <small>${moment(replies.reply[i].date).format("YYYY-MM-DD")}</small>
                         </div>
-                        <div class="card-body">
-                            <h6>${replies.reply[i].reply}</h6>
-
-                            <div class="float-right">
-                                <small>${moment(replies.reply[i].date).format("YYYY-MM-DD")}</small>
-                            </div>
-                        </div>
-                    </div>`);
+                    </div>
+                </div>`);
+            }
         }
     }
 

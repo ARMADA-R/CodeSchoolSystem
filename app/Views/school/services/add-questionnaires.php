@@ -13,42 +13,7 @@
 
 
 
-<div class="row mt-4 pb-5" style="font-size: 1rem;">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body p-2">
-                <p class="mb-1">23,508</p>
-                <p class="mb-1">رصيد الإشعارات « خدمة الرسائل القصيرة »</p>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
+<?php require(APPPATH . 'Views/school/layouts/notifications-service-status.php') ?>
 
 
 <div class="row">
@@ -85,7 +50,7 @@
                                     <textarea class="form-control questions" rows="1"></textarea>
                                 </div>
                             </div>
-                            <div class="col-md-4 d-flex">
+                            <div class="col-sm-4 d-flex">
                                 <div class="form-group d-flex">
                                     <button class="btn btn-light align-self-end" onclick="addAnswer(this)">
                                         اضف جواباً
@@ -121,7 +86,8 @@
 
 <?php include_once(APPPATH . 'Views/school/layouts/postContent.php') ?>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
 
 <script>
     var questions = '';
@@ -143,7 +109,7 @@
                                     <textarea class="form-control questions" rows="1"></textarea>
                                 </div>
                             </div>
-                            <div class="col-md-4 d-flex">
+                            <div class="col-sm-4 d-flex">
                                 <div class="form-group d-flex">
                                     <button class="btn btn-light align-self-end" onclick="addAnswer(this)">
                                         اضف جواباً

@@ -1,6 +1,6 @@
 
 <div class="row mt-4 pb-5" style="font-size: 1rem;">
-    <div class="col-md-4">
+    <div class="col-sm-4">
         <div class="card">
             <div class="card-body p-2">
                 <p class="mb-1">23,508</p>
@@ -10,7 +10,7 @@
         </div>
         <!-- /.card -->
     </div>
-    <div class="col-md-4">
+    <div class="col-sm-4">
         <div class="card">
             <div class="card-body p-2">
                 <p class="mb-1">23,508</p>
@@ -21,7 +21,7 @@
         <!-- /.card -->
 
     </div>
-    <div class="col-md-4">
+    <div class="col-sm-4">
         <div class="card">
             <div class="card-body p-2">
                 <p class="mb-1">sh_20b_jed</p>

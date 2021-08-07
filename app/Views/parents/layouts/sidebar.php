@@ -5,7 +5,6 @@
         <img src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light text-white-50">Parent Dashboard</span>
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar hide-scrollbar">
        
@@ -17,32 +16,32 @@
                 <li class="nav-header">الإدارة المدرسية</li>
                 
                 <li class="nav-item">
-                    <a href="<?php echo base_url() . '/public/'; ?>parent/school/exams/tables" class="nav-link">
-                        <i class="text-navy nav-icon fas fa-clipboard-list"></i>
+                    <a href="<?php echo base_url() . '/public/'; ?>parent/school/exams/tables" class="nav-link <?php echo strpos(current_url(),'parent/school/exams/tables')? 'active' :''; ?>">
+                        <i class="text-navy nav-icon fas fa-clipboard-list" style="color:  <?php echo strpos(current_url(),'parent/school/exams/tables')? '#f4f6f9' :''; ?>;"></i>
                         <p>
                             جداول الاختبارات
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url() . '/public/'; ?>parent/school/global/table" class="nav-link">
-                        <i class="text-navy nav-icon fas fa-clipboard-list"></i>
+                    <a href="<?php echo base_url() . '/public/'; ?>parent/school/global/table" class="nav-link <?php echo strpos(current_url(),'parent/school/global/table')? 'active' :''; ?>">
+                        <i class="text-navy nav-icon fas fa-clipboard-list" style="color:  <?php echo strpos(current_url(),'parent/school/global/table')? '#f4f6f9' :''; ?>;"></i>
                         <p>
                             الجدول المدرسي العام
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url() . '/public/'; ?>parent/school/questionnaires" class="nav-link">
-                        <i class="text-navy nav-icon fas fa-question"></i>
+                    <a href="<?php echo base_url() . '/public/'; ?>parent/school/questionnaires" class="nav-link <?php echo strpos(current_url(),'parent/school/questionnaires')? 'active' :''; ?>">
+                        <i class="text-navy nav-icon fas fa-clipboard-list" style="color:  <?php echo strpos(current_url(),'parent/school/questionnaires')? '#f4f6f9' :''; ?>;"></i>
                         <p>
                             الاستبانات الإلكترونية
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url() . '/public/'; ?>parent/school/forms" class="nav-link">
-                        <i class="text-navy nav-icon fas fa-clipboard-list"></i>
+                    <a href="<?php echo base_url() . '/public/'; ?>parent/school/forms" class="nav-link <?php echo strpos(current_url(),'parent/school/forms')? 'active' :''; ?>">
+                        <i class="text-navy nav-icon fas fa-clipboard-list" style="color:  <?php echo strpos(current_url(),'parent/school/forms')? '#f4f6f9' :''; ?>;"></i>
                         <p>
                             النماذج الالكترونية
                         </p>
@@ -50,8 +49,8 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a href="<?php echo base_url() . '/public/'; ?>parent/school/notification" class="nav-link">
-                        <i class="text-navy nav-icon fas fa-chevron-left"></i>
+                    <a href="<?php echo base_url() . '/public/'; ?>parent/school/notification" class="nav-link <?php echo strpos(current_url(),'parent/school/notification')? 'active' :''; ?>">
+                        <i class="text-navy nav-icon fas fa-bell" style="color:  <?php echo strpos(current_url(),'parent/school/notification')? '#f4f6f9' :''; ?>;"></i>
                         <p>
                             التنبيهات المدرسية
                         </p>
@@ -61,16 +60,16 @@
 
                 <li class="nav-header">الدعم الفني</li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url() . '/public/'; ?>parent/support/technical/sys-managers/messaging" class="nav-link">
-                        <i class="text-navy nav-icon fas fa-comments"></i>
+                    <a href="<?php echo base_url() . '/public/'; ?>parent/support/technical/sys-managers/messaging" class="nav-link <?php echo strpos(current_url(),'parent/support/technical/sys-managers/messaging')? 'active' :''; ?>">
+                        <i class="text-navy nav-icon fas fa-comments" style="color:  <?php echo strpos(current_url(),'parent/support/technical/sys-managers/messaging')? '#f4f6f9' :''; ?>;"></i>
                         <p>
                             مراسلة مدير النظام
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url() . '/public/'; ?>parent/support/technical/school-management/messaging" class="nav-link">
-                        <i class="text-navy nav-icon fas fa-comments"></i>
+                    <a href="<?php echo base_url() . '/public/'; ?>parent/support/technical/school-management/messaging" class="nav-link <?php echo strpos(current_url(),'parent/support/technical/school-management/messaging')? 'active' :''; ?>">
+                        <i class="text-navy nav-icon fas fa-comments" style="color:  <?php echo strpos(current_url(),'parent/support/technical/school-management/messaging')? '#f4f6f9' :''; ?>;"></i>
                         <p>
                             مراسلة ادارة المدرسة
                         </p>
@@ -82,16 +81,16 @@
 
                 <li class="nav-header">شركاء النجاح</li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url() . '/public/'; ?>parent/partners/offers" class="nav-link">
-                        <i class="text-navy nav-icon fas fa-star"></i>
+                    <a href="<?php echo base_url() . '/public/'; ?>parent/partners/offers" class="nav-link <?php echo strpos(current_url(),'parent/partners/offers')? 'active' :''; ?>">
+                        <i class="text-navy nav-icon fas fa-star" style="color:  <?php echo strpos(current_url(),'parent/partners/offers')? '#f4f6f9' :''; ?>;"></i>
                         <p>
                             عروض من شركاء النجاح
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url() . '/public/'; ?>parent/partners/support" class="nav-link">
-                        <i class="text-navy nav-icon fas fa-envelope-open-text"></i>
+                    <a href="<?php echo base_url() . '/public/'; ?>parent/partners/support" class="nav-link <?php echo strpos(current_url(),'parent/partners/support')? 'active' :''; ?>">
+                        <i class="text-navy nav-icon fas fa-envelope-open-text" style="color:  <?php echo strpos(current_url(),'parent/partners/support')? '#f4f6f9' :''; ?>;"></i>
                         <p>
                             نظام الدعم الفني لشريك النجاح
                         </p>
