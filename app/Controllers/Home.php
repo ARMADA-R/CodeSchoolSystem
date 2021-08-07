@@ -7,6 +7,18 @@ class Home extends BaseController
 		return view('home');
 	}
 
+	
+	public function showLoginForm()
+	{
+		return view('login');
+	}
+
+
+	public function showRegisterForm()
+	{
+		return view('register');
+	}
+
 	//--------------------------------------------------------------------
 
 }

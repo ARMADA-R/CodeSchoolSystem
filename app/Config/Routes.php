@@ -133,6 +133,11 @@ $routes->get('partner/partner/support/technical/ticket/(:num)', 'PartnerView::vi
 
 
 
+
+//Home routes
+$routes->get('login', 'Home::showLoginForm');
+$routes->get('register', 'Home::showRegisterForm');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

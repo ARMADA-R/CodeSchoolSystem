@@ -1,19 +1,21 @@
-<html lang="en">
+<html lang="ar" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>نظام المبرمجون لإدارة المدارس</title>
 
 
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Bootstrap 4 RTL -->
     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/plugins/bootstrap/css/bootstrap.min.css">
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+    <!-- toastr  -->
+    <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/css/toastr.css">
+    
     <style>
         .bg-navy {
             background-color: #001f3f !important;
@@ -32,30 +34,175 @@
         .wave.wave-success .svg-icon svg g [fill] {
             fill: #1bc5bd;
         }
+
+        .card-title {
+            float: right;
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .navbar-light {
+            background-color: #f8f9fa !important;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif !important;
+            font-weight: 500;
+        }
+
+        .m-right-auto {
+            margin-right: auto !important;
+        }
+
+        .m-left-auto {
+            margin-right: auto !important;
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .page-item.active .page-link {
+            background-color: #001f3f;
+            border-color: #001f3f;
+        }
+
+        .btn-secondary {
+            background-color: #334c65;
+            border-color: #334c65;
+        }
+
+        .btn-secondary:hover {
+            background-color: #334c65e0;
+        }
+
+        table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before,
+        table.dataTable.dtr-inline.collapsed>tbody>tr>th.dtr-control:before {
+            background-color: #001f3f !important;
+        }
+
+        .custom-control-input:checked~.custom-control-label::before {
+            color: #fff;
+            border-color: #334c65;
+            background-color: #001f3f;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #001f3f;
+            border-color: #001f3f;
+        }
+
+        .btn-primary:hover {
+            color: #fff;
+            background-color: #001a35;
+            border-color: #001a35;
+        }
+
+        .btn-primary.focus,
+        .btn-primary:focus {
+            color: #fff;
+            background-color: #001f3f;
+            border-color: #001f3f;
+            box-shadow: 0 0 0 0.2rem rgb(0 31 63 / 34%);
+        }
+
+        .btn-primary:not(:disabled):not(.disabled).active,
+        .btn-primary:not(:disabled):not(.disabled):active,
+        .show>.btn-primary.dropdown-toggle {
+            color: #fff;
+            background-color: #001f3f;
+            border-color: #001831;
+        }
+
+        .btn-primary.disabled,
+        .btn-primary:disabled {
+            color: #fff;
+            background-color: #001f3f;
+            border-color: #001f3f;
+            border-top-color: rgb(0, 31, 63);
+            border-right-color: rgb(0, 31, 63);
+            border-bottom-color: rgb(0, 31, 63);
+            border-left-color: rgb(0, 31, 63);
+        }
+
+        .btn-outline-primary {
+            color: #001f3f;
+            border-color: #001f3f;
+        }
+
+        .btn-outline-primary:hover {
+            color: #fff;
+            background-color: #001f3f;
+            border-color: #001f3f;
+        }
+
+        .btn-outline-primary:not(:disabled):not(.disabled).active,
+        .btn-outline-primary:not(:disabled):not(.disabled):active,
+        .show>.btn-outline-primary.dropdown-toggle {
+            color: #fff;
+            background-color: #001f3f;
+            border-color: #001f3f;
+        }
+
+        .btn-outline-primary.focus,
+        .btn-outline-primary:focus {
+            box-shadow: 0 0 0 0.2rem rgb(0 31 63 / 19%);
+        }
+
+        .page-link {
+            color: #001f3f;
+        }
+
+        .svg-icon.svg-icon-4x svg {
+            height: 4rem !important;
+            width: 4rem !important;
+        }
+
+        svg {
+            overflow: hidden;
+            vertical-align: middle;
+        }
+
+        .svg-icon.svg-icon-primary svg g [fill] {
+            -webkit-transition: fill .3s ease;
+            transition: fill .3s ease;
+            fill: #3699ff !important;
+        }
+
+        .svg-icon.svg-icon-danger svg g [fill] {
+            -webkit-transition: fill .3s ease;
+            transition: fill .3s ease;
+            fill: #f64e60 !important;
+        }
+
+        .svg-icon.svg-icon-success svg g [fill] {
+            -webkit-transition: fill .3s ease;
+            transition: fill .3s ease;
+            fill: #1bc5bd !important;
+        }
+
+        .card {
+
+            border: 0px;
+            border-radius: .25rem;
+        }
     </style>
 </head>
 
 <body>
-    <!-- <header>
-        <div class="collapse bg-dark" id="navbarHeader">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-8 col-md-7 py-4">
-                        <h4 class="text-white">About</h4>
-                        <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-                    </div>
-                    <div class="col-sm-4 offset-md-1 py-4">
-                        <h4 class="text-white">Contact</h4>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                            <li><a href="#" class="text-white">Like on Facebook</a></li>
-                            <li><a href="#" class="text-white">Email me</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-navy">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-navy" style=" direction: ltr;">
             <div class="container">
                 <a class="navbar-brand" href="#">Arsail</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,84 +224,53 @@
                             <a class="nav-link" href="#">من نحن</a>
                         </li>
                         <li class="nav-item px-1">
-                            <a class="nav-link" href="#">تسجيل دخول</a>
+                            <a class="nav-link" href="<?php echo base_url() . '/public/'; ?>login">تسجيل دخول</a>
                         </li>
                         <li class="nav-item px-1">
-                            <a class="nav-link" href="#">انشاء حساب</a>
+                            <a class="nav-link" href="<?php echo base_url() . '/public/'; ?>register">انشاء حساب</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        
     </header>
 
-    <main role="main">
+    <main role="main" class="bg-light">
 
-        <section class="text-center">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-                    <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+        <section class="text-center pb-5">
+            <div id="slider" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators" id="slides-indicators-container">
+                    <li data-target="#slider" data-slide-to="0" class="active"></li>
                 </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item">
-                        <img src="https://sa.arsail.net/schools/assets/files/1628168915_a659a18f44336dbfb794.jpg" class="carousel-image " alt="">
-                        <div class="container">
-                            <div class="carousel-caption text-left">
-                                <h1>Example headline.</h1>
-                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="carousel-inner" id="slides-container">
                     <div class="carousel-item active">
-                        <img src="https://sa.arsail.net/schools/assets/files/1628168915_a659a18f44336dbfb794.jpg" class="carousel-image " alt="">
+                        <img src="https://sa.arsail.net/assets/media/bg/bg-9.jpg" class="carousel-image " alt="">
                         <div class="container">
-                            <div class="carousel-caption">
-                                <h1>Another example headline.</h1>
-                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-                            </div>
-                        </div>
-                    </div>
+                            <div class="carousel-caption mb-5">
+                                <h1>نظام المبرمجون لإدارة المدارس</h1>
 
-                    <div class="carousel-item">
-                        <img src="https://sa.arsail.net/schools/assets/files/1628168915_a659a18f44336dbfb794.jpg" class="carousel-image " alt="">
-                        <div class="container">
-                            <div class="carousel-caption text-right">
-                                <h1>One more for good measure.</h1>
-                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                <a class="carousel-control-prev" href="#slider" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
+                    <span class="sr-only">السابق</span>
                 </a>
-                <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                <a class="carousel-control-next" href="#slider" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
+                    <span class="sr-only">التالي</span>
                 </a>
             </div>
         </section>
 
-
-        <div class="album py-5 bg-light">
+        <div class="py-4 ">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm rounded-4">
-                            <div class="card-body p-0">
-                                <div class="d-flex align-items-center p-4 justify-content-end py-5">
-                                    <div class="d-flex flex-column">
-                                        <h5 class="card-title">تعليم الاطفال</h5>
-                                        <p class="card-text">مناهج حديثة وكوادر مؤهلة</p>
-                                    </div>
+                        <div class="card mb-4 shadow-sm rounded-4" style="height: 88%!important;">
+                            <div class="card-body  p-0">
+                                <div class="d-flex align-items-center p-4  py-5">
                                     <div class="mx-2">
                                         <span class="svg-icon svg-icon-primary svg-icon-4x">
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52px" height="52px" viewBox="0 0 24 24" version="1.1">
@@ -166,21 +282,20 @@
                                             </svg>
                                         </span>
                                     </div>
+                                    <div class="d-flex flex-column">
+                                        <h5 class="">تعليم الاطفال</h5>
+                                        <p class="card-text">مناهج حديثة وكوادر مؤهلة</p>
+                                    </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm rounded-4">
+                        <div class="card mb-4 shadow-sm rounded-4" style="height: 88%!important;">
                             <div class="card-body p-0">
-                                <div class="d-flex align-items-center p-4 justify-content-end py-5">
-                                    <div class="d-flex flex-column">
-                                        <h5 class="card-title">تتبع اولياء الامور</h5>
-                                        <p class="card-text">تتبع طفلك وتواصل مع الإداريين</p>
-                                    </div>
+                                <div class="d-flex align-items-center p-4  py-5">
                                     <div class="mx-2">
-                                        <span class="svg-icon svg-icon-primary svg-icon-4x">
+                                        <span class="svg-icon svg-icon-danger svg-icon-4x">
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52px" height="52px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <rect x="0" y="0" width="24" height="24"></rect>
@@ -190,21 +305,20 @@
                                             </svg>
                                         </span>
                                     </div>
+                                    <div class="d-flex flex-column">
+                                        <h5 class="">تتبع اولياء الامور</h5>
+                                        <p class="card-text">تتبع طفلك وتواصل مع الإداريين</p>
+                                    </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm rounded-4">
-                            <div class="card-body p-0">
-                                <div class="d-flex align-items-center p-4 justify-content-end py-5">
-                                    <div class="d-flex flex-column">
-                                        <h5 class="card-title">خدمات متنوعة</h5>
-                                        <p class="card-text">أنشطة ومناسبات</p>
-                                    </div>
+                        <div class="card mb-4 shadow-sm rounded-4" style="height: 88%!important;">
+                            <div class="card-body d-flex  p-0">
+                                <div class="d-flex align-items-center p-4  py-5">
                                     <div class="mx-2">
-                                        <span class="svg-icon svg-icon-primary svg-icon-4x">
+                                        <span class="svg-icon svg-icon-success svg-icon-4x">
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52px" height="52px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <rect x="0" y="0" width="24" height="24"></rect>
@@ -214,45 +328,275 @@
                                             </svg>
                                         </span>
                                     </div>
+                                    <div class="d-flex flex-column">
+                                        <h5 class="">خدمات متنوعة</h5>
+                                        <p class="card-text">أنشطة ومناسبات</p>
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
 
+        <section class="py-4">
+            <div class="container">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="p-6">
+                            <h2 class="text-dark mb-8 font-weight-bold">من نحن</h2>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="accordionExample7" class="accordion accordion-light accordion-light-borderless accordion-svg-toggle">
+                                        <div class="card" style="border: unset;">
+                                            <div id="headingOne7" style="border: unset;" class="card-header bg-white">
+                                                <div data-toggle="collapse" data-target="#collapseOne7" aria-expanded="false" role="button" class="d-flex w-100  card-title collapsed">
+                                                    <span class="svg-icon svg-icon-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                                                <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
+                                                                <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999)"></path>
+                                                            </g>
+                                                        </svg></span>
+                                                    <div class="card-label text-dark pl-4">النشأة والتأسيس</div>
+                                                </div>
+                                            </div>
+                                            <div id="collapseOne7" aria-labelledby="headingOne7" data-parent="#accordionExample7" class="collapse" style="">
+                                                <div class="card-body text-dark-50 font-size-lg pl-12">تأسس نظام المبرمجون لإدارة المدارس في عام 2020، على يد نخبة من ذوي الكفاءات لإدارة تجمع من المدارس.</div>
+                                            </div>
+                                        </div>
+                                        <div class="card" style="border: unset;">
+                                            <div id="headingTwo7" style="border: unset;" class="card-header bg-white">
+                                                <div data-toggle="collapse" data-target="#collapseTwo7" aria-expanded="true" role="button" class="d-flex w-100  card-title collapsed">
+                                                    <span class="svg-icon svg-icon-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                                                <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
+                                                                <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999)"></path>
+                                                            </g>
+                                                        </svg></span>
+                                                    <div class="card-label text-dark pl-4">أهدافنا</div>
+                                                </div>
+                                            </div>
+                                            <div id="collapseTwo7" aria-labelledby="headingTwo7" data-parent="#accordionExample7" class="collapse">
+                                                <div class="card-body text-dark-50 font-size-lg pl-12">نهدف إلى تحقيق حلقة تواصل بين الأهل والمدرسة لتحقيق أفضل النتائج التي تصب في مصلحة الطلاب في المقام الأول.</div>
+                                            </div>
+                                        </div>
+                                        <div class="card" style="border: unset;">
+                                            <div id="headingThree7" style=" border: unset;" class="card-header bg-white">
+                                                <div data-toggle="collapse" data-target="#collapseThree7" aria-expanded="true" role="button" class="d-flex w-100 card-title collapsed">
+                                                    <span class="svg-icon svg-icon-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                                                <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
+                                                                <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999)"></path>
+                                                            </g>
+                                                        </svg></span>
+                                                    <div class="card-label text-dark pl-4">تطلعاتنا</div>
+                                                </div>
+                                            </div>
+                                            <div id="collapseThree7" aria-labelledby="headingThree7" data-parent="#accordionExample7" class="collapse">
+                                                <div class="card-body text-dark-50 font-size-lg pl-12">نتطلع إلى بناء جيل متميز من الطلاب القادرين على رفع سوية المجتمع على جميع الأصعدة العلمية والأدبية والفنية.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-4">
+            <div class="container">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="">
+                            <h2 class="text-dark font-weight-bolder mb-4">معلومات التواصل</h2>
+                        </div>
+                        <div class="form-group  my-2">
+                            <label class="col-4 col-form-label">رقم الهاتف:</label>
+                            <div class="col-8"><span class="form-control-plaintext" id="phone"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-4">
+            <div class="container">
+                <div class="card shadow-sm">
+                    <div class="card-body" style="padding-bottom: unset;">
+                        <div class="">
+                            <div class="col-sm-7">
+                                <h2 class="text-dark font-weight-bolder mb-4">أرسل شيئًا</h2>
+                            </div>
+                            <div class="col-sm-5">
+                            </div>
+                        </div>
+                        <form onsubmit="sendContactUsRequest(this); return false;">
+                            <div class="form-group mb-6">
+                                <input type="email" name="email" required placeholder="البريد الالكتروني" class="bg-light form-control border-0 form-control-solid ">
+                            </div>
+                            <div class="form-group mb-6">
+                                <input type="text" name="message_title" required placeholder="عنوان الرسالة" class="bg-light form-control border-0 form-control-solid ">
+                            </div>
+                            <div class="form-group mb-6">
+                                <textarea name="message_text" rows="4" required placeholder="نص الرسالة" class="bg-light form-control border-0 form-control-solid d"></textarea>
+                            </div>
+                            <div class="form-group mb-6 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary font-weight-bold">إرسال</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer class="text-muted">
+    <footer class="text-muted mt-2">
         <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-            <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
-            <p>New to Bootstrap? <a href="https://bootstrap.rtlcss.com/">Visit the homepage</a> or read our <a href="/docs/4.5/getting-started/introduction/">getting started guide</a>.</p>
+            <p id="copyright"></p>
         </div>
-    </footer> -->
+    </footer>
 
-    <div class="d-flex h-100 justify-content-center">
+    <!-- 
+    <div class="d-flex h-75 justify-content-center">
         <h1 class="align-self-center">Coming Soon</h1>
     </div>
+    <div class="mt-5 d-flex justify-content-center">
+        <a href="<?php echo base_url() . '/public/'; ?>school" class="mx-4 btn btn-outline-primary">المدرسة</a>
+        <a href="<?php echo base_url() . '/public/'; ?>parent" class="mx-4 btn btn-outline-primary">ولي الامر</a>
+        <a href="<?php echo base_url() . '/public/'; ?>partner" class="mx-4 btn btn-outline-primary">الشركاء</a>
+        <a href="<?php echo base_url() . '/public/'; ?>admin" class="mx-4 btn btn-outline-primary">المشرفين</a>
+    </div>
+ -->
 
 
     <!-- jQuery 3.4.1 -->
     <script src="<?php echo base_url() . '/public/'; ?>design/js/jquery-3.4.1.min.js"></script>
-
-
     <script>
         window.jQuery || document.write('<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>')
     </script>
-
     <!-- Bootstrap -->
     <script src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- tostar -->
+    <script src="<?php echo base_url() . '/public/'; ?>design/js/toastr.js"></script>
 
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "7000",
+            "extendedTimeOut": "4000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+            "toastClass": 'toastr'
+        };
+
+        $(document).ready(function() {
+            getInfoData();
+            getSliderData();
+        });
+
+        function sendContactUsRequest(form) {
+            formData = $(form).serializeArray().reduce(function(obj, item) {
+                obj[item.name] = item.value;
+                return obj;
+            }, {});
+
+            var jqxhr = $.ajax({
+                    url: "https://sa.arsail.net/schools/Contact_us/SendRequest",
+                    method: "POST",
+                    timeout: 0,
+                    data: {
+                        email: formData.email,
+                        message_title: formData.message_title,
+                        message_text: formData.message_text,
+                    }
+                })
+                .done(function(response) {
+                    toastr.success('تم الإرسال!');
+                })
+                .fail(function(response) {
+                    console.log(response);
+                    toastr.error('حدث خطأ ما اثناء ارسال البيانات!', 'خطأ');
+                });
+
+        }
+
+        function getSliderData() {
+            var jqxhr = $.ajax({
+                    url: "https://sa.arsail.net/schools/Slider_Api/Slider",
+                    method: "GET",
+                    timeout: 0,
+                })
+                .done(function(response) {
+                    setSliderData(response.data);
+                })
+                .fail(function(response) {
+                    console.log(response);
+                    toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                });
+
+        }
+
+        function getInfoData() {
+            var jqxhr = $.ajax({
+                    url: "https://sa.arsail.net/schools/Info/GetInfo",
+                    method: "GET",
+                    timeout: 0,
+                })
+                .done(function(response) {
+                    setInfoData(response.data);
+                })
+                .fail(function(response) {
+                    console.log(response);
+                    toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                });
+
+        }
+
+        function setSliderData(data) {
+
+            var slides_indicators_container = $("#slides-indicators-container");
+            var slides_container = $("#slides-container");
+            if (data.length) {
+                slides_container.html('');
+                slides_indicators_container.html('');
+
+                for (let i = 0; i < data.length; i++) {
+                    slides_indicators_container.append(`<li data-target="#slider" data-slide-to="${i}" class="${i==0? 'active':''}"></li>`)
+                    slides_container.append(`<div class="carousel-item ${i==0? 'active':''}">
+                        <img src="${data[i].image_url}" class="carousel-image " alt="">
+                        <div class="container">
+                            <div class="carousel-caption text-left">
+                                <p>${data[i].text}</p>
+                            </div>
+                        </div>
+                    </div>`)
+                }
+            }
+        }
+
+        function setInfoData(data) {
+            $("#copyright").html(data.copyright);
+            $("#phone").html(data.phone);
+        }
+    </script>
 </body>
 
 </html>
