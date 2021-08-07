@@ -973,6 +973,8 @@
     <div class="card">
   <div class="card-header">
   <h6 class="text-center text-bold">مراسلة المدرسة
+
+  
 </h6>
 
   <div class="card-tools">
@@ -1127,10 +1129,10 @@
             },
 
         }).done(function(response) {
-            toastr.success('تم تحديث البيانات  3بنجاح')
+            toastr.success('تم تحديث خدمات  بنجاح')
           $("#copyright").val(response.data.copyright);
         }).fail(function(response) {
-            toastr.error('حدث خطأ ما اثناء تحديث البيانات!2', 'خطأ');
+            toastr.error('حدث خطأ ما اثناء تحديث خدمات!', 'خطأ');
         });
  }
 
