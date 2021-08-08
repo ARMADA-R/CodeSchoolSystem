@@ -215,13 +215,13 @@
                             <a class="nav-link" href="#">نتيجة الطلاب <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item px-1">
-                            <a class="nav-link" href="#">تواصل معنا</a>
+                            <a class="nav-link" href="#contact_us_section">تواصل معنا</a>
                         </li>
                         <li class="nav-item px-1">
-                            <a class="nav-link" href="#">خدماتنا</a>
+                            <a class="nav-link" href="#service_section">خدماتنا</a>
                         </li>
                         <li class="nav-item px-1">
-                            <a class="nav-link" href="#">من نحن</a>
+                            <a class="nav-link" href="#whoWeAre_section">من نحن</a>
                         </li>
                         <li class="nav-item px-1">
                             <a class="nav-link" href="<?php echo base_url() . '/public/'; ?>login">تسجيل دخول</a>
@@ -264,7 +264,7 @@
             </div>
         </section>
 
-        <div class="py-4 ">
+        <div class="py-4 " id="service_section">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
@@ -341,7 +341,7 @@
             </div>
         </div>
 
-        <section class="py-4">
+        <section class="py-4" id="whoWeAre_section">
             <div class="container">
                 <div class="card shadow-sm">
                     <div class="card-body">
@@ -363,7 +363,7 @@
                                                     <div class="card-label text-dark pl-4">النشأة والتأسيس</div>
                                                 </div>
                                             </div>
-                                            <div id="collapseOne7" aria-labelledby="headingOne7" data-parent="#accordionExample7" class="collapse" style="">
+                                            <div id="collapseOne7" aria-labelledby="headingOne7" data-parent="#accordionExample7" class="collapse">
                                                 <div class="card-body text-dark-50 font-size-lg pl-12">تأسس نظام المبرمجون لإدارة المدارس في عام 2020، على يد نخبة من ذوي الكفاءات لإدارة تجمع من المدارس.</div>
                                             </div>
                                         </div>
@@ -410,7 +410,7 @@
             </div>
         </section>
 
-        <section class="py-4">
+        <section class="py-4" id="contact_us_section">
             <div class="container">
                 <div class="card shadow-sm">
                     <div class="card-body">
@@ -426,7 +426,7 @@
             </div>
         </section>
 
-        <section class="py-4">
+        <section class="py-4" >
             <div class="container">
                 <div class="card shadow-sm">
                     <div class="card-body" style="padding-bottom: unset;">
