@@ -133,9 +133,9 @@
                     name: 'ticket_text',
                     className: 'text-center',
                     title: '',
-                    render: function(data, type, row, meta) {
+                     render: function(data, type, row, meta) {
                         return `
-                        <a href="<?php echo base_url() . '/public/';?>admin/problem/<?php echo $id; ?>">${data}</a>
+                        <a href="<?php echo base_url() . '/public/';?>admin/problem/<?php echo $id; ?> ">${data}</a>
 
                         
                         `;

@@ -79,7 +79,7 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
 <div class="row">
 <div class="col-lg-12">
 <label class="m-2" style="white-space: nowrap;">رسالتك: </label>
-                <textarea name="" class="form-control " rows="10" style="box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 15%);">أكتب رسالتك....</textarea></div>
+                <textarea id="reple" name="" class="form-control " rows="10" style="box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 15%);">أكتب رسالتك....</textarea></div>
 
 
 
@@ -91,7 +91,13 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
 <!-- end row2 -->
 
 
-
+<hr>
+        <div class="d-flex justify-content-end">
+            
+            <a class="btn btn-success m-2" onclick="ReplyTicket()"  style="color: #fff;
+    background-color: #1bc5bd;
+    border-color: #1bc5bd;">اضافة الرد</a>
+        </div>
 
 
 
@@ -107,12 +113,26 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
 <!-- end card1 -->
 
 
+<div class="card">
+    <div class="card-header">
+        اسم المستخدم:
+        <BR>
+        اخر تحديث:
+    </div>
+    <div class="card-body">
+      <div class=" row gg3"></div>
+      <div class="col-lg-3">
+            التعليق:
+            <label for=""> hi </label>
 
 
+      </div>
+      <div class="col-lg-3"></div>
+      <div class="col-lg-3"></div>
+    
+</div>
 
-
-
-
+</div>
 
 
 
@@ -160,8 +180,65 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
     });
 
 
+    
 
 
+    function ReplyTicket() {
+         var user_id= 17  
+          
+
+        $.ajax({
+                "url": "https://sa.arsail.net/schools/Tickets/ReplyTicket",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE"
+                },
+                data: {
+                   
+                    ticket_id:<?php echo $id; ?>,
+                    user_id: user_id,
+                    reply : $('#reple').val()
+                   
+                },
+            }).done(function(response) {
+                toastr.success('تم اضافة الرد  بنجاح')
+
+
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء  اضافة الرد!', 'خطأ');
+            });
+    }
+
+
+
+
+
+
+    function y22(data) {
+        $("#gg3").html('');
+
+              for(let i=0;i<data.length;i++){
+                
+                $("#gg3").append( `
+               
+                <div class="col-lg-3">
+            التعليق:
+            <label for=""> hi </label>
+
+
+      </div>  
+
+`);
+                
+
+
+
+              }
+              
+              }
 
 
 
