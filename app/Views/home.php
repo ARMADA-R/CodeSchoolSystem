@@ -221,14 +221,24 @@
                             <a class="nav-link" href="#service_section">خدماتنا</a>
                         </li>
                         <li class="nav-item px-1">
-                            <a class="nav-link" href="#whoWeAre_section">من نحن</a>
+                            <a  class="nav-link" href="#whoWeAre_section">من نحن</a>
                         </li>
-                        <li class="nav-item px-1">
-                            <a class="nav-link" href="<?php echo base_url() . '/public/'; ?>login">تسجيل دخول</a>
+                        <?php if (!session()->has('user_data')) echo " 
+                        <li class='nav-item px-1'>
+                            <a class='nav-link' href='".site_url('login')."'>تسجيل دخول</a>
                         </li>
-                        <li class="nav-item px-1">
-                            <a class="nav-link" href="<?php echo base_url() . '/public/'; ?>register">انشاء حساب</a>
-                        </li>
+                        <li class='nav-item px-1'>
+                            <a class='nav-link' href='".site_url('register')."'>انشاء حساب</a>
+                        </li>";
+
+                        else {
+                             echo " 
+                             <form id=\"logoutForm\" action=\"".site_url('logout')."\" method=\"post\"></form>
+                        <li class='nav-item px-1'>
+                            <a onclick=\"$('#logoutForm').submit()\" style=\"cursor: pointer;\" class='nav-link' >تسجيل خروج</a>
+                        </li>";
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>

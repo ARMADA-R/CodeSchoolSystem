@@ -21,14 +21,16 @@
             <!-- <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
                 <i class="fas fa-th-large"></i>
             </a> -->
-            <a href="" class="btn text-white-50 " style="color: #343a40; padding: 0;" >
-                <div class=" mx-2 d-flex">
-                    <div class="p-2 pl-3">
-                        <div class="d-block">تسجيل الخروج</div>
+            <form action="<?= site_url('logout') ?>" method="post">
+                <button  class="btn text-white-50 " style="color: #343a40; padding: 0;">
+                    <div class=" mx-2 d-flex">
+                        <div class="p-2 pl-3">
+                            <div class="d-block">تسجيل الخروج</div>
+                        </div>
+                        <i class=" fas fa-sign-out-alt" style="align-self: center;"></i>
                     </div>
-                    <i class=" fas fa-sign-out-alt" style="align-self: center;"></i>
-                </div>
-            </a>
+                </button>
+            </form>
         </li>
     </ul>
 </nav>

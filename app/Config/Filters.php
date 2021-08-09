@@ -10,6 +10,7 @@ class Filters extends BaseConfig
 		'csrf'     => \CodeIgniter\Filters\CSRF::class,
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+		'authenticateUsers' => \App\Filters\RedirectIfAuthenticate::class,
 	];
 
 	// Always applied before every request
@@ -19,7 +20,7 @@ class Filters extends BaseConfig
 			// 'csrf',
 		],
 		'after'  => [
-			'toolbar',
+			// 'toolbar',
 			//'honeypot'
 		],
 	];

@@ -84,8 +84,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
-    var school_id = 24;
-    var user_id = 24;
+    
     var dataTable = null;
     var studentsData = [];
 
@@ -1600,7 +1599,7 @@
                     group: group,
                 },
                 headers: {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAyLTIyIiwiZXhwIjoiMjAyMi0wMi0yMiIsImRhdGEiOiIyMyJ9.ZITmmvk9fnZXo8Bfy30vw8uYK2kGZeN_M8XFPErmr_w"
+                    "Authorization": token
                 },
             })
             .done(function(response) {

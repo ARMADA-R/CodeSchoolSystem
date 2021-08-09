@@ -266,8 +266,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
-    var school_id = 24;
-    var parent_id = 23;
+    
     var dataTable = null;
     var studentsData = [];
 
@@ -556,13 +555,10 @@
 
     }
     $(document).ready(function() {
-
         $('#status').change(function() {
             getTicketsData();
         });
-
         getTicketsData();
-
     });
 
 
@@ -572,13 +568,15 @@
                 method: "GET",
                 timeout: 0,
                 data: {
-                    parent_id: parent_id,
-                    page: "1",
-                    limit: "7000",
-                    status: $('#status').val(),
+                    "parent_id": parent_id,
+                    "page": "1",
+                    "limit": "8000",
+                    "date": $('#date').val(),
+                    "ticket_name": $('#ticket_name').val(),
+                    "status": $('#status').val(),
                 },
                 headers: {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAyLTIyIiwiZXhwIjoiMjAyMi0wMi0yMiIsImRhdGEiOiIyMyJ9.ZITmmvk9fnZXo8Bfy30vw8uYK2kGZeN_M8XFPErmr_w"
+                    "Authorization": token
                 },
             })
             .done(function(response) {
@@ -601,7 +599,7 @@
                     limit: "7000",
                 },
                 headers: {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAyLTIyIiwiZXhwIjoiMjAyMi0wMi0yMiIsImRhdGEiOiIyMyJ9.ZITmmvk9fnZXo8Bfy30vw8uYK2kGZeN_M8XFPErmr_w"
+                    "Authorization": token
                 },
             })
             .done(function(response) {
@@ -639,7 +637,7 @@
                     ticket_id: id,
                 },
                 headers: {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAyLTIyIiwiZXhwIjoiMjAyMi0wMi0yMiIsImRhdGEiOiIyMyJ9.ZITmmvk9fnZXo8Bfy30vw8uYK2kGZeN_M8XFPErmr_w"
+                    "Authorization": token
                 },
             })
             .done(function(response) {
@@ -685,12 +683,12 @@
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI5IiwiZXhwIjoiMjAyMi0wMS0yOSIsImRhdGEiOnsidXNlcl9pZCI6MTh9fQ.1EfRPKk8zdCvjmn7qkVRKflJDtJjaoN0R_xvphe1No0",
+                    "Authorization": token,
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 "data": {
                     "ticket_id": $("#modal-id").val(),
-                    "user_id": school_id,
+                    "user_id": user_id,
                     "reply": reply
                 }
             }).done(function(response) {
@@ -717,7 +715,7 @@
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAyLTIyIiwiZXhwIjoiMjAyMi0wMi0yMiIsImRhdGEiOiIyMyJ9.ZITmmvk9fnZXo8Bfy30vw8uYK2kGZeN_M8XFPErmr_w",
+                    "Authorization": token,
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 "data": {

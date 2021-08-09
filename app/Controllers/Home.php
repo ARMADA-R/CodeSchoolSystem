@@ -6,7 +6,7 @@ class Home extends BaseController
 	
 	public function index()
 	{
-		dd(session());
+		// dd(session());
 		return view('home');
 	}
 

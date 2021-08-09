@@ -254,7 +254,7 @@
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form method="POST" id="signup-form" onsubmit="register(this); return false;" class="signup-form">
+                    <form method="POST" id="signup-form" action="<?= site_url('login') ?>" onsubmit="//register(this); return false;" class="signup-form">
                         <h2 class="form-title">تسجيل الدخول</h2>
 
                         <div id="form-content">
@@ -286,6 +286,10 @@
     <script src="<?php echo base_url() . '/public/'; ?>design/js/toastr.js"></script>
 
     <script>
+
+        var msg = '<?php //echo $res['msg'] ?>';
+        var code = '<?php //echo $res['code'] ?>';
+        // var user_data = '<?php //dd(session('user_data')) ?>'
         (function($) {
             $(".toggle-password").click(function() {
 
@@ -320,7 +324,9 @@
         };
 
         $(document).ready(function() {
-            
+            if (code == 400 || code == -1 || code == 1) {
+                toastr.error(msg);
+            }
         });
 
 
