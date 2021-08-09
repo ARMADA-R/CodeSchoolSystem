@@ -154,7 +154,7 @@
                         var checked = (row.status ==1) ? `checked` : ``;
                         return `<div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input"  ${checked} onchange="updateFormStatus(${row.id},this.checked)" id="customSwitch-${row.id}">
-                                    <label class="custom-control-label" for="customSwitch-${row.id}">${data}</label>
+                                    <label class="custom-control-label" for="customSwitch-${row.id}"></label>
                                 </div>`;
                     }
                 },

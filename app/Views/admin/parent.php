@@ -103,7 +103,6 @@
 
         <?php require(APPPATH . 'Views/admin/layouts/postContent.php'); ?>
         <script>
-    var id= <?php echo $id; ?>
 
 
         
