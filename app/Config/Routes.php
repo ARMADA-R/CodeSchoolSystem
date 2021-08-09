@@ -45,9 +45,11 @@ $routes->get('/admin/callus', 'AdminView::callus');
 $routes->get('/admin/gets', 'AdminView::gets');
 $routes->get('/admin/viewticketschool/(:num)', 'AdminView::viewticketschool/$1');
 $routes->get('/admin/problem/(:num)', 'AdminView::problem/$1');
-$routes->get('/admin/tebel', 'AdminView::tebel');
 $routes->get('/admin/viewticketparther/(:num)', 'AdminView::viewticketparther/$1');
 $routes->get('/admin/viewticketparent/(:num)', 'AdminView::viewticketparent/$1');
+$routes->get('/admin/editgets/(:num)', 'AdminView::editgets/$1');
+$routes->get('/admin/addgets', 'AdminView::addgets');
+
 
 
 

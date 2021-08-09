@@ -82,7 +82,7 @@
                 "file":"" },
 
         }).done(function(response) {
-            toastr.success('تم تحديث البيانات بنجاح')
+          //  toastr.success('تم تحديث البيانات بنجاح')
           $("#copyright").val(response.data.copyright);
         }).fail(function(response) {
             toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');

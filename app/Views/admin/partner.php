@@ -17,23 +17,23 @@
 
             <div class="col-lg-4">
 
-            <label class="sr-only" for="inlineFormInputGroupUsername2">إبحث عن مدرسة</label>
+            <label class="sr-only" for="searsh">إبحث عن مدرسة</label>
                 <div class="input-group mb-2 mr-sm-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text"> <i class="fas fa-search"></i></div>
                     </div>
-                    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="إبحث عن مدرسة"style="box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 10%);">
+                    <input type="text" class="form-control" id="searsh" placeholder="إبحث عن مدرسة"style="box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 10%);">
                 </div>
 
             </div>
             <div class="col-lg-4">
-            <label class="sr-only" for="inlineFormInputGroupUsername2">إبحث عن تاريخ</label>
+            <label class="sr-only" for="datee">إبحث عن تاريخ</label>
                 <div class="input-group mb-2 mr-sm-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text"> <i class="fas fa-search"></i></div>
                     </div>
                 
-                    <input type="date" class="form-control" id="inlineFormInputGroupUsername2" placeholder="إبحث عن تاريخ" style="box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 10%);">
+                    <input type="date" class="form-control" id="datee" placeholder="إبحث عن تاريخ" style="box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 10%);">
                 </div>
 
 
@@ -115,6 +115,12 @@ $(document).ready(function() {
 $('#status').change(function() {
     getTicketspartner();
 });
+$('#searsh').change(function() {
+    getTicketspartner();
+        });
+        $('#datee').change(function() {
+            getTicketspartner();
+        });
 });
 function getTicketspartner() {
 $.ajax({
@@ -128,7 +134,9 @@ $.ajax({
         
     page: 1,
     limit: 10000,
-           
+    status: $('#status').val(),
+            school_name:$('#searsh').val(),
+            date:$('#datee').val(),
            
         },
     }).done(function(response) {
@@ -212,6 +220,11 @@ border-color: #1bc5bd;" href="<?php echo base_url() . '/public/';?>admin/viewtic
 </div>
 <!--  end  tiket1 -->`);
 
+}
+
+   if (data.length == 0) {
+
+   alert("لاتوجد تذاكر متاحة");
 }
 }
  

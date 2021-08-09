@@ -156,8 +156,7 @@
              </div>
 </div>
 <div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-<button type="button" class="btn btn-primary" onclick="EditSlider()"   >حفظ </button>
+<button type="button" class="btn btn-secondary" data-dismiss="modal"onclick="EditSlider()">حفظ</button>
 </div>
 </div>
 </div>
@@ -210,7 +209,7 @@
                 
             },
         }).done(function(response) {
-            toastr.success('تم تعديل البيانات بنجاح')
+           // toastr.success('تم تعديل البيانات بنجاح')
             y22(response.data);
           
         }).fail(function(response) {

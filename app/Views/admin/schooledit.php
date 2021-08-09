@@ -19,7 +19,7 @@
 
         <div class="card">
           <div class="">
-            <h6 class="text-center text-bold">مدرسة الاحلام</h6>
+            <h6 class="text-center text-bold" id="school_name"></h6>
           </div>
           <div class="card-header ">
             <div class="row">
@@ -64,7 +64,7 @@
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#exampleModal1" style="color: #fff;
                   background-color: #1bc5bd;
-                  border-color: #1bc5bd;">
+                  border-color: #1bc5bd;"onclick="editschoollsave1()">
 
                   تعديل<i class="far fa-edit"></i>
                 </button>
@@ -83,12 +83,12 @@
                       <div class="modal-body">
 
                         <h5>القيمة الجديدة:</h5>
-                        <p><input type="text" name="" id="" value="" class=" form-control"> </p>
+                        <p><input type="text" name="" id="category1" value="" class=" form-control"> </p>
 
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-                        <button type="button" class="btn btn-primary">حفظ </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"onclick="editschoollsave1()">حفظ التعديل</button>
+                      
                       </div>
                     </div>
                   </div>
@@ -97,7 +97,7 @@
 
               </div>
               <!-- end wh  Modal -->
-              <small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;">15</small>
+              <small id="category" class="form-text text-muted text-bold" style="padding-right: 18px;"></small>
              
                 <!--end class1 -->
 
@@ -115,7 +115,7 @@
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#exampleModal2" style="color: #fff;
     background-color: #1bc5bd;
-    border-color: #1bc5bd;">
+    border-color: #1bc5bd;"onclick="editschoollsave2()">
 
     تعديل<i class="far fa-edit"></i>
   </button>
@@ -134,12 +134,11 @@
         <div class="modal-body">
 
           <h5>القيمة الجديدة:</h5>
-          <p><input type="text" name="" id="" value="" class=" form-control"> </p>
+          <p><input type="text" name="" id="sidtext1" value="" class=" form-control"> </p>
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-          <button type="button" class="btn btn-primary">حفظ </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"onclick="editschoollsave2()">حفظ التعديل</button>
         </div>
       </div>
     </div>
@@ -149,7 +148,7 @@
 </div>
 <!-- end wh  Modal -->
 
-<small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;">4523</small>
+<small id="sidtext" class="form-text text-muted text-bold" style="padding-right: 18px;">00000</small>
 
 <!--end class2 -->
 
@@ -173,7 +172,7 @@
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#exampleModal3" style="color: #fff;
     background-color: #1bc5bd;
-    border-color: #1bc5bd;">
+    border-color: #1bc5bd;" onclick="editschoollsave3()">
 
     تعديل<i class="far fa-edit"></i>
   </button>
@@ -192,12 +191,11 @@
         <div class="modal-body">
 
           <h5>القيمة الجديدة:</h5>
-          <p><input type="text" name="" id="" value="" class=" form-control"> </p>
+          <p><input type="text" name="" id="phone1" value="" class=" form-control"> </p>
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-          <button type="button" class="btn btn-primary">حفظ </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="editschoollsave3()">حفظ التعديل</button>
         </div>
       </div>
     </div>
@@ -212,7 +210,7 @@
 
 
 
-<small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;">0966451235</small>
+<small id="phone" class="form-text text-muted text-bold" style="padding-right: 18px;">0966451235</small>
 
 <!--end class3 -->
 
@@ -230,7 +228,7 @@
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#exampleModal4" style="color: #fff;
     background-color: #1bc5bd;
-    border-color: #1bc5bd;">
+    border-color: #1bc5bd;"onclick="editschoollsave4()">
 
     تعديل<i class="far fa-edit"></i>
   </button>
@@ -249,12 +247,11 @@
         <div class="modal-body">
 
           <h5>القيمة الجديدة:</h5>
-          <p><input type="text" name="" id="" value="" class=" form-control"> </p>
+          <p><input type="text" name="" id="city1" value="" class=" form-control"> </p>
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-          <button type="button" class="btn btn-primary">حفظ </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"onclick="editschoollsave4()">حفظ التعديل</button>
         </div>
       </div>
     </div>
@@ -269,7 +266,7 @@
 
 
 
-<small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;">دمشق</small>
+<small id="city" class="form-text text-muted text-bold" style="padding-right: 18px;"></small>
 
 <!--end class4 -->
 <!-- class5 -->
@@ -286,7 +283,7 @@
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#exampleModal5" style="color: #fff;
     background-color: #1bc5bd;
-    border-color: #1bc5bd;">
+    border-color: #1bc5bd;"onclick="editschoollsave6()">
 
     تعديل<i class="far fa-edit"></i>
   </button>
@@ -305,12 +302,11 @@
         <div class="modal-body">
 
           <h5>القيمة الجديدة:</h5>
-          <p><input type="text" name="" id="" value="" class=" form-control"> </p>
+          <p><input type="text" name="" id="username1" value="" class=" form-control"> </p>
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-          <button type="button" class="btn btn-primary">حفظ </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"onclick="editschoollsave6()">حفظ التعديل</button>
         </div>
       </div>
     </div>
@@ -325,7 +321,7 @@
 
 
 
-<small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;">هند</small>
+<small id="username" class="form-text text-muted text-bold" style="padding-right: 18px;"></small>
 
 <!--end class5 -->
 <!-- class6 -->
@@ -342,7 +338,7 @@
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#exampleModal6" style="color: #fff;
     background-color: #1bc5bd;
-    border-color: #1bc5bd;">
+    border-color: #1bc5bd;"onclick="editschoollsave5()">
 
     تعديل<i class="far fa-edit"></i>
   </button>
@@ -361,12 +357,11 @@
         <div class="modal-body">
 
           <h5>القيمة الجديدة:</h5>
-          <p><input type="text" name="" id="" value="" class=" form-control"> </p>
+          <p><input type="text" name="" id="email1" value="" class=" form-control"> </p>
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-          <button type="button" class="btn btn-primary">حفظ </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"onclick="editschoollsave5()">حفظ التعديل</button>
         </div>
       </div>
     </div>
@@ -381,15 +376,15 @@
 
 
 
-<small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;">test2@test.com
+<small id="email" class="form-text text-muted text-bold" style="padding-right: 18px;">
 </small>
 
 <!--end class6 -->
 <hr>
         <div class="d-flex justify-content-center">
-            <a class="btn btn-success m-2" style="color: #fff;
+            <a class="btn btn-success " style="color: #fff;
     background-color: #1bc5bd;
-    border-color: #1bc5bd;">حفظ التعديلات</a>
+    border-color: #1bc5bd;" onclick="saveedite()">حفظ التعديلات</a>
 
 
 </div>     
@@ -464,7 +459,7 @@
 
 
 
-              <label for="">
+              <label for="" >
                              سحب الغياب من نظام نور
               </label>
 
@@ -491,12 +486,12 @@
                       <div class="modal-body">
 
                         <h5>القيمة الجديدة:</h5>
-                        <input type="date" name="" id="" value="" class=" form-control"> 
+                        <input type="date" name="" id="end_date1" value="" class=" form-control"> 
                         <small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;"> أدخل تاريخًا صالحًا </small>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-                        <button type="button" class="btn btn-primary">حفظ </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="end_datesave1(), end_date1()">حفظ تاريخ الجديد</button>
+                       
                       </div>
                     </div>
                   </div>
@@ -505,7 +500,7 @@
 
               </div>
               <!-- end wh  Modal -->
-              <small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني</small>
+              <small id="end_date11" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني</small>
              
                 <!--end class1 -->
 
@@ -543,12 +538,11 @@
         <div class="modal-body">
 
           <h5>القيمة الجديدة:</h5>
-          <input type="date" name="" id="" value="" class=" form-control"> 
+          <input type="date" name="" id="end_date2" value="" class=" form-control"> 
                         <small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;"> أدخل تاريخًا صالحًا </small>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-          <button type="button" class="btn btn-primary">حفظ </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="end_datesave2(), end_date2()">حفظ تاريخ الجديد</button>
         </div>
       </div>
     </div>
@@ -558,7 +552,7 @@
 </div>
 <!-- end wh  Modal -->
 
-<small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني</small>
+<small id="end_date12" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني</small>
 
 <!--end class2 -->
 
@@ -602,12 +596,11 @@
         <div class="modal-body">
 
           <h5>القيمة الجديدة:</h5>
-          <input type="date" name="" id="" value="" class=" form-control"> 
+          <input type="date" name="" id="end_date3" value="" class=" form-control"> 
                         <small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;"> أدخل تاريخًا صالحًا </small>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-          <button type="button" class="btn btn-primary">حفظ </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="end_datesave3(), end_date3()">حفظ تاريخ الجديد</button>
         </div>
       </div>
     </div>
@@ -622,7 +615,7 @@
 
 
 
-<small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني</small>
+<small id="end_date13" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني</small>
 
 <!--end class3 -->
 
@@ -660,12 +653,11 @@
         <div class="modal-body">
 
           <h5>القيمة الجديدة:</h5>
-          <input type="date" name="" id="" value="" class=" form-control"> 
+          <input type="date" name="" id="end_date4" value="" class=" form-control"> 
                         <small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;"> أدخل تاريخًا صالحًا </small>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-          <button type="button" class="btn btn-primary">حفظ </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="end_datesave4(), end_date4()">حفظ تاريخ الجديد</button>
         </div>
       </div>
     </div>
@@ -680,7 +672,7 @@
 
 
 
-<small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني</small>
+<small id="end_date14" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني</small>
 
 <!--end class4 -->
 <!-- class5 -->
@@ -717,12 +709,11 @@
         <div class="modal-body">
 
           <h5>القيمة الجديدة:</h5>
-          <input type="date" name="" id="" value="" class=" form-control"> 
+          <input type="date" name="" id="end_date5" value="" class=" form-control"> 
                         <small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;"> أدخل تاريخًا صالحًا </small>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-          <button type="button" class="btn btn-primary">حفظ </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="end_datesave5(), end_date5()">حفظ تاريخ الجديد</button>
         </div>
       </div>
     </div>
@@ -738,7 +729,7 @@
 
 
 
-<small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني</small>
+<small id="end_date15" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني</small>
 
 <!--end class5 -->
 
@@ -755,7 +746,7 @@
 
 <div class=" wh float-md-right d-inline-flex" >
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#exampleModal7" style="color: #fff;
+  <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#Modal66" style="color: #fff;
     background-color: #1bc5bd;
     border-color: #1bc5bd;">
 
@@ -763,7 +754,7 @@
   </button>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel6" aria-hidden="true">
+  <div class="modal fade" id="Modal66" tabindex="-1" aria-labelledby="Modal6654" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -776,12 +767,11 @@
         <div class="modal-body">
 
           <h5>القيمة الجديدة:</h5>
-          <input type="date" name="" id="" value="" class=" form-control"> 
+          <input type="date" name="" id="end_date6" value="" class=" form-control"> 
                         <small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;"> أدخل تاريخًا صالحًا </small>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-          <button type="button" class="btn btn-primary">حفظ </button>
+        <button id="gggg" type="button" class="btn btn-secondary" data-dismiss="modal" onclick="end_datesave6(), end_date6()">حفظ تاريخ الجديد</button>
         </div>
       </div>
     </div>
@@ -797,7 +787,7 @@
 
 
 
-<small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني
+<small id="end_date16" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني
 </small>
 
 <!--end class6 -->
@@ -815,7 +805,7 @@
 
 <div class=" wh float-md-right d-inline-flex" >
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#exampleModal7" style="color: #fff;
+  <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#eModal7" style="color: #fff;
     background-color: #1bc5bd;
     border-color: #1bc5bd;">
 
@@ -823,11 +813,11 @@
   </button>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel7" aria-hidden="true">
+  <div class="modal fade" id="eModal7" tabindex="-1" aria-labelledby="eModal73" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel7">تعديل البيانات
+          <h5 class="modal-title" id="eModal7">تعديل البيانات
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -836,12 +826,11 @@
         <div class="modal-body">
 
           <h5>القيمة الجديدة:</h5>
-          <input type="date" name="" id="" value="" class=" form-control"> 
+          <input type="date" name="" id="end_date7" value="" class=" form-control"> 
                         <small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;"> أدخل تاريخًا صالحًا </small>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-          <button type="button" class="btn btn-primary">حفظ </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="end_datesave7(), end_date7()">حفظ تاريخ الجديد</button>
         </div>
       </div>
     </div>
@@ -856,13 +845,10 @@
 
 
 
-<small id="emailHelp" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني
+<small id="end_date17" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني
 </small>
 
 <!--end class7 -->
-            <div class="p-8" style="margin-bottom: 24;">       <br class=""style="">
-</div>
-     
 
 
 
@@ -923,7 +909,7 @@
                 </div>
   </div>
   <div class="card-body">
-  <div class="alert alert-info text-bold" role="alert" style="width: 50%;    padding: 3px;    box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 30%);
+  <div class="alert alert-info text-bold" role="alert" style="width: 68%;    padding: 3px;    box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 30%);
     border-radius: 50px;
 ">
      <img src="<?php echo (base_url() . '/public/24.png'); ?>" class="img-thumbnail img2" style="width: 75px;
@@ -940,7 +926,7 @@
 
 
 </div>
-<div class="alert  alert-warning text-bold" role="alert"; style=" width: 50%; padding: 3px;
+<div class="alert  alert-warning text-bold" role="alert"; style=" width: 68%; padding: 3px;
     border-radius: 50px;         box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 30%);">
 
 
@@ -996,7 +982,7 @@
     <div class="row" >
     <div class="col-lg-6 ">
 
-<input class=" form-control m-0.5" type="text" placeholder="عنوان الرسالة"style="background-color: #f5f5f5;
+<input id="message_title" class=" form-control m-0.5" type="text" placeholder="عنوان الرسالة"style="background-color: #f5f5f5;
     padding-top: 16px;
     padding-bottom: 16px;
     padding-left: 20px;
@@ -1012,7 +998,7 @@
 <div class="col-lg-6">
 
 
-<textarea class=" form-control" name="" id="" cols="7" rows="5" style="background-color: #f5f5f5;
+<textarea id="message_text" class=" form-control" name="" id="" cols="7" rows="5" style="background-color: #f5f5f5;
     padding-top: 16px;
     padding-bottom: 16px;
     padding-left: 20px;
@@ -1020,7 +1006,7 @@
     border-width: 2px;
     border-color: #ffffff;
     border-radius:15px;
-    box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 15%);">نص الرسالة </textarea>
+    box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 15%);" >نص الرسالة </textarea>
 </div>    
 
 
@@ -1031,7 +1017,7 @@
         <div class="d-flex justify-content-end">
             <a class="btn btn-success m-2" style="color: #fff;
     background-color: #1bc5bd;
-    border-color: #1bc5bd;">إرسال</a>
+    border-color: #1bc5bd;" onclick="SendAdminEmailtoSchool()">إرسال</a>
 
 
 </div>     
@@ -1090,12 +1076,80 @@
             },
 
         }).done(function(response) {
-            toastr.success('تم تحديث البيانات بنجاح')
-          $("#copyright").val(response.data.copyright);
+          
+          $("#school_name").html(response.data.school_name);
+          $("#category").html(response.data.category);
+          $("#sidtext").html(response.data.school_number);
+          $("#city").html(response.data.city);
+          $("#phone").html(response.data.phone);
+          $("#email").html(response.data.email);
+          $("#username").html(response.data.username);
+          
+          $("#category1").val(response.data.category);
+
+           $("#sidtext1").val(response.data.school_number);
+          $("#city1").val(response.data.city);
+          $("#phone1").val(response.data.phone);
+          $("#email1").val(response.data.email);
+          $("#username1").val(response.data.username);
+           // toastr.success('تم تحديث البيانات بنجاح')
+         
         }).fail(function(response) {
             toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
         });
  }
+
+ function editschoollsave1() {
+   
+         var rr= $("#category1").val();
+       $("#category").val(rr).html(rr);
+       
+
+
+ }
+ function editschoollsave2() {
+   
+   var rr1=   $("#sidtext1").val();
+   $("#sidtext").val(rr1).html(rr1);
+
+
+}
+function editschoollsave4() {
+   
+   
+   var rr2=  $("#city1").val();
+   $("#city").val(rr2).html(rr2);
+
+   
+}
+
+function editschoollsave3() {
+   
+ 
+
+   var rr3=  $("#phone1").val();
+   $("#phone").val(rr3).html(rr3);
+
+
+}
+function editschoollsave5() {
+   
+
+   var rr4=  $("#email1").val();
+   $("#email").val(rr4).html(rr4);
+
+
+}
+function editschoollsave6() {
+   
+   
+
+
+   var rr5=  $("#username1").val();
+   $("#username").val(rr5).html(rr5);
+
+}
+
 
 
  function GetServicesSchools() {
@@ -1109,7 +1163,7 @@
             },
 
         }).done(function(response) {
-            toastr.success('تم تحديث البيانات  2بنجاح')
+           // toastr.success('تم تحديث البيانات  2بنجاح')
           $("#copyright").val(response.data.copyright);
         }).fail(function(response) {
             toastr.error('حدث خطأ ما اثناء تحديث البيانات!2', 'خطأ');
@@ -1129,7 +1183,7 @@
             },
 
         }).done(function(response) {
-            toastr.success('تم تحديث خدمات  بنجاح')
+            //toastr.success('تم تحديث خدمات  بنجاح')
           $("#copyright").val(response.data.copyright);
         }).fail(function(response) {
             toastr.error('حدث خطأ ما اثناء تحديث خدمات!', 'خطأ');
@@ -1152,41 +1206,35 @@
             method: "POST",
             // timeout: 0,
             headers: {
-                authorization: "yJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
-               'content-type': ' multipart/form-data; boundary=----WebKitFormBoundaryDAALBdeF0LIEqm9x'
+                authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
+               
 
             },
             data: {
-                "id":$("#phone").val(),
-                "email":$("#copyright").val(),
-                "password": $("#file").val(),
-                "city": $("#file").val(),
-                "phone": $("#file").val(),
-                "education_type": $("#file").val(),
-                "school_number": $("#file").val(),
-                "username": $("#file").val(),
-                "school_name": $("#file").val(),
-                "category": $("#file").val(),
 
 
+
+                "id":<?php echo $id;?>,
+                "email": $("#email1").val(),
+                
+                "city": $("#city1").val(),
+                "phone": $("#phone1").val(),
+                "education_type": $("#file1").val(),
+                "school_number": $("#sidtext1").val(),
+                "username":  $("#username1").val(),
+                "school_name": $("#school_name1").val(),
+                "category": $("#category1").val(),
+                "password": <?php echo $id;?>,
+
+                
               
               },
                 
         }).done(function(response) {
-            toastr.success('تم حفظ البيانات بنجاح')
+            toastr.success('تم حفظ جميع البيانات بنجاح')
         }).fail(function(response) {
             toastr.error('حدث خطأ ما اثناء حفظ البيانات!', 'خطأ');
         });
-    }
-
-    function getAndsend() {
-        setBasicData($("#phone").val(),$("#copyright").val() ,$("#file").val() );
-    }
-
-    function print(msg) {
-
-        $("#copyright").html(msg)
-        
     }
 
 
@@ -1198,8 +1246,12 @@
             method: "POST",
            
             data: {
-              "id":$("#phone").val(),
-                "email":$("#copyright").val(),
+              "id":<?php echo $id;?>,
+                "message_title":$("#message_title").val(),
+                "message_text":$("#message_text").val(),
+                "school_email":$("#email1").val(),
+                "admin_email":$("#email1").val(),
+
               },
               headers: {
                 authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
@@ -1215,6 +1267,311 @@
  }
 
 
+
+
+ function end_datesave1() {
+        $.ajax({
+            url: "https://sa.arsail.net/schools/Schools/EditServiceSchool",
+            method: "POST",
+            // timeout: 0,
+            headers: {
+                authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
+               
+
+            },
+            data: {
+
+
+
+                "school_id":<?php echo $id;?>,
+                
+                "end_date": $("#end_date1").val(),
+                "status": 1,
+               
+
+                "service_id":  6,
+                
+
+                
+              
+              },
+                
+        }).done(function(response) {
+            toastr.success('تم حفظ  تاريخ الجديد بنجاح')
+        }).fail(function(response) {
+            toastr.error('حدث خطأ ما اثناء حفظ تاريخ الجديد!', 'خطأ');
+        });
+    }
+
+    function end_date1() {
+   
+
+   var v1=  $("#end_date1").val();
+   $("#end_date11").val(v1).html(v1);
+
+
+
+}
+
+
+
+function end_datesave2() {
+        $.ajax({
+            url: "https://sa.arsail.net/schools/Schools/EditServiceSchool",
+            method: "POST",
+            // timeout: 0,
+            headers: {
+                authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
+               
+
+            },
+            data: {
+
+
+
+                "school_id":<?php echo $id;?>,
+                
+                "end_date": $("#end_date2").val(),
+                "status": 1,
+               
+
+                "service_id":  7,
+                
+
+                
+              
+              },
+                
+            }).done(function(response) {
+            toastr.success('تم حفظ  تاريخ الجديد بنجاح')
+        }).fail(function(response) {
+            toastr.error('حدث خطأ ما اثناء حفظ تاريخ الجديد!', 'خطأ');
+        });
+    }
+
+
+function end_date2() {
+   
+
+   var v2=  $("#end_date2").val();
+   $("#end_date12").val(v2).html(v2);
+
+
+}
+function end_date3() {
+   
+
+   var v3=  $("#end_date3").val();
+   $("#end_date13").val(v3).html(v3);
+
+
+}
+
+function end_datesave3() {
+        $.ajax({
+            url: "https://sa.arsail.net/schools/Schools/EditServiceSchool",
+            method: "POST",
+            // timeout: 0,
+            headers: {
+                authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
+               
+
+            },
+            data: {
+
+
+
+                "school_id":<?php echo $id;?>,
+                
+                "end_date": $("#end_date3").val(),
+                "status": 1,
+               
+
+                "service_id":  4,
+                
+
+                
+              
+              },
+                
+            }).done(function(response) {
+            toastr.success('تم حفظ  تاريخ الجديد بنجاح')
+        }).fail(function(response) {
+            toastr.error('حدث خطأ ما اثناء حفظ تاريخ الجديد!', 'خطأ');
+        });
+    }
+
+function end_date4() {
+   
+
+   var v4=  $("#end_date4").val();
+   $("#end_date14").val(v4).html(v4);
+
+
+}
+
+function end_datesave4() {
+        $.ajax({
+            url: "https://sa.arsail.net/schools/Schools/EditServiceSchool",
+            method: "POST",
+            // timeout: 0,
+            headers: {
+                authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
+               
+
+            },
+            data: {
+
+
+
+                "school_id":<?php echo $id;?>,
+                
+                "end_date": $("#end_date4").val(),
+                "status": 1,
+               
+
+                "service_id":  5,
+                
+
+                
+              
+              },
+                
+            }).done(function(response) {
+            toastr.success('تم حفظ  تاريخ الجديد بنجاح')
+        }).fail(function(response) {
+            toastr.error('حدث خطأ ما اثناء حفظ تاريخ الجديد!', 'خطأ');
+        });
+    }
+
+function end_date5() {
+   
+
+   var v5=  $("#end_date5").val();
+   $("#end_date15").val(v5).html(v5);
+
+
+}
+
+function end_datesave5() {
+        $.ajax({
+            url: "https://sa.arsail.net/schools/Schools/EditServiceSchool",
+            method: "POST",
+            // timeout: 0,
+            headers: {
+                authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
+               
+
+            },
+            data: {
+
+
+
+                "school_id":<?php echo $id;?>,
+                
+                "end_date": $("#end_date5").val(),
+                "status": 1,
+               
+
+                "service_id":  2,
+                
+
+                
+              
+              },
+                
+            }).done(function(response) {
+            toastr.success('تم حفظ  تاريخ الجديد بنجاح')
+        }).fail(function(response) {
+            toastr.error('حدث خطأ ما اثناء حفظ تاريخ الجديد!', 'خطأ');
+        });
+    }
+
+function end_date6() {
+   
+
+   var v6=  $("#end_date6").val();
+   $("#end_date16").val(v6).html(v6);
+
+
+}
+
+function end_datesave6() {
+        $.ajax({
+            url: "https://sa.arsail.net/schools/Schools/EditServiceSchool",
+            method: "POST",
+            // timeout: 0,
+            headers: {
+                authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
+               
+
+            },
+            data: {
+
+
+
+                "school_id":<?php echo $id;?>,
+                
+                "end_date": $("#end_date6").val(),
+                "status": 1,
+               
+
+                "service_id":  3,
+                
+
+                
+              
+              },
+                
+            }).done(function(response) {
+            toastr.success('تم حفظ  تاريخ الجديد بنجاح')
+        }).fail(function(response) {
+            toastr.error('حدث خطأ ما اثناء حفظ تاريخ الجديد!', 'خطأ');
+        });
+    }
+
+
+
+function end_datesave7() {
+        $.ajax({
+            url: "https://sa.arsail.net/schools/Schools/EditServiceSchool",
+            method: "POST",
+            // timeout: 0,
+            headers: {
+                authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE",
+               
+
+            },
+            data: {
+
+
+
+                "school_id":<?php echo $id;?>,
+                
+                "end_date": $("#end_date7").val(),
+                "status": 1,
+               
+
+                "service_id":  1,
+                
+
+                
+              
+              },
+            }).done(function(response) {
+            toastr.success('تم حفظ  تاريخ الجديد بنجاح')
+        }).fail(function(response) {
+            toastr.error('حدث خطأ ما اثناء حفظ تاريخ الجديد!', 'خطأ');
+        });
+    }
+    function end_date7() {
+   
+
+   var v7=  $("#end_date7").val();
+   $("#end_date17").val(v7).html(v7);
+
+
+}
 
     
 </script>

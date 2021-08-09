@@ -151,7 +151,7 @@
                     className: 'text-center t-status align-middle',
                     title: 'حالة الإرسال',
                     render: function(data, type, row, meta) {
-                        var checked = (row.form_status == 0) ? `checked` : ``;
+                        var checked = (row.status ==1) ? `checked` : ``;
                         return `<div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input"  ${checked} onchange="updateFormStatus(${row.id},this.checked)" id="customSwitch-${row.id}">
                                     <label class="custom-control-label" for="customSwitch-${row.id}">${data}</label>
@@ -188,7 +188,8 @@
                     render: function(data, type, row, meta) {
                         return `<div class="row justify-content-center  text-white ">
                                     <div class="m-1">
-                                        <a type="button" class="btn btn-sm btn-info " title="edit" style="margin: 0px;" href="#" class="nav-link">
+                                        <a type="button" class="btn btn-sm btn-info " title="edit" style="margin: 0px;" href="<?php echo base_url().'/public/admin/editgets';?>/${row.id}" class="nav-link">
+
                                             <i class="far fa-edit"></i>
                                         </a>
                                     </div>
@@ -211,7 +212,16 @@
 
                     }, ]
                 },
-                'colvis'
+                'colvis',
+                {
+                    text: 'اضافة بوابة <i class="far fa-plus-square"></i>',
+                    className: 'btn btn-sm',
+                    action: function(e, dt, node, config) {
+                        location.href = " <?php echo base_url().'/public/admin/addgets';?>" 
+
+                    }
+                }
+
             ],
             "language": {
                 "emptyTable": "ليست هناك بيانات متاحة في الجدول",

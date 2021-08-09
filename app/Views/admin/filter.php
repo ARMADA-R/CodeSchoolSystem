@@ -57,7 +57,7 @@
             },
 
         }).done(function(response) {
-            toastr.success('تم تحديث البيانات بنجاح')
+           // toastr.success('تم تحديث البيانات بنجاح')
             $("#text").val(response.data.text);
 
         }).fail(function(response) {
