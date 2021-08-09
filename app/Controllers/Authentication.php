@@ -15,7 +15,7 @@ use \Firebase\JWT\JWT;
 
 class Authentication extends ResourceController
 {
-    protected $redirectAfterAuthenticate = 'login';
+    protected $redirectAfterAuthenticate = 'home';
     protected $loginView = 'login';
 
 

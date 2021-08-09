@@ -17,9 +17,10 @@
     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/css/toastr.css">
 
     <!-- Font Icon -->
-    <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>register-form/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <!-- <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>register-form/fonts/material-icon/css/material-design-iconic-font.min.css"> -->
 
     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>register-form/css/style.css">
+
     <style>
         .bg-navy {
             background-color: #001f3f !important;
@@ -286,9 +287,9 @@
     <script src="<?php echo base_url() . '/public/'; ?>design/js/toastr.js"></script>
 
     <script>
-
-        var msg = '<?php //echo $res['msg'] ?>';
-        var code = '<?php //echo $res['code'] ?>';
+ 
+        var msg =  '<?php echo isset($data['msg'])? $data['msg'] : '' ?>';
+        var code = '<?php echo isset($data['msg'])? $data['code'] : 0 ?>';
         // var user_data = '<?php //dd(session('user_data')) ?>'
         (function($) {
             $(".toggle-password").click(function() {
@@ -324,7 +325,7 @@
         };
 
         $(document).ready(function() {
-            if (code == 400 || code == -1 || code == 1) {
+            if (code == -1) {
                 toastr.error(msg);
             }
         });

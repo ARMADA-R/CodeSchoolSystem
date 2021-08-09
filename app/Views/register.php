@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/css/toastr.css">
 
     <!-- Font Icon -->
-    <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>register-form/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <!-- <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>register-form/fonts/material-icon/css/material-design-iconic-font.min.css"> -->
 
     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>register-form/css/style.css">
     <style>
