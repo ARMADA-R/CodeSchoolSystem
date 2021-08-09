@@ -186,7 +186,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-    <button type="button" class="btn btn-primary" onclick="DeleteSlider()">حذف </button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="DeleteSlider()">حذف </button>
   </div>
 </div>
 </div>
@@ -205,7 +205,7 @@
             url: "https://sa.arsail.net/schools/Slider_Api/Slider",
             method: "GET",
             data: {
-               text:"" ,
+              
                 
             },
         }).done(function(response) {
@@ -315,7 +315,7 @@
                 
                 $("#lider").append( `
                 <div class="col-md-3">
-                          <img src="${data[i].image_url}" class="img-thumbnail d-flex justify-content-lg-around  " style=" height:200px;    width: -webkit-fill-available; object-fit: scale-down; " id="${data[i].id}">
+                          <img src="${data[i].image_url}" class="imgee img-thumbnail d-flex justify-content-lg-around  " style=" height:200px;    width: -webkit-fill-available; object-fit: scale-down; " id="${data[i].id}">
 
                           <div class="d-flex justify-content-center">
 
