@@ -92,7 +92,7 @@
 <script>
     var questions = '';
     var qAnswers = '';
-    var school_id = 24;
+    
     $(document).ready(function() {
 
 
@@ -194,7 +194,7 @@
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI5IiwiZXhwIjoiMjAyMi0wMS0yOSIsImRhdGEiOnsidXNlcl9pZCI6MTh9fQ.1EfRPKk8zdCvjmn7qkVRKflJDtJjaoN0R_xvphe1No0",
+                    "Authorization": token,
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 "data": {

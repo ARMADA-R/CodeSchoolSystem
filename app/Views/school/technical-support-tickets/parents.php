@@ -134,8 +134,7 @@
 
 
 <script>
-    var school_id = 24;
-    var user_id = 24;
+    
 
     $(document).ready(function() {
         getTickets();
@@ -150,7 +149,7 @@
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI5IiwiZXhwIjoiMjAyMi0wMS0yOSIsImRhdGEiOnsidXNlcl9pZCI6MTh9fQ.1EfRPKk8zdCvjmn7qkVRKflJDtJjaoN0R_xvphe1No0"
+                    "Authorization": token
                 },
                 data: {
                     school_id: school_id,
@@ -185,7 +184,7 @@
                                                         <div class="card-text d-flex pb-3 justify-content-between " style="font-size: 0.9rem;">
                                                           <div>  الهاتف: </div><div> ${data[i].phone} </div>
                                                         </div>
-                                                        <a href="<?php echo base_url() . '/public/'; ?>school/support/technical/ticket/${data[i].id}" class="btn btn-outline-primary" style="width: -webkit-fill-available;">استعراض التذاكر</a>
+                                                        <a href="<?= site_url() ?>school/support/technical/ticket/${data[i].id}" class="btn btn-outline-primary" style="width: -webkit-fill-available;">استعراض التذاكر</a>
                                                     </div>
                                                 </div>
                                             </div>`);
@@ -203,7 +202,7 @@
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAyLTIyIiwiZXhwIjoiMjAyMi0wMi0yMiIsImRhdGEiOiIyMyJ9.ZITmmvk9fnZXo8Bfy30vw8uYK2kGZeN_M8XFPErmr_w",
+                    "Authorization": token,
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 "data": {

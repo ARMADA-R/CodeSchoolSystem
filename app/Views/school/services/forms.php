@@ -8,7 +8,7 @@
             النماذج الإلكترونية
         </div>
         <div class="col-3">
-            <a href="<?php echo base_url() . '/public/'; ?>school/questionnaires/add" style="width: inherit;" class="btn btn-light" data-toggle="modal" data-target="#add-temblate">
+            <a href="<?= site_url() ?>school/questionnaires/add" style="width: inherit;" class="btn btn-light" data-toggle="modal" data-target="#add-temblate">
                 إضافة نموذج
             </a>
         </div>
@@ -112,8 +112,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
-    var school_id = 24;
-    var user_id = 24;
+    
     var dataTable = null;
 
     $(document).ready(function() {
@@ -397,7 +396,7 @@
                     limit: "7000",
                 },
                 headers: {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAyLTIyIiwiZXhwIjoiMjAyMi0wMi0yMiIsImRhdGEiOiIyMyJ9.ZITmmvk9fnZXo8Bfy30vw8uYK2kGZeN_M8XFPErmr_w"
+                    "Authorization": token
                 },
             })
             .done(function(response) {
@@ -416,7 +415,7 @@
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI1IiwiZXhwIjoiMjAyMi0wMS0yNSIsImRhdGEiOiIxNCJ9.IN0TgoaZbO3b9NiH1eRO7eTmEwvV4ymVpVQR_h_g-Ww",
+                    "Authorization": token,
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 "data": {
@@ -443,7 +442,7 @@
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI5IiwiZXhwIjoiMjAyMi0wMS0yOSIsImRhdGEiOnsidXNlcl9pZCI6MTh9fQ.1EfRPKk8zdCvjmn7qkVRKflJDtJjaoN0R_xvphe1No0",
+                    "Authorization": token,
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 "data": {

@@ -61,7 +61,7 @@
 
 
 <script>
-    var partner_id = 16;
+    
 
     $(document).ready(function() {
         getTickets();
@@ -76,7 +76,7 @@
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI5IiwiZXhwIjoiMjAyMi0wMS0yOSIsImRhdGEiOnsidXNlcl9pZCI6MTh9fQ.1EfRPKk8zdCvjmn7qkVRKflJDtJjaoN0R_xvphe1No0"
+                    "Authorization": token
                 },
                 data: {
                     partner_id: partner_id,

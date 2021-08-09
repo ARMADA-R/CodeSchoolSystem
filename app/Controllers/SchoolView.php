@@ -4,6 +4,26 @@ namespace App\Controllers;
 
 class SchoolView extends BaseController
 {
+
+	public function generateToken()
+	{
+		$iat = date('Y-m-d');
+		$a = strtotime($iat . '+1 year');
+		$exp =  date('Y-m-d', $a);
+
+		$payload = array(
+			"iss" => "The_school",
+			"aud" => "The_rewr",
+			"iat" => $iat,
+
+			"exp" => $exp,
+			"data" => $result->id,
+		);
+
+		$kunci = 'SChO0lS';
+		$output = JWT::encode($payload, $kunci);
+		return $output;
+		}
 	public function index()
 	{
 		return view('welcome_message');

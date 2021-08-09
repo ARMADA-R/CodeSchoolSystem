@@ -46,7 +46,9 @@
   $("img.lazyload").lazyload();
 </script>
 <script>
-  var school_id = 24;
+  var school_id = '<?= session('user_data')['user_id'] ?>';
+  var user_id = '<?= session('user_data')['user_id'] ?>';
+  var token = '<?= session('user_data')['token'] ?>';
 
   toastr.options = {
     "closeButton": false,
@@ -76,7 +78,7 @@
       "method": "POST",
       "timeout": 0,
       "headers": {
-        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI1IiwiZXhwIjoiMjAyMi0wMS0yNSIsImRhdGEiOiIxNCJ9.IN0TgoaZbO3b9NiH1eRO7eTmEwvV4ymVpVQR_h_g-Ww",
+        "Authorization": token,
         "Content-Type": "application/x-www-form-urlencoded"
       },
       "data": {
@@ -109,7 +111,7 @@
         "method": "POST",
         "timeout": 0,
         "headers": {
-          "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI1IiwiZXhwIjoiMjAyMi0wMS0yNSIsImRhdGEiOiIxNCJ9.IN0TgoaZbO3b9NiH1eRO7eTmEwvV4ymVpVQR_h_g-Ww"
+          "Authorization": token
         },
         "processData": false,
         "mimeType": "multipart/form-data",
