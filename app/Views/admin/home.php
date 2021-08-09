@@ -201,21 +201,23 @@
 
 <script>
   $(document).ready(function() {
+    getliders(); 
+  }); 
+       
+       function getliders(){
         $.ajax({
             url: "https://sa.arsail.net/schools/Slider_Api/Slider",
             method: "GET",
-            data: {
-              
-                
-            },
+            
         }).done(function(response) {
-           // toastr.success('تم تعديل البيانات بنجاح')
+           // toastr.success('تم تعديل البيانات بنجاح');
             y22(response.data);
           
         }).fail(function(response) {
             toastr.error('حدث خطأ ما اثناء تعديل البيانات!', 'خطأ');
-        });
-    });
+        });}
+
+   
     function prent(msg) {
     $('#text2').val(msg);
       $('#text2').html(msg);
@@ -239,7 +241,8 @@
             },
                 
         }).done(function(response) {
-            toastr.success('تم اضافة البيانات بنجاح')
+            toastr.success('تم اضافة البيانات بنجاح');
+            getliders();
         }).fail(function(response) {
             toastr.error('حدث خطأ ما اثناء اضافة البيانات!', 'خطأ');
         });
@@ -271,7 +274,8 @@
             },
                 
         }).done(function(response) {
-            toastr.success('تم تحديث البيانات بنجاح')
+            toastr.success('تم تحديث البيانات بنجاح');
+            getliders();
          
         }).fail(function(response) {
             toastr.error('حدث خطأ ما اثناء تحديث تعديل!', 'خطأ');
@@ -297,7 +301,8 @@
            },
                 
         }).done(function(response) {
-            toastr.success('تم حذف البيانات بنجاح')
+            toastr.success('تم حذف البيانات بنجاح');
+            getliders();
         }).fail(function(response) {
             toastr.error('حدث خطأ ما اثناء حذف البيانات!', 'خطأ');
         });
