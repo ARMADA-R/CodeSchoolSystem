@@ -17,7 +17,7 @@
 
 
 
-        <div class="card">
+        <div class="card collapsed-card">
           <div class="">
             <h6 class="text-center text-bold" id="school_name"></h6>
           </div>
@@ -40,7 +40,7 @@
                     
                   </div>
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
+                  <i class="fas fa-plus"></i>
                   </button>
                 
                 </div>
@@ -380,7 +380,7 @@
 </small>
 
 <!--end class6 -->
-<hr>
+<hr class="p-1">
         <div class="d-flex justify-content-center">
             <a class="btn btn-success " style="color: #fff;
     background-color: #1bc5bd;
@@ -417,7 +417,7 @@
       <div class="col-xl-6"> 
     
 
-      <div class="card">
+      <div class="card collapsed-card">
           <div class="">
             <h6 class="text-center text-bold">الخدمات المفعلة
                </h6>
@@ -433,7 +433,7 @@
                     
                   </div>
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
+                  <i class="fas fa-plus"></i>
                   </button>
                 
                 </div>
@@ -673,7 +673,7 @@
 
 
 <small id="end_date14" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني</small>
-
+ 
 <!--end class4 -->
 <!-- class5 -->
 
@@ -847,6 +847,10 @@
 
 <small id="end_date17" class="form-text text-muted text-bold" style="padding-right: 18px;">صالحة لغاية 30 كانون الثاني
 </small>
+<div>
+<br>
+
+</div>
 
 <!--end class7 -->
 
@@ -889,7 +893,7 @@
   <div class="row" >
       <!-- start block1 -->
     <div class="col-xl-6">
-<div class="card">
+<div class="card collapsed-card ">
   <div class="card-header">
   <h6 class="text-center text-bold">إحصائيات الرصيد</h6>
 
@@ -903,12 +907,12 @@
                     
                   </div>
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
+                    <i class="fas fa-plus"></i>
                   </button>
                 
                 </div>
   </div>
-  <div class="card-body">
+  <div class="card-body" style="display: none;">
   <div class="alert alert-info text-bold" role="alert" style="width: 68%;    padding: 3px;    box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 30%);
     border-radius: 50px;
 ">
@@ -956,7 +960,7 @@
     </div>
      <!-- start block2 -->
     <div class="col-xl-6">
-    <div class="card">
+    <div class="card collapsed-card">
   <div class="card-header">
   <h6 class="text-center text-bold">مراسلة المدرسة
 
@@ -973,16 +977,16 @@
                     
                   </div>
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
+                  <i class="fas fa-plus"></i>
                   </button>
                 
                 </div>
   </div>
   <div class="card-body">
     <div class="row" >
-    <div class="col-lg-6 ">
+    <div class="col-lg-12 ">
 
-<input id="message_title" class=" form-control m-0.5" type="text" placeholder="عنوان الرسالة"style="background-color: #f5f5f5;
+<input id="message_title" class=" form-control m-2 p-2" type="text" placeholder="عنوان الرسالة"style="background-color: #f5f5f5;
     padding-top: 16px;
     padding-bottom: 16px;
     padding-left: 20px;
@@ -993,12 +997,7 @@
     box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 15%);">
 
 
-
-</div>
-<div class="col-lg-6">
-
-
-<textarea id="message_text" class=" form-control" name="" id="" cols="7" rows="5" style="background-color: #f5f5f5;
+<textarea id="message_text" class=" form-control m-2" name="" id="" cols="7" rows="5" style="background-color: #f5f5f5;
     padding-top: 16px;
     padding-bottom: 16px;
     padding-left: 20px;
@@ -1007,7 +1006,8 @@
     border-color: #ffffff;
     border-radius:15px;
     box-shadow: 0px 10px 18px 1px rgb(0 0 0 / 15%);" >نص الرسالة </textarea>
-</div>    
+
+</div>
 
 
 

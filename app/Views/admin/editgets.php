@@ -103,7 +103,7 @@
         <!-- end row1 -->
         <hr>
         <div class="d-flex justify-content-end">
-            <a onclick="save()" class="btn btn-success m-2" style="color: #fff;
+            <a onclick="save1()" class="btn btn-success m-2" style="color: #fff;
     background-color: #1bc5bd;
     border-color: #1bc5bd;">حفظ</a>
 
@@ -158,7 +158,7 @@
             toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
         });
     });
-   function save() 
+   function save1() 
       
    {
         $.ajax({
@@ -173,7 +173,7 @@
                 password:  $("#password").val(),
                 arabic_link: $("#arabic_link").val(),
                 english_link: $("#english_link").val(),
-                email:$("#email").val(response.data.email),
+                email:$("#email").val(),
                 type_sender: $("#type_sender").val(),
                 status:$("#status").val(),
                 encrypt_type:$("#encrypt_type").val()
