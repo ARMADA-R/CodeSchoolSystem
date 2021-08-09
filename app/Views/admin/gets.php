@@ -71,8 +71,7 @@
 <?php require(APPPATH . 'Views/admin/layouts/postContent.php'); ?>
 
 
-<script src="<?php echo base_url() . '/public/'; ?>design/pdfMake/pdfmake.min.js"></script>
-<script src="<?php echo base_url() . '/public/'; ?>design/pdfMake/vfs_fonts.js"></script>
+
 <script src="<?php echo base_url() . '/public/'; ?>Excel/jquery.table2excel.js"></script>
 
 <script src="<?php echo base_url() . '/public/'; ?>design/js/datatable.all.js"></script>
@@ -82,7 +81,6 @@
 
 
 <script>
-    var school_id = 24;
     var dataTable = null;
 
     $(document).ready(function() {
@@ -429,12 +427,11 @@
                 method: "GET",
                 timeout: 0,
                 data: {
-                    school_id: school_id,
                     page: "1",
                     limit: "10000"
                 },
                 headers: {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAzIiwiZXhwIjoiMjAyMi0wOC0wMyIsImRhdGEiOiIxNyJ9.nbG_Ip9QZLCa4yA0jFothG4Wd1lupOqB1M7GSd4PP9I"
+                    "Authorization": token
                 },
             })
             .done(function(response) {
@@ -453,7 +450,7 @@
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAzIiwiZXhwIjoiMjAyMi0wOC0wMyIsImRhdGEiOiIxNyJ9.nbG_Ip9QZLCa4yA0jFothG4Wd1lupOqB1M7GSd4PP9I",
+                    "Authorization": token,
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 "data": {
@@ -490,7 +487,7 @@
                 },
                 headers: {
                   
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAzIiwiZXhwIjoiMjAyMi0wOC0wMyIsImRhdGEiOiIxNyJ9.nbG_Ip9QZLCa4yA0jFothG4Wd1lupOqB1M7GSd4PP9I",
+                    "Authorization": token,
                 "content-type": "application/x-www-form-urlencoded",
 
                 },

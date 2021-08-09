@@ -231,7 +231,7 @@
             method: "POST",
           //  timeout: 0,
             headers: {
-                'authorization': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAzIiwiZXhwIjoiMjAyMi0wOC0wMyIsImRhdGEiOiIxNyJ9.nbG_Ip9QZLCa4yA0jFothG4Wd1lupOqB1M7GSd4PP9I",
+                'authorization': token,
                 'content-type': "multipart/form-data; boundary=----WebKitFormBoundaryBFuJKLB7Ihgt6VIQ",
 
             },
@@ -261,7 +261,7 @@
             method: "POST",
           //  timeout: 0,
             headers: {
-                'authorization': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAzIiwiZXhwIjoiMjAyMi0wOC0wMyIsImRhdGEiOiIxNyJ9.nbG_Ip9QZLCa4yA0jFothG4Wd1lupOqB1M7GSd4PP9I",
+                'authorization': token,
 
 
             },
@@ -290,7 +290,7 @@
             method: "DELETE",
           //  timeout: 0,
             headers: {
-                'authorization': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAxIiwiZXhwIjoiMjAyMi0wOC0wMSIsImRhdGEiOiIxNyJ9.wb3NNCYPAdtG3qnvJiELl0mEhQ9tshj5T6AQvAHcDQU",
+                'authorization': token,
 
             },
             data: {

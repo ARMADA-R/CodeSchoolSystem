@@ -88,8 +88,7 @@
 <script src="<?php echo base_url() . '/public/'; ?>design/js/jquery-3.4.1.min.js"></script>
 
 
-<script src="<?php echo base_url() . '/public/'; ?>design/pdfMake/pdfmake.min.js"></script>
-<script src="<?php echo base_url() . '/public/'; ?>design/pdfMake/vfs_fonts.js"></script>
+
 <script src="<?php echo base_url() . '/public/'; ?>Excel/jquery.table2excel.js"></script>
 
 <script src="<?php echo base_url() . '/public/'; ?>design/js/datatable.all.js"></script>
@@ -422,7 +421,7 @@
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTAxLTI1IiwiZXhwIjoiMjAyMi0wMS0yNSIsImRhdGEiOiIxNCJ9.IN0TgoaZbO3b9NiH1eRO7eTmEwvV4ymVpVQR_h_g-Ww"
+                    "Authorization": token
                 },
             })
             .done(function(response) {
