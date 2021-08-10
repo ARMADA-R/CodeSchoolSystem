@@ -105,7 +105,6 @@
 
 
 
-
 <!-- Modal -->
 <div class="modal fade" id="edite1" tabindex="-1" aria-labelledby="edite1" aria-hidden="true">
 <div class="modal-dialog">
@@ -144,9 +143,8 @@
               <label for="file2" class="btn btn-success  "style="color: #fff;
       background-color: #5883ba;
        border-color: #ffffff;width: 40%; ">أختر صورة  <i class="far fa-folder-open"></i></label>
-       <input type="hidden" id="idd">
 
-        <input class="btn btn-success a1 form-control  " type="file" name="" style="margin-top: 50px;display:none;" id="file2"> 
+        <input class="btn btn-success a1 form-control  " type="file" name="" style="margin-top:50px; display:none;" id="file2"> 
         <h6 class="help-block sp1" >الحجم الأعظمي المسموح للصورة 1MB، والحد الأقصى لعدد الصور 5..
         </h6>
               </div>
@@ -165,7 +163,7 @@
 
 
 
-
+<button style="display: none;" id="lunchEdit" data-toggle="modal" data-target="#edite1"></button>
 
 <!-- Modal -->
 <div class="modal fade" id="delete1" tabindex="-1" aria-labelledby="delete1l" aria-hidden="true">
@@ -202,6 +200,8 @@
 <script>
   $(document).ready(function() {
     getliders(); 
+    
+
   }); 
        
        function getliders(){
@@ -219,32 +219,37 @@
 
    
     function prent(msg) {
+      console.log(msg);
     $('#text2').val(msg);
       $('#text2').html(msg);
-      $('.btnmg').click();
+      $('#lunchEdit').click();
       
     }
 
     function AddSlider() {
+      var form = new FormData();
+      form.append("text", $("#text8").val());
+      form.append("file", $("#file8")[0].files[0]);
+   
         $.ajax({
             url: "https://sa.arsail.net/schools/Slider_Api/AddSlider",
             method: "POST",
-          //  timeout: 0,
+         timeout: 0,
             headers: {
                 'authorization': token,
-                'content-type': "multipart/form-data; boundary=----WebKitFormBoundaryBFuJKLB7Ihgt6VIQ",
-
             },
-            data: {
-               text: $("#text8").val() ,
-               file: $("#file8").val()
-            },
+            "processData": false,
+          "mimeType": "multipart/form-data",
+        
+           "contentType": false,
+          "data": form
                 
         }).done(function(response) {
             toastr.success('تم اضافة البيانات بنجاح');
-            getliders();
+         
         }).fail(function(response) {
             toastr.error('حدث خطأ ما اثناء اضافة البيانات!', 'خطأ');
+         
         });
     }
 
@@ -256,26 +261,34 @@
 
 
     function EditSlider(){
+      var form = new FormData();
+      form.append("id", $('.imgee').attr('id'));
+
+      form.append("text", $("#text2").val());
+      form.append("file", $("#file2")[0].files[0]);
         $.ajax({
             url: "https://sa.arsail.net/schools/Slider_Api/EditSlider",
             method: "POST",
-          //  timeout: 0,
+            
+              timeout: 0,
             headers: {
                 'authorization': token,
-
-
             },
-            data: {
-             
-              id :$('.imgee').attr('id'),
-              text: $("#text2").val(),
-              file: $("#file2").val(),
+            "processData": false,
+          "mimeType": "multipart/form-data",
+        
+           "contentType": false,
+          
+    
+            "data": form 
+            
+            
 
-            },
-                
+        
         }).done(function(response) {
             toastr.success('تم تحديث البيانات بنجاح');
-            getliders();
+             location.href = '';
+
          
         }).fail(function(response) {
             toastr.error('حدث خطأ ما اثناء تحديث تعديل!', 'خطأ');
@@ -302,7 +315,7 @@
                 
         }).done(function(response) {
             toastr.success('تم حذف البيانات بنجاح');
-            getliders();
+            location.href = '';
         }).fail(function(response) {
             toastr.error('حدث خطأ ما اثناء حذف البيانات!', 'خطأ');
         });
@@ -325,9 +338,9 @@
                           <div class="d-flex justify-content-center">
 
                           <!-- Button trigger modal -->
-                          <button id="" type="button" class="btn btn-info m-2  btnmg" data-toggle="modal" data-target="#edite1" style="color: #fff;
+                          <button  type="button" class="btn btn-info m-2  btnmg"  style="color: #fff;
                           background-color: #1bc5bd;
-                          border-color: #1bc5bd;"onclick="prent('${data[i].text}')">
+                          border-color: #1bc5bd;" onclick="prent('${data[i].text}')">
 
                           تعديل<i class="far fa-edit"></i>
                           </button>

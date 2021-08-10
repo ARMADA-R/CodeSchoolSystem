@@ -269,62 +269,8 @@
 <small id="city" class="form-text text-muted text-bold" style="padding-right: 18px;"></small>
 
 <!--end class4 -->
+
 <!-- class5 -->
-
-
-<div style="display: inline;"><i class="fas fa-users" style="color: #1bc5bd;"></i></div>
-
-
-<label for="">  اسم المسنخدم:
-
-</label>
-
-<div class=" wh float-md-right d-inline-flex">
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#exampleModal5" style="color: #fff;
-    background-color: #1bc5bd;
-    border-color: #1bc5bd;"onclick="editschoollsave6()">
-
-    تعديل<i class="far fa-edit"></i>
-  </button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel5" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel5">تعديل البيانات
-          </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-
-          <h5>القيمة الجديدة:</h5>
-          <p><input type="text" name="" id="username1" value="" class=" form-control"> </p>
-
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"onclick="editschoollsave6()">حفظ التعديل</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end Modal -->
-
-</div>
-<!-- end wh  Modal -->
-
-
-
-
-
-
-<small id="username" class="form-text text-muted text-bold" style="padding-right: 18px;"></small>
-
-<!--end class5 -->
-<!-- class6 -->
 
 
 <div style="display: inline;"><i class="far fa-envelope" style="color: #1bc5bd;"></i></div>
@@ -379,33 +325,37 @@
 <small id="email" class="form-text text-muted text-bold" style="padding-right: 18px;">
 </small>
 
-<!--end class6 -->
-
-<!-- class7 -->
+<!--end class5 -->
 
 
-<div style="display: inline;"><i class="far fa-envelope" style="color: #1bc5bd;"></i></div>
 
 
-<label for="">    كلمة المرور:
+
+<!-- class6 -->
+
+
+<div style="display: inline;"><i class="fas fa-users" style="color: #1bc5bd;"></i></div>
+
+
+<label for="">  اسم المسنخدم:
 
 </label>
 
-<div class=" wh float-md-right d-inline-flex" >
+<div class=" wh float-md-right d-inline-flex">
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#dal8" style="color: #fff;
+  <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#exampleModal5" style="color: #fff;
     background-color: #1bc5bd;
-    border-color: #1bc5bd;"onclick="editschoollsave8()">
+    border-color: #1bc5bd;"onclick="editschoollsave6()">
 
     تعديل<i class="far fa-edit"></i>
   </button>
 
   <!-- Modal -->
-  <div class="modal fade" id="dal8" tabindex="-1" aria-labelledby="exampleLabel6" aria-hidden="true">
+  <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel5" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleLabel6">تعديل البيانات
+          <h5 class="modal-title" id="exampleModalLabel5">تعديل البيانات
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -414,11 +364,11 @@
         <div class="modal-body">
 
           <h5>القيمة الجديدة:</h5>
-          <p><input type="text" name="" id="password" value="" class=" form-control"> </p>
+          <p><input type="text" name="" id="username1" value="" class=" form-control"> </p>
 
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"onclick="editschoollsave8()">حفظ التعديل</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"onclick="editschoollsave6()">حفظ التعديل</button>
         </div>
       </div>
     </div>
@@ -433,7 +383,64 @@
 
 
 
-<small id="password" class="form-text text-muted text-bold" style="padding-right: 18px;">
+<small id="username" class="form-text text-muted text-bold" style="padding-right: 18px;"></small>
+
+<!--end class6 -->
+
+<!-- class7 -->
+
+
+<div style="display: inline;"><i class="fas fa-unlock"style="color: #1bc5bd;"></i></div>
+
+
+<label for="">    كلمة المرور:
+
+</label>
+
+<div class=" wh float-md-right d-inline-flex" >
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#dal8" style="color: #fff;
+    background-color: #1bc5bd;
+    border-color: #1bc5bd;"onclick="editschoollsave8()">
+
+    اضافة <i class="fas fa-key"></i>
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="dal8" tabindex="-1" aria-labelledby="exampleLabel6" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleLabel6">تحقق وتعديل  كلمة مرور
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <h5>ادخل كلمة مرورالحالية او جديدة:</h5>
+          <p><input type="text" name="" id="password" value="" class=" form-control"> </p>
+
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"onclick="editschoollsave8()">حفظ </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end Modal -->
+
+</div>
+<!-- end wh  Modal -->
+
+
+
+
+
+
+<small id="password" class="form-text text-muted text-bold" style="padding-right: 18px;"> <b style="color: red;  font-size: 24px;
+">*</b> ادخل كلمة مرور قبل حفظ التعديلات 
 </small>
 
 <!--end class7 -->
@@ -914,6 +921,7 @@
 
 </div>
 
+
 <!--end class7 -->
 
 
@@ -924,7 +932,14 @@
 
               <!-- end group forms -->
             </div>
+<div>
+  <br class="">
+  <br class="">
 
+  <br class="">
+
+
+</div>
 
           </div>
           <!-- end row crad bady -->
@@ -1208,7 +1223,7 @@ function editschoollsave5() {
    
 
    var rr4=  $("#password").val();
-   $("#password").val(rr4).html(rr4);
+   $("#password").val(rr4);
 
 
 }
@@ -1298,7 +1313,7 @@ function editschoollsave6() {
                 "username":  $("#username1").val(),
                 "school_name": $("#school_name1").val(),
                 "category": $("#category1").val(),
-                "password": <?php echo $id;?>,
+                "password":$("#password").val()
 
                 
               

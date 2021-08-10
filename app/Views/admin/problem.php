@@ -113,6 +113,8 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
 <!-- end card1 -->
 
 
+<div id="gg3" class="row">
+ <div class="col-lg-4">
 <div class="card">
     <div class="card-header">
         اسم المستخدم:
@@ -120,19 +122,21 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
         اخر تحديث:
     </div>
     <div class="card-body">
-      <div class=" row gg3"></div>
-      <div class="col-lg-3">
+      
+      
             التعليق:
             <label for=""> hi </label>
 
 
       </div>
-      <div class="col-lg-3"></div>
-      <div class="col-lg-3"></div>
+      </div>
+      </div>
+
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4"></div>
     
 </div>
 
-</div>
 
 
 
@@ -174,6 +178,8 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
 
         }).done(function(response) {
             //toastr.success('تم تحديث البيانات بنجاح')
+            y22(response.data);
+           
         }).fail(function(response) {
             toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
         });
@@ -218,17 +224,33 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
 
     function y22(data) {
         $("#gg3").html('');
-
-              for(let i=0;i<data.length;i++){
-                
+        
+console.log(data);
+              for(let i = 0; i < data.reply.length; i++){
                 $("#gg3").append( `
-               
-                <div class="col-lg-3">
-            التعليق:
-            <label for=""> hi </label>
+                <div class="col-lg-4">
 
+                <div class="card">
+                <div class="card-header">
+                اسم المستخدم: ${data.reply[i].username}
+                <BR>
+                 اخر تحديث: ${data.reply[i].date}
+                 </div>
+              <div class="card-body">
+     
+      
+             التعليق: ${data.reply[i].role};
+             <label for="">  ${data.reply[i].reply} </label>
+            
 
-      </div>  
+      </div>
+    
+      
+      
+    
+</div>
+</div>
+
 
 `);
                 
