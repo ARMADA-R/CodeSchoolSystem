@@ -1,6 +1,15 @@
 <?php require(APPPATH . 'Views/school/layouts/preContent.php') ?>
 
 <!-- Content Header (Page header) -->
+<div class="content-header my-2 bg-white">
+
+    <div class="row ">
+        <div class="col ">
+            إشعارات الغياب والتأخر
+        </div>
+    </div>
+</div>
+
 <?php require(APPPATH . 'Views/school/layouts/notifications-service-status.php') ?>
 
 <div class="row mt-4  mb-4" style="font-size: 1rem;">
@@ -90,8 +99,9 @@
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="date" class="col-form-label">التاريخ</label>
-                                <input required type="date" name="date" class="form-control" id="date">
+                                <label for="hijri-date-picker" class="col-form-label">التاريخ</label>
+                                <input required type="text"class="form-control" id="hijri-date-picker">
+                                <input required type="hidden" name="date" class="form-control" id="date">
                             </div>
                         </div>
                     </div>

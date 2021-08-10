@@ -16,24 +16,31 @@
 <?php require(APPPATH . 'Views/school/layouts/notifications-service-status.php') ?>
 
 
-<div class="modal fade" id="add-temblate" tabindex="-1" aria-labelledby="add-temblateLabel" aria-hidden="true">
+<div class="modal fade" id="add-public-program" tabindex="-1" aria-labelledby="add-public-programLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-temblateLabel">اضف جدول</h5>
+                <h5 class="modal-title" id="add-public-programLabel">اضف جدول</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form onsubmit="addExamTable(this); return false;">
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="program_name">اسم البرنامج</label>
-                                <select required class="form-control" name="program_name" id="program_name">
+                                <select required class="form-control" name="public_id" id="program_name">
                                     <option value="">اسم الجدول</option>
+                                    <option value="6">Final Term</option>
+                                    <option value="7">Midd Term</option>
+                                    <option value="8">برنامج الامتحان النهائي الفصل الاول</option>
+                                    <option value="9">جدول الاختبار للفترة الثانية </option>
+                                    <option value="10">تجربة جدول نهائي </option>
+                                    <option value="11">اختبار الفترة الاولي </option>
                                 </select>
+
                             </div>
                         </div>
                         <div class="col-md">
@@ -45,9 +52,7 @@
                             </div>
                         </div>
                     </div>
-
                     <hr>
-
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
@@ -57,8 +62,9 @@
                         </div>
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="date" class="col-form-label">التاريخ</label>
-                                <input type="date" class="form-control" id="date">
+                                <label for="hijri-date-picker" class="col-form-label">التاريخ</label>
+                                <input required type="text" class="form-control  dependencies" id="hijri-date-picker" placeholder="التاريخ">
+                                <input required type="hidden" name="date" class="form-control dependencies" id="date">
                             </div>
                         </div>
                     </div>
@@ -85,41 +91,40 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                <button type="button" class="btn btn-primary">حفظ</button>
+                <button type="button" id="add-public-program-submit" class="btn btn-primary">حفظ</button>
             </div>
         </div>
     </div>
 </div>
-
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header p-2 d-flex align-items-center bg-white">
                 <div class="m-left-auto">
-                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#add-temblate">اضف جدول</button>
+                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#add-public-program-">اضف جدول</button>
                 </div>
             </div>
-            <div class="card-body p-2" style="overflow: scroll;">
+            <div class="card-body p-2" style="overflow-x: scroll;">
                 <table id="messages_forms" class="table table-striped " style="width:100%">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>م</th>
+                            <th>الصف</th>
+                            <th>الفصل</th>
+                            <th>الجدول</th>
+                            <th>التاريخ</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody></tbody>
 
-                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
 <?php include_once(APPPATH . 'Views/school/layouts/postContent.php') ?>
+
+
 
 
 
@@ -132,19 +137,70 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
-
 <script>
-    // `
-    // <"row"<"col"B>>
-    // <"row"<"col-md-6"<"row"<"col"f>><"row"<"col"B>>><"col-md-6"<"row"<"col"l>>>>
-    // `
+    var dataTable = null;
+    var class_id = null;
+    var public_id = null;
+    var section_id = null;
     $(document).ready(function() {
-        var table = $('#messages_forms').DataTable({
+        dataTable = $('#messages_forms').DataTable({
             dom: `<"row d-flex"<"col-md-6 d-flex"fl><"col-md-6  d-flex align-items-center "<"m-right-auto"B>>>rtip`,
-            fixedHeader: true,
             "lengthMenu": [
-                [25, 50, 100, 500],
-                [25, 50, 100, 500]
+                [5, 10, 20, 50],
+                [5, 10, 20, 50]
+            ],
+            order: [
+                [1, 'asc']
+            ],
+
+            responsive: true,
+            autoWidth: false,
+            // rowId: 'id',
+            columnDefs: [{
+                responsivePriority: 20000,
+                targets: 2
+            }, ],
+            "processing": true,
+
+            columns: [{
+                    data: null,
+                    name: 'id',
+                    title: 'م',
+                    className: 'text-center t-id',
+                    // orderable: false,
+                    searchable: false,
+                    exportable: false,
+                    render: function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    data: 'class_name',
+                    name: 'class_name',
+                    className: 'text-center t-class_name',
+                    title: 'الصف'
+                },
+                {
+                    data: 'semester',
+                    name: 'semester',
+                    className: 'text-center t-semester',
+                    title: 'الفصل'
+                },
+                {
+                    data: 'program',
+                    name: 'program',
+                    className: 'text-center t-program',
+                    title: 'الجدول'
+                },
+                {
+                    data: 'date',
+                    name: 'date',
+                    className: 'text-center t-date',
+                    title: 'التاريخ',
+                    render: function(data, type, row, meta) {
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
+                    }
+                },
             ],
             buttons: [{
                     extend: 'collection',
@@ -152,13 +208,8 @@
                     className: 'btn btn-sm',
                     buttons: [{
                         extend: 'excel',
-
-                    }, {
-                        extend: 'pdf',
-
                     }, {
                         extend: 'csv',
-
                     }]
                 },
                 'colvis'
@@ -356,6 +407,135 @@
                 }
             }
         });
-
     });
+
+    $(document).ready(function() {
+        getPublicTable();
+        // getSemesters();
+        // getClasses();
+    });
+
+    function getPublicTable() {
+        var jqxhr = $.ajax({
+                url: "https://sa.arsail.net/schools/Schools/GetSchoolTable",
+                method: "GET",
+                timeout: 0,
+                data: {
+                    school_id: school_id,
+                    page: "1",
+                    limit: "10000",
+                    
+                },
+                headers: {
+                    "Authorization": token
+                },
+            })
+            .done(function(response) {
+                dataTable.clear().rows.add(response.data).draw()
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+            });
+    }
+
+    function addExamTable(element) {
+        // formData = $(element).serializeArray().reduce(function(obj, item) {
+        //     obj[item.name] = item.value;
+        //     return obj;
+        // }, {});
+        // $('#add-public-program-submit').attr("disabled", true);
+        // $('#add-spinner').show();
+
+        // var jqxhr = $.ajax({
+        //         url: "https://sa.arsail.net/schools/Templates/AddTemplate",
+        //         method: "POST",
+        //         timeout: 0,
+        //         data: {
+        //             "name": formData.name,
+        //             "content": formData.content,
+        //             "letters_number": formData.letters_number,
+        //             "message_number": formData.message_number,
+        //             "id": formData.id,
+        //             "school_id": school_id,
+        //             "sender_type": formData.sender_type,
+        //         },
+        //         headers: {
+        //             "Authorization": token,
+        //             "Content-Type": "application/x-www-form-urlencoded",
+        //         },
+        //     })
+        //     .done(function(response) {
+        //         refreshTemplatesTable();
+        //         toastr.success('تم اضافة البيانات بنجاح')
+        //     })
+        //     .fail(function(response) {
+        //         console.log(response);
+        //         toastr.error('حدث خطأ ما اثناء اضافة البيانات!', 'خطأ');
+
+        //     }).always(function() {
+        //         $('#add-public-program-submit').removeAttr('disabled');
+        //         $('#add-spinner').hide();
+        //     });
+
+        // return false;
+    }
+    // function getClasses() {
+    //     var jqxhr = $.ajax({
+    //             url: "https://sa.arsail.net/schools/Schools/GetClasses",
+    //             method: "GET",
+    //             timeout: 0,
+    //             headers: {
+    //                 "Authorization": token
+    //             },
+    //         })
+    //         .done(function(response) {
+    //             setClassesOptions(response.data);
+    //         })
+    //         .fail(function(response) {
+    //             console.log(response);
+    //             toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+    //         });
+
+    // }
+
+    // function getSemesters() {
+    //     var jqxhr = $.ajax({
+    //             url: "https://sa.arsail.net/schools/Schools/GetSemester",
+    //             method: "GET",
+    //             timeout: 0,
+    //             headers: {
+    //                 "Authorization": token
+    //             },
+    //         })
+    //         .done(function(response) {
+    //             setSemestersOptions(response.data);
+    //         })
+    //         .fail(function(response) {
+    //             console.log(response);
+    //             toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+    //         });
+
+    // }
+    // // set classes options in classes select box
+    // function setClassesOptions(data) {
+    //     var classSelect = $('#classes-selector');
+    //     $.each(data, function(index, val) {
+    //         classSelect.append($('<option>', {
+    //             value: val.id,
+    //             text: val.name + ' ' + val.code,
+    //         }));
+    //     });
+    // }
+
+    // // set semester options in semesters select box
+    // function setSemestersOptions(data) {
+    //     var semesterSelect = $('#semesters-selector');
+    //     $.each(data, function(index, val) {
+    //         semesterSelect.append($('<option>', {
+    //             value: val.id,
+    //             text: val.name,
+    //         }));
+    //     });
+    // }
 </script>

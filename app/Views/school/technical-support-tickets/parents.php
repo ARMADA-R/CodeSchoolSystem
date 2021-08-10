@@ -37,7 +37,9 @@
     </div>
     <div class="col-4">
         <div class="form-group">
-            <input type="date" id="date" class="form-control dependencies" placeholder="التاريخ">
+            <input required type="text" class="form-control  dependencies" id="hijri-date-picker" placeholder="التاريخ">
+            <input required type="hidden" name="date" class="form-control dependencies" id="date">
+        
         </div>
     </div>
     <div class="col-4">
@@ -114,7 +116,7 @@
 </div>
 
 <div class="row" id="tickets-container">
-    <div class="col-lg-4">
+    <!-- <div class="col-lg-4">
         <div class="card">
             <div class="card-body">
                 <p class="card-text" style="font-size: 0.9rem;">الاسم الكامل:</p>
@@ -124,7 +126,7 @@
                 <a href="<?php echo base_url() . '/public/'; ?>school/support/technical/ticket/3" class="btn btn-outline-primary" style="width: -webkit-fill-available;">استعراض التذاكر</a>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 
@@ -139,6 +141,9 @@
     $(document).ready(function() {
         getTickets();
         $('.dependencies').change(function() {
+            getTickets();
+        });
+        $('.dependencies').on('dp.change', function() {
             getTickets();
         });
     });

@@ -29,7 +29,9 @@
     </div>
     <div class="col-4">
         <div class="form-group">
-            <input type="date" id="date" class="form-control dependencies" placeholder="التاريخ">
+            <input required type="text" class="form-control  dependencies" id="hijri-date-picker" placeholder="التاريخ">
+            <input required type="hidden" name="date" class="form-control dependencies" id="date">
+
         </div>
     </div>
     <div class="col-4">
@@ -126,11 +128,12 @@
 
 
 <script>
-    
-
     $(document).ready(function() {
         getTickets();
         $('.dependencies').change(function() {
+            getTickets();
+        });
+        $('.dependencies').on('dp.change', function() {
             getTickets();
         });
     });
@@ -183,6 +186,4 @@
 
         }
     }
-
-
 </script>

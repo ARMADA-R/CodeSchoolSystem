@@ -24,7 +24,7 @@
 <!-- Bootstrap 4 rtl -->
 <!-- <script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"></script> -->
 <!-- overlayScrollbars -->
-<!-- <script src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script> -->
+<script src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
 <!-- Bootstrap -->
 <script src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -35,12 +35,13 @@
 <!-- AdminLTE -->
 <script src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/moment/moment.min.js"></script>
 
-<!-- Bootstrap 4 rtl -->
-<!-- <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous"> -->
-
-
 <!-- tostar -->
 <script src="<?php echo base_url() . '/public/'; ?>design/js/toastr.js"></script>
+
+<!-- Hijri Date -->
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/moment-with-locales.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/moment-hijri.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/bootstrap-hijri-datetimepicker.js"></script>
 
 <script>
   $("img.lazyload").lazyload();
@@ -68,6 +69,37 @@
     "hideMethod": "fadeOut",
     "toastClass": 'toastr'
   };
+
+  //Hijri date bicker configration
+  $("#hijri-date-picker").hijriDatePicker({
+    locale: "ar-sa",
+    format: "DD-MM-YYYY",
+    hijriFormat: "iYYYY-iMM-iDD",
+    dayViewHeaderFormat: "MMMM YYYY",
+    hijriDayViewHeaderFormat: "iMMMM iYYYY",
+    showSwitcher: true,
+    allowInputToggle: true,
+    useCurrent: false,
+    isRTL: true,
+    keepOpen: false,
+    hijri: true,
+    debug: false,
+    showClear: true,
+    showTodayButton: false,
+    showClose: true,
+  });
+
+  $("#hijri-date-picker").on('dp.change', function(arg) {
+
+    if (!arg.date) {
+      $("#date").val('');
+      return;
+    };
+    let date = arg.date;
+    $("input#date").val(date.format("YYYY-MM-DD"));
+  });
+
+
 
   function getShortenLink() {
     $("#get-shorrten-btn").attr('disabled', 'true');
@@ -99,38 +131,38 @@
 
   function uploadImage() {
 
-      var form = new FormData();
-      form.append("school_id", school_id);
-      form.append("file", $("#image-to-upload")[0].files[0]);
+    var form = new FormData();
+    form.append("school_id", school_id);
+    form.append("file", $("#image-to-upload")[0].files[0]);
 
-      $("#image-to-upload-btn").attr('disabled', 'true');
-      $("#image-to-upload-btn").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    $("#image-to-upload-btn").attr('disabled', 'true');
+    $("#image-to-upload-btn").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                     <span class="sr-only">جارٍ المعالجة...</span>`);
-      $.ajax({
-        "url": "https://sa.arsail.net/schools/Servies/UploadImage",
-        "method": "POST",
-        "timeout": 0,
-        "headers": {
-          "Authorization": token
-        },
-        "processData": false,
-        "mimeType": "multipart/form-data",
-        "contentType": false,
-        "data": form
-      }).done(function(response) {
+    $.ajax({
+      "url": "https://sa.arsail.net/schools/Servies/UploadImage",
+      "method": "POST",
+      "timeout": 0,
+      "headers": {
+        "Authorization": token
+      },
+      "processData": false,
+      "mimeType": "multipart/form-data",
+      "contentType": false,
+      "data": form
+    }).done(function(response) {
 
-        $("#image-to-upload-btn").html('معالجة');
-        $("#image-to-upload-btn").removeAttr('disabled');
-        $("#uploaded-image-link").val(JSON.parse(response).data.image_url);
-        
-      }).fail(function(response) {
+      $("#image-to-upload-btn").html('معالجة');
+      $("#image-to-upload-btn").removeAttr('disabled');
+      $("#uploaded-image-link").val(JSON.parse(response).data.image_url);
 
-        console.log(response);
-        toastr.error("حدث خطأ مااثناء تحميل الملف!", 'خطأ');
-        $("#image-to-upload-btn").html('معالجة');
-        $("#image-to-upload-btn").removeAttr('disabled');
-      });
-    }
+    }).fail(function(response) {
+
+      console.log(response);
+      toastr.error("حدث خطأ مااثناء تحميل الملف!", 'خطأ');
+      $("#image-to-upload-btn").html('معالجة');
+      $("#image-to-upload-btn").removeAttr('disabled');
+    });
+  }
 </script>
 </body>
 
