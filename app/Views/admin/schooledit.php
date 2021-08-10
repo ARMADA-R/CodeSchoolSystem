@@ -380,6 +380,68 @@
 </small>
 
 <!--end class6 -->
+
+<!-- class7 -->
+
+
+<div style="display: inline;"><i class="far fa-envelope" style="color: #1bc5bd;"></i></div>
+
+
+<label for="">    كلمة المرور:
+
+</label>
+
+<div class=" wh float-md-right d-inline-flex" >
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-success  " data-toggle="modal" data-target="#dal8" style="color: #fff;
+    background-color: #1bc5bd;
+    border-color: #1bc5bd;"onclick="editschoollsave8()">
+
+    تعديل<i class="far fa-edit"></i>
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="dal8" tabindex="-1" aria-labelledby="exampleLabel6" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleLabel6">تعديل البيانات
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <h5>القيمة الجديدة:</h5>
+          <p><input type="text" name="" id="password" value="" class=" form-control"> </p>
+
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"onclick="editschoollsave8()">حفظ التعديل</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end Modal -->
+
+</div>
+<!-- end wh  Modal -->
+
+
+
+
+
+
+<small id="password" class="form-text text-muted text-bold" style="padding-right: 18px;">
+</small>
+
+<!--end class7 -->
+
+
+
+
+
 <hr class="p-1">
         <div class="d-flex justify-content-center">
             <a class="btn btn-success " style="color: #fff;
@@ -1139,7 +1201,19 @@ function editschoollsave5() {
    $("#email").val(rr4).html(rr4);
 
 
+
+
+  }
+  function editschoollsave8() {
+   
+
+   var rr4=  $("#password").val();
+   $("#password").val(rr4).html(rr4);
+
+
 }
+
+
 function editschoollsave6() {
    
    
