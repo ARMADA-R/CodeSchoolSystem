@@ -33,14 +33,14 @@
                                 <label for="program_name">اسم البرنامج</label>
                                 <select required class="form-control" name="exam_id" id="program_name">
                                     <option value="">اسم الجدول</option>
-                                    <option  value="6">Final Term</option>
-                                    <option  value="7">Midd Term</option>
-                                    <option  value="8">برنامج الامتحان النهائي الفصل الاول</option>
-                                    <option  value="9">جدول الاختبار للفترة الثانية </option>
-                                    <option  value="10">تجربة جدول نهائي </option>
-                                    <option  value="11">اختبار الفترة الاولي </option>
+                                    <option value="6">Final Term</option>
+                                    <option value="7">Midd Term</option>
+                                    <option value="8">برنامج الامتحان النهائي الفصل الاول</option>
+                                    <option value="9">جدول الاختبار للفترة الثانية </option>
+                                    <option value="10">تجربة جدول نهائي </option>
+                                    <option value="11">اختبار الفترة الاولي </option>
                                 </select>
-                                
+
                             </div>
                         </div>
                         <div class="col-md">
@@ -62,8 +62,9 @@
                         </div>
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="date" class="col-form-label">التاريخ</label>
-                                <input type="date" class="form-control" id="date">
+                                <label for="hijri-date-picker" class="col-form-label">التاريخ</label>
+                                <input required type="text" class="form-control  dependencies" id="hijri-date-picker" placeholder="التاريخ">
+                                <input required type="hidden" name="date" class="form-control dependencies" id="date">
                             </div>
                         </div>
                     </div>
@@ -138,7 +139,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
-    
     var dataTable = null;
     var class_id = null;
     var exam_id = null;
@@ -205,7 +205,7 @@
                     className: 'text-center t-date',
                     title: 'التاريخ',
                     render: function(data, type, row, meta) {
-                        return moment(data).format("DD-MM-YYYY");
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
                     }
                 },
             ],

@@ -142,7 +142,11 @@
                     data: 'date',
                     name: 'date',
                     className: 'text-center t-date align-middle',
-                    title: 'تاريخ الرصد'
+                    title: 'تاريخ الرصد',
+                    render: function(data, type, row, meta) {
+
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
+                    }
                 },
                 {
                     data: 'message',
