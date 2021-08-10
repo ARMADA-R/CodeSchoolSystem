@@ -204,7 +204,7 @@
                                                         <div class="card-text d-flex pb-3 justify-content-between " style="font-size: 0.9rem;">
                                                           <div>  الهاتف: </div><div> ${data[i].phone} </div>
                                                         </div>
-                                                        <a href="<?php echo base_url() . '/public/'; ?>parent/partner/support/technical/ticket/${data[i].partner_id}" class="btn btn-outline-primary" style="width: -webkit-fill-available;">استعراض التذاكر</a>
+                                                        <a href="<?= site_url() ?>parent/partner/support/technical/ticket/${data[i].partner_id}" class="btn btn-outline-primary" style="width: -webkit-fill-available;">استعراض التذاكر</a>
                                                     </div>
                                                 </div>
                                             </div>`);

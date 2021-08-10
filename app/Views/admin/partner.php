@@ -128,7 +128,7 @@ $.ajax({
         "method": "GET",
         "timeout": 0,
         "headers": {
-            "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAyIiwiZXhwIjoiMjAyMi0wOC0wMiIsImRhdGEiOiIxNyJ9.xH9VpqElqG-dIbZPO3zEfC68qmQ1xoBWGpQTuh5WrBU"
+            "Authorization": token
         },
         data: {
         
@@ -241,7 +241,7 @@ function viewtpr(id) {
                     status: $('#status').val(),
                 },
                 headers: {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE"
+                    "Authorization": token
                 },
             })
             .done(function(response) {

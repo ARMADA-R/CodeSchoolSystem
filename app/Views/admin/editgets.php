@@ -131,7 +131,7 @@
             url: "https://sa.arsail.net/schools/Gates_Api/GetGateByID",
             method: "GET",
             "headers": {
-                "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE"
+                "Authorization": token
             },
             data: {
                 id: <?php echo $id; ?>
@@ -165,7 +165,7 @@
             url: "https://sa.arsail.net/schools/Gates_Api/EditGate",
             method: "POST",
             "headers": {
-                "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE"
+                "Authorization": token
             },
             data: {
                 id: <?php echo $id; ?>,

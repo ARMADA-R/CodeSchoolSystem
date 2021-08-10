@@ -95,7 +95,7 @@
             method: "POST",
             // timeout: 0,
             headers: {
-                'authorization': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAyIiwiZXhwIjoiMjAyMi0wOC0wMiIsImRhdGEiOiIxNyJ9.xH9VpqElqG-dIbZPO3zEfC68qmQ1xoBWGpQTuh5WrBU",
+                'authorization': token,
                 'content-type': 'multipart/form-data; boundary=----WebKitFormBoundary4mNmbXjLH5bIyIUi'
             },
             data: {

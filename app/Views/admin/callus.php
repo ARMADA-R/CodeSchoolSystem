@@ -101,8 +101,7 @@
 
 <?php require(APPPATH . 'Views/admin/layouts/postContent.php'); ?>
 
-<script src="<?php echo base_url() . '/public/'; ?>design/pdfMake/pdfmake.min.js"></script>
-<script src="<?php echo base_url() . '/public/'; ?>design/pdfMake/vfs_fonts.js"></script>
+
 <script src="<?php echo base_url() . '/public/'; ?>Excel/jquery.table2excel.js"></script>
 
 <script src="<?php echo base_url() . '/public/'; ?>design/js/datatable.all.js"></script>
@@ -112,7 +111,6 @@
 
 
 <script>
-    var school_id = 24;
     var dataTable = null;
 
     $(document).ready(function() {
@@ -398,12 +396,11 @@
                 method: "GET",
                 timeout: 0,
                 data: {
-                    school_id: school_id,
                     page: "1",
                     limit: "10000"
                 },
                 headers: {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAyIiwiZXhwIjoiMjAyMi0wOC0wMiIsImRhdGEiOiIxNyJ9.xH9VpqElqG-dIbZPO3zEfC68qmQ1xoBWGpQTuh5WrBU"
+                    "Authorization": token
                 },
             })
             .done(function(response) {

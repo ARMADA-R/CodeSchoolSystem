@@ -161,7 +161,7 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
             url: "https://sa.arsail.net/schools/Tickets/GetTicketsReply",
             method: "GET",
             headers: {
-                'authorization': "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAyIiwiZXhwIjoiMjAyMi0wOC0wMiIsImRhdGEiOiIxNyJ9.xH9VpqElqG-dIbZPO3zEfC68qmQ1xoBWGpQTuh5WrBU",
+                'authorization': token,
          
 
             },
@@ -184,7 +184,6 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
 
 
     function ReplyTicket() {
-         var user_id= 17  
           
 
         $.ajax({
@@ -192,7 +191,7 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA3IiwiZXhwIjoiMjAyMi0wOC0wNyIsImRhdGEiOiIxNyJ9.lKx3L3SagRE_JCexKb2zh2q0QvHdx5c1_fMkyDMfkwE"
+                    "Authorization": token
                 },
                 data: {
                    

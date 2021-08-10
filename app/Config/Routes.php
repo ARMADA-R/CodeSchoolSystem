@@ -29,7 +29,11 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  */
 
-// Yousef Route
+
+
+// Admin Routes
+$routes->group('', ['filter' => 'authenticateUsers:1'], function ($routes) {
+
 $routes->get('/admin', 'AdminView::home');
 $routes->get('/admin/info', 'AdminView::info');
 $routes->get('/admin/slider', 'AdminView::slider');
@@ -50,7 +54,7 @@ $routes->get('/admin/viewticketparther/(:num)', 'AdminView::viewticketparther/$1
 $routes->get('/admin/viewticketparent/(:num)', 'AdminView::viewticketparent/$1');
 $routes->get('/admin/editgets/(:num)', 'AdminView::editgets/$1');
 $routes->get('/admin/addgets', 'AdminView::addgets');
-
+});
 
 
 

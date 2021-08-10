@@ -127,7 +127,7 @@
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTAyIiwiZXhwIjoiMjAyMi0wOC0wMiIsImRhdGEiOiIxNyJ9.xH9VpqElqG-dIbZPO3zEfC68qmQ1xoBWGpQTuh5WrBU"
+                    "Authorization": token
                 },
                 data: {
                    
@@ -248,7 +248,7 @@ alert("لاتوجد تذاكر متاحة");
                     status: $('#status').val()
                 },
                 headers: {
-                    "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUaGVfc2Nob29sIiwiYXVkIjoiVGhlX3Jld3IiLCJpYXQiOiIyMDIxLTA4LTA1IiwiZXhwIjoiMjAyMi0wOC0wNSIsImRhdGEiOiIxNyJ9.q_84FctB4e2pP_u86yOe6LZUw11Cl2PehycED_x3G-I"
+                    "Authorization": token
                 },
             })
             .done(function(response) {
