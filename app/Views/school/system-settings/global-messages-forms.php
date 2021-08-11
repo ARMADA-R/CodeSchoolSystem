@@ -487,7 +487,7 @@
                 method: "GET",
                 timeout: 0,
                 data: {
-                    school_id: "24",
+                    school_id: school_id,
                     page: "1",
                     limit: "10000"
                 },

@@ -143,14 +143,11 @@
         });
 
         $("#hijri-date-picker").on('dp.change', function (arg) {
-           
             if (!arg.date) {
                 $("#date").val('');
                 return;
             };
-
             let date = arg.date;
-
             $("#date").val(date.format("YYYY/M/D"));
         });
 
