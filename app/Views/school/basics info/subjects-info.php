@@ -31,13 +31,13 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="student_number">رقم الطالب</label>
-                                <input type="number" class="form-control" name="student_number" id="student_number">
+                                <input required  type="number" class="form-control" name="student_number" id="student_number">
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="student_name">اسم الطالب</label>
-                                <input type="text" class="form-control" name="student_name" id="student_name">
+                                <input required  type="text" class="form-control" name="student_name" id="student_name">
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="phone">رقم الجوال</label>
-                                <input type="number" class="form-control" name="phone" id="phone">
+                                <input required  type="number" class="form-control" name="phone" id="phone">
                             </div>
                         </div>
                     </div>
@@ -55,13 +55,13 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="level">المستوى</label>
-                                <input type="text" class="form-control" name="level" id="level">
+                                <input required  type="text" class="form-control" name="level" id="level">
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="division">الشعبة</label>
-                                <input type="text" class="form-control" name="division" id="division">
+                                <input required  type="text" class="form-control" name="division" id="division">
                             </div>
                         </div>
                     </div>
@@ -103,13 +103,13 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="course_number">رقم الطالب</label>
-                                <input type="number" class="form-control" name="student_number" id="student_number-edit">
+                                <input required  type="number" class="form-control" name="student_number" id="student_number-edit">
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="student_name">اسم الطالب</label>
-                                <input type="text" class="form-control" name="student_name" id="student_name-edit">
+                                <input required  type="text" class="form-control" name="student_name" id="student_name-edit">
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="phone">رقم الجوال</label>
-                                <input type="number" class="form-control" name="phone" id="phone-edit">
+                                <input required  type="number" class="form-control" name="phone" id="phone-edit">
                             </div>
                         </div>
                     </div>
@@ -127,13 +127,13 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="level">المستوى</label>
-                                <input type="text" class="form-control" name="level" id="level-edit">
+                                <input required  type="text" class="form-control" name="level" id="level-edit">
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="division">الشعبة</label>
-                                <input type="text" class="form-control" name="division" id="division-edit">
+                                <input required  type="text" class="form-control" name="division" id="division-edit">
                             </div>
                         </div>
                     </div>

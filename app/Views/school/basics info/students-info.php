@@ -31,13 +31,13 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="stud_num">رقم الطالب</label>
-                                <input type="number" class="form-control" name="student_number" id="stud_num">
+                                <input  required type="number" class="form-control" name="student_number" id="stud_num">
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="full-name">الاسم الكامل</label>
-                                <input type="text" class="form-control" name="full_name" id="full-name">
+                                <input  required type="text" class="form-control" name="full_name" id="full-name">
                             </div>
                         </div>
                     </div>
@@ -46,13 +46,13 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="parent_email">بريد ولي الامر</label>
-                                <input type="email" class="form-control" name="parent_email" id="parent_email">
+                                <input  required type="email" class="form-control" name="parent_email" id="parent_email">
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="phone">رقم الجوال</label>
-                                <input type="number" class="form-control" name="phone" id="phone">
+                                <input  required type="number" class="form-control" name="phone" id="phone">
                             </div>
                         </div>
                     </div>
