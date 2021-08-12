@@ -153,6 +153,11 @@ $routes->group('', ['filter' => 'authenticateUsers:4'], function ($routes) {
 	$routes->get('partner/partner/support/technical/ticket/(:num)', 'PartnerView::viewPartnerTicket/$1');
 });
 
+
+
+$routes->get('excelForm', 'ExcelReader::viewExcel');
+$routes->post('excel', 'ExcelReader::index');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

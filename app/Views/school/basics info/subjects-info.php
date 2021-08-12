@@ -31,13 +31,13 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="student_number">رقم الطالب</label>
-                                <input required  type="number" class="form-control" name="student_number" id="student_number">
+                                <input required type="number" class="form-control" name="student_number" id="student_number">
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="student_name">اسم الطالب</label>
-                                <input required  type="text" class="form-control" name="student_name" id="student_name">
+                                <input required type="text" class="form-control" name="student_name" id="student_name">
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="phone">رقم الجوال</label>
-                                <input required  type="number" class="form-control" name="phone" id="phone">
+                                <input required type="number" class="form-control" name="phone" id="phone">
                             </div>
                         </div>
                     </div>
@@ -55,13 +55,13 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="level">المستوى</label>
-                                <input required  type="text" class="form-control" name="level" id="level">
+                                <input required type="text" class="form-control" name="level" id="level">
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="division">الشعبة</label>
-                                <input required  type="text" class="form-control" name="division" id="division">
+                                <input required type="text" class="form-control" name="division" id="division">
                             </div>
                         </div>
                     </div>
@@ -77,6 +77,46 @@
                         <div>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
                             <button type="submit" id="add-student-submit" class="btn btn-primary">حفظ</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="add-student-from-file" tabindex="-1" aria-labelledby="add-student-from-fileLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add-student-from-fileLabel">اضافة طلاب من ملف</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form onsubmit="addFromFile(); return false;">
+                <div class="modal-body p-4">
+                    <div class="row">
+
+                        <div class="col-md">
+                            <div class="form-group">
+                                <input required type="file" class="form-control" name="excel" id="excel-file" accept=".xlsx">
+                                <small class="form-text text-danger">لسلامة البيانات المدخلة يرجى التأكد من ان الملف يتبع الشكل المحدد ولا يتعارض مع طريقة الادخال المحددة</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div>
+                            <div id="add-from-file-spinner" style="display: none" class="spinner-border text-secondary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                            <button type="button" onclick="addFromFile()" id="add-from-file-submit" class="btn btn-primary">حفظ</button>
                         </div>
                     </div>
                 </div>
@@ -103,13 +143,13 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="course_number">رقم الطالب</label>
-                                <input required  type="number" class="form-control" name="student_number" id="student_number-edit">
+                                <input required type="number" class="form-control" name="student_number" id="student_number-edit">
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="student_name">اسم الطالب</label>
-                                <input required  type="text" class="form-control" name="student_name" id="student_name-edit">
+                                <input required type="text" class="form-control" name="student_name" id="student_name-edit">
                             </div>
                         </div>
                     </div>
@@ -119,7 +159,7 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="phone">رقم الجوال</label>
-                                <input required  type="number" class="form-control" name="phone" id="phone-edit">
+                                <input required type="number" class="form-control" name="phone" id="phone-edit">
                             </div>
                         </div>
                     </div>
@@ -127,13 +167,13 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="level">المستوى</label>
-                                <input required  type="text" class="form-control" name="level" id="level-edit">
+                                <input required type="text" class="form-control" name="level" id="level-edit">
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="division">الشعبة</label>
-                                <input required  type="text" class="form-control" name="division" id="division-edit">
+                                <input required type="text" class="form-control" name="division" id="division-edit">
                             </div>
                         </div>
                     </div>
@@ -163,9 +203,12 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header p-2 d-flex align-items-center bg-white">
-                <div class="m-left-auto">
+            <div class="card-header p-2 d-flex align-items-center justify-content-end bg-white">
+                <div class="mx-1">
                     <button type="button" class="btn btn-light" data-toggle="modal" data-target="#add-student">اضف طالب</button>
+                </div>
+                <div class="mx-1">
+                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#add-student-from-file">تحميل ملف</button>
                 </div>
             </div>
             <div class="card-body p-2" style="overflow-x: scroll;">
@@ -198,7 +241,6 @@
 
 
 <script>
-    
     var dataTable = null;
 
     $(document).ready(function() {
@@ -632,6 +674,43 @@
             }).always(function() {
                 $('#add-employee-submit').removeAttr('disabled');
                 $('#add-spinner').hide();
+            });
+
+        return false;
+    }
+
+    function addFromFile() {
+
+        var form = new FormData();
+        form.append("excel", $("#excel-file")[0].files[0]);
+        form.append("school_id", school_id);
+        form.append("user_id", user_id);
+
+        $('#add-from-file-submit').attr("disabled", true);
+        $('#add-from-file-spinner').show();
+
+        var jqxhr = $.ajax({
+                url: "<?= site_url('CoursesExtends/AddCoursesFromFile') ?>", //"https://sa.arsail.net/schools/Courses/AddCourse",
+                method: "POST",
+                timeout: 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "headers": {
+                    "Authorization": token,
+                },
+                data: form
+            })
+            .done(function(response) {
+                refreshContentTable();
+                toastr.success(JSON.parse(response).msg)
+            })
+            .fail(function(response) {
+                console.log([response, response.responseText]);
+                toastr.error(JSON.parse(response.responseText).msg, 'خطأ');
+            }).always(function() {
+                $('#add-from-file-submit').removeAttr('disabled');
+                $('#add-from-file-spinner').hide();
             });
 
         return false;
