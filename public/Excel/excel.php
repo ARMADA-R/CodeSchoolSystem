@@ -22,7 +22,7 @@
 
     <div class="form-group">
         <div class="custom-file">
-            <input type="file" class="custom-file-input" name="xlfile" id="xlf" accept=".xlsx, .xls" required>
+            <input type="file" class="custom-file-input" name="xlfile" id="xlf" accept=".xlsx" required>
             <label class="custom-file-label" for="xlf">upload-file</label>
         </div>
         <hr>

@@ -148,14 +148,15 @@ $routes->group('', ['filter' => 'authenticateUsers:4'], function ($routes) {
 	$routes->get('partner/school/forms', 'PartnerView::forms');
 	$routes->get('partner/school/notification', 'PartnerView::schoolNotifications');
 
-
 	$routes->get('partner/partners/support', 'PartnerView::partnersSupport');
 	$routes->get('partner/partner/support/technical/ticket/(:num)', 'PartnerView::viewPartnerTicket/$1');
 });
 
 
 
-$routes->get('excelForm', 'ExcelReader::viewExcel');
+$routes->get('excelForm', function (){
+	return view('excel');
+});
 $routes->post('excel', 'ExcelReader::index');
 
 /**
