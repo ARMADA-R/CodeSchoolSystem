@@ -162,7 +162,7 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
 <script>
   $(document).ready(function() {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Tickets/GetTicketsReply",
+            url: "<?= site_url('') ?>Tickets/GetTicketsReply",
             method: "GET",
             headers: {
                 'authorization': token,
@@ -193,7 +193,7 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
           
 
         $.ajax({
-                "url": "https://sa.arsail.net/schools/Tickets/ReplyTicket",
+                "url": "<?= site_url('') ?>Tickets/ReplyTicket",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {

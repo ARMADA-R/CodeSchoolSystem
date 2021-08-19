@@ -326,7 +326,7 @@
 
     function refreshTable() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Schools/GetParentSchoolTable",
+                url: "<?= site_url('') ?>Schools/GetParentSchoolTable",
                 method: "GET",
                 timeout: 0,
                 data: {

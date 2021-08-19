@@ -74,7 +74,7 @@
 
     $(document).ready(function() {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Info/GetInfo",
+            url: "<?= site_url('') ?>Info/GetInfo",
             method: "GET"
           
 
@@ -95,7 +95,7 @@
       form2.append("file", $("#file")[0].files[0]);
 
         $.ajax({
-            url: "https://sa.arsail.net/schools/Info/EditInfo",
+            url: "<?= site_url('') ?>Info/EditInfo",
             method: "POST",
             timeout: 0,
             headers: {

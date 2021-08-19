@@ -443,7 +443,7 @@
             }, {});
 
             var jqxhr = $.ajax({
-                    url: "https://sa.arsail.net/schools/Auth/Register",
+                    url: "<?= site_url('') ?>Auth/Register",
                     method: "POST",
                     timeout: 0,
                     data: formData,

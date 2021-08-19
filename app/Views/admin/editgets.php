@@ -128,7 +128,7 @@
 <script>
     $(document).ready(function() {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Gates_Api/GetGateByID",
+            url: "<?= site_url('') ?>Gates_Api/GetGateByID",
             method: "GET",
             "headers": {
                 "Authorization": token
@@ -162,7 +162,7 @@
       
    {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Gates_Api/EditGate",
+            url: "<?= site_url('') ?>Gates_Api/EditGate",
             method: "POST",
             "headers": {
                 "Authorization": token

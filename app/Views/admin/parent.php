@@ -123,7 +123,7 @@
     });
     function getTicketsParents() {
         $.ajax({
-                "url": "https://sa.arsail.net/schools/Tickets/GetSchoolsParentsTickets",
+                "url": "<?= site_url('') ?>Tickets/GetSchoolsParentsTickets",
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
@@ -237,7 +237,7 @@ alert("لاتوجد تذاكر متاحة");
     
  function viewt() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Tickets/GetSchoolsParentsTicketsBySchoolId",
+                url: "<?= site_url('') ?>Tickets/GetSchoolsParentsTicketsBySchoolId",
                 method: "GET",
                 timeout: 0,
                 data: {

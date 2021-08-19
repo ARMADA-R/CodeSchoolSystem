@@ -355,7 +355,7 @@
 
     function getFormsData() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Servies/GetForms",
+                url: "<?= site_url('') ?>Servies/GetForms",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -378,7 +378,7 @@
 
     function updateFormStatus(id, status) {
         var jqxhr = $.ajax({
-                "url": "https://sa.arsail.net/schools/Servies/UpdateFormStatus",
+                "url": "<?= site_url('') ?>Servies/UpdateFormStatus",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
@@ -403,7 +403,7 @@
     function addForm() {
 
         var jqxhr = $.ajax({
-                "url": "https://sa.arsail.net/schools/Servies/AddForms",
+                "url": "<?= site_url('') ?>Servies/AddForms",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {

@@ -392,7 +392,7 @@
 
     function callesTable() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Contact_us/Contact_us",
+                url: "<?= site_url('') ?>Contact_us/Contact_us",
                 method: "GET",
                 timeout: 0,
                 data: {

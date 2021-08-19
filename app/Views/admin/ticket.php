@@ -124,7 +124,7 @@
 
         function getTickets() {
             $.ajax({
-                    "url": "https://sa.arsail.net/schools/Tickets/GetAdminSchoolsTickets",
+                    "url": "<?= site_url('') ?>Tickets/GetAdminSchoolsTickets",
                     "method": "GET",
                     "timeout": 0,
                     "headers": {
@@ -234,7 +234,7 @@ alert("لاتوجد تذاكر متاحة");
 
                 function viewt(id) {
                     var jqxhr = $.ajax({
-                            url: "https://sa.arsail.net/schools/Tickets/GetSchoolsAdminTicketsBySchoolId",
+                            url: "<?= site_url('') ?>Tickets/GetSchoolsAdminTicketsBySchoolId",
                             method: "GET",
                             timeout: 0,
                             data: {

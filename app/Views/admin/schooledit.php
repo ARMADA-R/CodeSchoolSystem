@@ -1142,7 +1142,7 @@
     });
  function getschoolbyid() {
   $.ajax({
-            url: "https://sa.arsail.net/schools/Schools/GetSchoolByID",
+            url: "<?= site_url('') ?>Schools/GetSchoolByID",
             method: "GET",
             data: {
                 id:<?php echo $id;?>
@@ -1243,7 +1243,7 @@ function editschoollsave6() {
 
  function GetServicesSchools() {
   $.ajax({
-            url: "https://sa.arsail.net/schools/Schools/GetServicesSchools",
+            url: "<?= site_url('') ?>Schools/GetServicesSchools",
             method: "GET",
           
               headers: {
@@ -1260,7 +1260,7 @@ function editschoollsave6() {
  }
  function GetServicesBySchoolID() {
   $.ajax({
-            url: "https://sa.arsail.net/schools/Schools/GetServicesBySchoolID",
+            url: "<?= site_url('') ?>Schools/GetServicesBySchoolID",
             method: "GET",
            
             data: {
@@ -1291,7 +1291,7 @@ function editschoollsave6() {
 
     function saveedite() {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Schools/EditSchool",
+            url: "<?= site_url('') ?>Schools/EditSchool",
             method: "POST",
             // timeout: 0,
             headers: {
@@ -1331,7 +1331,7 @@ function editschoollsave6() {
 
     function SendAdminEmailtoSchool() {
   $.ajax({
-            url: "https://sa.arsail.net/schools/Schools/SendAdminEmailtoSchool",
+            url: "<?= site_url('') ?>Schools/SendAdminEmailtoSchool",
             method: "POST",
            
             data: {
@@ -1360,7 +1360,7 @@ function editschoollsave6() {
 
  function end_datesave1() {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Schools/EditServiceSchool",
+            url: "<?= site_url('') ?>Schools/EditServiceSchool",
             method: "POST",
             // timeout: 0,
             headers: {
@@ -1406,7 +1406,7 @@ function editschoollsave6() {
 
 function end_datesave2() {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Schools/EditServiceSchool",
+            url: "<?= site_url('') ?>Schools/EditServiceSchool",
             method: "POST",
             // timeout: 0,
             headers: {
@@ -1458,7 +1458,7 @@ function end_date3() {
 
 function end_datesave3() {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Schools/EditServiceSchool",
+            url: "<?= site_url('') ?>Schools/EditServiceSchool",
             method: "POST",
             // timeout: 0,
             headers: {
@@ -1501,7 +1501,7 @@ function end_date4() {
 
 function end_datesave4() {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Schools/EditServiceSchool",
+            url: "<?= site_url('') ?>Schools/EditServiceSchool",
             method: "POST",
             // timeout: 0,
             headers: {
@@ -1544,7 +1544,7 @@ function end_date5() {
 
 function end_datesave5() {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Schools/EditServiceSchool",
+            url: "<?= site_url('') ?>Schools/EditServiceSchool",
             method: "POST",
             // timeout: 0,
             headers: {
@@ -1587,7 +1587,7 @@ function end_date6() {
 
 function end_datesave6() {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Schools/EditServiceSchool",
+            url: "<?= site_url('') ?>Schools/EditServiceSchool",
             method: "POST",
             // timeout: 0,
             headers: {
@@ -1623,7 +1623,7 @@ function end_datesave6() {
 
 function end_datesave7() {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Schools/EditServiceSchool",
+            url: "<?= site_url('') ?>Schools/EditServiceSchool",
             method: "POST",
             // timeout: 0,
             headers: {

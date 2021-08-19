@@ -206,7 +206,7 @@
        
        function getliders(){
         $.ajax({
-            url: "https://sa.arsail.net/schools/Slider_Api/Slider",
+            url: "<?= site_url('') ?>Slider_Api/Slider",
             method: "GET",
             
         }).done(function(response) {
@@ -232,7 +232,7 @@
       form.append("file", $("#file8")[0].files[0]);
    
         $.ajax({
-            url: "https://sa.arsail.net/schools/Slider_Api/AddSlider",
+            url: "<?= site_url('') ?>Slider_Api/AddSlider",
             method: "POST",
          timeout: 0,
             headers: {
@@ -267,7 +267,7 @@
       form.append("text", $("#text2").val());
       form.append("file", $("#file2")[0].files[0]);
         $.ajax({
-            url: "https://sa.arsail.net/schools/Slider_Api/EditSlider",
+            url: "<?= site_url('') ?>Slider_Api/EditSlider",
             method: "POST",
             
               timeout: 0,
@@ -299,7 +299,7 @@
 
     function DeleteSlider() {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Slider_Api/DeleteSlider",
+            url: "<?= site_url('') ?>Slider_Api/DeleteSlider",
             method: "DELETE",
           //  timeout: 0,
             headers: {

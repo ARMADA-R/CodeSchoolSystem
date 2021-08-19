@@ -446,7 +446,7 @@
 
     function adminmaile() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Messaging/MailArchive",
+                url: "<?= site_url('') ?>Messaging/MailArchive",
                 method: "GET",
                 timeout: 0,
                 data: {

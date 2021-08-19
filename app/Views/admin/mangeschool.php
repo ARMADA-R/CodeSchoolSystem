@@ -389,7 +389,7 @@
 
     function manegTable() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Schools/GetSchools",
+                url: "<?= site_url('') ?>Schools/GetSchools",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -415,7 +415,7 @@
     
     function Deletetebel(id) {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools//Schools/DeleteSchool",
+                url: "<?= site_url('') ?>/Schools/DeleteSchool",
                 method: "DELETE",
                 timeout: 0,
                 data: {

@@ -124,7 +124,7 @@ $('#searsh').change(function() {
 });
 function getTicketspartner() {
 $.ajax({
-        "url": "https://sa.arsail.net/schools/Tickets/GetPartnersAdminTickets",
+        "url": "<?= site_url('') ?>Tickets/GetPartnersAdminTickets",
         "method": "GET",
         "timeout": 0,
         "headers": {
@@ -230,7 +230,7 @@ border-color: #1bc5bd;" href="<?php echo base_url() . '/public/';?>admin/viewtic
  
 function viewtpr(id) {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Tickets/GetAdminPartnersTicketsById",
+                url: "<?= site_url('') ?>Tickets/GetAdminPartnersTicketsById",
                 method: "GET",
                 timeout: 0,
                 data: {

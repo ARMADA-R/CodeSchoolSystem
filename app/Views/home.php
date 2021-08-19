@@ -529,7 +529,7 @@
             }, {});
 
             var jqxhr = $.ajax({
-                    url: "https://sa.arsail.net/schools/Contact_us/SendRequest",
+                    url: "<?= site_url('') ?>Contact_us/SendRequest",
                     method: "POST",
                     timeout: 0,
                     data: {
@@ -550,7 +550,7 @@
 
         function getSliderData() {
             var jqxhr = $.ajax({
-                    url: "https://sa.arsail.net/schools/Slider_Api/Slider",
+                    url: "<?= site_url('') ?>Slider_Api/Slider",
                     method: "GET",
                     timeout: 0,
                 })
@@ -566,7 +566,7 @@
 
         function getInfoData() {
             var jqxhr = $.ajax({
-                    url: "https://sa.arsail.net/schools/Info/GetInfo",
+                    url: "<?= site_url('') ?>Info/GetInfo",
                     method: "GET",
                     timeout: 0,
                 })

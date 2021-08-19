@@ -320,7 +320,7 @@
 
     function refreshTable() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Servies/GetParentSurvey",
+                url: "<?= site_url('') ?>Servies/GetParentSurvey",
                 method: "GET",
                 timeout: 0,
                 data: {

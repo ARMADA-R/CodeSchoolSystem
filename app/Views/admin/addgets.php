@@ -115,7 +115,7 @@
       
    {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Gates_Api/AddGate",
+            url: "<?= site_url('') ?>Gates_Api/AddGate",
             method: "POST",
             "headers": {
                 "Authorization": token

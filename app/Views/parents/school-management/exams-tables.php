@@ -329,7 +329,7 @@
 
     function refreshExamsTable() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Schools/GetParentExamTable",
+                url: "<?= site_url('') ?>Schools/GetParentExamTable",
                 method: "GET",
                 timeout: 0,
                 data: {

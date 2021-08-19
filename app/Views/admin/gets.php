@@ -938,7 +938,7 @@
 
     function updateFormStatus(id, status) {
         var jqxhr = $.ajax({
-                "url": "https://sa.arsail.net/schools/Gates_Api/addGateStatus",
+                "url": "<?= site_url('') ?>Gates_Api/addGateStatus",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
@@ -966,7 +966,7 @@
 
     function DeleteGate(id) {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Gates_Api/DeleteGate",
+                url: "<?= site_url('') ?>Gates_Api/DeleteGate",
                 method: "DELETE",
                 timeout: 0,
                 data: {

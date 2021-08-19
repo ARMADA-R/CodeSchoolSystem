@@ -393,7 +393,7 @@
 
     function manegTable() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Tickets/GetSchoolsParentsTicketsBySchoolId",
+                url: "<?= site_url('') ?>Tickets/GetSchoolsParentsTicketsBySchoolId",
                 method: "GET",
                 timeout: 0,
                 data: {

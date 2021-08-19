@@ -141,7 +141,7 @@
 
     function getParentSchools() {
         $.ajax({
-                "url": "https://sa.arsail.net/schools/schools/GetSchoolsParent",
+                "url": "<?= site_url('') ?>schools/GetSchoolsParent",
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
@@ -172,7 +172,7 @@
 
     function getTickets() {
         $.ajax({
-                "url": "https://sa.arsail.net/schools/Tickets/GetParentsSchoolsTickets",
+                "url": "<?= site_url('') ?>Tickets/GetParentsSchoolsTickets",
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
@@ -225,7 +225,7 @@
         $("#send-ticket-btn").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                     <span class="sr-only">جارٍ الارسال...</span>`);
         $.ajax({
-                "url": "https://sa.arsail.net/schools/Tickets/AddParentSchoolTicket",
+                "url": "<?= site_url('') ?>Tickets/AddParentSchoolTicket",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {

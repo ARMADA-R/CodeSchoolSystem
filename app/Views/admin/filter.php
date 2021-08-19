@@ -46,7 +46,7 @@
 <script>
   $(document).ready(function() {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Contact_us/GetBlacklist",
+            url: "<?= site_url('') ?>Contact_us/GetBlacklist",
             method: "GET",
             "headers": {
                     "Authorization": token
@@ -67,7 +67,7 @@
 
     function EditBlacklist() {
         $.ajax({
-            url: "https://sa.arsail.net/schools/Contact_us/EditBlacklist",
+            url: "<?= site_url('') ?>Contact_us/EditBlacklist",
             method: "POST",
           //  timeout: 0,
             headers: {
