@@ -72,7 +72,7 @@
 
     function getTickets() {
         $.ajax({
-                "url": "https://sa.arsail.net/schools/Tickets/GetPartnersparentsTickets",
+                "url": "<?= site_url('') ?>Tickets/GetPartnersparentsTickets",
                 "method": "GET",
                 "timeout": 0,
                 "headers": {

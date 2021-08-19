@@ -5,6 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>excel</title>
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/adminlte.min.css">
+    <!-- Bootstrap 4 RTL -->
+    <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Custom style for RTL -->
+    <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
+
+
 </head>
 
 <body>
@@ -22,11 +31,11 @@
 
     <div class="form-group">
         <div class="custom-file">
-            <input type="file" class="custom-file-input" name="xlfile" id="xlf" accept=".xlsx, .xls" required>
+            <!-- <input type="file" class="custom-file-input" name="xlfile" id="xlf" accept=".xlsx, .xls" required> -->
             <label class="custom-file-label" for="xlf">upload-file</label>
         </div>
         <hr>
-        <select name="" id="excelSheets">
+        <!-- <select name="" id="excelSheets">
 
         </select>
         <hr>
@@ -35,12 +44,85 @@
         <button type="button" onclick="ExcelSubmit();" class="btn btn-info">save</button>
         <button type="reset" class="btn btn-outline-secondary">reset</button>
         <input type="hidden" class="form-control" name="table" id="jstable" required>
-        <input type="" id="excel-form-submit" style="visibility: hidden;" value="">
+        <input type="" id="excel-form-submit" style="visibility: hidden;" value=""> -->
+    </div>
+
+    <hr class="pt-5">
+
+    <div class="modal fade" id="add-student-from-file" tabindex="-1" aria-labelledby="add-student-from-fileLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="add-student-from-fileLabel">اضافة طلاب من ملف</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form onsubmit="addFromFile(); return false;">
+                    <div class="modal-body p-4">
+                        <div class="row">
+
+                            <div class="col-md">
+                                <div class="form-group">
+                                    <input required type="file" class="form-control" name="xlfile" id="xlf" accept=".xlsx, .xls">
+                                    <small class="form-text text-danger">لسلامة البيانات المدخلة يرجى التأكد من ان الملف يتبع الشكل المحدد ولا يتعارض مع طريقة الادخال المحددة</small>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md">
+                                <div class="form-group">
+                                    <!-- <label for="excelSheets">الورقة</label> -->
+                                    <select class="form-control " name="" id="excelSheets"></select>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-4">
+
+                                <button type="button" onclick="ExcelSubmit();" class="btn btn-info">save</button>
+                                <button type="reset" class="btn btn-outline-secondary">reset</button>
+                                <input type="hidden" class="form-control" name="table" id="jstable" required>
+                                <input type="" id="excel-form-submit" style="visibility: hidden;" value="">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md">
+                                <div id="htmlout" style="overflow-x: scroll;"></div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div>
+                                <div id="add-from-file-spinner" style="display: none" class="spinner-border text-secondary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="button" onclick="ExcelSubmit();" class="btn btn-info">save</button>
+                                <button type="reset" class="btn btn-outline-secondary">reset</button>
+                                <input type="hidden" class="form-control" name="table" id="jstable" required>
+                                <input type="" id="excel-form-submit" style="visibility: hidden;" value="">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                                <button type="button" onclick="addFromFile()" id="add-from-file-submit" class="btn btn-primary">حفظ</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="mx-1">
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#add-student-from-file">تحميل ملف</button>
     </div>
 
 
-
-
+    <button onclick="testReq()" class="btn btn-danger"> Test </button>
 
 
 
@@ -53,6 +135,12 @@
     <script src="<?php echo base_url() . '/public/'; ?>Excel/EXCEL/jquery-ui.min.js"></script>
     <script src="<?php echo base_url() . '/public/'; ?>Excel/EXCEL/jquery.dragtable.js"></script>
     <script src="<?php echo base_url() . '/public/'; ?>Excel/EXCEL/FileSaver.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AdminLTE -->
+    <script src="<?php echo base_url() . '/public/'; ?>design/AdminLTE/dist/js/adminlte.js"></script>
 
     <script>
         var school_id = '24';
@@ -74,6 +162,23 @@
                     "contentType": false,
 
                     data: form
+                })
+                .done(function(response) {
+                    console.log(response);
+                })
+                .fail(function(response) {
+                    console.log(response);
+                });
+
+        }
+
+
+        function testReq() {
+
+            var jqxhr = $.ajax({
+                    url: "<?= site_url('Schools/sendSMSToStudents') ?>",
+                    method: "get",
+                    timeout: 0,
                 })
                 .done(function(response) {
                     console.log(response);
@@ -120,7 +225,7 @@
 
             getdata();
 
-            console.log(JSON.parse(document.getElementById('jstable').value));
+            // console.log(JSON.parse(document.getElementById('jstable').value));
             document.getElementById('excel-form-submit').click();
         };
 
@@ -137,7 +242,6 @@
             }
         });
     </script>
-
 
     <script>
         function getdata() {
@@ -179,10 +283,13 @@
                 });
             });
         }
+
+        function deleteRow(element) {
+            if (confirm("هل انت متأكد من حذف هذا السطر؟ \n الاسطر المحذوفة لا تضاف الى قاعدة البيانات")) {
+                $(element).closest('tr').remove();
+            }
+        }
     </script>
-
-
-
 
     <script>
         var sheetNames = [];
@@ -209,8 +316,8 @@
 
                 workbook.SheetNames.forEach(function(sheetName, index) {
 
-                    console.log(index);
-                    console.log(sheetName);
+                    // console.log(index);
+                    // console.log(sheetName);
 
 
 
@@ -226,7 +333,26 @@
                             type: 'string',
                             bookType: 'html'
                         });
-                        // console.log(htmlstr);
+
+
+                        // set button to each row
+                        var jqueryHtmlStr = $(htmlstr);
+                        var tableRows = jqueryHtmlStr.find("tbody").children();
+                        var tbodtHtml = '';
+                        for (let i = 0; i < tableRows.length; i++) {
+                            tbodtHtml += $(tableRows[i]).append(`<td id="sjs-xxx${i}"><button type="button" class="btn btn-outline-danger" onclick="deleteRow(this);" >حذف</button></td>`)[0].outerHTML;
+                        }
+
+                        jqueryHtmlStr.find("tbody");
+                        (jqueryHtmlStr.find("tbody").html(''));
+                        jqueryHtmlStr.find("tbody").html(tbodtHtml);
+
+                        htmlstr = '';
+                        jqueryHtmlStr.each(function(index) {
+                            htmlstr += jqueryHtmlStr[index].outerHTML
+                        });
+
+
                         var counter = 0;
                         for (var index = 1; index < htmlstr.length - 3; index++) {
                             if (htmlstr[index - 1] == '<' && htmlstr[index] == 't' && htmlstr[index + 1] == 'd') {
@@ -237,7 +363,7 @@
                         }
 
                         var head = "<thead><tr>";
-                        for (let index = 0; index < counter; index++) {
+                        for (let index = 0; index < counter - 1; index++) { // counter - 1 case we have a delete button
                             let options = '';
                             Object.keys(columns).forEach(function(key) {
                                 // do something with obj[key]
@@ -252,7 +378,10 @@
                                 "</th>"
 
                         }
+                        head += "<th class=\"align-middle text-center\">خيارات</th>";
+
                         head += "</tr></thead>";
+                        // console.log(htmlstr);
                         HTMLOUT.innerHTML += htmlstr;
                         document.getElementById('excel-table').innerHTML += head;
                         document.getElementById('excel-table').className += "draggable table table-striped table-bordered table-hover";
@@ -324,17 +453,6 @@
                 if (rABS) reader.readAsBinaryString(f);
                 else reader.readAsArrayBuffer(f);
 
-                // console.log(process_wb);
-                // sheetNames = process_wb.SheetNames;
-
-                // $("#excelSheets").html("");
-
-                // for (let i = 0; i < sheetNames.length; i++) {
-                //     $("#excelSheets").append($('<option>', {
-                //         value: i,
-                //         text: sheetNames[i],
-                //     }));
-                // }
 
             };
 
@@ -349,7 +467,7 @@
             xlf.addEventListener('change', handleFile, false);
 
             $("#excelSheets").change(function() {
-                process_wb(global_wb)
+                process_wb(global_wb);
             })
         })();
     </script>

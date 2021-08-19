@@ -26,32 +26,45 @@ class CoursesExtends extends Courses
 
                 $user_id = $this->request->getVar('user_id');
                 $school_id = $this->request->getVar('school_id');
+                $excelData = $this->request->getVar('excelData');
 
-                $file = isset($_FILES["excel"]['tmp_name']) ? $_FILES["excel"]['tmp_name'] : '';
-
+               
                 if (!$school_id) {
                     $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
                     return $this->respond($result, 400);
                     exit;
                 }
-
-                $data = ExcelReader::parseToArray($file, 2, 0);
-                if ($data !== []) {
-
+                
+               
+                if (!$excelData) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل بيانات Excel ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+                
+                $excelData = json_decode($excelData, true);
+                
+                if ($excelData !== []) {
+                    
                     $addedSuccessNum = 0;
                     $failedToAddNum = 0;
 
                     $model = new CoursesModel();
 
-                    foreach ($data as  $value) {
-                        
+                    foreach ($excelData as  $value) {
+                        $value['student_number'] = str_replace('$', '', $value['student_number']);
+                        $value['phone'] = str_replace('$', '', $value['student_number']);
                         try {
+                            if ($value['full_name'] == '' || $value['student_number'] == '') {
+                                throw new Exception();
+                            }
+                            
                             $model->add_course([
                                 'user_id' => $user_id,
                                 'school_id' => $school_id,
-                                'student_number' => $value['IdentificationID'],
-                                'student_name' => $value['FullName'],
-                                'phone' => $value['MobileNumber']
+                                'student_number' => $value['student_number'],
+                                'student_name' => $value['student_name'],
+                                'phone' => $value['phone']
                             ]);
 
                             $addedSuccessNum++;

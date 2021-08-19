@@ -4,8 +4,14 @@
 <div class="content-header my-2 bg-white">
 
     <div class="row ">
-        <div class="col ">
+        <div class="col-sm ">
             إشعارات الغياب والتأخر
+        </div>
+        <div class="col-sm-3">
+            <span>
+                عدد الرسائل الكلي
+            </span>
+            <span id="total-messages-number"></span>
         </div>
     </div>
 </div>
@@ -16,7 +22,8 @@
     <div class="col-lg-3">
         <div class="form-group">
             <select required class="form-control determenators" name="submit-type" id="classes-selector">
-                <option value="">الصف</option>
+                <option>الصف</option>
+                <option value="">الكل</option>
             </select>
         </div>
 
@@ -24,18 +31,19 @@
     <div class="col-lg-3">
         <div class="form-group">
             <select required class="form-control determenators" name="submit-type" id="semesters-selector">
-                <option value="">الفصل</option>
+                <option>الفصل</option>
+                <option value="">الكل</option>
             </select>
         </div>
     </div>
     <div class="col-lg-3">
-        <button type="button" style="width: inherit; background-color: #fff;" class="btn btn-light" data-toggle="modal" data-target="#add-temblate">رصد</button>
+        <button type="button" id="registeration-btn" style="width: inherit; background-color: #fff;" class="btn btn-light" data-toggle="modal" data-target="#add-temblate">رصد</button>
         <div class="form-group">
         </div>
     </div>
 
     <div class="col-lg-3">
-        <button type="button" style="width: inherit; background-color: #fff;" onclick="checkBeforSend()" class="btn btn-light">ارسال</button>
+        <button type="button" style="width: inherit; background-color: #fff;" onclick="sendNotificationsToSelected()" class="btn btn-light">ارسال للمحدد</button>
         <div class="form-group">
         </div>
     </div>
@@ -100,8 +108,18 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="hijri-date-picker" class="col-form-label">التاريخ</label>
-                                <input required type="text"class="form-control" id="hijri-date-picker">
+                                <input required type="text" class="form-control" id="hijri-date-picker">
                                 <input required type="hidden" name="date" class="form-control" id="date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="template-selector" class="col-form-label">قالب الرسالة</label>
+                                <select required class="form-control" name="template" id="template-selector">
+                                    <option title="" value=""></option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -219,7 +237,8 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="date" class="col-form-label">التاريخ</label>
-                                <input required type="date" class="form-control" name="date" id="update-date">
+                                <input required type="text" class="form-control" id="hijri-date-picker-updateOne">
+                                <input required type="hidden" class="form-control" name="date" id="update-date">
                             </div>
                         </div>
                     </div>
@@ -286,6 +305,8 @@
                             <th>الحصة</th>
                             <th>اليوم</th>
                             <th>تاريخ الرصد</th>
+                            <th>الرسالة</th>
+                            <th>عدد الرسائل</th>
                         </tr>
                     </thead>
                 </table>
@@ -308,13 +329,42 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
-    
     var dataTable = null;
     var studentsData = [];
 
+
+    //Hijri date bicker configration
+    $("#hijri-date-picker-updateOne").hijriDatePicker({
+        locale: "ar-sa",
+        format: "DD-MM-YYYY",
+        hijriFormat: "iYYYY-iMM-iDD",
+        dayViewHeaderFormat: "MMMM YYYY",
+        hijriDayViewHeaderFormat: "iMMMM iYYYY",
+        showSwitcher: true,
+        allowInputToggle: true,
+        useCurrent: false,
+        isRTL: true,
+        keepOpen: false,
+        hijri: true,
+        debug: false,
+        showClear: true,
+        showTodayButton: false,
+        showClose: true,
+    });
+
+    $("#hijri-date-picker-updateOne").on('dp.change', function(arg) {
+
+        if (!arg.date) {
+            $("#date").val('');
+            return;
+        };
+        let date = arg.date;
+        $("input#update-date").val(date.format("YYYY-MM-DD"));
+    });
+
     $(document).ready(function() {
         dataTable = $('#content-table').DataTable({
-            dom: `<"row d-flex"<"col-md-6 d-flex"fl><"col-md-6  d-flex align-items-center "<"m-right-auto"B>>>rtip`,
+            dom: `<"row d-flex justify-content-end mx-1 my-1 mb-3 "B><"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
                 [25, 50, 100, 500],
                 [25, 50, 100, 500]
@@ -354,7 +404,6 @@
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
-
                         return meta.row + meta.settings._iDisplayStart + 1;
                     }
                 },
@@ -367,8 +416,11 @@
                 {
                     data: 'full_name',
                     name: 'full_name',
-                    className: 'text-center t-full_name align-middle',
-                    title: 'اسم الطالب'
+                    className: `text-center t-full_name align-middle`,
+                    title: 'اسم الطالب',
+                    render: function(data, type, row, meta) {
+                        return `<div id="t-student-name-${row.student_id}">${data}</div>`;
+                    }
                 },
                 {
                     data: 'class_name',
@@ -386,7 +438,10 @@
                     data: 'parent_phone',
                     name: 'parent_phone',
                     className: 'text-center t-parent_phone align-middle',
-                    title: 'جوال ولي الامر'
+                    title: 'جوال ولي الامر',
+                    render: function(data, type, row, meta) {
+                        return `<span class="span-phone-${row.student_id}" id="span-phone-${row.student_id}")">${data? data : 'لا يوجد'}</span>`;
+                    }
                 },
                 {
                     data: 'monitoring_case',
@@ -424,7 +479,9 @@
                         if (data) {
                             return data;
                         } else {
-                            return `<button class="btn btn-link day-btn button-day-${row.student_id}" style="color: #212529;" id="button-day-${row.student_id}" onclick="showUpdateDayModal(${row.student_id})">تحديد</button>`;
+                            return `<button class="btn btn-link day-btn button-day-${row.student_id}" style="color: #212529;" id="button-day-${row.student_id}" onclick="showUpdateDayModal(${row.student_id})">تحديد</button>
+                            <div class="class-student-${row.student_id}" id="class-student-${row.student_id}" style="display: none;">${row.class_id}</div>
+                            <div class="semesters-student-${row.student_id}" id="semesters-student-${row.student_id}" style="display: none;">${row.semaster_name}</div>`;
                         }
                     }
                 },
@@ -439,6 +496,22 @@
                         } else {
                             return `<button class="btn btn-link date-btn button-date-${row.student_id}" style="color: #212529;" id="button-date-${row.student_id}" onclick="showUpdateDateModal(${row.student_id})">تحديد</button>`;
                         }
+                    }
+                },
+                {
+                    data: 'student_id',
+                    className: 'text-center t-date align-middle',
+                    title: 'عدد الرسائل',
+                    render: function(data, type, row, meta) {
+                        return `<div class="t-message-number-${data} s-messages-number" id="t-message-number-${data}"></div>`;
+                    }
+                },
+                {
+                    data: 'student_id',
+                    className: 'text-center t-date align-middle',
+                    title: 'نص رسالة الرصد',
+                    render: function(data, type, row, meta) {
+                        return `<div class="t-message-student-${data}" id="t-message-student-${data}"></div>`;
                     }
                 },
 
@@ -488,7 +561,7 @@
                             });
 
 
-                            var pageTitle = 'تقرير الحضور'+' (الصف:'+ $('#classes-selector').val()+ ' , الفصل: '+$('#semesters-selector').val()+')',
+                            var pageTitle = 'تقرير الحضور' + ' (الصف:' + $('#classes-selector').val() + ' , الفصل: ' + $('#semesters-selector').val() + ')',
                                 win = window.open('', 'Print');
                             win.document.write(`<html dir="rtl" lang="ar"><head><title>` + pageTitle + '</title>' +
                                 `<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -706,6 +779,7 @@
         getClasses();
         getSemesters();
         getPeriods();
+        getTemplates()
 
         $('#select-all').change(function() {
             if (this.checked) {
@@ -724,7 +798,7 @@
 
     function refreshContentTable() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Schools/GetStudentAbsenceAndLag",
+                url: "http://localhost/codeigniter/CodeSchoolSystem/public/Schools/GetStudentAbsenceAndLag",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -827,7 +901,7 @@
             }));
         });
     }
-    // set semester options in semesters select box
+
     function setPeriodsOptions(data) {
         var periodsSelect = $('#periods-selector');
         var updatePeriodsSelect = $('#update-periods-selector');
@@ -895,18 +969,17 @@
     }
 
     function showUpdateDateModal(id) {
-        var oldValue = $('tr#' + id).children('.t-date').html();
+        var oldValue = $('tr#' + id).children('.t-date').children('button').html();
 
         $('input[name="row_id"]').each(function(index, value) {
             $(value).val(id);
         });
 
-        $('#update-date').val(oldValue);
+        $('#hijri-date-picker-updateOne').val(oldValue != "تحديد" ? oldValue : '');
         $('#update-date-modal').click()
     }
 
     function updateStatus(element) {
-        console.log(1);
         formData = $(element).serializeArray().reduce(function(obj, item) {
             obj[item.name] = item.value;
             return obj;
@@ -923,6 +996,9 @@
                 $(value).css('color', '#dc3545')
             }
         });
+
+        putPreparedMessageData(formData.attendance_status, $("#button-period-" + formData.row_id).html(), $("#button-day-" + formData.row_id).html(), moment($("#button-date-" + formData.row_id).html(), "iYYYY/iM/iD").format("YYYY-MM-DD"), formData.row_id);
+        $(element).closest(".modal").modal('toggle');
     }
 
     function updatePeriod(element) {
@@ -935,6 +1011,8 @@
             $(value).html(formData.period);
         });
 
+        putPreparedMessageData($("#button-status-" + formData.row_id).html(), formData.period, $("#button-day-" + formData.row_id).html(), moment($("#button-date-" + formData.row_id).html(), "iYYYY/iM/iD").format("YYYY-MM-DD"), formData.row_id);
+        $(element).closest(".modal").modal('toggle');
     }
 
     function updateDay(element) {
@@ -946,6 +1024,9 @@
         $('.button-day-' + formData.row_id).each(function(index, value) {
             $(value).html(formData.day);
         });
+
+        putPreparedMessageData($("#button-status-" + formData.row_id).html(), $("#button-period-" + formData.row_id).html(), formData.day, moment($("#button-date-" + formData.row_id).html(), "iYYYY/iM/iD").format("YYYY-MM-DD"), formData.row_id);
+        $(element).closest(".modal").modal('toggle');
     }
 
     function updateDate(element) {
@@ -955,12 +1036,14 @@
         }, {});
 
         $('.button-date-' + formData.row_id).each(function(index, value) {
-            $(value).html(formData.date);
+            $(value).html(moment(formData.date, "YYYY-MM-DD").format("iYYYY/iM/iD"));
         });
 
+        putPreparedMessageData($("#button-status-" + formData.row_id).html(), $("#button-period-" + formData.row_id).html(), $("#button-day-" + formData.row_id).html(), formData.date, formData.row_id);
+        $(element).closest(".modal").modal('toggle');
     }
 
-    function updateMultiFullStatus(element) {
+    function getSelectedStudents() {
         var selectedStudents = [];
         var studentCheckBoxes = document.getElementsByName('students[]');
         for (var i = 0; i < studentCheckBoxes.length; i++) {
@@ -968,7 +1051,12 @@
                 selectedStudents.push(studentCheckBoxes[i].value)
             }
         }
-        console.log(selectedStudents);
+
+        return selectedStudents;
+    }
+
+    function updateMultiFullStatus(element) {
+        var selectedStudents = getSelectedStudents();
 
         formData = $(element).serializeArray().reduce(function(obj, item) {
             obj[item.name] = item.value;
@@ -998,38 +1086,149 @@
             });
 
             $('.button-date-' + selectedStudents[i]).each(function(index, value) {
-                $(value).html(formData.date);
+                $(value).html(moment(formData.date, "YYYY-MM-DD").format("iYYYY/iM/iD"));
+            });
+
+            $('.t-message-student-' + selectedStudents[i]).each(function(index, value) {
+
+                putPreparedMessageData(formData.attendance_status, formData.period, formData.day, formData.date, selectedStudents[i]);
+
             });
 
         }
     }
 
-    function checkBeforSend() {
-        if (confirm('هل انت متأكد من ارسال الاشعارات؟')) {
-            checkAndSendNotifications();
+    function putPreparedMessageData(attendance_status, period, day, date, studentID) {
+
+        var studentName = $('#t-student-name-' + studentID).html();
+        var templateText = $("#template-selector").find(":selected").attr("title");
+
+        if (!templateText) {
+            alert("يرجى تحديد قالب لعرض الرسائل وعددها!");
+            // $("#registeration-btn").click();
+            $('#add-temblate').modal('toggle');
+
+            $("#template-selector").focus();
+
+        } else {
+            var message = getPreparedTemplateMessage(attendance_status, period, day, date, studentName, templateText);
+            $('#t-message-student-' + studentID).html(message);
+            $("#t-message-number-" + studentID).html(getMessagesNumberForText(message));
         }
+        getTotalMessagesNumber()
     }
 
-    function checkAndSendNotifications() {
 
-        console.log('checkAndSendNotifications');
-        for (let i = 0; i < studentsData.length; i++) {
-            var status = $('button#button-status-' + studentsData[i].student_id).html();
-            var period = $('button#button-period-' + studentsData[i].student_id).html();
-            var day = $('button#button-day-' + studentsData[i].student_id).html();
-            var date = $('button#button-date-' + studentsData[i].student_id).html();
-            // status != 'حاضر' &&
-            // console.log([status, period, day, date, studentsData[i].student_id, studentsData]);
-            if (status != 'تحديد' && status != studentsData.monitoring_case && period != 'تحديد' && day != 'تحديد' && date != 'تحديد') {
-                sendNotifications(studentsData[i].student_id, studentsData[i].class_id, studentsData[i].semaster_name, status, period, day, date);
+    function getPreparedTemplateMessage(attendance_status, period, day, date, student_name, template) {
+
+        if (attendance_status != 'حاضر' && attendance_status != 'تحديد') {
+            if (template.includes("@STATUS@")) {
+                template = template.replaceAll('@STATUS@', attendance_status); //replaceAll
+            }
+
+            if (template.includes("@STUDENT@")) {
+                template = template.replaceAll('@STUDENT@', student_name);
+            }
+
+            if (template.includes("@DATE@")) {
+                template = template.replaceAll('@DATE@', moment(date, "YYYY-MM-DD").format("iYYYY/iM/iD"));
+            }
+
+            if (template.includes("@DAY@")) {
+                template = template.replaceAll('@DAY@', day);
+            }
+
+            if (template.includes("@PERIOD@")) {
+                template = template.replaceAll('@PERIOD@', period);
+            }
+        } else {
+            template = '';
+        }
+
+
+        return template;
+
+    }
+
+    function getMessagesNumberForText(messageText) {
+        var messageLength = messageText.length;
+
+        var messagesNumber = 0;
+        if (messageLength != 0) {
+            if (messageLength <= 70) {
+                var messagesNumber = parseInt((messageLength - 1) / 70) + 1;
+            } else {
+                var messagesNumber = parseInt((messageLength - 1) / 67) + 1;
             }
         }
+
+        return messagesNumber;
+
     }
 
-    function sendNotifications(students_id, class_id, semaster_name, status, period, day, date) {
+    // function checkBeforSend() {
+
+    // }
+
+    function sendNotificationsToSelected() {
+
+        var selectedRows = getSelectedStudents();
+        var dataToSend = [];
+        var totalSelectedMessageNumber = 0;
+        var totalNotificationToSend = 0;
+
+        for (let i = 0; i < selectedRows.length; i++) {
+
+            student_id = selectedRows[i];
+
+            
+            var toSend = 0;
+            var attendance_status = $("#button-status-" + student_id).html();
+            var phone = $("#span-phone-" + student_id).html();
+            
+            if (attendance_status != 'حاضر' && attendance_status != 'تحديد' && phone != 'لا يوجد') {
+                totalSelectedMessageNumber += parseInt($("#t-message-number-" + student_id).html()) ? parseInt($("#t-message-number-" + student_id).html()) : 0;
+                totalNotificationToSend++;
+                toSend = 1;
+            }
+
+            dataToSend.push({
+                isToSend: toSend,
+                school: school_id,
+                studentId: student_id,
+                message: $("#t-message-student-" + student_id).html(),
+                studentName: $("#t-student-name-" + student_id).html(),
+                period: $("#button-period-" + student_id).html(),
+                day: $("#button-day-" + student_id).html(),
+                date: moment($("#button-date-" + student_id).html(), "iYYYY/iM/iD").format("YYYY-MM-DD"),
+                attendance_status: attendance_status,
+                phone: phone,
+                class_id: $("#class-student-" + student_id).html(),
+                semaster_id: $("#semesters-student-" + student_id).html(),
+            });
+
+        }
+
+        console.log(totalSelectedMessageNumber);
+        console.log(dataToSend);
+        if (selectedRows.length > 0) {
+            if (confirm(`
+             هل انت متأكد من حفظ بيانات الغياب ل${selectedRows.length} طالب
+             وارسال اشعارات الى ${totalNotificationToSend}  طالب
+             علما ان كلفة الرصيد المخصوم ${totalSelectedMessageNumber} رسالة`)) {
+
+                sendNotifications(dataToSend);
+            }
+        } else {
+            alert('حدد عناصر اولاً!');
+        }
+
+    }
+
+    function sendNotifications(data = []) {
 
         var jqxhr = $.ajax({
-                "url": "https://sa.arsail.net/schools/Schools/SendAbsenceAndLag",
+                "url": "http://localhost/codeigniter/CodeSchoolSystem/public/Schools/SendAbsenceAndLagNotifications",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
@@ -1037,18 +1236,12 @@
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 "data": {
-                    "students_id": students_id,
-                    "class_id": class_id,
-                    "semaster_id": semaster_name,
-                    "monitoring_case": status,
-                    "period": period,
-                    "day": day,
-                    "date": date,
-                    "school_id": school_id
+                    "school_id": school_id,
+                    "data": data,
                 }
             })
             .done(function(response) {
-                refreshContentTable();
+                // refreshContentTable();
                 toastr.success('تم تحديث حالة الغياب')
             })
             .fail(function(response) {
@@ -1060,5 +1253,49 @@
             });
     }
 
-</script>
+    function getTemplates() {
+        var jqxhr = $.ajax({
+                url: "https://sa.arsail.net/schools/Templates/GetGeneralMessagingTempalte",
+                method: "GET",
+                timeout: 0,
+                data: {
+                    school_id: school_id,
+                    page: "1",
+                    limit: "40"
+                },
+                headers: {
+                    "Authorization": token
+                },
+            })
+            .done(function(response) {
+                setTemplateOptions(response.data);
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء تحميل بيانات القوالب!', 'خطأ');
+            });
+    }
 
+    function setTemplateOptions(data) {
+        var templatesSelect = $('#template-selector');
+        $.each(data, function(index, val) {
+            templatesSelect.append($('<option>', {
+                value: val.id,
+                text: val.name,
+                title: val.content
+            }));
+        });
+    }
+
+
+    function getTotalMessagesNumber() {
+        var totalMessagesNumber = 0;
+        $('.s-messages-number').each(function(index, value) {
+            totalMessagesNumber += parseInt($(value).html()) ? parseInt($(value).html()) : 0;
+        });
+        // console.log(totalMessagesNumber);
+        $("#total-messages-number").html(totalMessagesNumber);
+
+        return totalMessagesNumber;
+    }
+</script>

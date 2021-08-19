@@ -7,6 +7,7 @@
         <div class="col ">
             قوالب الرسائل العامة
         </div>
+        
     </div>
 </div>
 <!-- /.content-header -->
@@ -16,7 +17,7 @@
 <button type="button" id="edit-temblate-btn" class="btn" style="display: none;" data-toggle="modal" data-target="#edit-temblate"></button>
 
 <div class="modal fade" id="edit-temblate" tabindex="-1" aria-labelledby="edit-temblateLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog  modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="edit-temblateLabel">تعديل قالب</h5>
@@ -27,26 +28,58 @@
             <form onsubmit="updateTemplate(this); return false;">
                 <input type="hidden" class="form-control" name="id" id="record-id-edit">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="title-edit" class="col-form-label">العنوان</label>
-                        <input type="text" class="form-control" name="name" id="title-edit">
-                    </div>
 
-                    <div class="form-group">
-                        <label for="submit-type-edit">نوع الارسال</label>
-                        <select required class="form-control" name="sender_type" id="submit-type-edit">
-                            <option value="">--</option>
-                            <option value="1">رسالة نصية</option>
-                            <option value="2">رسالة واتساب</option>
-                        </select>
+                    <div class="form-row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="title-edit" class="col-form-label">العنوان</label>
+                                <input type="text" class="form-control" name="name" id="title-edit">
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="submit-type-edit">نوع الارسال</label>
+                                <select required class="form-control" name="sender_type" id="submit-type-edit">
+                                    <option value="">--</option>
+                                    <option value="1">رسالة نصية</option>
+                                    <option value="2">رسالة واتساب</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="message-text-edit" class="col-form-label">المحتوى</label>
                         <textarea oninput="checkMessagesNumber(this)" rows="4" name="content" class="form-control" id="message-text-edit"></textarea>
                         <small id="messagesNum" class="form-text text-muted">عدد الحروف <span id="lettersNum-edit"></span> عدد الرسائل <span id="messageNum-edit"></span> </small>
+                        <small id="messagesRelativeHint" class="form-text text-muted"></small>
                         <input type="hidden" name="letters_number">
                         <input type="hidden" name="message_number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-text-edit" class="col-form-label">متغيرات يمكن استخدامها</label>
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item w-100">حالة الرصد</li>
+                            <li class="list-group-item w-100">@STATUS@</li>
+                        </ul>
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item w-100">اسم الطالب</li>
+                            <li class="list-group-item w-100"> @STUDENT@</li>
+                        </ul>
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item w-100">التاريخ</li>
+                            <li class="list-group-item w-100"> @DATE@</li>
+                        </ul>
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item w-100">اليوم</li>
+                            <li class="list-group-item w-100"> @DAY@</li>
+                        </ul>
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item w-100">الحصة</li>
+                            <li class="list-group-item w-100"> @PERIOD@</li>
+                        </ul>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -69,7 +102,7 @@
 </div>
 
 <div class="modal fade" id="add-temblate" tabindex="-1" aria-labelledby="add-temblateLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog  modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="add-temblateLabel">إنشاء قالب</h5>
@@ -80,26 +113,56 @@
             <form onsubmit="addTemplate(this); return false;">
                 <input type="hidden" class="form-control" name="id" id="record-id-add">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">العنوان</label>
-                        <input type="text" class="form-control" name="name" id="recipient-name">
+                    <div class="form-row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">العنوان</label>
+                                <input type="text" class="form-control" name="name" id="recipient-name">
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="submit-type">نوع الارسال</label>
+                                <select required class="form-control" name="sender_type" id="submit-type">
+                                    <option value="">--</option>
+                                    <option value="1">رسالة نصية</option>
+                                    <option value="2">رسالة واتساب</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="submit-type">نوع الارسال</label>
-                        <select required class="form-control" name="sender_type" id="submit-type">
-                            <option value="">--</option>
-                            <option value="1">رسالة نصية</option>
-                            <option value="2">رسالة واتساب</option>
-                        </select>
-                    </div>
-
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">المحتوى</label>
                         <textarea oninput="checkMessagesNumber(this)" name="content" rows="4" class="form-control" id="message-text"></textarea>
                         <small id="messagesNum" class="form-text text-muted">عدد الحروف 0 عدد الرسائل 0</small>
+                        <small id="messagesRelativeHint" class="form-text text-muted"></small>
                         <input type="hidden" name="letters_number">
                         <input type="hidden" name="message_number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-text-edit" class="col-form-label">متغيرات يمكن استخدامها</label>
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item w-100">حالة الرصد</li>
+                            <li class="list-group-item w-100">@STATUS@</li>
+                        </ul>
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item w-100">اسم الطالب</li>
+                            <li class="list-group-item w-100"> @STUDENT@</li>
+                        </ul>
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item w-100">التاريخ</li>
+                            <li class="list-group-item w-100"> @DATE@</li>
+                        </ul>
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item w-100">اليوم</li>
+                            <li class="list-group-item w-100"> @DAY@</li>
+                        </ul>
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item w-100">الحصة</li>
+                            <li class="list-group-item w-100"> @PERIOD@</li>
+                        </ul>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -177,11 +240,10 @@
 
 
 <script>
-    
     var dataTable = null;
     $(document).ready(function() {
         dataTable = $('#messages_forms').DataTable({
-            dom: `<"row d-flex"<"col-md-6 d-flex"fl><"col-md-6  d-flex align-items-center "<"m-right-auto"B>>>rtip`,
+            dom: `<"row d-flex justify-content-end mx-1 my-1 mb-3 "B><"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
                 [25, 50, 100, 500],
                 [25, 50, 100, 500]
@@ -591,13 +653,41 @@
     function checkMessagesNumber(element) {
         var message = element.value;
         var messageLength = message.length;
+        var isRelative = false;
+
+        if (message.includes("@STATUS@")) {
+            isRelative = true;
+            messageLength += 2;
+        }
+        if (message.includes("@STUDENT@")) {
+            isRelative = true;
+            messageLength += 5;
+        }
+        if (message.includes("@DATE@")) {
+            isRelative = true;
+            messageLength += 4;
+        }
+        if (message.includes("@DAY@")) {
+            isRelative = true;
+            messageLength += 5;
+        }
+        if (message.includes("@PERIOD@")) {
+            isRelative = true;
+            messageLength += 7;
+        }
+
         var messagesNumber = 0;
-        if (messageLength <= 70) {
-            var messagesNumber = parseInt((messageLength / 70)) + 1;
-        } else {
-            var messagesNumber = parseInt((messageLength - 1) / 67) + 1;
+        if (messageLength != 0) {
+            if (messageLength <= 70) {
+                var messagesNumber = parseInt((messageLength - 1) / 70) + 1;
+            } else {
+                var messagesNumber = parseInt((messageLength - 1) / 67) + 1;
+            }
         }
         $(element).parent().children("small#messagesNum").html(`عدد الحروف ${messageLength} عدد الرسائل ${messagesNumber}`);
+        if (isRelative) {
+            $(element).parent().children("small#messagesRelativeHint").html(`في حالة استخدام المتغيرات يكون عدد المحارف والرسائل نسبي الى محتوى المتغير فيمكن ان يكون عدد الاحرف اكثر من المعروض اعلاه ويمكن ان يكون اقل وذلك تبعا لمحتوى كل متغير <br>\n تم اخذ تقدير متوسط لطول محتوى كل متغير للحصول على نتائج اقرب ما تكون للصحيحة`);
+        }
         $(element).parent().children("input[name='letters_number']").val(messageLength);
         $(element).parent().children("input[name='message_number']").val(messagesNumber);
     }
@@ -643,6 +733,4 @@
 
         return false;
     }
-
- 
 </script>

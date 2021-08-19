@@ -12,7 +12,7 @@
 
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-6">
+            <!-- <div class="col-lg-6">
                 <form>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
@@ -41,20 +41,8 @@
                     </div>
                 </form>
 
-
-
             </div>
-
-
-
-
-            <!-- end block1 -->
-
-
-            <!-- start block2 -->
-
             <div class="col-lg-6">
-
                 <form>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
@@ -68,7 +56,6 @@
 
                             </select>
                         </div>
-                        <!--  -->
                         <div class="col-md-6 mb-3">
                             <label for="type_sender">نوع إرسال البيانات:
                             </label>
@@ -95,11 +82,9 @@
 
 
 
-            </div>
-            <!-- end block2 -->
+            </div> -->
 
         </div>
-        <!-- end row1 -->
         <hr>
         <div class="d-flex justify-content-end">
             <a onclick="save()" class="btn btn-success m-2" style="color: #fff;

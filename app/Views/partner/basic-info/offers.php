@@ -372,7 +372,7 @@
 
     function getPartnersData() {
         var jqxhr = $.ajax({
-                "url": "https://sa.arsail.net/schools/Partners/GetServicePartner",
+                "url": "<?= site_url('') ?>Partners/GetServicePartner",
                 "method": "GET",
                 "timeout": 0,
                 "headers": {

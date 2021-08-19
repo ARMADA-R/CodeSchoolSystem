@@ -145,7 +145,7 @@
     var section_id = null;
     $(document).ready(function() {
         dataTable = $('#messages_forms').DataTable({
-            dom: `<"row d-flex"<"col-md-6 d-flex"fl><"col-md-6  d-flex align-items-center "<"m-right-auto"B>>>rtip`,
+            dom: `<"row d-flex justify-content-end mx-1 my-1 mb-3 "B><"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
                 [5, 10, 20, 50],
                 [5, 10, 20, 50]

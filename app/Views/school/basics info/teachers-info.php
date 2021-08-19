@@ -140,12 +140,93 @@
 </div>
 <button id="edit-teacher-btn" style="display: none;" class="btn btn-light" data-toggle="modal" data-target="#edit-teacher"></button>
 
+
+<div class="modal fade" id="add-teachers-from-file" tabindex="-1" aria-labelledby="add-teachers-from-fileLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add-teachers-from-fileLabel">اضافة معلمين من ملف</h5>
+                <div class="d-flex justify-content-center ml-auto mr-auto">
+                    <div class="spinner-border" style="visibility: hidden;" id="proccesingFileSpenner" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form onsubmit="addFromFile(); return false;">
+                <div class="modal-body p-4">
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <input required type="file" class="form-control" name="xlfile" id="xlf" accept=".xlsx, .xls">
+                                <!-- <small class="form-text text-danger">لسلامة البيانات المدخلة يرجى التأكد من ان الملف يتبع الشكل المحدد ولا يتعارض مع طريقة الادخال المحددة</small> -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md">
+                            <div class="form-group">
+                                <!-- <label for="excelSheets">الورقة</label> -->
+                                <select class="form-control " name="" id="excelSheets"></select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+
+                            <button type="button" id="add-from-file-submit" onclick="ExcelSubmit();" class="btn btn-primary w-100">
+                                <span class="spinner-border spinner-border-sm" style="display: none;" id="add-from-file-spinner"  role="status" aria-hidden="true"></span>
+                                <span id="save-file-btn-text">حفظ</span>
+                            </button>
+                            <input type="hidden" class="form-control" name="table" id="jstable" required>
+                            <input type="" id="excel-form-submit" style="visibility: hidden;" value="">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md">
+                            <div id="htmlout" style="overflow-x: scroll;"></div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div>
+                            <div id="add-from-file-spinner" style="display: none" class="spinner-border text-secondary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="hidden" class="form-control" name="table" id="jstable" required>
+                            <input type="" id="excel-form-submit" style="visibility: hidden;" value="">
+                            <button type="button" id="add-from-file-submit2" onclick="ExcelSubmit();" class="btn btn-primary w-100">
+                                <span class="spinner-border spinner-border-sm" style="display: none;" id="add-from-file-spinner2"  role="status" aria-hidden="true"></span>
+                                <span id="save-file-btn-text">حفظ</span>
+                            </button>                            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                            <button type="button" onclick="addFromFile()" id="add-from-file-submit" class="btn btn-primary">حفظ</button> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header p-2 d-flex align-items-center bg-white">
                 <div class="m-left-auto">
                     <button type="button" class="btn btn-light" data-toggle="modal" data-target="#add-teacher">اضف معلم</button>
+                </div>
+                <div class="mx-1">
+                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#add-teachers-from-file">تحميل ملف</button>
                 </div>
             </div>
             <div class="card-body p-2" style="overflow-x: scroll;">
@@ -172,6 +253,14 @@
 <script src="<?php echo base_url() . '/public/'; ?>Excel/jquery.table2excel.js"></script>
 
 <script src="<?php echo base_url() . '/public/'; ?>design/js/datatable.all.js"></script>
+
+<script src="<?php echo base_url() . '/public/'; ?>Excel/EXCEL/parseTable.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Excel/EXCEL/shim.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Excel/EXCEL/xlsx.full.min.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Excel/EXCEL/jquery-ui.min.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Excel/EXCEL/jquery.dragtable.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Excel/EXCEL/FileSaver.min.js"></script>
+
 
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
@@ -609,5 +698,324 @@
             });
 
         return false;
+    }
+</script>
+
+
+<script>
+    var selectedValues = [];
+
+    function addFromFile(data) {
+
+        var form = new FormData();
+        form.append("excelData", JSON.stringify(data));
+        form.append("school_id", school_id);
+        form.append("user_id", user_id);
+
+        $('#add-from-file-submit').attr("disabled", true);
+        $('#add-from-file-spinner').show();
+        $('#add-from-file-submit2').attr("disabled", true);
+        $('#add-from-file-spinner2').show();
+
+        var jqxhr = $.ajax({
+                url: "<?= site_url('TeachersExtends/AddTeachersFromFile') ?>", //"https://sa.arsail.net/schools/Courses/AddCourse",
+                method: "POST",
+                timeout: 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "headers": {
+                    "Authorization": token,
+                },
+                data: form
+            })
+            .done(function(response) {
+                refreshTeachersTable();
+                toastr.success(JSON.parse(response).msg)
+            })
+            .fail(function(response) {
+                console.log([response, response.responseText]);
+                toastr.error(JSON.parse(response.responseText).msg, 'خطأ');
+            }).always(function() {
+                $('#add-from-file-submit').removeAttr('disabled');
+                $('#add-from-file-spinner').hide();
+                $('#add-from-file-submit2').removeAttr('disabled');
+                $('#add-from-file-spinner2').hide();
+            });
+
+        return false;
+    }
+
+    function ExcelSubmit() {
+        console.log(selectedValues);
+        if (selectedValues.length < 5) {
+            alert('يجب تحديد جميع اسماء الاعمدة اولاً!!');
+        } else {
+            addFromFile(getdata());
+            // console.log(JSON.parse(document.getElementById('jstable').value));
+            document.getElementById('excel-form-submit').click();
+        }
+    };
+
+    var columns = {
+        'full_name': 'اسم المعلم',
+        'teacher_number': 'رقم المعلم',
+        'phone': 'الهاتف',        
+    };
+
+    $('.custom-file input').change(function(e) {
+        if (e.target.files.length) {
+            $(this).next('.custom-file-label').html(e.target.files[0].name);
+        }
+    });
+
+    function getdata() {
+        //rename and get data from table as js array 
+        var index = 0;
+        var thArray = [];
+
+        $('#excel-table > thead > tr > th > select').each(function() {
+            thArray.push($(this).val());
+        });
+
+        $('#excel-table > thead > tr > th').each(function() {
+            $(this).text(thArray[index++]);
+        });
+
+        var table = document.getElementById("excel-table");
+        var data = parseTable(table);
+
+        console.log(data);
+        //convert js array to JSON and passing it to php by html input
+        // document.getElementById('jstable').value = JSON.stringify(data);
+
+        return data;
+    };
+
+    function uniqueSelects() {
+        $('select').on('change', function() {
+            selectedValues = [];
+            $('select').each(function() {
+                var thisValue = this.value;
+                if (thisValue !== '')
+                    selectedValues.push(thisValue);
+            }).each(function() {
+                $(this).find('option:not(:selected)').each(function() {
+                    if ($.inArray(this.value, selectedValues) === -1) {
+                        $(this).removeAttr('hidden');
+                    } else {
+                        if (this.value !== '')
+                            $(this).attr('hidden', 'hidden');
+                    }
+                });
+            });
+        });
+    }
+
+    function deleteRow(element) {
+        if (confirm("هل انت متأكد من حذف هذا السطر؟ \n الاسطر المحذوفة لا تضاف الى قاعدة البيانات")) {
+            $(element).closest('tr').remove();
+        }
+    }
+</script>
+
+<script>
+    var proccesingFileSpenner = $("#proccesingFileSpenner");
+    var sheetNames = [];
+    var sheetToView = 0;
+    var xlf = document.getElementById('xlf');
+    var X = XLSX;
+    var XW = {
+        /* worker message */
+        msg: 'xlsx',
+        /* worker scripts */
+        worker: '<?= base_url('') . '/public/' ?>Excel/EXCEL/xlsxworker.js'
+    };
+    var global_wb;
+
+    var process_wb = (function() {
+        $("#htmlout").html('');
+        var OUT = document.getElementById('out');
+        var HTMLOUT = document.getElementById('htmlout');
+
+        var to_html = function to_html(workbook) {
+            HTMLOUT.innerHTML = "";
+            showSpinner();
+            // console.log(workbook);
+
+            workbook.SheetNames.forEach(function(sheetName, index) {
+
+
+
+
+
+                if (index == $("#excelSheets").val()) {
+
+
+                    // if (condition) {
+                    // }
+                    var htmlstr = X.write(workbook, {
+                        id: "excel-table",
+                        editable: true,
+                        sheet: sheetName,
+                        type: 'string',
+                        bookType: 'html'
+                    });
+
+
+                    // set button to each row
+                    var jqueryHtmlStr = $(htmlstr);
+                    var tableRows = jqueryHtmlStr.find("tbody").children();
+                    var tbodtHtml = '';
+                    for (let i = 0; i < tableRows.length; i++) {
+                        tbodtHtml += $(tableRows[i]).append(`<td id="sjs-xxx${i}"><div class="row justify-content-center  text-white "><button type="button" class="btn btn-outline-danger" onclick="deleteRow(this);" >حذف</button></row></td>`)[0].outerHTML;
+                    }
+
+                    jqueryHtmlStr.find("tbody");
+                    (jqueryHtmlStr.find("tbody").html(''));
+                    jqueryHtmlStr.find("tbody").html(tbodtHtml);
+
+                    htmlstr = '';
+                    jqueryHtmlStr.each(function(index) {
+                        htmlstr += jqueryHtmlStr[index].outerHTML
+                    });
+
+
+                    var counter = 0;
+                    for (var index = 1; index < htmlstr.length - 3; index++) {
+                        if (htmlstr[index - 1] == '<' && htmlstr[index] == 't' && htmlstr[index + 1] == 'd') {
+                            counter++;
+                        }
+                        if (htmlstr[index] == '/' && htmlstr[index + 1] == 't' && htmlstr[index + 2] == 'r')
+                            break;
+                    }
+
+                    var head = "<thead><tr>";
+                    for (let index = 0; index < counter - 1; index++) { // counter - 1 case we have a delete button
+                        let options = '';
+                        Object.keys(columns).forEach(function(key) {
+                            // do something with obj[key]
+                            options += '<option value="' + key + '"> ' + columns[key] + ' </option>'
+                        });
+
+                        head += "<th>" +
+                            ' <select required name="column_' + index + '" id="column_' + index + '" class="form-control">' +
+                            '<option value="" selected> -- </option>' +
+                            options +
+                            '</select>' +
+                            "</th>"
+
+                    }
+                    head += "<th class=\"align-middle text-center\">خيارات</th>";
+
+                    head += "</tr></thead>";
+                    // console.log(htmlstr);
+                    HTMLOUT.innerHTML += htmlstr;
+                    document.getElementById('excel-table').innerHTML += head;
+                    document.getElementById('excel-table').className += "draggable table table-striped table-bordered table-hover";
+                    uniqueSelects();
+
+                    // hiding spinner 
+                    // drag();
+
+                }
+            });
+            proccesingFileSpenner.attr('style', 'visibility:hidden');
+            return "";
+        };
+        return function process_wb(wb) {
+            showSpinner();
+
+            global_wb = wb;
+            var output = "";
+            output = to_html(wb);
+
+
+            if (typeof console !== 'undefined') console.log("output", new Date());
+
+
+        };
+
+    })();
+
+    var do_file = (function() {
+        var rABS = typeof FileReader !== "undefined" && (FileReader.prototype || {}).readAsBinaryString;
+        var use_worker = typeof Worker !== 'undefined';
+        var xw = function xw(data, cb) {
+            var worker = new Worker(XW.worker);
+            worker.onmessage = function(e) {
+                switch (e.data.t) {
+                    case 'ready':
+                        break;
+                    case 'e':
+                        console.error(e.data.d);
+                        break;
+                    case XW.msg:
+                        cb(JSON.parse(e.data.d));
+                        break;
+                }
+            };
+            worker.postMessage({
+                d: data,
+                b: rABS ? 'binary' : 'array'
+            });
+        };
+
+        return function do_file(files) {
+
+            showSpinner();
+
+            var f = files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                if (typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
+                var data = e.target.result;
+                if (!rABS) data = new Uint8Array(data);
+                if (use_worker) xw(data, process_wb);
+                else process_wb(X.read(data, {
+                    type: rABS ? 'binary' : 'array'
+                }));
+
+                // set sheets names as options in select box
+                sheetNames = X.read(data, {
+                    type: rABS ? 'binary' : 'array'
+                }).SheetNames;
+                $("#excelSheets").html("");
+                for (let i = 0; i < sheetNames.length; i++) {
+                    $("#excelSheets").append($('<option>', {
+                        value: i,
+                        text: sheetNames[i],
+                    }));
+                }
+            };
+            if (rABS) reader.readAsBinaryString(f);
+            else reader.readAsArrayBuffer(f);
+
+
+        };
+
+    })();
+
+    (function() {
+        if (!xlf.addEventListener) return;
+
+        function handleFile(e) {
+            showSpinner();
+
+            do_file(e.target.files);
+
+        }
+        xlf.addEventListener('change', handleFile, false);
+
+        $("#excelSheets").change(function() {
+            console.log("sheet changed");
+            showSpinner();
+            process_wb(global_wb);
+        })
+    })();
+
+    function showSpinner() {
+        // showing spinner while prccess file
+        proccesingFileSpenner.attr('style', 'visibility:visible');
     }
 </script>
