@@ -468,7 +468,7 @@
 
     function refreshContentTable() {
         var jqxhr = $.ajax({
-                url: "http://localhost/codeigniter/CodeSchoolSystem/public/Schools/getSchoolGates",
+                url: "<?= site_url('') ?>Schools/getSchoolGates",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -491,7 +491,7 @@
     function deleteRecord(id) {
         if (confirm('هل انت متأكد من انك تريد حذف اعدادات هذه البوابة؟')) {
             var jqxhr = $.ajax({
-                    "url": "http://localhost/codeigniter/CodeSchoolSystem/public/Schools/deleteSchoolGate",
+                    "url": "<?= site_url('') ?>Schools/deleteSchoolGate",
                     "method": "DELETE",
                     "timeout": 0,
                     "headers": {
@@ -535,7 +535,7 @@
         $('#update-spinner').show();
 
         var jqxhr = $.ajax({
-                url: "http://localhost/codeigniter/CodeSchoolSystem/public/Schools/setSchoolGate",
+                url: "<?= site_url('') ?>Schools/setSchoolGate",
                 method: "POST",
                 timeout: 0,
                 data: {
@@ -591,7 +591,7 @@
         $('#add-spinner').show();
 
         var jqxhr = $.ajax({
-                url: "http://localhost/codeigniter/CodeSchoolSystem/public/Schools/setSchoolGate",
+                url: "<?= site_url('') ?>Schools/setSchoolGate",
                 method: "POST",
                 timeout: 0,
                 data: {
@@ -626,7 +626,7 @@
 
     function getSystemGates() {
         var jqxhr = $.ajax({
-                url: "http://localhost/codeigniter/CodeSchoolSystem/public/Gates_Api/Gates?key=all",
+                url: "<?= site_url('') ?>Gates_Api/Gates?key=all",
                 method: "GET",
                 timeout: 0,
                 headers: {

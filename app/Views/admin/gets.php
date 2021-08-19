@@ -915,7 +915,7 @@
 
     function getsTable() {
         var jqxhr = $.ajax({
-                url: "http://localhost/codeigniter/CodeSchoolSystem/public/Gates_Api/Gates",
+                url: "<?= site_url('') ?>Gates_Api/Gates",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -1004,7 +1004,7 @@
         }, {});
 
         $.ajax({
-            url: "http://localhost/codeigniter/CodeSchoolSystem/public/Gates_Api/AddGate",
+            url: "<?= site_url('') ?>Gates_Api/AddGate",
             method: "POST",
             "headers": {
                 "Authorization": token
@@ -1060,7 +1060,7 @@
         }, {});
 
         $.ajax({
-            url: "http://localhost/codeigniter/CodeSchoolSystem/public/Gates_Api/updateGate",
+            url: "<?= site_url('') ?>Gates_Api/updateGate",
             method: "POST",
             "headers": {
                 "Authorization": token

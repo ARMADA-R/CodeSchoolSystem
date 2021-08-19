@@ -798,7 +798,7 @@
 
     function refreshContentTable() {
         var jqxhr = $.ajax({
-                url: "http://localhost/codeigniter/CodeSchoolSystem/public/Schools/GetStudentAbsenceAndLag",
+                url: "<?= site_url('') ?>Schools/GetStudentAbsenceAndLag",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -1228,7 +1228,7 @@
     function sendNotifications(data = []) {
 
         var jqxhr = $.ajax({
-                "url": "http://localhost/codeigniter/CodeSchoolSystem/public/Schools/SendAbsenceAndLagNotifications",
+                "url": "<?= site_url('') ?>Schools/SendAbsenceAndLagNotifications",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
