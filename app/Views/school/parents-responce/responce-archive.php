@@ -554,7 +554,7 @@
 
     function getArchiveData() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Schools/GetParentArchiveAbsenceAndLag",
+                url: "<?= site_url('') ?>Schools/GetParentArchiveAbsenceAndLag",
                 method: "GET",
                 timeout: 0,
                 data: {

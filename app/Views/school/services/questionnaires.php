@@ -414,7 +414,7 @@
 
     function getSurveyData() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Servies/GetSurvey",
+                url: "<?= site_url('') ?>Servies/GetSurvey",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -443,7 +443,7 @@
         }, {});
 
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Servies/addSurveysss",
+                url: "<?= site_url('') ?>Servies/addSurveysss",
                 method: "GET",
                 timeout: 0,
                 data: {

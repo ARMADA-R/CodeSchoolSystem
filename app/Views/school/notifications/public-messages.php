@@ -1142,7 +1142,7 @@
 
     function getStudentsData() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Students/GetStudents",
+                url: "<?= site_url('') ?>Students/GetStudents",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -1165,7 +1165,7 @@
 
     function getTeachersData() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Teachers/GetTeachers",
+                url: "<?= site_url('') ?>Teachers/GetTeachers",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -1188,7 +1188,7 @@
 
     function getEmployeesData() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Employee/GetEmployee",
+                url: "<?= site_url('') ?>Employee/GetEmployee",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -1229,7 +1229,7 @@
     function sendNotifications(students_id, class_id, semaster_name, status, period, day, date) {
 
         var jqxhr = $.ajax({
-                "url": "https://sa.arsail.net/schools/Schools/SendAbsenceAndLag",
+                "url": "<?= site_url('') ?>Schools/SendAbsenceAndLag",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
@@ -1262,7 +1262,7 @@
 
     function getTemplates() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Templates/GetGeneralMessagingTempalte",
+                url: "<?= site_url('') ?>Templates/GetGeneralMessagingTempalte",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -1302,7 +1302,7 @@
         }
         
         var jqxhr = $.ajax({
-                "url": "https://sa.arsail.net/schools/Messaging/SendGeneralMail",
+                "url": "<?= site_url('') ?>Messaging/SendGeneralMail",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {

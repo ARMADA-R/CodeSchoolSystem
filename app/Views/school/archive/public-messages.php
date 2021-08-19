@@ -1589,7 +1589,7 @@
 
     function getArchiveData(group) {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Messaging/GetArchiveGeneralMessage",
+                url: "<?= site_url('') ?>Messaging/GetArchiveGeneralMessage",
                 method: "GET",
                 timeout: 0,
                 data: {

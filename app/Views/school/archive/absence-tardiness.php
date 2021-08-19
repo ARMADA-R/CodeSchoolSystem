@@ -419,7 +419,7 @@
 
     function refreshContentTable() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Schools/GetArchiveAbsenceAndLag",
+                url: "<?= site_url('') ?>Schools/GetArchiveAbsenceAndLag",
                 method: "GET",
                 timeout: 0,
                 data: {

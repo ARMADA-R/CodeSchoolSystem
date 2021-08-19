@@ -516,7 +516,7 @@
 
     function refreshEmployeesTable() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Employee/GetEmployee",
+                url: "<?= site_url('') ?>Employee/GetEmployee",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -541,7 +541,7 @@
     function deleteRecord(id) {
         if (confirm('هل انت متأكد من انك تريد حذف هذا السجل؟')) {
             var jqxhr = $.ajax({
-                    "url": "https://sa.arsail.net/schools/Employee/DeleteEmployee",
+                    "url": "<?= site_url('') ?>Employee/DeleteEmployee",
                     "method": "DELETE",
                     "timeout": 0,
                     "headers": {
@@ -581,7 +581,7 @@
         $('#edit-employee-submit').attr("disabled", true);
         $('#edit-spinner').show();
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Employee/EditEmployee",
+                url: "<?= site_url('') ?>Employee/EditEmployee",
                 method: "POST",
                 timeout: 0,
                 data: {
@@ -619,7 +619,7 @@
         $('#add-spinner').show();
 
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Employee/AddEmployee",
+                url: "<?= site_url('') ?>Employee/AddEmployee",
                 method: "POST",
                 timeout: 0,
                 data: {

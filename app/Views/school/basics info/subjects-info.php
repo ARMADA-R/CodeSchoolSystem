@@ -582,7 +582,7 @@
 
     function refreshContentTable() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Courses/GetCourses",
+                url: "<?= site_url('') ?>Courses/GetCourses",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -607,7 +607,7 @@
     function deleteRecord(id) {
         if (confirm('هل انت متأكد من انك تريد حذف هذا السجل؟')) {
             var jqxhr = $.ajax({
-                    "url": "https://sa.arsail.net/schools/Courses/DeleteCourse",
+                    "url": "<?= site_url('') ?>Courses/DeleteCourse",
                     "method": "DELETE",
                     "timeout": 0,
                     "headers": {
@@ -650,7 +650,7 @@
         $('#edit-employee-submit').attr("disabled", true);
         $('#edit-spinner').show();
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Courses/EditCourse",
+                url: "<?= site_url('') ?>Courses/EditCourse",
                 method: "POST",
                 timeout: 0,
                 data: {
@@ -692,7 +692,7 @@
         $('#add-spinner').show();
 
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Courses/AddCourse",
+                url: "<?= site_url('') ?>Courses/AddCourse",
                 method: "POST",
                 timeout: 0,
                 data: {
@@ -742,7 +742,7 @@
         $('#add-from-file-spinner2').show();
 
         var jqxhr = $.ajax({
-                url: "<?= site_url('CoursesExtends/AddCoursesFromFile') ?>", //"https://sa.arsail.net/schools/Courses/AddCourse",
+                url: "<?= site_url('CoursesExtends/AddCoursesFromFile') ?>", //"<?= site_url('') ?>Courses/AddCourse",
                 method: "POST",
                 timeout: 0,
                 "processData": false,

@@ -378,7 +378,7 @@
 
     function getArchiveData() {
         var jqxhr = $.ajax({
-                "url": "https://sa.arsail.net/schools/Partners/GetPartners?page=1&limit=2",
+                "url": "<?= site_url('') ?>Partners/GetPartners?page=1&limit=2",
                 "method": "GET",
                 "timeout": 0,
                 "headers": {

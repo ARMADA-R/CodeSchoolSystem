@@ -611,7 +611,7 @@
 
     function refreshStudentsTable() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Students/GetStudents",
+                url: "<?= site_url('') ?>Students/GetStudents",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -636,7 +636,7 @@
     function deleteRecord(id) {
         if (confirm('هل انت متأكد من انك تريد حذف هذا القالب؟')) {
             var jqxhr = $.ajax({
-                    "url": "https://sa.arsail.net/schools/Students/DeleteStudent",
+                    "url": "<?= site_url('') ?>Students/DeleteStudent",
                     "method": "DELETE",
                     "timeout": 0,
                     "headers": {
@@ -680,7 +680,7 @@
         $('#edit-student-submit').attr("disabled", true);
         $('#edit-spinner').show();
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Students/EditStudent",
+                url: "<?= site_url('') ?>Students/EditStudent",
                 method: "POST",
                 timeout: 0,
                 data: {
@@ -722,7 +722,7 @@
         $('#add-spinner').show();
 
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Students/AddStudent",
+                url: "<?= site_url('') ?>Students/AddStudent",
                 method: "POST",
                 timeout: 0,
                 data: {
@@ -757,7 +757,7 @@
 
     function getClasses() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Schools/GetClasses",
+                url: "<?= site_url('') ?>Schools/GetClasses",
                 method: "GET",
                 timeout: 0,
                 headers: {
@@ -776,7 +776,7 @@
 
     function getSemesters() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Schools/GetSemester",
+                url: "<?= site_url('') ?>Schools/GetSemester",
                 method: "GET",
                 timeout: 0,
                 headers: {
@@ -843,7 +843,7 @@
         $('#add-from-file-spinner2').show();
 
         var jqxhr = $.ajax({
-                url: "<?= site_url('StudentsExtends/AddStudentsFromFile') ?>", //"https://sa.arsail.net/schools/Courses/AddCourse",
+                url: "<?= site_url('StudentsExtends/AddStudentsFromFile') ?>", //"<?= site_url('') ?>Courses/AddCourse",
                 method: "POST",
                 timeout: 0,
                 "processData": false,

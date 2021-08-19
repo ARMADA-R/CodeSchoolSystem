@@ -190,7 +190,7 @@
         $("#send-survey-btn").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                     <span class="sr-only">جارٍ الارسال...</span>`);
         $.ajax({
-                "url": "https://sa.arsail.net/schools/Servies/AddSurvey",
+                "url": "<?= site_url('') ?>Servies/AddSurvey",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {

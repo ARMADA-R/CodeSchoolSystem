@@ -827,7 +827,7 @@
 
     function getClasses() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Schools/GetClasses",
+                url: "<?= site_url('') ?>Schools/GetClasses",
                 method: "GET",
                 timeout: 0,
                 headers: {
@@ -846,7 +846,7 @@
 
     function getSemesters() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Schools/GetSemester",
+                url: "<?= site_url('') ?>Schools/GetSemester",
                 method: "GET",
                 timeout: 0,
                 headers: {
@@ -865,7 +865,7 @@
 
     function getPeriods() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Schools/GetPeriods?school_id=" + school_id,
+                url: "<?= site_url('') ?>Schools/GetPeriods?school_id=" + school_id,
                 method: "GET",
                 timeout: 0,
                 headers: {
@@ -1255,7 +1255,7 @@
 
     function getTemplates() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Templates/GetGeneralMessagingTempalte",
+                url: "<?= site_url('') ?>Templates/GetGeneralMessagingTempalte",
                 method: "GET",
                 timeout: 0,
                 data: {

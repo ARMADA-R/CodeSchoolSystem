@@ -545,7 +545,7 @@
 
     function refreshTemplatesTable() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Templates/GetGeneralMessagingTempalte",
+                url: "<?= site_url('') ?>Templates/GetGeneralMessagingTempalte",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -570,7 +570,7 @@
     function deleteRecord(id) {
         if (confirm('هل انت متأكد من انك تريد حذف هذا القالب؟')) {
             var jqxhr = $.ajax({
-                    "url": "https://sa.arsail.net/schools/Templates/DeleteTemplate",
+                    "url": "<?= site_url('') ?>Templates/DeleteTemplate",
                     "method": "DELETE",
                     "timeout": 0,
                     "headers": {
@@ -617,7 +617,7 @@
         $('#edit-temblate-submit').attr("disabled", true);
         $('#edit-spinner').show();
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Templates/EditTemplate",
+                url: "<?= site_url('') ?>Templates/EditTemplate",
                 method: "POST",
                 timeout: 0,
                 data: {
@@ -701,7 +701,7 @@
         $('#add-spinner').show();
 
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Templates/AddTemplate",
+                url: "<?= site_url('') ?>Templates/AddTemplate",
                 method: "POST",
                 timeout: 0,
                 data: {

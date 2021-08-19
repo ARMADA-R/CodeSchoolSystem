@@ -106,7 +106,7 @@
     $("#get-shorrten-btn").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                     <span class="sr-only">جارٍ التحميل...</span>`);
     $.ajax({
-      "url": "https://sa.arsail.net/schools/Servies/GetTinyUrl",
+      "url": "<?= site_url('') ?>Servies/GetTinyUrl",
       "method": "POST",
       "timeout": 0,
       "headers": {
@@ -139,7 +139,7 @@
     $("#image-to-upload-btn").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                     <span class="sr-only">جارٍ المعالجة...</span>`);
     $.ajax({
-      "url": "https://sa.arsail.net/schools/Servies/UploadImage",
+      "url": "<?= site_url('') ?>Servies/UploadImage",
       "method": "POST",
       "timeout": 0,
       "headers": {

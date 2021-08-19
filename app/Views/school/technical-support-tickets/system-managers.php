@@ -531,7 +531,7 @@
 
     function getTicketsData() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Tickets/GetSchoolsAdminTicketsBySchoolId",
+                url: "<?= site_url('') ?>Tickets/GetSchoolsAdminTicketsBySchoolId",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -615,7 +615,7 @@
         $("#spinner-control").attr('style', 'display: .');
 
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Tickets/GetTicketsReply",
+                url: "<?= site_url('') ?>Tickets/GetTicketsReply",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -663,7 +663,7 @@
         var reply = $("#user-reply").val();
 
         $.ajax({
-                "url": "https://sa.arsail.net/schools/Tickets/ReplyTicket",
+                "url": "<?= site_url('') ?>Tickets/ReplyTicket",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
@@ -695,7 +695,7 @@
         $("#send-ticket-btn").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                     <span class="sr-only">جارٍ الارسال...</span>`);
         $.ajax({
-                "url": "https://sa.arsail.net/schools/Tickets/AddSchoolAdminTicket",
+                "url": "<?= site_url('') ?>Tickets/AddSchoolAdminTicket",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {

@@ -424,7 +424,7 @@
 
     function refreshExamsTable() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Schools/GetSchoolExamTable",
+                url: "<?= site_url('') ?>Schools/GetSchoolExamTable",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -457,7 +457,7 @@
         // $('#add-spinner').show();
 
         // var jqxhr = $.ajax({
-        //         url: "https://sa.arsail.net/schools/Templates/AddTemplate",
+        //         url: "<?= site_url('') ?>Templates/AddTemplate",
         //         method: "POST",
         //         timeout: 0,
         //         data: {
@@ -491,7 +491,7 @@
     }
     // function getClasses() {
     //     var jqxhr = $.ajax({
-    //             url: "https://sa.arsail.net/schools/Schools/GetClasses",
+    //             url: "<?= site_url('') ?>Schools/GetClasses",
     //             method: "GET",
     //             timeout: 0,
     //             headers: {
@@ -510,7 +510,7 @@
 
     // function getSemesters() {
     //     var jqxhr = $.ajax({
-    //             url: "https://sa.arsail.net/schools/Schools/GetSemester",
+    //             url: "<?= site_url('') ?>Schools/GetSemester",
     //             method: "GET",
     //             timeout: 0,
     //             headers: {

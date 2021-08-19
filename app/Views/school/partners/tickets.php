@@ -434,7 +434,7 @@
 
     function getTicketsData() {
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Tickets/GetSchoolPartnersTicketsByPartnerId",
+                url: "<?= site_url('') ?>Tickets/GetSchoolPartnersTicketsByPartnerId",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -476,7 +476,7 @@
         $("#spinner-control").attr('style', 'display: .');
 
         var jqxhr = $.ajax({
-                url: "https://sa.arsail.net/schools/Tickets/GetTicketsReply",
+                url: "<?= site_url('') ?>Tickets/GetTicketsReply",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -524,7 +524,7 @@
         var reply = $("#user-reply").val();
 
         $.ajax({
-                "url": "https://sa.arsail.net/schools/Tickets/ReplyTicket",
+                "url": "<?= site_url('') ?>Tickets/ReplyTicket",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
