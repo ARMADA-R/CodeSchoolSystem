@@ -147,24 +147,27 @@
                     title: 'الجوال'
                 },
                 {
-                    data: 'message_text',
-                    name: 'message_text',
-                    className: 'text-center t-message_text align-middle',
+                    data: 'message',
+                    name: 'message',
+                    className: 'text-center t-message align-middle',
                     title: 'نص الرسالة'
                 },
                 {
                     data: 'send_date',
                     name: 'send_date',
                     className: 'text-center t-send_date align-middle',
-                    title: 'تاريخ الارسال'
+                    title: 'تاريخ الارسال',
+                    render: function(data, type, row, meta) {
+
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
+                    }
                 },
                 {
-                    data: null,
+                    data: 'send_status',
                     className: 'text-center align-middle',
                     title: 'حالة الارسال',
                     render: function(data, type, row, meta) {
-                        return '';
-                        // return `<button class="btn btn-link ${row.id}" style="color: #212529;" id="button-date-${row.id}" onclick="sendStudentNotification(${row.id})">ارسال</button>`;
+                        return (data == 1)? `<div class="text-success">تم الارسال</div>` : ((data == 0)? `<div class="text-danger">فشل الارسال</div>` : ((data == -1 )? `<div class="text-muted">غير مخصصة للارسال</div>` :`جارٍ الارسال`));
                     }
                 },
             ],
@@ -440,12 +443,13 @@
                 $(row).addClass('datatable-row');
                 $(row).addClass('notToExcel');
             },
-            columns: [{
+            columns: [
+                {
+                    "data": null,
                     "className": 'details-control align-middle',
                     "orderable": false,
                     searchable: false,
                     exportable: false,
-                    "data": null,
                     "defaultContent": ''
                 },
                 {
@@ -484,25 +488,27 @@
                     title: 'الجوال'
                 },
                 {
-                    data: 'message_text',
-                    name: 'message_text',
-                    className: 'text-center t-message_text align-middle',
+                    data: 'message',
+                    name: 'message',
+                    className: 'text-center t-message align-middle',
                     title: 'نص الرسالة'
                 },
                 {
                     data: 'send_date',
                     name: 'send_date',
                     className: 'text-center t-send_date align-middle',
-                    title: 'تاريخ الارسال'
+                    title: 'تاريخ الارسال',
+                    render: function(data, type, row, meta) {
+
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
+                    }
                 },
                 {
-                    data: null,
-                    name: 'send_status',
+                    data: 'send_status',
                     className: 'text-center align-middle',
                     title: 'حالة الارسال',
                     render: function(data, type, row, meta) {
-                        return '--';
-                        // return `<button class="btn btn-link ${row.id}" style="color: #212529;" id="button-date-${row.id}" onclick="sendStudentNotification(${row.id})">ارسال</button>`;
+                        return (data == 1)? `<div class="text-success">تم الارسال</div>` : ((data == 0)? `<div class="text-danger">فشل الارسال</div>` : ((data == -1 )? `<div class="text-muted">غير مخصصة للارسال</div>` :`جارٍ الارسال`));
                     }
                 },
             ],
@@ -874,24 +880,27 @@
                     title: 'الجوال'
                 },
                 {
-                    data: 'message_text',
-                    name: 'message_text',
-                    className: 'text-center t-message_text align-middle',
+                    data: 'message',
+                    name: 'message',
+                    className: 'text-center t-message align-middle',
                     title: 'نص الرسالة'
                 },
                 {
                     data: 'send_date',
                     name: 'send_date',
                     className: 'text-center t-send_date align-middle',
-                    title: 'تاريخ الارسال'
+                    title: 'تاريخ الارسال',
+                    render: function(data, type, row, meta) {
+
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
+                    }
                 },
                 {
-                    data: null,
+                    data: 'send_status',
                     className: 'text-center align-middle',
                     title: 'حالة الارسال',
                     render: function(data, type, row, meta) {
-                        return '';
-                        // return `<button class="btn btn-link ${row.id}" style="color: #212529;" id="button-date-${row.id}" onclick="sendStudentNotification(${row.id})">ارسال</button>`;
+                        return (data == 1)? `<div class="text-success">تم الارسال</div>` : ((data == 0)? `<div class="text-danger">فشل الارسال</div>` : ((data == -1 )? `<div class="text-muted">غير مخصصة للارسال</div>` :`جارٍ الارسال`));
                     }
                 },
             ],
@@ -1262,24 +1271,27 @@
                     title: 'الجوال'
                 },
                 {
-                    data: 'message_text',
-                    name: 'message_text',
-                    className: 'text-center t-message_text align-middle',
+                    data: 'message',
+                    name: 'message',
+                    className: 'text-center t-message align-middle',
                     title: 'نص الرسالة'
                 },
                 {
                     data: 'send_date',
                     name: 'send_date',
                     className: 'text-center t-send_date align-middle',
-                    title: 'تاريخ الارسال'
+                    title: 'تاريخ الارسال',
+                    render: function(data, type, row, meta) {
+
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
+                    }
                 },
                 {
-                    data: null,
+                    data: 'send_status',
                     className: 'text-center align-middle',
                     title: 'حالة الارسال',
                     render: function(data, type, row, meta) {
-                        return '';
-                        // return `<button class="btn btn-link ${row.id}" style="color: #212529;" id="button-date-${row.id}" onclick="sendStudentNotification(${row.id})">ارسال</button>`;
+                        return (data == 1)? `<div class="text-success">تم الارسال</div>` : ((data == 0)? `<div class="text-danger">فشل الارسال</div>` : ((data == -1 )? `<div class="text-muted">غير مخصصة للارسال</div>` :`جارٍ الارسال`));
                     }
                 },
             ],
@@ -1589,7 +1601,7 @@
 
     function getArchiveData(group) {
         var jqxhr = $.ajax({
-                url: "<?= site_url('') ?>Messaging/GetArchiveGeneralMessage",
+                url: "<?= site_url('') ?>Messaging/getGeneralMessageArchive",
                 method: "GET",
                 timeout: 0,
                 data: {

@@ -18,17 +18,23 @@ class HTTPRequester
     public static function HTTPGet($url)
     {
 
-        //Use file_get_contents to GET the URL in question.
-        $contents = file_get_contents($url);
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-        //If $contents is not a boolean FALSE value.
-        if ($contents !== false) {
-            //Print out the contents.
-            echo $contents;
-        }else
-        print_r($contents);
-        return $contents;
+        //for debug only!
+        // curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        // curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+        $resp = curl_exec($curl);
+        curl_close($curl);
+
+
+        return $resp;
+
     }
+
+
     /**
      * @description Make HTTP-POST call
      * @param       $url

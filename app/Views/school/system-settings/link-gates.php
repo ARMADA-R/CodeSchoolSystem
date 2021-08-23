@@ -37,21 +37,21 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="sender-name">اسم المرسل</label>
-                                <input type="text" name="sender_name" class="form-control" id="sender-name">
+                                <input  required type="text" name="sender_name" class="form-control" id="sender-name">
 
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="username">اسم المستخدم</label>
-                                <input type="text" name="username" class="form-control" id="username">
+                                <input  required type="text" name="username" class="form-control" id="username">
 
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="password">كلمة المرور</label>
-                                <input type="text" name="password" class="form-control" id="password">
+                                <input  required type="text" name="password" class="form-control" id="password">
 
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="update-password">كلمة المرور</label>
-                                <input required type="text" name="password" class="form-control" id="update-password">
+                                <input  required type="text" name="password" class="form-control" id="update-password">
 
                             </div>
                         </div>

@@ -480,46 +480,18 @@ class Gates_Api extends BaseController
 
 	public function sendSMS($gate_url, $user, $password, $to, $message, $sender, $mehod = "GET")
 	{
+		// if ($mehod == "GET") {
+			$url =  str_replace("@MESSAGE@", urlencode($message), str_replace("@RECEIVENUMBER@", $to, str_replace("@SENDERNAME@", $sender, str_replace("@PASSWORD@", $password, str_replace("@USERNAME@", $user, $gate_url)))));
+			return HTTPRequester::HTTPGet($url);
+		// } else if($mehod == "POST"){
 
-		$url =  str_replace("@MESSAGE@", $message, str_replace("@RECEIVENUMBER@", $to, str_replace("@SENDERNAME@", $sender, str_replace("@PASSWORD@", $password, str_replace("@USERNAME@", $user, $gate_url)))));
-		// print_r($url);
-
-		$data = [
-			// 'user' => $user,
-			// 'pass' => $pass,
-			// 'to' => $to,
-			// 'message' => $message,
-			// 'sender' => $sender,
-			// $date ?? 'date' =>  $date,
-			// $time ?? 'time' =>   $time
-		];
-
-		return HTTPRequester::HTTPGet($url);
-
-		// print_r(1);
-
-		// // use key 'http' even if you send the request to https://...
-		// $options = [
-		// 	'http' => [
-		// 		'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-		// 		'method'  => 'POST',
-		// 		'content' => http_build_query($data)
-		// 	]
-		// ];
-		// $context  = stream_context_create($options);
-
-		// print_r($context);
-
-		// $result = file_get_contents($url, false, $context);
-		// if ($result === FALSE) { /* Handle error */
-		// 	dd("faile");
+		// 	return HTTPRequester::HTTPPost($url, [
+				
+		// 	]);
 		// }
-
-		// print_r(3);
-		// dd($result);
-
-		// var_dump($result);
+		
 	}
+
 
 	public function getUserNotificationBalance($gate_id, $user_id)
 	{

@@ -47,7 +47,7 @@ class CoursesModel extends Model
     public function delete_course($id){
         $db = \Config\Database::connect();
         $builder = $db->table('courses');
-        $builder->where('id',$id);
+        $builder->whereIn('id',$id);
          $builder->delete();
          return $db->affectedRows();
        

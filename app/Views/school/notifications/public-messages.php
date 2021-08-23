@@ -14,7 +14,7 @@
 
 
 <div class="row mt-4  mb-4 justify-content-between" style="font-size: 1rem;">
-    <div class="col-sm-4">
+    <div class="col-md-3">
         <div class="form-group">
             <select required class="form-control" name="submit-type" id="determinants">
                 <option value="">المجموعة</option>
@@ -26,7 +26,7 @@
 
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-md-3">
         <div class="form-group">
             <select required class="form-control" name="template" id="templates">
                 <option value="">القالب</option>
@@ -35,8 +35,16 @@
 
     </div>
 
-    <div class="col-sm-4">
-        <button type="button" onclick="sendToGroup()" style="width: inherit; background-color: #fff;" class="btn btn-light">ارسال الى المجموعة</button>
+    <div class="col-md-3">
+        <div class="form-group">
+            <button type="button" onclick="sendToGroup()" style="width: 100%; background-color: #fff;" class="btn btn-light">ارسال الى المجموعة</button>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <button type="button" onclick="sendUsersNotifications()" style="width: 100%; background-color: #fff;" class="btn btn-light">ارسال الى المحدد</button>
+        </div>
     </div>
     <!-- /.col -->
 </div>
@@ -80,7 +88,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
-    
     var dataTable = null;
     var studentsData = [];
 
@@ -107,7 +114,7 @@
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
-                        return `<input type="checkbox" class='align-middle' value='${data}' name="teachers[]" id="${data}"/>`;
+                        return `<input type="checkbox" class='align-middle' value='${data}' name="Users[]" id="${data}"/>`;
                     }
                 },
                 {
@@ -394,7 +401,7 @@
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
-                        return `<input type="checkbox" class='align-middle' value='${data}' name="selected_data[]" id="${data}"/>`;
+                        return `<input type="checkbox" class='align-middle' value='${data}' name="Users[]" id="${data}"/>`;
                     }
                 },
                 {
@@ -413,13 +420,19 @@
                     data: 'full_name',
                     name: 'full_name',
                     className: 'text-center t-full_name align-middle',
-                    title: 'اسم الطالب'
+                    title: 'اسم الطالب',
+                    render: function(data, type, row, meta) {
+                        return `<div id="name-${row.id}">${data}</div>`;
+                    }
                 },
                 {
                     data: 'phone',
                     name: 'phone',
                     className: 'text-center t-phone align-middle',
-                    title: 'الجوال'
+                    title: 'الجوال',
+                    render: function(data, type, row, meta) {
+                        return `<div id="phone-${row.id}">${data}</div>`;
+                    }
                 },
                 {
                     data: null,
@@ -651,7 +664,7 @@
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
-                        return `<input type="checkbox" class='align-middle' value='${data}' name="selected_data[]" id="${data}"/>`;
+                        return `<input type="checkbox" class='align-middle' value='${data}' name="Users[]" id="${data}"/>`;
                     }
                 },
                 {
@@ -670,13 +683,19 @@
                     data: 'full_name',
                     name: 'full_name',
                     className: 'text-center t-full_name align-middle',
-                    title: 'اسم المعلم'
+                    title: 'اسم المعلم',
+                    render: function(data, type, row, meta) {
+                        return `<div id="name-${row.id}">${data}</div>`;
+                    }
                 },
                 {
                     data: 'phone',
                     name: 'phone',
                     className: 'text-center t-phone align-middle',
-                    title: 'الجوال'
+                    title: 'الجوال',
+                    render: function(data, type, row, meta) {
+                        return `<div id="phone-${row.id}">${data}</div>`;
+                    }
                 },
                 {
                     data: null,
@@ -898,7 +917,7 @@
 
             responsive: true,
             autoWidth: false,
-            rowId: 'student_id',
+            rowId: 'id',
             columns: [{
                     data: 'id',
                     className: 'text-center align-middle',
@@ -907,7 +926,7 @@
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
-                        return `<input type="checkbox" class='align-middle' value='${data}' name="selected_data[]" id="${data}"/>`;
+                        return `<input type="checkbox" class='align-middle' value='${data}' name="Users[]" id="${data}"/>`;
                     }
                 },
                 {
@@ -926,13 +945,19 @@
                     data: 'name',
                     name: 'name',
                     className: 'text-center t-name align-middle',
-                    title: 'اسم الموظف'
+                    title: 'اسم الموظف',
+                    render: function(data, type, row, meta) {
+                        return `<div id="name-${row.id}">${data}</div>`;
+                    }
                 },
                 {
                     data: 'phone',
                     name: 'phone',
                     className: 'text-center t-phone align-middle',
-                    title: 'الجوال'
+                    title: 'الجوال',
+                    render: function(data, type, row, meta) {
+                        return `<div id="phone-${row.id}">${data}</div>`;
+                    }
                 },
                 {
                     data: null,
@@ -1210,7 +1235,7 @@
     }
 
     function selects() {
-        var ele = document.getElementsByName('selected_data[]');
+        var ele = document.getElementsByName('Users[]');
         for (var i = 0; i < ele.length; i++) {
             if (ele[i].type == 'checkbox')
                 ele[i].checked = true;
@@ -1218,7 +1243,7 @@
     }
 
     function deSelect() {
-        var ele = document.getElementsByName('selected_data[]');
+        var ele = document.getElementsByName('Users[]');
         for (var i = 0; i < ele.length; i++) {
             if (ele[i].type == 'checkbox')
                 ele[i].checked = false;
@@ -1226,10 +1251,41 @@
         }
     }
 
-    function sendNotifications(students_id, class_id, semaster_name, status, period, day, date) {
+    function getSelectedUsers() {
+        var selectedUsers = [];
+        var usersCheckBoxes = document.getElementsByName('Users[]');
+        for (var i = 0; i < usersCheckBoxes.length; i++) {
+            if (usersCheckBoxes[i].type == 'checkbox' && usersCheckBoxes[i].checked) {
+                selectedUsers.push(usersCheckBoxes[i].value)
+            }
+        }
+
+        return selectedUsers;
+    }
+
+    function getUsersData() {
+        var selectedUsers = getSelectedUsers();
+        var usersData= [];
+
+        for (let i = 0; i < selectedUsers.length; i++) {
+            selectedUsers[i];
+            usersData.push({
+                "id": selectedUsers[i],
+                "name": $('#name-' + selectedUsers[i]).html(),
+                "phone": $('#phone-' + selectedUsers[i]).html(),
+            });
+        }
+
+        console.log(usersData);
+
+        return usersData;
+        
+    }
+
+    function sendUsersNotifications() {
 
         var jqxhr = $.ajax({
-                "url": "<?= site_url('') ?>Schools/SendAbsenceAndLag",
+                "url": "<?= site_url('') ?>Messaging/SendGeneralMessagesToUsers",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
@@ -1237,23 +1293,19 @@
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 "data": {
-                    "students_id": students_id,
-                    "class_id": class_id,
-                    "semaster_id": semaster_name,
-                    "monitoring_case": status,
-                    "period": period,
-                    "day": day,
-                    "date": date,
-                    "school_id": school_id
+                    "usersData": getUsersData(),
+                    "school_id": school_id,
+                    "template_id": $('#templates').val(),
+                    "group": $('#determinants').val()
                 }
             })
             .done(function(response) {
-                refreshContentTable();
-                toastr.success('تم تحديث حالة الغياب')
+                // refreshContentTable();
+                toastr.success(response.msg)
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             }).always(function() {
                 $('#edit-employee-submit').removeAttr('disabled');
                 $('#edit-spinner').hide();
@@ -1300,9 +1352,9 @@
             toastr.error('يجب تحديد القالب والمجموعة قبل الارسال!', 'خطأ');
             return;
         }
-        
+
         var jqxhr = $.ajax({
-                "url": "<?= site_url('') ?>Messaging/SendGeneralMail",
+                "url": "<?= site_url('') ?>Messaging/SendGeneralMessagesToGroup",
                 "method": "POST",
                 "timeout": 0,
                 "headers": {
@@ -1316,11 +1368,11 @@
                 }
             })
             .done(function(response) {
-                toastr.success('تم ارسال الاشعارات')
+                toastr.success(response.msg);
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
     }
 </script>

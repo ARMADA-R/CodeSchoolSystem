@@ -23,6 +23,7 @@
                     <thead>
                         <tr>
                             <th></th>
+                            <th></th>
                             <th>م</th>
                             <th>رقم الطالب</th>
                             <th>اسم الطالب</th>
@@ -33,7 +34,7 @@
                             <th>الحصة</th>
                             <th>تاريخ الرصد</th>
                             <th>نص الرسالة</th>
-                            <!-- <th>حالة الإرسال</th> -->
+                            <th>حالة الإرسال</th>
                         </tr>
                     </thead>
                     <tbody> </tbody>
@@ -57,7 +58,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
-    
     var dataTable = null;
     // var studentsData = [];
 
@@ -70,11 +70,16 @@
                 [25, 50, 100, 500]
             ],
             order: [
-                [1, 'asc']
+                [2, 'asc']
             ],
 
             responsive: true,
             autoWidth: false,
+            rowId: 'id',
+            createdRow: function(row, data, index) {
+                $(row).addClass('datatable-row');
+                $(row).addClass('notToExcel');
+            },
             columns: [{
                     "className": 'details-control align-middle',
                     "orderable": false,
@@ -82,6 +87,17 @@
                     exportable: false,
                     "data": null,
                     "defaultContent": ''
+                },
+                {
+                    data: 'student_id',
+                    className: 'text-center align-middle',
+                    title: `<input type="checkbox" class="select-all"  id="select-all">`,
+                    orderable: false,
+                    searchable: false,
+                    exportable: false,
+                    render: function(data, type, row, meta) {
+                        return `<input type="checkbox" onchange="check(this)" class="align-middle selected_data" value='${data}' name="selected_data[]" id="${data}"/>`;
+                    }
                 },
                 {
                     data: null,
@@ -154,12 +170,16 @@
                     className: 'text-center t-message align-middle',
                     title: 'نص الرسالة'
                 },
-                // {
-                //     data: 'send_status',
-                //     name: 'send_status',
-                //     className: 'text-center t-send_status align-middle',
-                //     title: 'حالة الارسال'
-                // },
+                {
+                    data: 'send_status',
+                    name: 'send_status',
+                    className: 'text-center t-send_status align-middle',
+                    title: 'حالة الارسال',
+                    render: function(data, type, row, meta) {
+                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`));
+                    }
+                },
+
 
             ],
             buttons: [{
@@ -179,6 +199,20 @@
                                 });
                             }
                         },
+                        {
+                            text: 'للمحدد Excel',
+                            action: function(e, dt, node, config) {
+                                $("#content-table").table2excel({
+                                    // exclude CSS class
+                                    exclude: ".notToExcel",
+                                    name: "تقرير",
+                                    filename: "أرشيف  إشعارات الغياب والتأخر (طلاب)-" + moment().format('DD-MM-YYYY'), //do not include extension
+                                    fileext: ".xlsx", // file extension
+                                    exclude_inputs: true
+                                });
+                            }
+                        },
+
                         {
                             text: 'طباعة',
                             action: function(e, dt, node, config) {
@@ -200,6 +234,45 @@
 
 
                                 var pageTitle = 'أرشيف إشعارات الغياب والتأخر' + ' (الصف:' + $('#classes-selector').val() + ' , الفصل: ' + $('#semesters-selector').val() + ')',
+                                    win = window.open('', 'Print');
+                                win.document.write(`<html dir="rtl" lang="ar"><head><title>` + pageTitle + '</title>' +
+                                    `<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+                                    <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+                                    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
+                                    <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
+                                    <style>table {width: 100%;margin-bottom: 1rem;color: #212529;background-color: transparent;text-align: center!important;}table th,table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}table tbody + tbody {border-top: 2px solid #dee2e6;}table {border: 1px solid #dee2e6;}table th,table td {border: 1px solid #dee2e6;}table thead th,table thead td {border-bottom-width: 2px;}table tbody tr:nth-of-type(odd) {background-color: rgba(0, 0, 0, 0.05);}</style>` +
+                                    '</head><body style="padding-top: 4rem">' + tableContainer[0].outerHTML + '</body></html>');
+                                win.document.close();
+                                win.print();
+                                win.close();
+                            }
+                        },
+                        {
+                            text: 'طباعة المحدد',
+                            action: function(e, dt, node, config) {
+                                var tableContainer = $('#content-table').clone();
+                                tableContainer.css('border-collapse', 'collapse');
+                                tableContainer.css('font-family', 'Arial, Helvetica, sans-serif');
+
+                                tableContainer.find('td').each(function(index, value) {
+                                    $(value).css('border', ' 0.6px solid #dee2e6');
+                                    $(value).css('padding', ' 8px');
+                                    $(value).css('display', '');
+
+                                });
+                                tableContainer.find('tr').each(function(index, value) {
+                                    if (!$(value).hasClass('toprint') && index != 0) {
+                                        $(value).remove();
+                                    }
+                                });
+
+                                tableContainer.find('th').each(function(index, value) {
+                                    $(value).css('border', ' 1px solid #dee2e6');
+                                    $(value).css('display', '');
+                                });
+
+
+                                var pageTitle = 'أرشيف إشعارات الغياب والتأخر' + ' (طلاب)',
                                     win = window.open('', 'Print');
                                 win.document.write(`<html dir="rtl" lang="ar"><head><title>` + pageTitle + '</title>' +
                                     `<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -413,9 +486,34 @@
     });
 
 
+    function check(element) {
+
+        if (element.checked) {
+
+                $(element).closest('.datatable-row').addClass('toprint');
+                $(element).closest('.datatable-row').removeClass('notToExcel');
+
+            } else {
+
+                $(element).closest('.datatable-row').removeClass('toprint');
+                $(element).closest('.datatable-row').addClass('notToExcel');
+
+            }
+    }
+
+
     $(document).ready(function() {
         refreshContentTable();
+        $('#select-all').change(function() {
+            if (this.checked) {
+                selects();
+            } else {
+                deSelect();
+            }
+        });
+
     });
+
 
     function refreshContentTable() {
         var jqxhr = $.ajax({
@@ -439,5 +537,26 @@
                 console.log(response);
                 toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
             });
+    }
+
+
+    function selects() {
+        var ele = document.getElementsByName('selected_data[]');
+        for (var i = 0; i < ele.length; i++) {
+            if (ele[i].type == 'checkbox')
+                ele[i].checked = true;
+            $(ele[i]).closest('.datatable-row').addClass('toprint');
+            $(ele[i]).closest('.datatable-row').removeClass('notToExcel');
+        }
+    }
+
+    function deSelect() {
+        var ele = document.getElementsByName('selected_data[]');
+        for (var i = 0; i < ele.length; i++) {
+            if (ele[i].type == 'checkbox')
+                ele[i].checked = false;
+            $(ele[i]).closest('.datatable-row').removeClass('toprint');
+            $(ele[i]).closest('.datatable-row').addClass('notToExcel');
+        }
     }
 </script>

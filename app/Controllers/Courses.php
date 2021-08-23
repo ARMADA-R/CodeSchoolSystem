@@ -226,8 +226,47 @@ class Courses extends BaseController
 				}
 				$model = new CoursesModel();
 
-				$delete = $model->delete_course($id);
+				$delete = $model->delete_course([$id]);
 				if ($delete == 1) {
+					$data = array('code' => 1, 'msg' => 'success', 'data' => []);
+					return	$this->respond($data, 200);
+				} else {
+					$data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+					return	$this->respond($data, 400);
+				}
+			} else {
+				$result = array(
+					'code' => $result['code'], 'msg' => $result['messages'],
+				);
+				return $this->respond($result, 400);
+			}
+		} else {
+			$data = array('code' => -1, 'msg' => 'Method must be Delete', 'data' => []);
+			return	$this->respond($data, 200);
+		}
+	}
+
+
+	public function DeleteCourses()
+	{
+
+		if ($this->request->getMethod() == 'delete') {
+			$check = new Check(); // Create an instance
+			$result = $check->check();
+
+			if ($result['code'] == 1) {
+				$input = $this->request->getRawInput();;
+				$ids = isset($input['ids']) ? $input['ids'] : '';
+				if (!$ids) {
+					$data = array('code' => -1, 'msg' => 'لم يتم تحديد مستخدمين!', 'data' => []);
+					return	$this->respond($data, 400);
+					exit;
+				}
+				$model = new CoursesModel();
+
+				$delete = $model->delete_course($ids);
+
+				if ($delete >= 1) {
 					$data = array('code' => 1, 'msg' => 'success', 'data' => []);
 					return	$this->respond($data, 200);
 				} else {

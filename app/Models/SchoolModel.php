@@ -154,8 +154,8 @@ class SchoolModel extends Model
         $db = \Config\Database::connect();
         $builder = $db->table('absence_and_lag');
 
-        $builder->insert($data);
-        return $db->affectedRows();
+        // $builder->insert($data);
+        return $builder->insert($data);
     }
     public function add_table_school($data)
     {
@@ -203,7 +203,7 @@ class SchoolModel extends Model
         $page = ($page - 1) * $limit;
         $db = \Config\Database::connect();
         $builder = $db->table('absence_and_lag');
-        $builder->select('students.id student_id,full_name,student_number,users.phone parent_phone,classes.name class_name,semaster.name semaster_name,monitoring_case,period,date,message');
+        $builder->select('students.id student_id,full_name,student_number,users.phone parent_phone,classes.name class_name,semaster.name semaster_name,monitoring_case,period,date,message,send_status');
         $builder->join('students', 'absence_and_lag.student_id = students.id');
         $builder->join('users', 'students.parent_id = users.id');
         $builder->join('classes', 'students.class_id = classes.id');
@@ -215,7 +215,7 @@ class SchoolModel extends Model
         } else {
             $query   = $builder->get($limit, $page);
         }
-        return $query->getResult();
+        return ($query->getResult());
     }
     public function get_asbense_reply($limit, $page, $key)
     {
@@ -558,4 +558,73 @@ class SchoolModel extends Model
         $builder->delete();
         return $db->affectedRows();
     }
+
+    public function add_toSent($data)
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('unsent_messages');
+        $builder->insert($data);
+        return $db->affectedRows();
+    }
+
+    public function get_unsent_messages($count = 50)
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('unsent_messages');
+        $builder->select(
+                "gates.name as gates_name,".
+                "gates.method as gates_method,".
+                "gates.arabic_link as gates_arabic_link,".
+                "gates.latin_link as gates_latin_link,".
+                "gates.isReturnStatus as gates_isReturnStatus,".
+                "schools_gates.username,".
+                "schools_gates.sender_name,". 
+                "schools_gates.password,".
+                "unsent_messages.id as unsent_message_id,".
+                "unsent_messages.message_archive_id,".
+                "unsent_messages.message,".
+                "unsent_messages.phone,".
+                "unsent_messages.type"
+            ); //
+        $builder->join('schools_gates','unsent_messages.school_gate_id = schools_gates.id');
+        $builder->join('gates', 'gates.id = schools_gates.gate_id');
+        $builder->limit($count);
+        // $builder->where('schools_gates.isActive', 1);
+        $query   = $builder->get();
+        return $query->getResult();
+    }
+
+    public function deleteFromUnsentMessage($ids)
+    {
+        if (count($ids) < 1) return;
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('unsent_messages');
+        $builder->whereIn('id', $ids);
+        $builder->delete();
+        return $db->affectedRows();
+    }
+
+    public function updateAbsenceArchiveMessagesStatus($ids, $status)
+    {
+        print_r($ids);
+        if (count($ids) < 1) return;
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('absence_and_lag');
+        $builder->whereIn('id', $ids);
+        return  $builder->update(["send_status" => $status]);
+    }
+
+    public function updatePublicMessagesArchiveMessagesStatus($ids, $status)
+    {
+        print_r($ids);
+        if (count($ids) < 1) return;
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('public_messages');
+        $builder->whereIn('id', $ids);
+        return  $builder->update(["send_status" => $status]);
+    }
+
 }

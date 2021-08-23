@@ -775,9 +775,11 @@ class Schools extends BaseController
                 $asbense = array();
                 if (!empty($result)) {
                     $unique = array_unique($result, SORT_REGULAR);
+
                     foreach ($unique as $a) {
                         array_push($asbense, $a);
                     }
+
                     $data = array('code' => 1, 'msg' => 'success', 'data' => array_unique($asbense, SORT_REGULAR), 'total_count' => count($asbense));
                     return    $this->respond($data, 200);
                 } else {
@@ -1933,7 +1935,7 @@ class Schools extends BaseController
         return $res;
     }
 
-    public function deleteSchoolGate(Type $var = null)
+    public function deleteSchoolGate()
     {
         if ($this->request->getMethod() == 'delete') {
             $check = new Check(); // Create an instance
@@ -2019,23 +2021,31 @@ class Schools extends BaseController
                     'date' => $date,
                     'school_id' => $school_id,
                     'message' => $message,
+                    'send_status' => $isToSend == "1" ? null : -1,
                 ];
 
-                if ($model->add_asbense($data)) {
+                $temp = $model->add_asbense($data);
+
+
+                if ($temp) {
                     $savedRecords++;
                 }
 
-                // try {
-                // if ($isToSend == "1") {
-                //     print_r((new Gates_Api)->sendSMS($schoolGate->arabic_link, $schoolGate->username, $schoolGate->password, $phone, $message, $schoolGate->sender_name, $schoolGate->method));
-                // }
-                // } catch (\Throwable $th) {
-                //     //throw $th;
-                // }
+                if ($isToSend == "1") {
+                    $model->add_toSent([
+                        "user_id" => $student_id,
+                        "message" =>  $message,
+                        "phone" =>  $phone,
+                        "school_id" => $school_id,
+                        "message_archive_id" => $temp->connID->insert_id,
+                        "school_gate_id" => $schoolGate->id,
+                        "type" => 'absenceAndLag',
+                    ]);
+                }
             }
 
 
-            $data = ['code' => 1, 'msg' => 'تم حفظ حالة الغياب ل' . $savedRecords . ' طالب' . '\n سيتم ارسال الاشعارات بأقرب وقت ممكن.', 'data' => []];
+            $data = ['code' => 1, 'msg' => 'تم حفظ حالة الغياب ل' . $savedRecords . ' طالب' . '   سيتم ارسال الاشعارات بأقرب وقت ممكن.', 'data' => []];
             return    $this->respond($data, 200);
         } else {
             $result = array(
@@ -2043,5 +2053,63 @@ class Schools extends BaseController
             );
             return $this->respond($result, 400);
         }
+    }
+
+    // http://localhost/codeigniter/CodeSchoolSystem/public/Schools/checkAndSendSMSToStudents/100
+    public function checkAndSendSMSToStudents($num)
+    {
+
+        $model = new SchoolModel();
+        $unsentMessages = $model->get_unsent_messages(intval($num));
+        $sentMessages = [];
+        $faildSentAbsenceMessagesArchive = [];
+        $successSentAbsenceMessagesArchive = [];
+
+        $faildSentPublicMessagesArchive = [];
+        $successSentPublicMessagesArchive = [];
+
+        foreach ($unsentMessages as $key => $value) {
+
+            $res = (new Gates_Api)->sendSMS($value->gates_arabic_link, $value->username, $value->password, $value->phone, $value->message, $value->sender_name, $value->gates_method);
+
+            if ($res == "ok" || $res == 100) {
+                $sentMessages[] = $value->unsent_message_id;
+
+                if ($value->type == "absenceAndLag") {
+                    $successSentAbsenceMessagesArchive[] = $value->message_archive_id;
+                } else if ($value->type == "publicMessage") {
+                    $successSentPublicMessagesArchive[] = $value->message_archive_id;
+                }
+            } else {
+                $sentMessages[] = $value->unsent_message_id;
+
+                if ($value->type == "absenceAndLag") {
+                    $faildSentAbsenceMessagesArchive[] = $value->message_archive_id;
+                } else if ($value->type == "publicMessage") {
+                    $faildSentPublicMessagesArchive[] = $value->message_archive_id;
+                }
+            }
+
+            if (count($sentMessages) > 10) {
+                $model->deleteFromUnsentMessage($sentMessages);
+                $model->updateAbsenceArchiveMessagesStatus($successSentAbsenceMessagesArchive, 1);
+                $model->updateAbsenceArchiveMessagesStatus($faildSentAbsenceMessagesArchive, 0);
+
+                $model->updatePublicMessagesArchiveMessagesStatus($faildSentPublicMessagesArchive, 0);
+                $model->updatePublicMessagesArchiveMessagesStatus($successSentPublicMessagesArchive, 1);
+
+                $sentMessages = [];
+                $faildSentAbsenceMessagesArchive = [];
+                $successSentAbsenceMessagesArchive = [];
+                $faildSentPublicMessagesArchive = [];
+                $successSentPublicMessagesArchive = [];
+            }
+        }
+
+        $model->deleteFromUnsentMessage($sentMessages);
+        $model->updateAbsenceArchiveMessagesStatus($successSentAbsenceMessagesArchive, 1);
+        $model->updateAbsenceArchiveMessagesStatus($faildSentAbsenceMessagesArchive, 0);
+        $model->updatePublicMessagesArchiveMessagesStatus($faildSentPublicMessagesArchive, 0);
+        $model->updatePublicMessagesArchiveMessagesStatus($successSentPublicMessagesArchive, 1);
     }
 }
