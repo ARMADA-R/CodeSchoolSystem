@@ -55,7 +55,7 @@ class CoursesExtends extends Courses
                         $value['student_number'] = str_replace('$', '', $value['student_number']);
                         $value['phone'] = str_replace('$', '', $value['student_number']);
                         try {
-                            if ($value['full_name'] == '' || $value['student_number'] == '') {
+                            if ($value['student_name'] == '' || $value['student_number'] == '') {
                                 throw new Exception();
                             }
                             

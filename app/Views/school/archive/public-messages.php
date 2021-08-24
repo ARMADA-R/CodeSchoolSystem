@@ -9,6 +9,8 @@
         </div>
     </div>
 </div>
+
+</div>
 <!-- /.content-header -->
 
 <?php require(APPPATH . 'Views/school/layouts/notifications-service-status.php') ?>
@@ -27,19 +29,7 @@
 
     </div>
 
-    <div class="col-sm-4">
-        <div class="form-group">
-            <select required class="form-control" name="template" id="templates">
-                <option value="">القالب</option>
-            </select>
-        </div>
 
-    </div>
-
-    <div class="col-sm-4">
-        <button type="button" onclick="sendToGroup()" style="width: inherit; background-color: #fff;" class="btn btn-light">ارسال الى المجموعة</button>
-    </div>
-    <!-- /.col -->
 </div>
 <!-- /.row -->
 
@@ -84,7 +74,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
-    
     var dataTable = null;
     var studentsData = [];
 
@@ -167,7 +156,7 @@
                     className: 'text-center align-middle',
                     title: 'حالة الارسال',
                     render: function(data, type, row, meta) {
-                        return (data == 1)? `<div class="text-success">تم الارسال</div>` : ((data == 0)? `<div class="text-danger">فشل الارسال</div>` : ((data == -1 )? `<div class="text-muted">غير مخصصة للارسال</div>` :`جارٍ الارسال`));
+                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`));
                     }
                 },
             ],
@@ -443,8 +432,7 @@
                 $(row).addClass('datatable-row');
                 $(row).addClass('notToExcel');
             },
-            columns: [
-                {
+            columns: [{
                     "data": null,
                     "className": 'details-control align-middle',
                     "orderable": false,
@@ -508,7 +496,7 @@
                     className: 'text-center align-middle',
                     title: 'حالة الارسال',
                     render: function(data, type, row, meta) {
-                        return (data == 1)? `<div class="text-success">تم الارسال</div>` : ((data == 0)? `<div class="text-danger">فشل الارسال</div>` : ((data == -1 )? `<div class="text-muted">غير مخصصة للارسال</div>` :`جارٍ الارسال`));
+                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`));
                     }
                 },
             ],
@@ -516,8 +504,7 @@
                     extend: 'collection',
                     text: 'تصدير',
                     className: 'btn btn-sm',
-                    buttons: [
-                        {
+                    buttons: [{
                             text: 'Excel',
                             action: function(e, dt, node, config) {
                                 $("#content-table").table2excel({
@@ -556,14 +543,33 @@
                                     $(value).css('display', '');
 
                                 });
+                                
 
                                 tableContainer.find('th').each(function(index, value) {
                                     $(value).css('border', ' 1px solid #dee2e6');
                                     $(value).css('display', '');
                                 });
+                                var bodyHeader = `<div class="content-header my-2 bg-white">
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
+                                                        <div style=" -ms-flex: 0 0 33.333333%; flex: 0 0 33.333333%; max-width: 33.333333%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: center!important; ">
+                                                            <h4>المملكة العربية السعودية</h4>
+                                                            <h5>${school_name}</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -40px;">
+                                                        <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: center!important; ">
+                                                            <h6><b> كشف رصد التحضير اليومي </b></h6>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
+                                                        <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: left!important; ">
+                                                            <h6> يوم `+moment().format("dddd")+` الموافق ل `+moment().format("iDD-iMM-iYYYY")+` </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>`;
 
+                                var pageTitle = 'أرشيف الرسائل العامة' + ' (طلاب)',
 
-                                var pageTitle = 'أرشيف إشعارات الغياب والتأخر' + ' (طلاب)',
                                     win = window.open('', 'Print');
                                 win.document.write(`<html dir="rtl" lang="ar"><head><title>` + pageTitle + '</title>' +
                                     `<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -571,7 +577,7 @@
                                     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
                                     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
                                     <style>table {width: 100%;margin-bottom: 1rem;color: #212529;background-color: transparent;text-align: center!important;}table th,table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}table tbody + tbody {border-top: 2px solid #dee2e6;}table {border: 1px solid #dee2e6;}table th,table td {border: 1px solid #dee2e6;}table thead th,table thead td {border-bottom-width: 2px;}table tbody tr:nth-of-type(odd) {background-color: rgba(0, 0, 0, 0.05);}</style>` +
-                                    '</head><body style="padding-top: 4rem">' + tableContainer[0].outerHTML + '</body></html>');
+                                    '</head><body style="padding-top: 4rem">' + bodyHeader + tableContainer[0].outerHTML + '</body></html>');
                                 win.document.close();
                                 win.print();
                                 win.close();
@@ -602,7 +608,27 @@
                                 });
 
 
-                                var pageTitle = 'أرشيف إشعارات الغياب والتأخر' + ' (طلاب)',
+                                var bodyHeader = `<div class="content-header my-2 bg-white">
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
+                                                        <div style=" -ms-flex: 0 0 33.333333%; flex: 0 0 33.333333%; max-width: 33.333333%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: center!important; ">
+                                                            <h4>المملكة العربية السعودية</h4>
+                                                            <h5>${school_name}</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -40px;">
+                                                        <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: center!important; ">
+                                                            <h6><b> كشف رصد التحضير اليومي </b></h6>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
+                                                        <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: left!important; ">
+                                                            <h6> يوم `+moment().format("dddd")+` الموافق ل `+moment().format("iDD-iMM-iYYYY")+` </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>`;
+
+                                var pageTitle = 'أرشيف الرسائل العامة' + ' (طلاب)',
+
                                     win = window.open('', 'Print');
                                 win.document.write(`<html dir="rtl" lang="ar"><head><title>` + pageTitle + '</title>' +
                                     `<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -610,7 +636,7 @@
                                     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
                                     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
                                     <style>table {width: 100%;margin-bottom: 1rem;color: #212529;background-color: transparent;text-align: center!important;}table th,table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}table tbody + tbody {border-top: 2px solid #dee2e6;}table {border: 1px solid #dee2e6;}table th,table td {border: 1px solid #dee2e6;}table thead th,table thead td {border-bottom-width: 2px;}table tbody tr:nth-of-type(odd) {background-color: rgba(0, 0, 0, 0.05);}</style>` +
-                                    '</head><body style="padding-top: 4rem">' + tableContainer[0].outerHTML + '</body></html>');
+                                    '</head><body style="padding-top: 4rem">'+bodyHeader + tableContainer[0].outerHTML + '</body></html>');
                                 win.document.close();
                                 win.print();
                                 win.close();
@@ -900,7 +926,7 @@
                     className: 'text-center align-middle',
                     title: 'حالة الارسال',
                     render: function(data, type, row, meta) {
-                        return (data == 1)? `<div class="text-success">تم الارسال</div>` : ((data == 0)? `<div class="text-danger">فشل الارسال</div>` : ((data == -1 )? `<div class="text-muted">غير مخصصة للارسال</div>` :`جارٍ الارسال`));
+                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`));
                     }
                 },
             ],
@@ -908,8 +934,7 @@
                     extend: 'collection',
                     text: 'تصدير',
                     className: 'btn btn-sm',
-                    buttons: [
-                        {
+                    buttons: [{
                             text: 'Excel',
                             action: function(e, dt, node, config) {
                                 $("#content-table").table2excel({
@@ -953,9 +978,27 @@
                                     $(value).css('border', ' 1px solid #dee2e6');
                                     $(value).css('display', '');
                                 });
+                                var bodyHeader = `<div class="content-header my-2 bg-white">
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
+                                                        <div style=" -ms-flex: 0 0 33.333333%; flex: 0 0 33.333333%; max-width: 33.333333%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: center!important; ">
+                                                            <h4>المملكة العربية السعودية</h4>
+                                                            <h5>${school_name}</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -40px;">
+                                                        <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: center!important; ">
+                                                            <h6><b> كشف رصد التحضير اليومي </b></h6>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
+                                                        <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: left!important; ">
+                                                            <h6> يوم `+moment().format("dddd")+` الموافق ل `+moment().format("iDD-iMM-iYYYY")+` </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>`;
 
+                                var pageTitle = 'أرشيف الرسائل العامة' + ' (معلمين)',
 
-                                var pageTitle = 'أرشيف إشعارات الغياب والتأخر' + ' (معلمين)',
                                     win = window.open('', 'Print');
                                 win.document.write(`<html dir="rtl" lang="ar"><head><title>` + pageTitle + '</title>' +
                                     `<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -963,7 +1006,7 @@
                                     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
                                     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
                                     <style>table {width: 100%;margin-bottom: 1rem;color: #212529;background-color: transparent;text-align: center!important;}table th,table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}table tbody + tbody {border-top: 2px solid #dee2e6;}table {border: 1px solid #dee2e6;}table th,table td {border: 1px solid #dee2e6;}table thead th,table thead td {border-bottom-width: 2px;}table tbody tr:nth-of-type(odd) {background-color: rgba(0, 0, 0, 0.05);}</style>` +
-                                    '</head><body style="padding-top: 4rem">' + tableContainer[0].outerHTML + '</body></html>');
+                                    '</head><body style="padding-top: 4rem">'+bodyHeader + tableContainer[0].outerHTML + '</body></html>');
                                 win.document.close();
                                 win.print();
                                 win.close();
@@ -993,8 +1036,26 @@
                                     $(value).css('display', '');
                                 });
 
+                                var bodyHeader = `<div class="content-header my-2 bg-white">
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
+                                                        <div style=" -ms-flex: 0 0 33.333333%; flex: 0 0 33.333333%; max-width: 33.333333%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: center!important; ">
+                                                            <h4>المملكة العربية السعودية</h4>
+                                                            <h5>${school_name}</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -40px;">
+                                                        <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: center!important; ">
+                                                            <h6><b> كشف رصد التحضير اليومي </b></h6>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
+                                                        <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: left!important; ">
+                                                            <h6> يوم `+moment().format("dddd")+` الموافق ل `+moment().format("iDD-iMM-iYYYY")+` </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>`;
 
-                                var pageTitle = 'أرشيف إشعارات الغياب والتأخر' + ' (معلمين)',
+                                var pageTitle = 'أرشيف الرسائل العامة' + ' (معلمين)',
                                     win = window.open('', 'Print');
                                 win.document.write(`<html dir="rtl" lang="ar"><head><title>` + pageTitle + '</title>' +
                                     `<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -1002,7 +1063,7 @@
                                     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
                                     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
                                     <style>table {width: 100%;margin-bottom: 1rem;color: #212529;background-color: transparent;text-align: center!important;}table th,table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}table tbody + tbody {border-top: 2px solid #dee2e6;}table {border: 1px solid #dee2e6;}table th,table td {border: 1px solid #dee2e6;}table thead th,table thead td {border-bottom-width: 2px;}table tbody tr:nth-of-type(odd) {background-color: rgba(0, 0, 0, 0.05);}</style>` +
-                                    '</head><body style="padding-top: 4rem">' + tableContainer[0].outerHTML + '</body></html>');
+                                    '</head><body style="padding-top: 4rem">'+bodyHeader + tableContainer[0].outerHTML + '</body></html>');
                                 win.document.close();
                                 win.print();
                                 win.close();
@@ -1235,7 +1296,7 @@
                     exportable: false,
                     "data": null,
                     "defaultContent": ''
-                },{
+                }, {
                     data: 'id',
                     className: 'text-center align-middle',
                     title: `<input type="checkbox" class="select-all"  id="select-all">`,
@@ -1291,7 +1352,7 @@
                     className: 'text-center align-middle',
                     title: 'حالة الارسال',
                     render: function(data, type, row, meta) {
-                        return (data == 1)? `<div class="text-success">تم الارسال</div>` : ((data == 0)? `<div class="text-danger">فشل الارسال</div>` : ((data == -1 )? `<div class="text-muted">غير مخصصة للارسال</div>` :`جارٍ الارسال`));
+                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`));
                     }
                 },
             ],
@@ -1299,8 +1360,7 @@
                     extend: 'collection',
                     text: 'تصدير',
                     className: 'btn btn-sm',
-                    buttons: [
-                        {
+                    buttons: [{
                             text: 'Excel',
                             action: function(e, dt, node, config) {
                                 $("#content-table").table2excel({
@@ -1345,8 +1405,26 @@
                                     $(value).css('display', '');
                                 });
 
+                                var bodyHeader = `<div class="content-header my-2 bg-white">
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
+                                                        <div style=" -ms-flex: 0 0 33.333333%; flex: 0 0 33.333333%; max-width: 33.333333%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: center!important; ">
+                                                            <h4>المملكة العربية السعودية</h4>
+                                                            <h5>${school_name}</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -40px;">
+                                                        <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: center!important; ">
+                                                            <h6><b> كشف رصد التحضير اليومي </b></h6>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
+                                                        <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: left!important; ">
+                                                            <h6> يوم `+moment().format("dddd")+` الموافق ل `+moment().format("iDD-iMM-iYYYY")+` </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>`;
 
-                                var pageTitle = 'أرشيف إشعارات الغياب والتأخر' + ' (موظفين)',
+                                var pageTitle = 'أرشيف الرسائل العامة' + ' (موظفين)',
                                     win = window.open('', 'Print');
                                 win.document.write(`<html dir="rtl" lang="ar"><head><title>` + pageTitle + '</title>' +
                                     `<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -1354,7 +1432,7 @@
                                     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
                                     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
                                     <style>table {width: 100%;margin-bottom: 1rem;color: #212529;background-color: transparent;text-align: center!important;}table th,table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}table tbody + tbody {border-top: 2px solid #dee2e6;}table {border: 1px solid #dee2e6;}table th,table td {border: 1px solid #dee2e6;}table thead th,table thead td {border-bottom-width: 2px;}table tbody tr:nth-of-type(odd) {background-color: rgba(0, 0, 0, 0.05);}</style>` +
-                                    '</head><body style="padding-top: 4rem">' + tableContainer[0].outerHTML + '</body></html>');
+                                    '</head><body style="padding-top: 4rem">'+ bodyHeader+ tableContainer[0].outerHTML + '</body></html>');
                                 win.document.close();
                                 win.print();
                                 win.close();
@@ -1384,8 +1462,26 @@
                                     $(value).css('display', '');
                                 });
 
+                                var bodyHeader = `<div class="content-header my-2 bg-white">
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
+                                                        <div style=" -ms-flex: 0 0 33.333333%; flex: 0 0 33.333333%; max-width: 33.333333%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: center!important; ">
+                                                            <h4>المملكة العربية السعودية</h4>
+                                                            <h5>${school_name}</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -40px;">
+                                                        <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: center!important; ">
+                                                            <h6><b> كشف رصد التحضير اليومي </b></h6>
+                                                        </div>
+                                                    </div>
+                                                    <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
+                                                        <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: left!important; ">
+                                                            <h6> يوم `+moment().format("dddd")+` الموافق ل `+moment().format("iDD-iMM-iYYYY")+` </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>`;
 
-                                var pageTitle = 'أرشيف إشعارات الغياب والتأخر' + ' (موظفين)',
+                                var pageTitle = 'أرشيف الرسائل العامة' + ' (موظفين)',
                                     win = window.open('', 'Print');
                                 win.document.write(`<html dir="rtl" lang="ar"><head><title>` + pageTitle + '</title>' +
                                     `<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -1393,7 +1489,7 @@
                                     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
                                     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
                                     <style>table {width: 100%;margin-bottom: 1rem;color: #212529;background-color: transparent;text-align: center!important;}table th,table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}table tbody + tbody {border-top: 2px solid #dee2e6;}table {border: 1px solid #dee2e6;}table th,table td {border: 1px solid #dee2e6;}table thead th,table thead td {border-bottom-width: 2px;}table tbody tr:nth-of-type(odd) {background-color: rgba(0, 0, 0, 0.05);}</style>` +
-                                    '</head><body style="padding-top: 4rem">' + tableContainer[0].outerHTML + '</body></html>');
+                                    '</head><body style="padding-top: 4rem">' +bodyHeader+ tableContainer[0].outerHTML + '</body></html>');
                                 win.document.close();
                                 win.print();
                                 win.close();
@@ -1632,12 +1728,12 @@
             $(ele[i]).closest('.datatable-row').removeClass('notToExcel');
         }
     }
-    
+
     function deSelect() {
         var ele = document.getElementsByName('selected_data[]');
         for (var i = 0; i < ele.length; i++) {
             if (ele[i].type == 'checkbox')
-            ele[i].checked = false;
+                ele[i].checked = false;
             $(ele[i]).closest('.datatable-row').removeClass('toprint');
             $(ele[i]).closest('.datatable-row').addClass('notToExcel');
         }

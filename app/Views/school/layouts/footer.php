@@ -47,10 +47,12 @@
   $("img.lazyload").lazyload();
 </script>
 <script>
+  
   var school_id = '<?= session('user_data')['user_id'] ?>';
   var user_id = '<?= session('user_data')['user_id'] ?>';
   var token = '<?= session('user_data')['token'] ?>';
-
+  var school_name = '<?= session('user_data')['school_name'] ?>';
+  moment.locale("ar-sa"); 
   toastr.options = {
     "closeButton": false,
     "debug": false,

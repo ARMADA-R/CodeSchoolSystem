@@ -52,6 +52,33 @@ class StudentsExtends extends Students
 
                     $model = new StudentsModel();
 
+                    $classesCodes = [];
+                    $classesData = [];
+
+                    foreach ($excelData as  $value){
+                         $classesCodes[] = $value['class'];
+                    }
+
+                    $tempClassesData = (new SchoolModel())->get_classes_by_codes($classesCodes);
+
+                    foreach ($tempClassesData as  $value) {
+                        $classesData[$value->code] = $value->id;
+                    }
+
+                    $semestersNames = [];
+                    $semestersData = [];
+
+                    foreach ($excelData as  $value){
+                         $semestersNames[] = $value['semestar'];
+                    }
+
+                    $tempSemestersData = (new SchoolModel())->get_semesters_by_names($semestersNames);
+
+                    foreach ($tempSemestersData as  $value) {
+                        $semestersData[$value->name] = $value->id;
+                    }
+
+                    
 
                     foreach ($excelData as  $value) {
                         try {
@@ -65,8 +92,8 @@ class StudentsExtends extends Students
                                 'student_number' => $value['student_number'],
                                 'full_name' => $value['full_name'],
                                 'phone' => $value['phone'],
-                                'class_id' => $value['class'],
-                                'semestar_id' => $value['semestar'],
+                                'class_id' => !empty($classesData[$value['class']])? $classesData[$value['class']] : null ,
+                                'semestar_id' => !empty($semestersData[$value['semestar']])? $semestersData[$value['semestar']] : null,
                             ]);
 
                             $addedSuccessNum++;

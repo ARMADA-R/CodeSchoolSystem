@@ -7,7 +7,7 @@
         <div class="col ">
             قوالب الرسائل العامة
         </div>
-        
+
     </div>
 </div>
 <!-- /.content-header -->
@@ -587,7 +587,7 @@
                 })
                 .fail(function(response) {
                     console.log(response);
-                    toastr.error('حدث خطأ ما اثناء حذف البيانات!', 'خطأ');
+                    toastr.error(response.responseJSON.msg, 'خطأ');
                 })
         }
     }
@@ -641,7 +641,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             }).always(function() {
                 $('#edit-temblate-submit').removeAttr('disabled');
                 $('#edit-spinner').hide();
@@ -654,6 +654,10 @@
         var message = element.value;
         var messageLength = message.length;
         var isRelative = false;
+
+        if (message.split(/\r\n|\r|\n/).length > 1) {
+            messageLength += (message.split(/\r\n|\r|\n/).length - 1);
+        }
 
         if (message.includes("@STATUS@")) {
             isRelative = true;
@@ -724,13 +728,14 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء اضافة البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
 
             }).always(function() {
                 $('#add-temblate-submit').removeAttr('disabled');
                 $('#add-spinner').hide();
             });
-
+            
         return false;
     }
 </script>
+<!-- $(".modal").each(function(index, value) { $(value).modal('toggle');}); -->

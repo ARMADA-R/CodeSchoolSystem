@@ -23,7 +23,7 @@
 
 
 
-<div class="row mt-4  mb-4  d-flex justify-content-center " style="font-size: 1rem;">
+<!-- <div class="row mt-4  mb-4  d-flex justify-content-center " style="font-size: 1rem;">
     <div class="col-4">
         <div class="form-group">
             <select required class="form-control dependencies" id="status">
@@ -47,7 +47,7 @@
             <input type="text" id="name" class="form-control dependencies" placeholder="الاسم">
         </div>
     </div>
-</div>
+</div> -->
 <!-- /.row -->
 
 

@@ -1153,6 +1153,10 @@
     function getMessagesNumberForText(messageText) {
         var messageLength = messageText.length;
 
+        if (messageText.split(/\r\n|\r|\n/).length > 1) {
+            messageLength += (messageText.split(/\r\n|\r|\n/).length - 1);
+        }
+
         var messagesNumber = 0;
         if (messageLength != 0) {
             if (messageLength <= 70) {

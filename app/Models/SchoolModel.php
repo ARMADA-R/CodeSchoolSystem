@@ -45,6 +45,14 @@ class SchoolModel extends Model
         $builder->where('school_id', $id);
         return  $builder->update($data);
     }
+    public function get_school_info_by_id($id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('school_info');
+        $builder->where('school_id', $id);
+        $query   = $builder->get();
+        return $query->getResult();
+    }
     public function edit_service($data)
     {
         $db = \Config\Database::connect();
@@ -110,6 +118,20 @@ class SchoolModel extends Model
         $query   = $builder->get();
         return $query->getResult();
     }
+
+    public function get_classes_by_codes(array $codes)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('classes');
+        $builder->select('id ,code');
+        $builder->whereIn('code', $codes);
+
+        $query   = $builder->get();
+        return $query->getResult();
+    }
+
+
+
     public function get_sections()
     {
         $db = \Config\Database::connect();
@@ -140,6 +162,7 @@ class SchoolModel extends Model
         $query   = $builder->get();
         return $query->getResult();
     }
+
     public function get_Semester()
     {
         $db = \Config\Database::connect();
@@ -149,6 +172,18 @@ class SchoolModel extends Model
         $query   = $builder->get();
         return $query->getResult();
     }
+
+    public function get_semesters_by_names(array $names)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('semaster');
+        $builder->select('id,name');
+        $builder->whereIn('name', $names);
+
+        $query   = $builder->get();
+        return $query->getResult();
+    }
+
     public function add_asbense($data)
     {
         $db = \Config\Database::connect();
