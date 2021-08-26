@@ -88,4 +88,41 @@ class EmployeeExtends extends Employee
             return    $this->respond($data, 200);
         }
     }
+
+    public function DeleteEmployees()
+	{
+
+		if ($this->request->getMethod() == 'delete') {
+			$check = new Check(); // Create an instance
+			$result = $check->check();
+
+			if ($result['code'] == 1) {
+				$input = $this->request->getRawInput();;
+				$ids = isset($input['ids']) ? $input['ids'] : '';
+				if (!$ids) {
+					$data = array('code' => -1, 'msg' => 'Please insert id flied', 'data' => []);
+					return	$this->respond($data, 400);
+					exit;
+				}
+				$model = new EmployeeModel();
+
+				$delete = $model->delete_employee($ids);
+				if ($delete >= 1) {
+                    $data = array('code' => 1, 'msg' => 'تم حذف '.$delete.' من السجلات بنجاح.', 'data' => []);
+                    return	$this->respond($data, 200);
+				} else {
+					$data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+					return	$this->respond($data, 400);
+				}
+			} else {
+				$result = array(
+					'code' => $result['code'], 'msg' => $result['messages'],
+				);
+				return $this->respond($result, 400);
+			}
+		} else {
+			$data = array('code' => -1, 'msg' => 'Method must be Delete', 'data' => []);
+			return	$this->respond($data, 200);
+		}
+	}
 }

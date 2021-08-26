@@ -493,14 +493,9 @@ class Gates_Api extends BaseController
 	}
 
 
-	public function getUserNotificationBalance($gate_id, $user_id)
+	public function getUserNotificationBalance($user, $password, $balance_url)
 	{
-		# http://www.smsscript.net/index.php/api/chk_balance/?user=api_user_1&pass=123456
-		$url = $gate_url;
-		$data = [
-			'user' => $user,
-			'pass' => $pass,
-		];
-		return HTTPRequester::HTTPGet($url, $data);
+		$url =  str_replace("@PASSWORD@", $password, str_replace("@USERNAME@", $user, $balance_url));
+		return HTTPRequester::HTTPGet($url);
 	}
 }

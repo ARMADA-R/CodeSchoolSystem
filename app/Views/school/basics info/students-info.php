@@ -212,11 +212,9 @@
                         <div class="col-sm-3">
 
                             <button type="button" id="add-from-file-submit" onclick="ExcelSubmit();" class="btn btn-primary w-100">
-                                <span class="spinner-border spinner-border-sm" style="display: none;" id="add-from-file-spinner"  role="status" aria-hidden="true"></span>
+                                <span class="spinner-border spinner-border-sm" style="display: none;" id="add-from-file-spinner" role="status" aria-hidden="true"></span>
                                 <span id="save-file-btn-text">حفظ</span>
                             </button>
-                            <input type="hidden" class="form-control" name="table" id="jstable" required>
-                            <input type="" id="excel-form-submit" style="visibility: hidden;" value="">
                         </div>
                     </div>
                     <hr>
@@ -238,9 +236,10 @@
                             <input type="hidden" class="form-control" name="table" id="jstable" required>
                             <input type="" id="excel-form-submit" style="visibility: hidden;" value="">
                             <button type="button" id="add-from-file-submit2" onclick="ExcelSubmit();" class="btn btn-primary w-100">
-                                <span class="spinner-border spinner-border-sm" style="display: none;" id="add-from-file-spinner2"  role="status" aria-hidden="true"></span>
+                                <span class="spinner-border spinner-border-sm" style="display: none;" id="add-from-file-spinner2" role="status" aria-hidden="true"></span>
                                 <span id="save-file-btn-text">حفظ</span>
-                            </button>                            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                            </button>
+                            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
                             <button type="button" onclick="addFromFile()" id="add-from-file-submit" class="btn btn-primary">حفظ</button> -->
                         </div>
                     </div>
@@ -256,6 +255,9 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header  p-2 d-flex align-items-center justify-content-end bg-white">
+                <div class="" style="margin-left: auto;">
+                    <button type="button" onclick="deleteRecords()" class="btn btn-outline-danger">حذف المحدد</button>
+                </div>
                 <div class="mx-1">
                     <button type="button" class="btn btn-light" data-toggle="modal" data-target="#add-student">اضف طالب</button>
                 </div>
@@ -267,6 +269,7 @@
                 <table id="messages_forms" class="table table-striped " style="width:100%">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>م</th>
                             <th>رقم الطالب</th>
                             <th>اسم الطالب</th>
@@ -323,6 +326,17 @@
                 targets: 6
             }, ],
             columns: [{
+                    data: 'id',
+                    className: 'text-center align-middle',
+                    title: `<input type="checkbox" class="select-all"  id="select-all">`,
+                    orderable: false,
+                    searchable: false,
+                    exportable: false,
+                    render: function(data, type, row, meta) {
+                        return `<input type="checkbox" class="align-middle selected_data" value='${data}' name="selected_data[]" id="${data}"/>`;
+                    }
+                },
+                {
                     data: 'id',
                     name: 'id',
                     title: 'م',
@@ -609,6 +623,81 @@
         getSemesters();
     });
 
+    $(document).ready(function() {
+        $('#select-all').change(function() {
+            if (this.checked) {
+                selects();
+            } else {
+                deSelect();
+            }
+        });
+    });
+
+    function selects() {
+        var ele = document.getElementsByName('selected_data[]');
+        for (var i = 0; i < ele.length; i++) {
+            if (ele[i].type == 'checkbox')
+                ele[i].checked = true;
+            $(ele[i]).closest('.datatable-row').addClass('toprint');
+            $(ele[i]).closest('.datatable-row').removeClass('notToExcel');
+        }
+    }
+
+    function deSelect() {
+        var ele = document.getElementsByName('selected_data[]');
+        for (var i = 0; i < ele.length; i++) {
+            if (ele[i].type == 'checkbox')
+                ele[i].checked = false;
+            $(ele[i]).closest('.datatable-row').removeClass('toprint');
+            $(ele[i]).closest('.datatable-row').addClass('notToExcel');
+        }
+    }
+
+
+    function getSelected() {
+        var selected = [];
+        var CheckBoxes = document.getElementsByName('selected_data[]');
+        for (var i = 0; i < CheckBoxes.length; i++) {
+            if (CheckBoxes[i].type == 'checkbox' && CheckBoxes[i].checked) {
+                selected.push(CheckBoxes[i].value)
+            }
+        }
+
+        return selected;
+    }
+
+    function deleteRecords() {
+        var ids = getSelected();
+
+        if (confirm('هل انت متأكد من انك تريد حذف السجلات المحددة؟')) {
+            var jqxhr = $.ajax({
+                    "url": "<?= site_url('') ?>StudentsExtends/DeleteStudents",
+                    "method": "DELETE",
+                    "timeout": 0,
+                    "headers": {
+                        "Authorization": token,
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    "data": {
+                        "ids": ids
+                    }
+                })
+                .done(function(response) {
+                    for (let i = 0; i < ids.length; i++) {
+                        dataTable.row($('tr#' + ids[i])).remove();
+                    }
+                    dataTable.draw();
+                    toastr.success(response.msg)
+                })
+                .fail(function(response) {
+                    console.log(response);
+                    toastr.error(response.responseJSON.msg, 'خطأ');
+                })
+        }
+    }
+
+
+
     function refreshStudentsTable() {
         var jqxhr = $.ajax({
                 url: "<?= site_url('') ?>Students/GetStudents",
@@ -628,7 +717,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
 
     }
@@ -885,7 +974,7 @@
     var columns = {
         'full_name': 'اسم الطالب',
         'student_number': 'رقم الطالب',
-        'phone': 'الهاتف',
+        'phone': 'الجوال',
         'class': 'الصف',
         'semestar': 'الفصل',
     };
@@ -1146,4 +1235,3 @@
         proccesingFileSpenner.attr('style', 'visibility:visible');
     }
 </script>
-

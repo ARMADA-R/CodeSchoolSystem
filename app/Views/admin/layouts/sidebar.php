@@ -1,8 +1,7 @@
-
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar elevation-4 sidebar-light-navy ">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link navbar-navy">
+    <a href="<?= site_url() ?>" class="brand-link navbar-navy">
         <img src="<?= site_url('public') ?>/design/AdminLTE/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light text-white-50">Admin Dashboard</span>
     </a>
@@ -28,8 +27,8 @@
 
                 <li class="nav-header">المحددات الرئيسية</li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url().'/public/admin/info';?>" class="nav-link">
-                   
+                    <a href="<?php echo base_url() . '/public/admin/info'; ?>" class="nav-link">
+
                         <i class="text-navy nav-icon fas fa-house-user"></i>
                         <p>
                             المعلومات الأساسية
@@ -38,42 +37,42 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url().'/public/admin/slider';?>" class="nav-link">
+                    <a href="<?php echo base_url() . '/public/admin/slider'; ?>" class="nav-link">
                         <i class="text-navy nav-icon far fa-image"></i>
                         <p>
                             السلادير
                         </p>
                     </a>
                 </li>
-                     <!-- اتصل بنا-->
-                     
-                <li class="nav-item">
-                <a href="<?php echo base_url().'/public/admin/callus';?>" class="nav-link">
+                <!-- اتصل بنا-->
 
-                    <i class="text-navy nav-icon fas fa-phone"></i>
-                    <p>
-                        أتصل بنا
-                    </p>
-                </a>
+                <li class="nav-item">
+                    <a href="<?php echo base_url() . '/public/admin/callus'; ?>" class="nav-link">
+
+                        <i class="text-navy nav-icon fas fa-phone"></i>
+                        <p>
+                            أتصل بنا
+                        </p>
+                    </a>
                 </li>
                 <!-- end المحددات الرئيسية-->
 
-                    
+
                 <li class="nav-header">إعدادات النظام</li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url().'/public/admin/gets';?>" class="nav-link">
+                    <a href="<?php echo base_url() . '/public/admin/gets'; ?>" class="nav-link">
                         <i class="text-navy nav-icon fas fa-plus-circle"></i>
                         <p>
-                           البوابات
+                            البوابات
                             <span class="badge badge-info right"></span>
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url().'/public/admin/filter';?>" class="nav-link">
+                    <a href="<?php echo base_url() . '/public/admin/filter'; ?>" class="nav-link">
                         <i class="text-navy nav-icon fas fa-filter"></i>
                         <p>
-                           نظام فلترة القوالب
+                            نظام فلترة القوالب
                         </p>
                     </a>
                 </li>
@@ -82,16 +81,25 @@
 
 
 
-                
+
 
 
                 <li class="nav-header"> إدارة المدارس</li>
-                
+
                 <li class="nav-item">
-                    <a href="<?php echo base_url().'/public/admin/mangeschool';?>" class="nav-link">
+                    <a href="<?php echo base_url() . '/public/admin/mangeschool'; ?>" class="nav-link">
                         <i class="text-navy nav-icon fas fa-school"></i>
                         <p>
                             إدارة المدارس
+                            <span class="badge badge-info right"></span>
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo base_url() . '/public/admin/classes'; ?>" class="nav-link">
+                        <i class="fas nav-icon  fa-layer-group text-navy"></i>
+                        <p>
+                            إدارة الصفوف والحصص
                             <span class="badge badge-info right"></span>
                         </p>
                     </a>
@@ -101,14 +109,14 @@
                 <!-- end إدارة المدارس-->
                 <li class="nav-header"> إعدادات شركاءالنجاح
                 </li>
-            
+
                 <li class="nav-item">
 
-                <a href="<?php echo base_url().'/public/admin/user';?>" class="nav-link">
+                    <a href="<?php echo base_url() . '/public/admin/user'; ?>" class="nav-link">
 
                         <i class="text-navy nav-icon fas fa-users"></i>
                         <p>
-                           الأعضاء
+                            الأعضاء
                             <span class="badge badge-info right"></span>
                         </p>
                     </a>
@@ -117,31 +125,31 @@
 
                 <!-- end إدارة المدارس-->
 
-                <li class="nav-header">  تذاكر الدعم الفني للمدارس</li>
+                <li class="nav-header"> تذاكر الدعم الفني للمدارس</li>
 
                 <li class="nav-item">
-                    <a href="<?php echo base_url().'/public/admin/ticket';?>" class="nav-link">
+                    <a href="<?php echo base_url() . '/public/admin/ticket'; ?>" class="nav-link">
                         <i class="text-navy nav-icon far fa-address-card"></i>
                         <p>
-                         مدارس
+                            مدارس
                         </p>
                     </a>
                 </li>
                 <!-- -->
                 <li class="nav-item">
-                    <a href="<?php echo base_url().'/public/admin/parent';?>" class="nav-link">
+                    <a href="<?php echo base_url() . '/public/admin/parent'; ?>" class="nav-link">
                         <i class="text-navy nav-icon far fa-address-card"></i>
                         <p>
-                         مدارس وأولياء الأمور
+                            مدارس وأولياء الأمور
                         </p>
                     </a>
                 </li>
-                
+
                 <li class="nav-item">
-                    <a href="<?php echo base_url().'/public/admin/partner';?>" class="nav-link">
+                    <a href="<?php echo base_url() . '/public/admin/partner'; ?>" class="nav-link">
                         <i class="text-navy nav-icon fas fa-user-graduate"></i>
                         <p>
-                         شريك النجاح
+                            شريك النجاح
                         </p>
                     </a>
                 </li>
@@ -150,15 +158,15 @@
                 <!-- end إدارة المدارس-->
                 <li class="nav-header">أرشيف الرسائل
                 </li>
-                
+
                 <li class="nav-item">
 
-                    <a href="<?php echo base_url().'/public/admin/adminemail';?>" class="nav-link">
-                    <!-- <a href="<?php echo base_url().'/public/admin/problem';?>" class="nav-link"> -->
+                    <a href="<?php echo base_url() . '/public/admin/adminemail'; ?>" class="nav-link">
+                        <!-- <a href="<?php echo base_url() . '/public/admin/problem'; ?>" class="nav-link"> -->
 
                         <i class="text-navy nav-icon fas fa-mail-bulk"></i>
                         <p>
-                          بريد مدير لوحة التحكم
+                            بريد مدير لوحة التحكم
                             <span class="badge badge-info right"></span>
                         </p>
                     </a>

@@ -47,12 +47,11 @@
   $("img.lazyload").lazyload();
 </script>
 <script>
-  
   var school_id = '<?= session('user_data')['user_id'] ?>';
   var user_id = '<?= session('user_data')['user_id'] ?>';
   var token = '<?= session('user_data')['token'] ?>';
   var school_name = '<?= session('user_data')['school_name'] ?>';
-  moment.locale("ar-sa"); 
+  moment.locale("ar-sa");
   toastr.options = {
     "closeButton": false,
     "debug": false,
@@ -164,6 +163,35 @@
       $("#image-to-upload-btn").html('معالجة');
       $("#image-to-upload-btn").removeAttr('disabled');
     });
+  }
+  $(document).ready(function() {
+    getNotificationServiceStatus();
+  });
+
+
+
+  function getNotificationServiceStatus() {
+    var jqxhr = $.ajax({
+        url: "<?= site_url('') ?>schools/getNotificationServiceData",
+        method: "GET",
+        timeout: 0,
+        headers: {
+          "Authorization": token
+        },
+        data: {
+          school_id: school_id,
+        }
+      })
+      .done(function(response) {
+        console.log(response);
+        $("#notification-service-userName").html(response.data.name);
+        $("#sms-balance").html(parseInt(response.data.sms_balance));
+      })
+      .fail(function(response) {
+        console.log(response);
+        toastr.error(response.msg, 'خطأ');
+      });
+
   }
 </script>
 </body>

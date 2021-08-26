@@ -94,4 +94,8 @@ class AdminView extends BaseController
     {
         return view('admin/addgets');
     }
+    public function classes()
+    {
+        return view('admin/classes');
+    }
 }

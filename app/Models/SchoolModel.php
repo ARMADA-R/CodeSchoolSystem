@@ -109,6 +109,32 @@ class SchoolModel extends Model
         $builder->delete();
         return $db->affectedRows();
     }
+    
+    public function delete_class(array $data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('classes');
+        $builder->whereIn('id', $data);
+        $builder->delete();
+        return $db->affectedRows();
+    }
+    
+    public function update_class(array $data, $id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('classes');
+        $builder->where('id', $id);
+        return  $builder->update($data);
+    }
+    
+    public function add_class(array $data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('classes');
+
+        return $builder->insert($data);
+    }
+
     public function get_classes()
     {
         $db = \Config\Database::connect();
@@ -479,6 +505,22 @@ class SchoolModel extends Model
         $builder = $db->table('period');
         return $builder->insert($data);
     }
+    public function update_period($data, $id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('period');
+        $builder->where('id', $id);
+        return  $builder->update($data);
+    }
+    public function delete_period($id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('period');
+        $builder->where('id', $id);
+        $builder->delete();
+        return $db->affectedRows();
+    }
+
     public function get_school_parent($school_id)
     {
 
@@ -642,7 +684,6 @@ class SchoolModel extends Model
 
     public function updateAbsenceArchiveMessagesStatus($ids, $status)
     {
-        print_r($ids);
         if (count($ids) < 1) return;
 
         $db = \Config\Database::connect();
@@ -653,7 +694,6 @@ class SchoolModel extends Model
 
     public function updatePublicMessagesArchiveMessagesStatus($ids, $status)
     {
-        print_r($ids);
         if (count($ids) < 1) return;
 
         $db = \Config\Database::connect();

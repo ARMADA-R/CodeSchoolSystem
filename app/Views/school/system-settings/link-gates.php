@@ -51,7 +51,7 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="password">كلمة المرور</label>
-                                <input  required type="text" name="password" class="form-control" id="password">
+                                <input  required type="password" name="password" class="form-control" id="password">
 
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="update-password">كلمة المرور</label>
-                                <input  required type="text" name="password" class="form-control" id="update-password">
+                                <input  required type="password" name="password" class="form-control" id="update-password">
 
                             </div>
                         </div>
@@ -483,7 +483,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
 
     }
@@ -638,7 +638,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
     }
 

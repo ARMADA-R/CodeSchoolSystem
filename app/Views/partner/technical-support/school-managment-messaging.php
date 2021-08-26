@@ -78,7 +78,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
     }
 
@@ -96,7 +96,7 @@
                                                           <div>  البريد الإلكتروني: </div><div> ${data[i].email} </div>
                                                         </div>
                                                         <div class="card-text d-flex pb-3 justify-content-between " style="font-size: 0.9rem;">
-                                                          <div>  الهاتف: </div><div> ${data[i].phone} </div>
+                                                          <div>  الجوال: </div><div> ${data[i].phone} </div>
                                                         </div>
                                                         <a href="<?php echo base_url() . '/public/'; ?>partner/support/technical/school-tickets/${data[i].school_id}" class="btn btn-outline-primary" style="width: -webkit-fill-available;">استعراض التذاكر</a>
                                                     </div>

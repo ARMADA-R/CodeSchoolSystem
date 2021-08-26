@@ -787,4 +787,84 @@ class Servies extends BaseController
             return    $this->respond($data, 200);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function addNewSurvey()
+    {
+
+        if ($this->request->getMethod() == 'post') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+            // var_dump($this->request->getVar());
+            // exit;
+            if ($result['code'] == 1) {
+
+                $title = $this->request->getVar('title');
+                $link = $this->request->getVar('link');
+                $school_id = $this->request->getVar('school_id');
+
+                if (!$school_id) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+                if (!$title) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل العنوان ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+                if (!$link) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال الرابط');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
+                $ch = curl_init();
+                $timeout = 5;
+                curl_setopt($ch, CURLOPT_URL, 'http://tinyurl.com/api-create.php?url=' . $link);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+                $tinyUrl = curl_exec($ch);
+                curl_close($ch);
+
+                $model = new ServicesModel();
+                $data = [
+                    'school_id' => $school_id,
+                    'title' => $title,
+                    'short_link' => $tinyUrl,
+                    'long_link' => $link,
+                ];
+
+                $save = $model->add_survey($data);
+
+                if ($save > 0) {
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
+            return    $this->respond($data, 400);
+        }
+    }
 }

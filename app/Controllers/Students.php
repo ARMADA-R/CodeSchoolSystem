@@ -273,7 +273,7 @@ class Students extends BaseController
         }
         $model = new StudentsModel();
 
-        $delete = $model->delete_students($id);
+        $delete = $model->delete_students([$id]);
         if ($delete == 1) {
           $data = array('code' => 1, 'msg' => 'success', 'data' => []);
           return  $this->respond($data, 200);

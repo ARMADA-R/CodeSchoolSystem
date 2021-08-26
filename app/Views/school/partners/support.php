@@ -113,7 +113,7 @@
             <div class="card-body">
                 <p class="card-text" style="font-size: 0.9rem;">الاسم الكامل:</p>
                 <p class="card-text" style="font-size: 0.9rem;">البريد الإلكتروني:</p>
-                <p class="card-text" style="font-size: 0.9rem;">الهاتف:</p>
+                <p class="card-text" style="font-size: 0.9rem;">الجوال:</p>
 
                 <a href="<?php echo base_url() . '/public/'; ?>school/support/technical/ticket/3" class="btn btn-outline-primary" style="width: -webkit-fill-available;">استعراض التذاكر</a>
             </div>
@@ -159,7 +159,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
     }
 
@@ -177,7 +177,7 @@
                                                           <div>  البريد الإلكتروني: </div><div> ${data[i].email} </div>
                                                         </div>
                                                         <div class="card-text d-flex pb-3 justify-content-between " style="font-size: 0.9rem;">
-                                                          <div>  الهاتف: </div><div> ${data[i].phone} </div>
+                                                          <div>  الجوال: </div><div> ${data[i].phone} </div>
                                                         </div>
                                                         <a href="<?= site_url() ?>school/partner/support/technical/ticket/${data[i].id}" class="btn btn-outline-primary" style="width: -webkit-fill-available;">استعراض التذاكر</a>
                                                     </div>

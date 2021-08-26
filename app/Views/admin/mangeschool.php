@@ -405,7 +405,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
 
     }

@@ -172,7 +172,7 @@
                                 <div class="form-group">
                                     <label for="add-username">رابط ارسال الرسائل العربية</label>
                                     <!-- <input required type="text" name="username" class="form-control" id="add-username"> -->
-                                    <textarea required name="arabic_messages_link" class="form-control" id="update-arabic-messages-link" maxlength="500" rows="3"></textarea>
+                                    <textarea required name="arabic_messages_link" class="form-control dir-ltr" id="update-arabic-messages-link" maxlength="500" rows="3"></textarea>
 
                                 </div>
                                 <div class="row">
@@ -212,7 +212,7 @@
                                 <div class="form-group">
                                     <label for="add-username">رابط ارسال الرسائل اللاتينية</label>
                                     <!-- <input required type="text" name="username" class="form-control" id="add-username"> -->
-                                    <textarea name="latin_messages_link" class="form-control" id="update-latin-messages-link" maxlength="500" required rows="3"></textarea>
+                                    <textarea name="latin_messages_link" class="form-control dir-ltr" id="update-latin-messages-link" maxlength="500" required rows="3"></textarea>
 
                                 </div>
                                 <div class="row">
@@ -252,7 +252,7 @@
                                 <div class="form-group">
                                     <label for="add-username">رابط استعلام الرصيد</label>
                                     <!-- <input required type="text" name="username" class="form-control" id="add-username"> -->
-                                    <textarea name="balance_link" class="form-control" id="update-balance-link" maxlength="500" required rows="3"></textarea>
+                                    <textarea name="balance_link" class="form-control dir-ltr" id="update-balance-link" maxlength="500" required rows="3"></textarea>
 
                                 </div>
                                 <div class="row">
@@ -369,7 +369,7 @@
                                 <div class="form-group">
                                     <label for="add-username">رابط ارسال الرسائل العربية</label>
                                     <!-- <input required type="text" name="username" class="form-control" id="add-username"> -->
-                                    <textarea required name="arabic_messages_link" class="form-control" maxlength="500" rows="3"></textarea>
+                                    <textarea required name="arabic_messages_link" class="form-control dir-ltr" maxlength="500" rows="3"></textarea>
 
                                 </div>
                                 <div class="row">
@@ -409,7 +409,7 @@
                                 <div class="form-group">
                                     <label for="add-username">رابط ارسال الرسائل اللاتينية</label>
                                     <!-- <input required type="text" name="username" class="form-control" id="add-username"> -->
-                                    <textarea name="latin_messages_link" class="form-control" maxlength="500" required rows="3"></textarea>
+                                    <textarea name="latin_messages_link" class="form-control dir-ltr" maxlength="500" required rows="3"></textarea>
 
                                 </div>
                                 <div class="row">
@@ -449,7 +449,7 @@
                                 <div class="form-group">
                                     <label for="add-username">رابط استعلام الرصيد</label>
                                     <!-- <input required type="text" name="username" class="form-control" id="add-username"> -->
-                                    <textarea name="balance_link" class="form-control" maxlength="500" required rows="3"></textarea>
+                                    <textarea name="balance_link" class="form-control dir-ltr" maxlength="500" required rows="3"></textarea>
 
                                 </div>
                                 <div class="row">
@@ -493,7 +493,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h6 id="display-link" style="overflow-wrap: break-word;">
+                <h6 id="display-link" class="dir-ltr" style="overflow-wrap: break-word;">
 
                 </h6>
             </div>
@@ -931,7 +931,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
 
     }

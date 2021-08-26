@@ -46,7 +46,6 @@ class StudentsExtends extends Students
 
                 if ($excelData !== []) {
 
-
                     $addedSuccessNum = 0;
                     $failedToAddNum = 0;
 
@@ -55,8 +54,8 @@ class StudentsExtends extends Students
                     $classesCodes = [];
                     $classesData = [];
 
-                    foreach ($excelData as  $value){
-                         $classesCodes[] = $value['class'];
+                    foreach ($excelData as  $value) {
+                        $classesCodes[] = $value['class'];
                     }
 
                     $tempClassesData = (new SchoolModel())->get_classes_by_codes($classesCodes);
@@ -68,8 +67,8 @@ class StudentsExtends extends Students
                     $semestersNames = [];
                     $semestersData = [];
 
-                    foreach ($excelData as  $value){
-                         $semestersNames[] = $value['semestar'];
+                    foreach ($excelData as  $value) {
+                        $semestersNames[] = $value['semestar'];
                     }
 
                     $tempSemestersData = (new SchoolModel())->get_semesters_by_names($semestersNames);
@@ -78,7 +77,7 @@ class StudentsExtends extends Students
                         $semestersData[$value->name] = $value->id;
                     }
 
-                    
+
 
                     foreach ($excelData as  $value) {
                         try {
@@ -92,8 +91,8 @@ class StudentsExtends extends Students
                                 'student_number' => $value['student_number'],
                                 'full_name' => $value['full_name'],
                                 'phone' => $value['phone'],
-                                'class_id' => !empty($classesData[$value['class']])? $classesData[$value['class']] : null ,
-                                'semestar_id' => !empty($semestersData[$value['semestar']])? $semestersData[$value['semestar']] : null,
+                                'class_id' => !empty($classesData[$value['class']]) ? $classesData[$value['class']] : null,
+                                'semestar_id' => !empty($semestersData[$value['semestar']]) ? $semestersData[$value['semestar']] : null,
                             ]);
 
                             $addedSuccessNum++;
@@ -107,7 +106,6 @@ class StudentsExtends extends Students
                     $data = array('code' => -1, 'msg' => 'لا يوجد بيانات لإضافتها!', 'data' => []);
                     return    $this->respond($data, 400);
                 }
-
             } else {
                 $result = array(
                     'code' => $result['code'], 'msg' => $result['messages'],
@@ -116,6 +114,43 @@ class StudentsExtends extends Students
             }
         } else {
             $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
+            return  $this->respond($data, 200);
+        }
+    }
+
+    public function DeleteStudents()
+    {
+
+        if ($this->request->getMethod() == 'delete') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $input = $this->request->getRawInput();;
+                $ids = isset($input['ids']) ? $input['ids'] : '';
+                if (!$ids) {
+                    $data = array('code' => -1, 'msg' => 'Please insert ids flied', 'data' => []);
+                    return  $this->respond($data, 400);
+                    exit;
+                }
+                $model = new StudentsModel();
+
+                $delete = $model->delete_students($ids);
+                if ($delete >= 1) {
+                    $data = array('code' => 1, 'msg' => 'تم حذف '.$delete.' من السجلات بنجاح.', 'data' => []);
+                    return  $this->respond($data, 200);
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return  $this->respond($data, 400);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be Delete', 'data' => []);
             return  $this->respond($data, 200);
         }
     }

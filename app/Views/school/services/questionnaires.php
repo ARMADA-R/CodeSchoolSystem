@@ -80,7 +80,7 @@
                             <th>رابط الاستبانة</th>
                             <th>الرابط المختصر</th>
                             <th>تاريخ رفع الاستبانة</th>
-                            <th>عدد المجاوبين</th>
+                            <!-- <th>عدد المجاوبين</th> -->
                             <!-- <th>استعراض</th> -->
                             <!-- <th>الحالة</th> -->
                         </tr>
@@ -107,6 +107,10 @@
 
     .clickable:hover {
         background-color: #00000030 !important;
+    }
+
+    .max-w-150{
+        max-width: 150px;
     }
 </style>
 
@@ -163,35 +167,36 @@
                     title: 'عنوان الاستبانة'
                 },
                 {
-                    data: null,
-                    "defaultContent": '',
-                    name: 'link',
-                    className: 'text-center t-link align-middle',
+                    data: 'long_link',
+                    name: 'long_link',
+                    className: 'text-center t-link align-middle max-w-150',
                     title: 'رابط طويل'
                 },
                 {
-                    data: null,
-                    "defaultContent": '',
+                    data: 'short_link',
                     name: 'short_link',
-                    className: 'text-center t-short_link align-middle',
+                    className: 'text-center t-short_link align-middle max-w-150',
                     title: 'رابط قصير'
                 },
                 {
-                    data: null,
-                    "defaultContent": '',
+                    data: 'date',
                     name: 'date',
                     className: 'text-center t-date align-middle',
-                    title: 'تاريخ الرفع'
-                },
-                {
-                    data: 'count',
-                    name: 'count',
-                    className: 'text-center t-count align-middle',
-                    title: 'عدد المجاوبين',
+                    title: 'تاريخ الرفع',
                     render: function(data, type, row, meta) {
-                        return data ? data : '';
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
                     }
+
                 },
+                // {
+                //     data: 'count',
+                //     name: 'count',
+                //     className: 'text-center t-count align-middle',
+                //     title: 'عدد المجاوبين',
+                //     render: function(data, type, row, meta) {
+                //         return data ? data : '';
+                //     }
+                // },
                 
             ],
 
@@ -431,7 +436,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
     }
 
@@ -443,25 +448,25 @@
         }, {});
 
         var jqxhr = $.ajax({
-                url: "<?= site_url('') ?>Servies/addSurveysss",
-                method: "GET",
+                url: "<?= site_url('') ?>Servies/addNewSurvey",
+                method: "Post",
                 timeout: 0,
                 data: {
                     school_id: school_id,
-                    page: "1",
-                    limit: "7000",
+                    link: formData.survey_link,
+                    title:formData.survey_title
                 },
                 headers: {
                     "Authorization": token
                 },
             })
             .done(function(response) {
-                
-                
+                toastr.success("تم اضافة البيانات.");
+                getSurveyData();
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء اضافة البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
 
         console.log(formData);

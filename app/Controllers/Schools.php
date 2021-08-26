@@ -536,6 +536,7 @@ class Schools extends BaseController
             return    $this->respond($data, 200);
         }
     }
+
     public function GetClasses()
     {
 
@@ -565,6 +566,7 @@ class Schools extends BaseController
             return    $this->respond($data, 200);
         }
     }
+
     public function GetSemester()
     {
 
@@ -1620,12 +1622,12 @@ class Schools extends BaseController
             if ($result['code'] == 1) {
                 $name = $this->request->getVar('name');
 
-                $school_id = $this->request->getVar('school_id');
-                if (!$school_id) {
-                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
-                    return $this->respond($result, 400);
-                    exit;
-                }
+                // $school_id = $this->request->getVar('school_id');
+                // if (!$school_id) {
+                //     $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
+                //     return $this->respond($result, 400);
+                //     exit;
+                // }
 
 
                 if (!$name) {
@@ -1636,7 +1638,7 @@ class Schools extends BaseController
 
 
                 $model = new SchoolModel();
-                $data = array('name' => $name, 'school_id' => $school_id);
+                $data = array('name' => $name);
                 if ($model->add_period($data)) {
                     $data = array('code' => 1, 'msg' => 'success', 'data' => []);
                     return    $this->respond($data, 200);
@@ -1745,44 +1747,7 @@ class Schools extends BaseController
         (new Gates_Api())->sendSMS('http://www.smsscript.net/index.php/api/sendsms/', 'nobalaa', '123456', '966500000000', 'lasttest', 'sendername');
     }
 
-    public function _____________getNotificationBalance()
-    {
-        if ($this->request->getMethod() == 'get') {
-            $check = new Check(); // Create an instance
-            $result = $check->check();
-
-            if ($result['code'] == 1) {
-
-
-                $school_id = $this->request->getVar('school_id');
-                if (!$school_id) {
-                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
-                    return $this->respond($result, 400);
-                    exit;
-                }
-
-                $model = new SchoolModel();
-                // $model->get_school_by_id($school_id);
-
-                $schoolGate = $model->getSchoolGateInfo($school_id);
-
-                if ($schoolGate) {
-                    # code...
-                }
-
-                (new Gates_Api())->getUserNotificationBalance($school_id, $schoolGate['id']);
-            } else {
-                $result = array(
-                    'code' => $result['code'], 'msg' => $result['messages'],
-                );
-                return $this->respond($result, 400);
-            }
-        } else {
-            $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
-            return    $this->respond($data, 200);
-        }
-    }
-
+    
     public function setSchoolGate()
     {
         if ($this->request->getMethod() == 'post') {
@@ -2068,6 +2033,8 @@ class Schools extends BaseController
         $faildSentPublicMessagesArchive = [];
         $successSentPublicMessagesArchive = [];
 
+        $sentMessageNum =0;
+
         foreach ($unsentMessages as $key => $value) {
 
             $res = (new Gates_Api)->sendSMS($value->gates_arabic_link, $value->username, $value->password, $value->phone, $value->message, $value->sender_name, $value->gates_method);
@@ -2104,6 +2071,8 @@ class Schools extends BaseController
                 $faildSentPublicMessagesArchive = [];
                 $successSentPublicMessagesArchive = [];
             }
+
+            $sentMessageNum++;
         }
 
         $model->deleteFromUnsentMessage($sentMessages);
@@ -2111,5 +2080,304 @@ class Schools extends BaseController
         $model->updateAbsenceArchiveMessagesStatus($faildSentAbsenceMessagesArchive, 0);
         $model->updatePublicMessagesArchiveMessagesStatus($faildSentPublicMessagesArchive, 0);
         $model->updatePublicMessagesArchiveMessagesStatus($successSentPublicMessagesArchive, 1);
+
+        $result = [
+            'msg' => $sentMessageNum > 0? $sentMessageNum.' message has been sent.' : 'There is no messages to sent!',
+        ];
+        return $this->respond($result, 200);
     }
+
+
+    public function addClass()
+    {
+        if ($this->request->getMethod() == 'post') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $name = $this->request->getVar('name');
+
+                $code = $this->request->getVar('code');
+                
+                if (!$code) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء تحديد الرمز ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
+                if (!$name) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء تحديد اسم الصف');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
+                $model = new SchoolModel();
+
+                $data = ['name' => $name, 'code' => $code];
+                if ($model->add_class($data)) {
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+    
+
+    public function updateClass()
+    {
+        if ($this->request->getMethod() == 'post') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $name = $this->request->getVar('name');
+
+                $code = $this->request->getVar('code');
+
+                $id = $this->request->getVar('id');
+                
+                if (!$code) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء تحديد الرمز ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
+                if (!$name) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء تحديد اسم الصف');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
+                if (!$id) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء تحديد معرف الصف');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
+                $model = new SchoolModel();
+
+                $data = ['name' => $name, 'code' => $code];
+
+                if ($model->update_class($data, $id)) {
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+    
+    public function deleteClass()
+    {
+        if ($this->request->getMethod() == 'delete') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $input = $this->request->getRawInput();;
+                $id = isset($input['id']) ? $input['id'] : '';
+                if (!$id) {
+                    $data = array('code' => -1, 'msg' => 'Please insert id flied', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+                $model = new SchoolModel();
+
+                $delete = $model->delete_class([$id]);
+                if ($delete == 1) {
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be Delete', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+    
+
+
+    public function getNotificationServiceData()
+    {
+        if ($this->request->getMethod() == 'get') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $school_id = $this->request->getVar('school_id');
+
+
+                if (!$school_id) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء تحديد المدرسة');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
+
+                $model = new SchoolModel();
+
+
+                if (empty($model->get_school_by_id($school_id))) {
+                    $result = array('code' => -1, 'msg' => 'المدرسة المحددة غير متوفرة!');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
+
+                $gate = $model->getSchoolActiveGatesById($school_id)[0];
+
+
+                if (!empty($gate)) {
+                    $name = $gate->sender_name;
+                    $sms_balance = (new Gates_Api())->getUserNotificationBalance($gate->username, $gate->password, $gate->balance_link);
+
+                    $data = [
+                        'code' => 1,
+                        'msg' => 'success',
+                        'data' => [
+                            "name" => $name,
+                            "sms_balance" => $sms_balance
+                        ]
+                    ];
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
+                    return    $this->respond($data, 200);
+                }
+            } else {
+                $result = [
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                ];
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
+            return    $this->respond($data, 400);
+        }
+    }
+    
+    public function updatePeriod()
+    {
+
+        if ($this->request->getMethod() == 'post') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $name = $this->request->getVar('name');
+
+                $school_id = $this->request->getVar('school_id');
+
+                $input = $this->request->getRawInput();;
+                $id = isset($input['id']) ? $input['id'] : '';
+                if (!$id) {
+                    $data = array('code' => -1, 'msg' => 'Please insert id flied', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+
+                // if (!$school_id) {
+                //     $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
+                //     return $this->respond($result, 400);
+                //     exit;
+                // }
+
+
+                if (!$name) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  اسم الحصة  ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
+
+                $model = new SchoolModel();
+                $data = array('name' => $name);
+                if ($model->update_period($data, $id)) {
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
+
+    public function deletePeriod()
+    {
+        if ($this->request->getMethod() == 'delete') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $input = $this->request->getRawInput();;
+                $id = isset($input['id']) ? $input['id'] : '';
+                if (!$id) {
+                    $data = array('code' => -1, 'msg' => 'Please insert id flied', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+                $model = new SchoolModel();
+
+                $delete = $model->delete_period($id);
+                if ($delete == 1) {
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be Delete', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
 }

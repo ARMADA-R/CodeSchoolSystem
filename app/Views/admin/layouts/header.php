@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/css/toastr.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/fontawesome-free/css/all.min.css">
-    
+
     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/frontend.css">
 
     <style>
@@ -67,13 +67,13 @@
         }
 
         .page-item.active .page-link {
-            background-color: #001f3f  !important;
-            border-color: #001f3f  !important;
+            background-color: #001f3f !important;
+            border-color: #001f3f !important;
         }
 
         .btn-secondary {
-            background-color: #334c65  !important;
-            border-color: #334c65  !important;
+            background-color: #334c65 !important;
+            border-color: #334c65 !important;
         }
 
         .btn-secondary:hover {
@@ -86,67 +86,67 @@
         }
 
         .custom-control-input:checked~.custom-control-label::before {
-            color: #fff  !important;
-            border-color: #334c65  !important;
-            background-color: #001f3f  !important;
+            color: #fff !important;
+            border-color: #334c65 !important;
+            background-color: #001f3f !important;
         }
 
         .btn-primary {
-            color: #fff  !important;
-            background-color: #001f3f  !important;
-            border-color: #001f3f  !important;
+            color: #fff !important;
+            background-color: #001f3f !important;
+            border-color: #001f3f !important;
         }
 
         .btn-primary:hover {
-            color: #fff  !important;
-            background-color: #001a35  !important;
-            border-color: #001a35  !important;
+            color: #fff !important;
+            background-color: #001a35 !important;
+            border-color: #001a35 !important;
         }
 
         .btn-primary.focus,
         .btn-primary:focus {
-            color: #fff  !important;
-            background-color: #001f3f  !important;
-            border-color: #001f3f  !important;
-            box-shadow: 0 0 0 0.2rem rgb(0 31 63 / 34%)  !important;
+            color: #fff !important;
+            background-color: #001f3f !important;
+            border-color: #001f3f !important;
+            box-shadow: 0 0 0 0.2rem rgb(0 31 63 / 34%) !important;
         }
 
         .btn-primary:not(:disabled):not(.disabled).active,
         .btn-primary:not(:disabled):not(.disabled):active,
         .show>.btn-primary.dropdown-toggle {
-            color: #fff  !important;
-            background-color: #001f3f  !important;
-            border-color: #001831  !important;
+            color: #fff !important;
+            background-color: #001f3f !important;
+            border-color: #001831 !important;
         }
 
         .btn-primary.disabled,
         .btn-primary:disabled {
-            color: #fff  !important;
-            background-color: #001f3f  !important;
-            border-color: #001f3f  !important;
-            border-top-color: rgb(0, 31, 63)  !important;
-            border-right-color: rgb(0, 31, 63)  !important;
-            border-bottom-color: rgb(0, 31, 63)  !important;
-            border-left-color: rgb(0, 31, 63)  !important;
+            color: #fff !important;
+            background-color: #001f3f !important;
+            border-color: #001f3f !important;
+            border-top-color: rgb(0, 31, 63) !important;
+            border-right-color: rgb(0, 31, 63) !important;
+            border-bottom-color: rgb(0, 31, 63) !important;
+            border-left-color: rgb(0, 31, 63) !important;
         }
 
         .btn-outline-primary {
-            color: #001f3f  !important;
-            border-color: #001f3f  !important;
+            color: #001f3f !important;
+            border-color: #001f3f !important;
         }
 
         .btn-outline-primary:hover {
             color: #fff !important;
-            background-color: #001f3f  !important;
-            border-color: #001f3f  !important;
+            background-color: #001f3f !important;
+            border-color: #001f3f !important;
         }
 
         .btn-outline-primary:not(:disabled):not(.disabled).active,
         .btn-outline-primary:not(:disabled):not(.disabled):active,
         .show>.btn-outline-primary.dropdown-toggle {
             color: #fff;
-            background-color: #001f3f  !important;
-            border-color: #001f3f  !important;
+            background-color: #001f3f !important;
+            border-color: #001f3f !important;
         }
 
         .btn-outline-primary.focus,
@@ -155,7 +155,11 @@
         }
 
         .page-link {
-            color: #001f3f ;
+            color: #001f3f;
+        }
+
+        .dir-ltr {
+            direction: ltr !important;
         }
     </style>
 </head>

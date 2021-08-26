@@ -143,7 +143,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
     }
 
@@ -185,7 +185,7 @@
 
 
             <div class="row">
-        <div class="col-lg-6"><label for=""> الهاتف:
+        <div class="col-lg-6"><label for=""> الجوال:
 
        </label></div>
 
@@ -256,7 +256,7 @@ alert("لاتوجد تذاكر متاحة");
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
 
         }

@@ -204,7 +204,25 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-navy" style=" direction: ltr;">
             <div class="container">
-                <a class="navbar-brand" href="#">Arsail</a>
+                <!-- <a class="navbar-brand" href="#">Arsail</a> -->
+                <ul class="navbar-nav " style="flex-direction: inherit; padding-inline-start: 10px;">
+                <?php if (!session()->has('user_data')) echo " 
+                        <li class='nav-item px-1'>
+                            <a class='nav-link' href='".site_url('login')."'>تسجيل دخول</a>
+                        </li>
+                        <li class='nav-item px-1'>
+                            <a class='nav-link' href='".site_url('register')."'>انشاء حساب</a>
+                        </li>";
+
+                        else {
+                             echo " 
+                             <form id=\"logoutForm\" action=\"".site_url('logout')."\" method=\"post\"></form>
+                        <li class='nav-item px-1'>
+                            <a onclick=\"$('#logoutForm').submit()\" style=\"cursor: pointer;\" class='nav-link' >تسجيل خروج</a>
+                        </li>";
+                        }
+                        ?>
+                </ul>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -223,22 +241,7 @@
                         <li class="nav-item px-1">
                             <a  class="nav-link" href="#whoWeAre_section">من نحن</a>
                         </li>
-                        <?php if (!session()->has('user_data')) echo " 
-                        <li class='nav-item px-1'>
-                            <a class='nav-link' href='".site_url('login')."'>تسجيل دخول</a>
-                        </li>
-                        <li class='nav-item px-1'>
-                            <a class='nav-link' href='".site_url('register')."'>انشاء حساب</a>
-                        </li>";
-
-                        else {
-                             echo " 
-                             <form id=\"logoutForm\" action=\"".site_url('logout')."\" method=\"post\"></form>
-                        <li class='nav-item px-1'>
-                            <a onclick=\"$('#logoutForm').submit()\" style=\"cursor: pointer;\" class='nav-link' >تسجيل خروج</a>
-                        </li>";
-                        }
-                        ?>
+                        
                     </ul>
                 </div>
             </div>
@@ -428,7 +431,7 @@
                             <h2 class="text-dark font-weight-bolder mb-4">معلومات التواصل</h2>
                         </div>
                         <div class="form-group  my-2">
-                            <label class="col-4 col-form-label">رقم الهاتف:</label>
+                            <label class="col-4 col-form-label">رقم الجوال:</label>
                             <div class="col-8"><span class="form-control-plaintext" id="phone"></span></div>
                         </div>
                     </div>
@@ -484,7 +487,7 @@
         <a href="<?php echo base_url() . '/public/'; ?>partner" class="mx-4 btn btn-outline-primary">الشركاء</a>
         <a href="<?php echo base_url() . '/public/'; ?>admin" class="mx-4 btn btn-outline-primary">المشرفين</a>
     </div>
- -->
+    -->
 
 
     <!-- jQuery 3.4.1 -->
@@ -559,7 +562,7 @@
                 })
                 .fail(function(response) {
                     console.log(response);
-                    toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                    toastr.error(response.responseJSON.msg, 'خطأ');
                 });
 
         }
@@ -575,7 +578,7 @@
                 })
                 .fail(function(response) {
                     console.log(response);
-                    toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                    toastr.error(response.responseJSON.msg, 'خطأ');
                 });
 
         }
@@ -606,6 +609,8 @@
             $("#copyright").html(data.copyright);
             $("#phone").html(data.phone);
         }
+
+        
     </script>
 </body>
 

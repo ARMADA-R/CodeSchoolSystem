@@ -389,7 +389,7 @@
                                                 <input type="password" class="form-input" name="re_password" id="re_password" min="8" placeholder="اعادة كلمة المرور" />
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-input" name="phone" id="phone" placeholder="الهاتف" />
+                                                <input type="text" class="form-input" name="phone" id="phone" placeholder="الجوال" />
                                             </div>
                                             <div class="form-group">
                                                 <input type="submit" name="submit" id="submit" class="form-submit" value="انشاء حساب" />
@@ -427,7 +427,7 @@
                                                 <input type="password" class="form-input" name="re_password" id="re_password" min="8" placeholder="اعادة كلمة المرور" />
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-input" name="phone" id="phone" placeholder="الهاتف" />
+                                                <input type="text" class="form-input" name="phone" id="phone" placeholder="الجوال" />
                                             </div>
                                             <div class="form-group">
                                                 <input type="submit" name="submit" id="submit" class="form-submit" value="انشاء حساب" />

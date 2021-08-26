@@ -652,7 +652,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
 
     }
@@ -879,7 +879,7 @@
     var columns = {
         'student_number': 'رقم الطالب',
         'student_name': 'اسم الطالب',
-        'phone': 'الهاتف',
+        'phone': 'الجوال',
     };
 
     $('.custom-file input').change(function(e) {

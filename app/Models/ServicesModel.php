@@ -82,7 +82,7 @@ class ServicesModel extends Model
 
         $db = \Config\Database::connect();
         $builder = $db->table('survey');
-        $builder->select('survey.id,title,( SELECT COUNT(*) FROM anwser_user_survey m WHERE survey.id=m.survey_id group by survey_id)count,status');
+        $builder->select('survey.id,title,long_link,short_link,CAST(create_date As Date) date,( SELECT COUNT(*) FROM anwser_user_survey m WHERE survey.id=m.survey_id group by survey_id)count,status');
         // $builder->join('anwser_user_survey', 'survey.id = anwser_user_survey.survey_id','left');
         $builder->wherein('school_id',$school_id);
         // $builder->groupBy("survey_id");

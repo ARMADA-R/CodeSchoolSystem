@@ -1,4 +1,6 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 
@@ -24,8 +26,7 @@ class App extends BaseConfig
 
 	public $baseURL = 'http://localhost/codeigniter/CodeSchoolSystem';
 
-	// public $baseURL = 'http://localhost/codeigniter/schoolsGit/CodeSchoolSystem';
-
+	// public $baseURL = 'https://new.arsail.net/CodeSchoolSystem';;
 	/*
 	|--------------------------------------------------------------------------
 	| Index File

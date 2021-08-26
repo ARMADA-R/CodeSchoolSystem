@@ -144,7 +144,7 @@ $.ajax({
     })
     .fail(function(response) {
         console.log(response);
-        toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+        toastr.error(response.responseJSON.msg, 'خطأ');
     });
 }
 
@@ -182,7 +182,7 @@ for (let i = 0; i < data.length; i++) {
 
 
     <div class="row">
-<div class="col-lg-6"><label for=""> الهاتف:
+<div class="col-lg-6"><label for=""> الجوال:
 
 </label></div>
 
@@ -249,7 +249,7 @@ function viewtpr(id) {
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحميل البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
 
         }

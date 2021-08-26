@@ -62,10 +62,10 @@ class StudentsModel extends Model
         return $query->getRow();
        
     }
-    public function delete_students($id){
+    public function delete_students($ids){
         $db = \Config\Database::connect();
         $builder = $db->table('students');
-        $builder->where('id',$id);
+        $builder->whereIn('id',$ids);
          $builder->delete();
          return $db->affectedRows();
        
