@@ -726,7 +726,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء اضافة البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
 
             }).always(function() {
                 $('#add-employee-submit').removeAttr('disabled');

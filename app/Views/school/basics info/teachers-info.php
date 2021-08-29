@@ -636,7 +636,7 @@
                         dataTable.row($('tr#' + ids[i])).remove();
                     }
                     dataTable.draw();
-                    toastr.success('تم حذف السجلات بنجاح!')
+                    toastr.success(response.msg)
                 })
                 .fail(function(response) {
                     console.log(response);
@@ -777,7 +777,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء اضافة البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
 
             }).always(function() {
                 $('#add-teacher-submit').removeAttr('disabled');

@@ -248,7 +248,7 @@
             toastr.success('تم اضافة البيانات بنجاح');
          
         }).fail(function(response) {
-            toastr.error('حدث خطأ ما اثناء اضافة البيانات!', 'خطأ');
+            toastr.error(response.responseJSON.msg, 'خطأ');
          
         });
     }

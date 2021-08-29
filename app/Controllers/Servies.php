@@ -221,79 +221,79 @@ class Servies extends BaseController
             return    $this->respond($data, 200);
         }
     }
-    public function UploadImage()
-    {
+    // public function UploadImage()
+    // {
 
-        if ($this->request->getMethod() == 'post') {
-            $check = new Check(); // Create an instance
-            $result = $check->check();
+    //     if ($this->request->getMethod() == 'post') {
+    //         $check = new Check(); // Create an instance
+    //         $result = $check->check();
 
-            if ($result['code'] == 1) {
-                $school_id = $this->request->getVar('school_id');
+    //         if ($result['code'] == 1) {
+    //             $school_id = $this->request->getVar('school_id');
 
-                if (!$school_id) {
-                    $data = array('code' => -1, 'msg' => 'Please insert school', 'data' => []);
-                    return    $this->respond($data, 400);
-                    exit;
-                }
-                if (empty($_FILES['file']['name'])) {
-                    $data = array('code' => -1, 'msg' => 'Please insert image flied', 'data' => []);
-                    return    $this->respond($data, 400);
-                    exit;
-                }
+    //             if (!$school_id) {
+    //                 $data = array('code' => -1, 'msg' => 'Please insert school', 'data' => []);
+    //                 return    $this->respond($data, 400);
+    //                 exit;
+    //             }
+    //             if (empty($_FILES['file']['name'])) {
+    //                 $data = array('code' => -1, 'msg' => 'Please insert image flied', 'data' => []);
+    //                 return    $this->respond($data, 400);
+    //                 exit;
+    //             }
 
-                $model = new ServicesModel();
-                $input = $this->validate([
-                    'file' => [
-                        'uploaded[file]',
-                        'mime_in[file,image/jpg,image/jpeg,image/png]',
-                        'max_size[file,1024]',
-                    ]
-                ]);
+    //             $model = new ServicesModel();
+    //             $input = $this->validate([
+    //                 'file' => [
+    //                     'uploaded[file]',
+    //                     'mime_in[file,image/jpg,image/jpeg,image/png]',
+    //                     'max_size[file,1024]',
+    //                 ]
+    //             ]);
 
-                if (!$input) {
-                    $data = array('code' => -1, 'msg' => 'Choose a valid file', 'data' => []);
-                    return    $this->respond($data, 400);
-                }
-                if ($file = $this->request->getFile('file')) {
-                    if ($file->isValid() && !$file->hasMoved()) {
-                        // Get file name and extension
-                        $name = $file->getName();
-                        $ext = $file->getClientExtension();
+    //             if (!$input) {
+    //                 $data = array('code' => -1, 'msg' => 'Choose a valid file', 'data' => []);
+    //                 return    $this->respond($data, 400);
+    //             }
+    //             if ($file = $this->request->getFile('file')) {
+    //                 if ($file->isValid() && !$file->hasMoved()) {
+    //                     // Get file name and extension
+    //                     $name = $file->getName();
+    //                     $ext = $file->getClientExtension();
 
-                        // Get random file name
-                        $newName = $file->getRandomName();
+    //                     // Get random file name
+    //                     $newName = $file->getRandomName();
 
-                        // Store file in public/uploads/ folder
-                        $file->move('./assets/files', $newName);
+    //                     // Store file in public/uploads/ folder
+    //                     $file->move('./assets/files', $newName);
 
-                        // File path to display preview
-                        $filepath = base_url() . "/assets/files/" . $newName;
+    //                     // File path to display preview
+    //                     $filepath = base_url() . "/assets/files/" . $newName;
 
-                        $data = array('school_id' => $school_id, 'image_url' => $filepath);
-                        if ($model->upload_image($data)) {
-                            $data = array('code' => 1, 'msg' => 'success', 'data' => array('image_url' => $filepath));
-                            return    $this->respond($data, 200);
-                        } else {
-                        }
-                        $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
-                        return    $this->respond($data, 400);
-                    }
-                } else {
-                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
-                    return    $this->respond($data, 400);
-                }
-            } else {
-                $result = array(
-                    'code' => $result['code'], 'msg' => $result['messages'],
-                );
-                return $this->respond($result, 400);
-            }
-        } else {
-            $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
-            return    $this->respond($data, 200);
-        }
-    }
+    //                     $data = array('school_id' => $school_id, 'image_url' => $filepath);
+    //                     if ($model->upload_image($data)) {
+    //                         $data = array('code' => 1, 'msg' => 'success', 'data' => array('image_url' => $filepath));
+    //                         return    $this->respond($data, 200);
+    //                     } else {
+    //                     }
+    //                     $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+    //                     return    $this->respond($data, 400);
+    //                 }
+    //             } else {
+    //                 $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+    //                 return    $this->respond($data, 400);
+    //             }
+    //         } else {
+    //             $result = array(
+    //                 'code' => $result['code'], 'msg' => $result['messages'],
+    //             );
+    //             return $this->respond($result, 400);
+    //         }
+    //     } else {
+    //         $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
+    //         return    $this->respond($data, 200);
+    //     }
+    // }
     public function GetTinyUrl()
     {
         if ($this->request->getMethod() == 'post') {
@@ -792,9 +792,17 @@ class Servies extends BaseController
 
 
 
-
-
-
+    public function getShortenURL($link)
+    {
+        $ch = curl_init();
+        $timeout = 5;
+        curl_setopt($ch, CURLOPT_URL, 'http://tinyurl.com/api-create.php?url=' . $link);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        $tinyUrl = curl_exec($ch);
+        curl_close($ch);
+        return $tinyUrl;
+    }
 
 
 
@@ -831,13 +839,7 @@ class Servies extends BaseController
                     exit;
                 }
 
-                $ch = curl_init();
-                $timeout = 5;
-                curl_setopt($ch, CURLOPT_URL, 'http://tinyurl.com/api-create.php?url=' . $link);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-                $tinyUrl = curl_exec($ch);
-                curl_close($ch);
+                $tinyUrl =  $this->getShortenURL($link);
 
                 $model = new ServicesModel();
                 $data = [
@@ -865,6 +867,264 @@ class Servies extends BaseController
         } else {
             $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
             return    $this->respond($data, 400);
+        }
+    }
+
+
+
+
+    public function UploadImage()
+    {
+
+        if ($this->request->getMethod() == 'post') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $school_id = $this->request->getVar('school_id');
+                $title = $this->request->getVar('title');
+
+                if (!$school_id) {
+                    $data = array('code' => -1, 'msg' => 'Please insert school', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+
+                if (!$title) {
+                    $data = array('code' => -1, 'msg' => 'Please insert title', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+                if (empty($_FILES['file']['name'])) {
+                    $data = array('code' => -1, 'msg' => 'Please insert image flied', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+
+                $model = new ServicesModel();
+                $input = $this->validate([
+                    'file' => [
+                        'uploaded[file]',
+                        'mime_in[file,image/jpg,image/jpeg,image/png]',
+                        'max_size[file,1024]',
+                    ]
+                ]);
+
+                if (!$input) {
+                    $data = array('code' => -1, 'msg' => 'Choose a valid file', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+                if ($file = $this->request->getFile('file')) {
+                    if ($file->isValid() && !$file->hasMoved()) {
+                        // Get file name and extension
+                        $name = $file->getName();
+                        $ext = $file->getClientExtension();
+
+                        // Get random file name
+                        $newName = $file->getRandomName();
+
+                        // Store file in public/uploads/ folder
+                        $file->move('./assets/files', $newName);
+
+                        // File path to display preview
+                        $filepath = base_url() . "/assets/files/" . $newName;
+
+                        $tinyUrl =  $this->getShortenURL($filepath);
+
+                        $data = [
+                            'title' => $title,
+                            'school_id' => $school_id,
+                            'tiny_image_url' => $tinyUrl,
+                            'image_url' => $filepath
+                        ];
+
+                        if ($model->upload_image($data)) {
+                            $data = array('code' => 1, 'msg' => 'success', 'data' => array('image_url' => $filepath));
+                            return    $this->respond($data, 200);
+                        } else {
+                        }
+                        $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                        return    $this->respond($data, 400);
+                    }
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
+    public function GetUploadedImages()
+    {
+        if ($this->request->getMethod() == 'get') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $school_id = $this->request->getVar('school_id');
+                if (!$school_id) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+                $page = $this->request->getVar('page');
+
+                $limit = $this->request->getVar('limit');
+                $key = $this->request->getVar('key');
+                if (empty($key) || $key != 'all') {
+                    if (!$page) {
+                        $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل الصفحة ');
+                        return $this->respond($result, 400);
+                        exit;
+                    }
+                    if (!$limit) {
+                        $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل عدد العناصر ');
+                        return $this->respond($result, 400);
+                        exit;
+                    }
+                }
+                $model = new ServicesModel();
+                $result = $model->get_uploaded_images($school_id, $limit, $page, $key);
+                if (!empty($result)) {
+
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => $result, 'total_count' => count($result));
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
+                    return    $this->respond($data, 200);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
+    public function addLinkShortcut()
+    {
+
+        if ($this->request->getMethod() == 'post') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $school_id = $this->request->getVar('school_id');
+                $title = $this->request->getVar('title');
+                $url = $this->request->getVar('url');
+
+                if (!$school_id) {
+                    $data = array('code' => -1, 'msg' => 'Please insert school', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+
+                if (!$title) {
+                    $data = array('code' => -1, 'msg' => 'Please insert title', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+
+
+                if (!$url) {
+                    $data = array('code' => -1, 'msg' => 'Please insert url', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+
+
+                $model = new ServicesModel();
+
+                $tinyUrl =  $this->getShortenURL($url);
+
+                $data = [
+                    'title' => $title,
+                    'school_id' => $school_id,
+                    'tiny_url' => $tinyUrl,
+                    'url' => $url
+                ];
+
+                if ($model->add_linkShortcut($data)) {
+
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => array('url' => $tinyUrl));
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
+    public function GetShortLinks()
+    {
+        if ($this->request->getMethod() == 'get') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $school_id = $this->request->getVar('school_id');
+                if (!$school_id) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+                $page = $this->request->getVar('page');
+
+                $limit = $this->request->getVar('limit');
+                $key = $this->request->getVar('key');
+                if (empty($key) || $key != 'all') {
+                    if (!$page) {
+                        $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل الصفحة ');
+                        return $this->respond($result, 400);
+                        exit;
+                    }
+                    if (!$limit) {
+                        $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل عدد العناصر ');
+                        return $this->respond($result, 400);
+                        exit;
+                    }
+                }
+                $model = new ServicesModel();
+                $result = $model->get_short_links($school_id, $limit, $page, $key);
+                if (!empty($result)) {
+
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => $result, 'total_count' => count($result));
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
+                    return    $this->respond($data, 200);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
+            return    $this->respond($data, 200);
         }
     }
 }

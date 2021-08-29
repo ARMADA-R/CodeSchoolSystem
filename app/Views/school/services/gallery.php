@@ -1,50 +1,93 @@
-<?php require(APPPATH . 'Views/parents/layouts/preContent.php') ?>
+<?php require(APPPATH . 'Views/school/layouts/preContent.php') ?>
 
 <!-- Content Header (Page header) -->
 <div class="content-header my-2 bg-white">
 
     <div class="row ">
         <div class="col  d-flex align-items-center ">
-            التنبيهات المدرسية
+            معرض الصور
+
+        </div>
+        <div class="col-3">
+            <!-- <a href=<?= site_url() ?>school/services/questionnaires/add" style="width: inherit;" class="btn btn-light">
+                إضافة استبانة
+            </a> -->
+            <button data-toggle="modal" data-target="#uploadImageModal" style="width: inherit;" class="btn btn-light">
+                إضافة صورة
+            </button>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+
+
+
+<?php require(APPPATH . 'Views/school/layouts/notifications-service-status.php') ?>
+
+
+<div class="modal fade" id="uploadImageModal" tabindex="-1" aria-labelledby="uploadImageModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadImageModalLabel">رفع صورة</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form onsubmit="uploadImage(this); return false;">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="title" class="col-form-label">عنوان الصورة</label>
+                                <input required type="text" class="form-control" name="title" id="title">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="image-to-upload" class="col-form-label">الصورة</label>
+                                <input required id="image-to-upload" type="file" class="form-control" size="1025" accept="image/*">
+                                <small class="form-text text-muted">الحجم الأعظمي المسموح للصورة 1MB.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <div class="col-sm-3 align-self-center"> -->
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                    <button type="submit" id="image-to-upload-btn" style="width: inherit;" class="btn btn-primary">حفظ</button>
+                    <!-- </div> -->
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-<!-- /.content-header -->
-<div class="p-4"></div>
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header" style="background-color: rgb(0 0 0 / 0%);">
-                <h6 class="">تنبيه
-                « <small>1</small> »
-                </h6>
-            </div>
-            <div class="card-body">
-                <h6>المحتوى النصي لتنبيه.</h6>
 
-                <div class="float-right">
-                    <small>21-12-2020:11:30</small>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header" style="background-color: rgb(0 0 0 / 0%);">
-                <h6 class="">تنبيه
-                « <small>1</small> »
-                </h6>
-            </div>
-            <div class="card-body">
-                <h6>المحتوى النصي لتنبيه.</h6>
+            <div class="card-body p-2" style="overflow-x: scroll;">
+                <table id="content-table" class="table table-striped " style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>م</th>
+                            <th> عنوان الصورة</th>
+                            <th>الرابط </th>
+                            <th>الرابط المختصر</th>
+                            <th>تاريخ الرفع </th>
 
-                <div class="float-right">
-                    <small>21-12-2020:11:30</small>
-                </div>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
-<?php include_once(APPPATH . 'Views/parents/layouts/postContent.php') ?>
+<?php include_once(APPPATH . 'Views/school/layouts/postContent.php') ?>
 <style>
     .clickable-row {
         cursor: pointer;
@@ -62,12 +105,12 @@
         background-color: #00000030 !important;
     }
 
-    .display-none {
-        display: none;
+    .max-w-150 {
+        max-width: 150px;
     }
 </style>
 
-<script src="<?php echo base_url() . '/public/'; ?>design/js/jquery-3.4.1.min.js"></script>
+
 
 
 
@@ -79,14 +122,13 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
-    
-    
     var dataTable = null;
+    var studentsData = [];
 
     $(document).ready(function() {
 
         dataTable = $('#content-table').DataTable({
-            dom: `f`,
+            dom: `<"row d-flex justify-content-end mx-1 my-1 mb-3 "B><"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
                 [25, 50, 100, 500, -1],
                 [25, 50, 100, 500, 'الكل']
@@ -98,6 +140,9 @@
             responsive: true,
             autoWidth: false,
             rowId: 'id',
+            createdRow: function(row, data, index) {
+                // $(row).addClass('clickable-row');
+            },
             columns: [{
                     data: null,
                     name: 'id',
@@ -114,39 +159,51 @@
                     data: 'title',
                     name: 'title',
                     className: 'text-center t-title align-middle',
-                    title: 'عنوان النموذج'
+                    title: 'عنوان الصورة'
                 },
                 {
-                    data: 'hits',
-                    name: 'hits',
-                    className: 'text-center t-hits align-middle',
-                    title: 'عدد المجاوبين',
-                    render: function(data, type, row, meta) {
-                        return data ? data : '';
-                    }
+                    data: 'image_url',
+                    name: 'image_url',
+                    className: 'text-center t-image_url align-middle max-w-150',
+                    title: 'رابط طويل'
                 },
                 {
-                    data: 'link',
-                    name: 'link',
-                    className: 'text-center t-link align-middle',
-                    title: 'استعراض',
+                    data: 'tiny_image_url',
+                    name: 'tiny_image_url',
+                    className: 'text-center t-tiny_image_url align-middle max-w-150',
+                    title: 'رابط قصير'
+                },
+                {
+                    data: 'date',
+                    name: 'date',
+                    className: 'text-center t-date align-middle',
+                    title: 'تاريخ الرفع',
                     render: function(data, type, row, meta) {
-                        return `<a style="color: #212529;" href="${row.link}"><i class="far fa-eye"></i></a>`;
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
                     }
+
                 },
                 // {
-                //     data: 'status',
-                //     name: 'status',
-                //     className: 'text-center t-status align-middle',
-                //     title: 'الحالة',
+                //     data: 'count',
+                //     name: 'count',
+                //     className: 'text-center t-count align-middle',
+                //     title: 'عدد المجاوبين',
                 //     render: function(data, type, row, meta) {
-                //         var checked = (row.form_status == 0) ? `checked` : ``;
-                //         return `<div class="custom-control custom-switch">
-                //                     <input type="checkbox" class="custom-control-input"  ${checked} onchange="updateFormStatus(${row.id},this.checked)" id="customSwitch-${row.id}">
-                //                     <label class="custom-control-label" for="customSwitch-${row.id}">${data}</label>
-                //                 </div>`;
+                //         return data ? data : '';
                 //     }
                 // },
+
+            ],
+
+            buttons: [{
+                    extend: 'collection',
+                    text: 'تصدير',
+                    className: 'btn btn-sm',
+                    buttons: [{
+                        extend: 'excel'
+                    }, ]
+                },
+                'colvis'
             ],
 
             "language": {
@@ -347,15 +404,15 @@
 
     $(document).ready(function() {
         $('#status').change(function() {
-            getFormsData();
+            getGalleryData();
         });
-        getFormsData();
+        getGalleryData();
     });
 
 
-    function getFormsData() {
+    function getGalleryData() {
         var jqxhr = $.ajax({
-                url: "<?= site_url('') ?>Servies/GetForms",
+                url: "<?= site_url('') ?>Servies/GetUploadedImages",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -376,52 +433,46 @@
             });
     }
 
-    function updateFormStatus(id, status) {
-        var jqxhr = $.ajax({
-                "url": "<?= site_url('') ?>Servies/UpdateFormStatus",
-                "method": "POST",
-                "timeout": 0,
-                "headers": {
-                    "Authorization": token,
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                "data": {
-                    "id": id,
-                    "status": status ? 1 : 0,
-                }
-            })
-            .done(function(response) {
-                toastr.success('تم تحديث حالة النموذج');
-            })
-            .fail(function(response) {
-                console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
-            });
-    }
+    function uploadImage(element) {
+
+        formData = $(element).serializeArray().reduce(function(obj, item) {
+            obj[item.name] = item.value;
+            return obj;
+        }, {});
+
+        var form = new FormData();
+        form.append("school_id", school_id);
+        form.append("title", formData.title);
+        form.append("file", $("#image-to-upload")[0].files[0]);
 
 
-    function addForm() {
+        $("#image-to-upload-btn").attr('disabled', 'true');
+        $("#image-to-upload-btn").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span class="sr-only">جارٍ المعالجة...</span>`);
 
         var jqxhr = $.ajax({
-                "url": "<?= site_url('') ?>Servies/AddForms",
-                "method": "POST",
-                "timeout": 0,
-                "headers": {
+                url: "<?= site_url('') ?>Servies/UploadImage",
+                method: "Post",
+                timeout: 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                data: form,
+                headers: {
                     "Authorization": token,
-                    "Content-Type": "application/x-www-form-urlencoded"
                 },
-                "data": {
-                    "school_id": school_id,
-                    "title": $("#form-title").val(),
-                    "link": $("#form-link").val()
-                }
             })
             .done(function(response) {
-                toastr.success('تم اضافة النموذج');
+                toastr.success("تم اضافة البيانات.");
+                getGalleryData();
             })
             .fail(function(response) {
                 console.log(response);
                 toastr.error(response.responseJSON.msg, 'خطأ');
+            }).always(function() {
+                $("#image-to-upload-btn").html('حفظ');
+                $("#image-to-upload-btn").removeAttr('disabled');
             });
+
+        console.log(formData);
     }
 </script>

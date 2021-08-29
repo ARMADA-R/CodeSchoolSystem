@@ -43,10 +43,10 @@ class TeachersModel extends Model
         return $query->getRow();
        
     }
-    public function delete_teachers($id){
+    public function delete_teachers($ids){
         $db = \Config\Database::connect();
         $builder = $db->table('teachers');
-        $builder->where('id',$id);
+        $builder->whereIn('id',$ids);
          $builder->delete();
          return $db->affectedRows();
        

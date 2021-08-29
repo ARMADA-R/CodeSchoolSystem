@@ -23,7 +23,7 @@ class SchoolView extends BaseController
 		$kunci = 'SChO0lS';
 		$output = JWT::encode($payload, $kunci);
 		return $output;
-		}
+	}
 	public function index()
 	{
 		return view('welcome_message');
@@ -202,6 +202,20 @@ class SchoolView extends BaseController
 	public function viewPartnerTicket($seg6)
 	{
 		return view('school/partners/tickets', ['id' => $seg6]);
+	}
+
+
+
+	public function tinyLinks()
+	{
+		return view('school/services/tinyLinks');
+	}
+
+
+
+	public function gallery()
+	{
+		return view('school/services/gallery');
 	}
 
 

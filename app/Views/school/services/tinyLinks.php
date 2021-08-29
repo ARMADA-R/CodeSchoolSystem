@@ -1,50 +1,93 @@
-<?php require(APPPATH . 'Views/parents/layouts/preContent.php') ?>
+<?php require(APPPATH . 'Views/school/layouts/preContent.php') ?>
 
 <!-- Content Header (Page header) -->
 <div class="content-header my-2 bg-white">
 
     <div class="row ">
         <div class="col  d-flex align-items-center ">
-            التنبيهات المدرسية
+            ارشيف الروابط المختصرة
+
+        </div>
+        <div class="col-3">
+            <!-- <a href=<?= site_url() ?>school/services/questionnaires/add" style="width: inherit;" class="btn btn-light">
+                إضافة استبانة
+            </a> -->
+            <button data-toggle="modal" data-target="#linkShortnerModal" style="width: inherit;" class="btn btn-light">
+                اضافة رابط
+            </button>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+
+
+
+<?php require(APPPATH . 'Views/school/layouts/notifications-service-status.php') ?>
+
+
+<div class="modal fade" id="linkShortnerModal" tabindex="-1" aria-labelledby="linkShortnerModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="linkShortnerModalLabel"> اختصار رابط</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form onsubmit="addShortenLink(this); return false;">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <label for="link-to-short-title" class="col-form-label">اسم الرابط</label>
+                                        <input required type="text" name="title" class="form-control" id="link-to-short-title">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <label for="link-to-short" class="col-form-label">الرابط</label>
+                                        <input required type="text" name="url" class="form-control" id="link-to-short">
+                                        <small class="form-text text-muted">اضف الرابط كاملا ابتداءً من http او https</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                    <button type="submit" id="get-shorrten-btn" class="btn btn-primary">اختصر</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-<!-- /.content-header -->
-<div class="p-4"></div>
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header" style="background-color: rgb(0 0 0 / 0%);">
-                <h6 class="">تنبيه
-                « <small>1</small> »
-                </h6>
-            </div>
-            <div class="card-body">
-                <h6>المحتوى النصي لتنبيه.</h6>
 
-                <div class="float-right">
-                    <small>21-12-2020:11:30</small>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header" style="background-color: rgb(0 0 0 / 0%);">
-                <h6 class="">تنبيه
-                « <small>1</small> »
-                </h6>
-            </div>
-            <div class="card-body">
-                <h6>المحتوى النصي لتنبيه.</h6>
-
-                <div class="float-right">
-                    <small>21-12-2020:11:30</small>
-                </div>
+            <div class="card-body p-2" style="overflow-x: scroll;">
+                <table id="content-table" class="table table-striped " style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>م</th>
+                            <th>اسم الرابط</th>
+                            <th>الرابط</th>
+                            <th>الرابط المختصر</th>
+                            <th>تاريخ الرفع </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
-<?php include_once(APPPATH . 'Views/parents/layouts/postContent.php') ?>
+<?php include_once(APPPATH . 'Views/school/layouts/postContent.php') ?>
 <style>
     .clickable-row {
         cursor: pointer;
@@ -62,12 +105,12 @@
         background-color: #00000030 !important;
     }
 
-    .display-none {
-        display: none;
+    .max-w-150 {
+        max-width: 150px;
     }
 </style>
 
-<script src="<?php echo base_url() . '/public/'; ?>design/js/jquery-3.4.1.min.js"></script>
+
 
 
 
@@ -79,25 +122,27 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
-    
-    
     var dataTable = null;
+    var studentsData = [];
 
     $(document).ready(function() {
 
         dataTable = $('#content-table').DataTable({
-            dom: `f`,
+            dom: `<"row d-flex justify-content-end mx-1 my-1 mb-3 "B><"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
                 [25, 50, 100, 500, -1],
                 [25, 50, 100, 500, 'الكل']
             ],
-            order: [
-                [0, 'asc']
-            ],
+            // order: [
+            //     [0, 'asc']
+            // ],
 
             responsive: true,
             autoWidth: false,
             rowId: 'id',
+            createdRow: function(row, data, index) {
+                // $(row).addClass('clickable-row');
+            },
             columns: [{
                     data: null,
                     name: 'id',
@@ -114,39 +159,41 @@
                     data: 'title',
                     name: 'title',
                     className: 'text-center t-title align-middle',
-                    title: 'عنوان النموذج'
+                    title: 'اسم الرابط'
                 },
                 {
-                    data: 'hits',
-                    name: 'hits',
-                    className: 'text-center t-hits align-middle',
-                    title: 'عدد المجاوبين',
-                    render: function(data, type, row, meta) {
-                        return data ? data : '';
-                    }
+                    data: 'url',
+                    name: 'url',
+                    className: 'text-center t-url align-middle max-w-150',
+                    title: 'الرابط'
                 },
                 {
-                    data: 'link',
-                    name: 'link',
-                    className: 'text-center t-link align-middle',
-                    title: 'استعراض',
-                    render: function(data, type, row, meta) {
-                        return `<a style="color: #212529;" href="${row.link}"><i class="far fa-eye"></i></a>`;
-                    }
+                    data: 'tiny_url',
+                    name: 'tiny_url',
+                    className: 'text-center t-tiny_url align-middle max-w-150',
+                    title: 'رابط قصير'
                 },
-                // {
-                //     data: 'status',
-                //     name: 'status',
-                //     className: 'text-center t-status align-middle',
-                //     title: 'الحالة',
-                //     render: function(data, type, row, meta) {
-                //         var checked = (row.form_status == 0) ? `checked` : ``;
-                //         return `<div class="custom-control custom-switch">
-                //                     <input type="checkbox" class="custom-control-input"  ${checked} onchange="updateFormStatus(${row.id},this.checked)" id="customSwitch-${row.id}">
-                //                     <label class="custom-control-label" for="customSwitch-${row.id}">${data}</label>
-                //                 </div>`;
-                //     }
-                // },
+                {
+                    data: 'date',
+                    name: 'date',
+                    className: 'text-center t-date align-middle',
+                    title: 'تاريخ الرفع',
+                    render: function(data, type, row, meta) {
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
+                    }
+
+                },
+            ],
+
+            buttons: [{
+                    extend: 'collection',
+                    text: 'تصدير',
+                    className: 'btn btn-sm',
+                    buttons: [{
+                        extend: 'excel'
+                    }, ]
+                },
+                'colvis'
             ],
 
             "language": {
@@ -347,15 +394,14 @@
 
     $(document).ready(function() {
         $('#status').change(function() {
-            getFormsData();
+            GetShortLinks();
         });
-        getFormsData();
+        GetShortLinks();
     });
 
-
-    function getFormsData() {
+    function GetShortLinks() {
         var jqxhr = $.ajax({
-                url: "<?= site_url('') ?>Servies/GetForms",
+                url: "<?= site_url('') ?>Servies/GetShortLinks",
                 method: "GET",
                 timeout: 0,
                 data: {
@@ -376,52 +422,42 @@
             });
     }
 
-    function updateFormStatus(id, status) {
-        var jqxhr = $.ajax({
-                "url": "<?= site_url('') ?>Servies/UpdateFormStatus",
-                "method": "POST",
-                "timeout": 0,
-                "headers": {
-                    "Authorization": token,
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                "data": {
-                    "id": id,
-                    "status": status ? 1 : 0,
-                }
-            })
-            .done(function(response) {
-                toastr.success('تم تحديث حالة النموذج');
-            })
-            .fail(function(response) {
-                console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
-            });
-    }
+
+    function addShortenLink(element) {
 
 
-    function addForm() {
+        formData = $(element).serializeArray().reduce(function(obj, item) {
+            obj[item.name] = item.value;
+            return obj;
+        }, {});
 
-        var jqxhr = $.ajax({
-                "url": "<?= site_url('') ?>Servies/AddForms",
-                "method": "POST",
-                "timeout": 0,
-                "headers": {
-                    "Authorization": token,
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                "data": {
-                    "school_id": school_id,
-                    "title": $("#form-title").val(),
-                    "link": $("#form-link").val()
-                }
-            })
-            .done(function(response) {
-                toastr.success('تم اضافة النموذج');
-            })
-            .fail(function(response) {
-                console.log(response);
-                toastr.error(response.responseJSON.msg, 'خطأ');
-            });
+        $("#get-shorrten-btn").attr('disabled', 'true');
+        $("#get-shorrten-btn").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">جارٍ التحميل...</span>`);
+
+        $.ajax({
+            "url": "<?= site_url('') ?>Servies/addLinkShortcut",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Authorization": token,
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            "data": {
+                school_id: school_id,
+                "url": formData.url,
+                "title": formData.title,
+            }
+        }).done(function(response) {
+            toastr.success("تم اضافة رابط الى الارشيف");
+            $("#link-to-short").val(response.data.url);
+            GetShortLinks();
+        }).fail(function(response) {
+            console.log(response);
+            toastr.error(response.responseJSON.msg, 'خطأ');
+
+        }).always(function() {
+            $("#get-shorrten-btn").html('اختصر');
+            $("#get-shorrten-btn").removeAttr('disabled');
+        });
     }
 </script>

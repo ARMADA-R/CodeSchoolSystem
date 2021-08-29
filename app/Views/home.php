@@ -229,9 +229,9 @@
 
                 <div class="collapse navbar-collapse font-weight-bold" id="navbarsExample07">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item px-1">
+                        <!-- <li class="nav-item px-1">
                             <a class="nav-link" href="#">نتيجة الطلاب <span class="sr-only">(current)</span></a>
-                        </li>
+                        </li> -->
                         <li class="nav-item px-1">
                             <a class="nav-link" href="#contact_us_section">تواصل معنا</a>
                         </li>

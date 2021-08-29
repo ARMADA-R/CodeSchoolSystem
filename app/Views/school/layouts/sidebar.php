@@ -177,7 +177,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= site_url() ?>school" class="nav-link" data-toggle="modal" data-target="#linkShortnerModal">
+                    <a href="<?= site_url() ?>school/services/tinyLinks" class="nav-link <?php echo strpos(current_url(),'school/services/tinyLinks')? 'active' :''; ?>" >
                         <i class="text-navy nav-icon fas fa-link"></i>
                         <p>
                             اختصار الروابط
@@ -185,13 +185,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= site_url() ?>school/subjects/info" class="nav-link" data-toggle="modal" data-target="#uploadImageModal">
+                    <a href="<?= site_url() ?>school/services/gallery" class="nav-link <?php echo strpos(current_url(),'school/services/gallery')? 'active' :''; ?>" >
                         <i class="text-navy nav-icon fas fa-file-upload"></i>
                         <p>
-                            رفع صورة /اعلان
+                            معرض الصور
                         </p>
                     </a>
                 </li>
+                
 
                 <li class="nav-header">متجر شريك النجاح</li>
                 <li class="nav-item">
@@ -217,7 +218,7 @@
     <!-- /.sidebar -->
 </aside>
 
-<div class="modal fade" id="linkShortnerModal" tabindex="-1" aria-labelledby="linkShortnerModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="linkShortnerModal" tabindex="-1" aria-labelledby="linkShortnerModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -251,8 +252,8 @@
             </div>
         </div>
     </div>
-</div>
-
+</div> -->
+<!-- 
 <div class="modal fade" id="uploadImageModal" tabindex="-1" aria-labelledby="uploadImageModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-lg">
         <div class="modal-content">
@@ -291,5 +292,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 

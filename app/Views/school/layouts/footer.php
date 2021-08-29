@@ -101,69 +101,7 @@
   });
 
 
-
-  function getShortenLink() {
-    $("#get-shorrten-btn").attr('disabled', 'true');
-    $("#get-shorrten-btn").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                    <span class="sr-only">جارٍ التحميل...</span>`);
-    $.ajax({
-      "url": "<?= site_url('') ?>Servies/GetTinyUrl",
-      "method": "POST",
-      "timeout": 0,
-      "headers": {
-        "Authorization": token,
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      "data": {
-        "url": $("#link-to-short").val()
-      }
-    }).done(function(response) {
-      $("#link-to-short").val(response.data.url);
-      $("#get-shorrten-btn").html('اختصر');
-      $("#get-shorrten-btn").removeAttr('disabled');
-    }).fail(function(response) {
-      console.log(response);
-      toastr.error(response.responseJSON.msg, 'خطأ');
-      $("#get-shorrten-btn").html('اختصر');
-      $("#get-shorrten-btn").removeAttr('disabled');
-    });
-  }
-
-
-  function uploadImage() {
-
-    var form = new FormData();
-    form.append("school_id", school_id);
-    form.append("file", $("#image-to-upload")[0].files[0]);
-
-    $("#image-to-upload-btn").attr('disabled', 'true');
-    $("#image-to-upload-btn").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                    <span class="sr-only">جارٍ المعالجة...</span>`);
-    $.ajax({
-      "url": "<?= site_url('') ?>Servies/UploadImage",
-      "method": "POST",
-      "timeout": 0,
-      "headers": {
-        "Authorization": token
-      },
-      "processData": false,
-      "mimeType": "multipart/form-data",
-      "contentType": false,
-      "data": form
-    }).done(function(response) {
-
-      $("#image-to-upload-btn").html('معالجة');
-      $("#image-to-upload-btn").removeAttr('disabled');
-      $("#uploaded-image-link").val(JSON.parse(response).data.image_url);
-
-    }).fail(function(response) {
-
-      console.log(response);
-      toastr.error("حدث خطأ مااثناء تحميل الملف!", 'خطأ');
-      $("#image-to-upload-btn").html('معالجة');
-      $("#image-to-upload-btn").removeAttr('disabled');
-    });
-  }
+  
   $(document).ready(function() {
     getNotificationServiceStatus();
   });

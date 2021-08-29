@@ -799,86 +799,86 @@ class Schools extends BaseController
             return    $this->respond($data, 200);
         }
     }
-    public function GetSchoolTable()
-    {
+    // public function GetSchoolTable()
+    // {
 
-        if ($this->request->getMethod() == 'get') {
-            $check = new Check(); // Create an instance
-            $result = $check->check();
+    //     if ($this->request->getMethod() == 'get') {
+    //         $check = new Check(); // Create an instance
+    //         $result = $check->check();
 
-            if ($result['code'] == 1) {
-                $page = $this->request->getVar('page');
+    //         if ($result['code'] == 1) {
+    //             $page = $this->request->getVar('page');
 
-                $limit = $this->request->getVar('limit');
-                $school_id = $this->request->getVar('school_id');
-                $class_id = $this->request->getVar('class_id');
-                $semaster_id = $this->request->getVar('semaster_id');
-                $section_id = $this->request->getVar('section_id');
-                $program_id = $this->request->getVar('program_id');
-                if (!$school_id) {
-                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
-                    return $this->respond($result, 400);
-                    exit;
-                }
-                $key = $this->request->getVar('key');
-                if (empty($key) || $key != 'all') {
-                    if (!$page) {
-                        $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل الصفحة ');
-                        return $this->respond($result, 400);
-                        exit;
-                    }
-                    if (!$limit) {
-                        $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل عدد العناصر ');
-                        return $this->respond($result, 400);
-                        exit;
-                    }
-                }
-                $model = new SchoolModel();
-                $result = $model->get_school_table($limit, $page, $school_id, $key, $class_id, $section_id, $semaster_id, $program_id);
-                $asbense = array();
-                if (!empty($result)) {
+    //             $limit = $this->request->getVar('limit');
+    //             $school_id = $this->request->getVar('school_id');
+    //             $class_id = $this->request->getVar('class_id');
+    //             $semaster_id = $this->request->getVar('semaster_id');
+    //             $section_id = $this->request->getVar('section_id');
+    //             $program_id = $this->request->getVar('program_id');
+    //             if (!$school_id) {
+    //                 $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
+    //                 return $this->respond($result, 400);
+    //                 exit;
+    //             }
+    //             $key = $this->request->getVar('key');
+    //             if (empty($key) || $key != 'all') {
+    //                 if (!$page) {
+    //                     $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل الصفحة ');
+    //                     return $this->respond($result, 400);
+    //                     exit;
+    //                 }
+    //                 if (!$limit) {
+    //                     $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل عدد العناصر ');
+    //                     return $this->respond($result, 400);
+    //                     exit;
+    //                 }
+    //             }
+    //             $model = new SchoolModel();
+    //             $result = $model->get_school_table($limit, $page, $school_id, $key, $class_id, $section_id, $semaster_id, $program_id);
+    //             $asbense = array();
+    //             if (!empty($result)) {
 
 
-                    $data = [];
-                    $i = 0;
-                    foreach ($result as $row) {
+    //                 $data = [];
+    //                 $i = 0;
+    //                 foreach ($result as $row) {
 
-                        $subjects = [
-                            'subject_name' => $row->subject_name,
-                            'period_name' => $row->period_name,
+    //                     $subjects = [
+    //                         'subject_name' => $row->subject_name,
+    //                         'period_name' => $row->period_name,
 
-                        ];
-                        if (!isset($data[$row->day])) {
-                            $data[$row->day] = [
-                                'day' => $row->day,
+    //                     ];
+    //                     if (!isset($data[$row->day])) {
+    //                         $data[$row->day] = [
+    //                             'day' => $row->day,
 
-                                'table' => [$subjects]
-                            ];
-                        } else {
-                            $data[$row->day]['table'][] = $subjects;
-                        }
-                    }
-                    $data2 = array();
-                    foreach ($data as $d) {
-                        array_push($data2, $d);
-                    }
-                    $data = array('code' => 1, 'msg' => 'success', 'data' => $data2, 'total_count' => count($asbense));
-                    return    $this->respond($data, 200);
-                } else {
-                    $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
-                    return    $this->respond($data, 200);
-                }
-            } else {
-                $result = array(
-                    'code' => $result['code'], 'msg' => $result['messages'],
-                );
-                return $this->respond($result, 400);
-            }
-        } else {
-            $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
-            return    $this->respond($data, 200);
-        }
-    }
+    //                             'table' => [$subjects]
+    //                         ];
+    //                     } else {
+    //                         $data[$row->day]['table'][] = $subjects;
+    //                     }
+    //                 }
+    //                 $data2 = array();
+    //                 foreach ($data as $d) {
+    //                     array_push($data2, $d);
+    //                 }
+    //                 $data = array('code' => 1, 'msg' => 'success', 'data' => $data2, 'total_count' => count($asbense));
+    //                 return    $this->respond($data, 200);
+    //             } else {
+    //                 $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
+    //                 return    $this->respond($data, 200);
+    //             }
+    //         } else {
+    //             $result = array(
+    //                 'code' => $result['code'], 'msg' => $result['messages'],
+    //             );
+    //             return $this->respond($result, 400);
+    //         }
+    //     } else {
+    //         $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
+    //         return    $this->respond($data, 200);
+    //     }
+    // }
     public function GetParentArchiveAbsenceAndLag()
     {
 
@@ -972,81 +972,81 @@ class Schools extends BaseController
             return    $this->respond($data, 200);
         }
     }
-    public function AddSchoolTable()
-    {
-        if ($this->request->getMethod() == 'post') {
+    // public function AddSchoolTable()
+    // {
+    //     if ($this->request->getMethod() == 'post') {
 
-            $class_id = $this->request->getVar('class_id');
-            $semaster_id = $this->request->getVar('semaster_id');
-            $section_id = $this->request->getVar('section_id');
-            $period = $this->request->getVar('period_id');
-            $day = $this->request->getVar('day');
-            $subject_id = $this->request->getVar('subject_id');
-            $school_id = $this->request->getVar('school_id');
-            $program_id = $this->request->getVar('program_id');
-            if (!$class_id) {
-                $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  الصف ');
-                return $this->respond($result, 400);
-                exit;
-            }
+    //         $class_id = $this->request->getVar('class_id');
+    //         $semaster_id = $this->request->getVar('semaster_id');
+    //         $section_id = $this->request->getVar('section_id');
+    //         $period = $this->request->getVar('period_id');
+    //         $day = $this->request->getVar('day');
+    //         $subject_id = $this->request->getVar('subject_id');
+    //         $school_id = $this->request->getVar('school_id');
+    //         $program_id = $this->request->getVar('program_id');
+    //         if (!$class_id) {
+    //             $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  الصف ');
+    //             return $this->respond($result, 400);
+    //             exit;
+    //         }
 
-            if (!$school_id) {
-                $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة  ');
-                return $this->respond($result, 400);
-                exit;
-            }
-            if (!$program_id) {
-                $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل اسم  البرنامج  ');
-                return $this->respond($result, 400);
-                exit;
-            }
+    //         if (!$school_id) {
+    //             $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة  ');
+    //             return $this->respond($result, 400);
+    //             exit;
+    //         }
+    //         if (!$program_id) {
+    //             $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل اسم  البرنامج  ');
+    //             return $this->respond($result, 400);
+    //             exit;
+    //         }
 
-            if (!$section_id) {
-                $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  الشعبة   ');
-                return $this->respond($result, 400);
-                exit;
-            }
-            if (!$day) {
-                $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل   اليوم  ');
-                return $this->respond($result, 400);
-                exit;
-            }
-            if (!$period) {
-                $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل   الحصة  ');
-                return $this->respond($result, 400);
-                exit;
-            }
-            if (!$semaster_id) {
-                $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  الفصل   ');
-                return $this->respond($result, 400);
-                exit;
-            }
-            $period = explode(",", $period);
-            $subject_id = explode(",", $subject_id);
-            $model = new SchoolModel();
-            $student_model = new StudentsModel();
+    //         if (!$section_id) {
+    //             $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  الشعبة   ');
+    //             return $this->respond($result, 400);
+    //             exit;
+    //         }
+    //         if (!$day) {
+    //             $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل   اليوم  ');
+    //             return $this->respond($result, 400);
+    //             exit;
+    //         }
+    //         if (!$period) {
+    //             $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل   الحصة  ');
+    //             return $this->respond($result, 400);
+    //             exit;
+    //         }
+    //         if (!$semaster_id) {
+    //             $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  الفصل   ');
+    //             return $this->respond($result, 400);
+    //             exit;
+    //         }
+    //         $period = explode(",", $period);
+    //         $subject_id = explode(",", $subject_id);
+    //         $model = new SchoolModel();
+    //         $student_model = new StudentsModel();
 
-            foreach ($subject_id as $key => $value) {
-
-
-                $data = array('school_id' => $school_id, 'class_id' => $class_id, 'semestar_id' => $semaster_id, 'section_id' => $section_id, 'period' => $period[$key], 'subject_id' => $value, 'day' => $day, 'program_id' => $program_id);
-                if ($model->add_table_school($data)) {
-                } else {
-                    $data = array('code' => 1, 'msg' => 'حصل خطأ ما الرجاء المحاولة لاحقا', 'data' => []);
-                    return    $this->respond($data, 400);
-                }
-            }
+    //         foreach ($subject_id as $key => $value) {
 
 
-            $data = array('code' => 1, 'msg' => 'success', 'data' => []);
-            return    $this->respond($data, 200);
-        } else {
-            $result = array(
-                'code' => -1, 'msg' => 'Method must be POST',
-            );
-            return $this->respond($result, 400);
-        }
-    }
+    //             $data = array('school_id' => $school_id, 'class_id' => $class_id, 'semestar_id' => $semaster_id, 'section_id' => $section_id, 'period' => $period[$key], 'subject_id' => $value, 'day' => $day, 'program_id' => $program_id);
+    //             if ($model->add_table_school($data)) {
+    //             } else {
+    //                 $data = array('code' => 1, 'msg' => 'حصل خطأ ما الرجاء المحاولة لاحقا', 'data' => []);
+    //                 return    $this->respond($data, 400);
+    //             }
+    //         }
+
+
+    //         $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+    //         return    $this->respond($data, 200);
+    //     } else {
+    //         $result = array(
+    //             'code' => -1, 'msg' => 'Method must be POST',
+    //         );
+    //         return $this->respond($result, 400);
+    //     }
+    // }
     public function GetLevel()
     {
         if ($this->request->getMethod() == 'get') {
@@ -1352,156 +1352,160 @@ class Schools extends BaseController
             return    $this->respond($data, 200);
         }
     }
-    public function AddExamTable()
-    {
-        if ($this->request->getMethod() == 'post') {
-
-            $class_id = $this->request->getVar('class_id');
-
-            $section_id = $this->request->getVar('section_id');
-
-            $day = $this->request->getVar('day');
-            $date = $this->request->getVar('date');
-            $subject_id = $this->request->getVar('subject_id');
-            $exam_id = $this->request->getVar('exam_id');
-            $school_id = $this->request->getVar('school_id');
-            if (!$school_id) {
-                $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
-                return $this->respond($result, 400);
-                exit;
-            }
-            if (!$class_id) {
-                $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  الصف ');
-                return $this->respond($result, 400);
-                exit;
-            }
 
 
-            if (!$exam_id) {
-                $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل اسم  البرنامج  ');
-                return $this->respond($result, 400);
-                exit;
-            }
+    // public function AddExamTable()
+    // {
+    //     if ($this->request->getMethod() == 'post') {
 
-            if (!$day) {
-                $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  اليوم');
-                return $this->respond($result, 400);
-                exit;
-            }
-            if (!$date) {
-                $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  التاريخ');
-                return $this->respond($result, 400);
-                exit;
-            }
-            if (!$subject_id) {
-                $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  المادة');
-                return $this->respond($result, 400);
-                exit;
-            }
+    //         $class_id = $this->request->getVar('class_id');
 
-            $model = new SchoolModel();
+    //         $section_id = $this->request->getVar('section_id');
 
-
+    //         $day = $this->request->getVar('day');
+    //         $date = $this->request->getVar('date');
+    //         $subject_id = $this->request->getVar('subject_id');
+    //         $exam_id = $this->request->getVar('exam_id');
+    //         $school_id = $this->request->getVar('school_id');
+    //         if (!$school_id) {
+    //             $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
+    //             return $this->respond($result, 400);
+    //             exit;
+    //         }
+    //         if (!$class_id) {
+    //             $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  الصف ');
+    //             return $this->respond($result, 400);
+    //             exit;
+    //         }
 
 
+    //         if (!$exam_id) {
+    //             $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل اسم  البرنامج  ');
+    //             return $this->respond($result, 400);
+    //             exit;
+    //         }
 
-            $data = array('school_id' => $school_id, 'class_id' => $class_id, 'section_id' => $section_id, 'day' => $day, 'date' => $date, 'day' => $day, 'exam_id' => $exam_id, 'subject_id' => $subject_id);
-            if ($model->add_exam_table_school($data)) {
+    //         if (!$day) {
+    //             $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  اليوم');
+    //             return $this->respond($result, 400);
+    //             exit;
+    //         }
+    //         if (!$date) {
+    //             $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  التاريخ');
+    //             return $this->respond($result, 400);
+    //             exit;
+    //         }
+    //         if (!$subject_id) {
+    //             $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  المادة');
+    //             return $this->respond($result, 400);
+    //             exit;
+    //         }
 
-                $data = array('code' => 1, 'msg' => 'success', 'data' => []);
-                return    $this->respond($data, 200);
-            } else {
-                $data = array('code' => 1, 'msg' => 'حصل خطأ ما الرجاء المحاولة لاحقا', 'data' => []);
-                return    $this->respond($data, 400);
-            }
-        } else {
-            $result = array(
-                'code' => -1, 'msg' => 'Method must be POST',
-            );
-            return $this->respond($result, 400);
-        }
-    }
-    public function GetSchoolExamTable()
-    {
-
-        if ($this->request->getMethod() == 'get') {
-            $check = new Check(); // Create an instance
-            $result = $check->check();
-
-            if ($result['code'] == 1) {
-                $page = $this->request->getVar('page');
-
-                $limit = $this->request->getVar('limit');
-                $exam_id = $this->request->getVar('exam_id');
-                $class_id = $this->request->getVar('class_id');
-
-                $section_id = $this->request->getVar('section_id');
-
-                $key = $this->request->getVar('key');
-                if (empty($key) || $key != 'all') {
-                    if (!$page) {
-                        $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل الصفحة ');
-                        return $this->respond($result, 400);
-                        exit;
-                    }
-                    if (!$limit) {
-                        $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل عدد العناصر ');
-                        return $this->respond($result, 400);
-                        exit;
-                    }
-                }
-                $school_id = $this->request->getVar('school_id');
-                if (!$school_id) {
-                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
-                    return $this->respond($result, 400);
-                    exit;
-                }
-                $model = new SchoolModel();
-                $result = $model->get_school_exam_table($limit, $page, $key, $class_id, $section_id, $exam_id, $school_id);
-                $asbense = array();
-                if (!empty($result)) {
+    //         $model = new SchoolModel();
 
 
-                    //                     $data = [];
-                    //                     $i=0;
-                    //                     foreach ($result as $row) {
-
-                    //                         $subjects = [
-                    //                             'subject_name' => $row->subject_name,
 
 
-                    //                         ];
-                    //                         if (!isset($data[$row->day])) {
-                    //                             $data[$row->day] = [
-                    //                                 'day' => $row->day,
 
-                    //                                 'table' => [$subjects]
-                    //                             ];
-                    //                         } else {
-                    //                             $data[$row->day]['table'][] = $subjects;
-                    //                         }
-                    //                     }
-                    //                     $data2=array();
-                    //                     foreach($data as $d){
-                    // array_push($data2,$d);
-                    //                     }
-                    $data = array('code' => 1, 'msg' => 'success', 'data' => $result, 'total_count' => count($result));
-                    return    $this->respond($data, 200);
-                } else {
-                    $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
-                    return    $this->respond($data, 200);
-                }
-            } else {
-                $result = array(
-                    'code' => $result['code'], 'msg' => $result['messages'],
-                );
-                return $this->respond($result, 400);
-            }
-        } else {
-            $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
-            return    $this->respond($data, 200);
-        }
-    }
+    //         $data = array('school_id' => $school_id, 'class_id' => $class_id, 'section_id' => $section_id, 'day' => $day, 'date' => $date, 'day' => $day, 'exam_id' => $exam_id, 'subject_id' => $subject_id);
+    //         if ($model->add_exam_table_school($data)) {
+
+    //             $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+    //             return    $this->respond($data, 200);
+    //         } else {
+    //             $data = array('code' => 1, 'msg' => 'حصل خطأ ما الرجاء المحاولة لاحقا', 'data' => []);
+    //             return    $this->respond($data, 400);
+    //         }
+    //     } else {
+    //         $result = array(
+    //             'code' => -1, 'msg' => 'Method must be POST',
+    //         );
+    //         return $this->respond($result, 400);
+    //     }
+    // }
+
+
+    // public function GetSchoolExamTable()
+    // {
+
+    //     if ($this->request->getMethod() == 'get') {
+    //         $check = new Check(); // Create an instance
+    //         $result = $check->check();
+
+    //         if ($result['code'] == 1) {
+    //             $page = $this->request->getVar('page');
+
+    //             $limit = $this->request->getVar('limit');
+    //             $exam_id = $this->request->getVar('exam_id');
+    //             $class_id = $this->request->getVar('class_id');
+
+    //             $section_id = $this->request->getVar('section_id');
+
+    //             $key = $this->request->getVar('key');
+    //             if (empty($key) || $key != 'all') {
+    //                 if (!$page) {
+    //                     $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل الصفحة ');
+    //                     return $this->respond($result, 400);
+    //                     exit;
+    //                 }
+    //                 if (!$limit) {
+    //                     $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل عدد العناصر ');
+    //                     return $this->respond($result, 400);
+    //                     exit;
+    //                 }
+    //             }
+    //             $school_id = $this->request->getVar('school_id');
+    //             if (!$school_id) {
+    //                 $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
+    //                 return $this->respond($result, 400);
+    //                 exit;
+    //             }
+    //             $model = new SchoolModel();
+    //             $result = $model->get_school_exam_table($limit, $page, $key, $class_id, $section_id, $exam_id, $school_id);
+    //             $asbense = array();
+    //             if (!empty($result)) {
+
+
+    //                 //                     $data = [];
+    //                 //                     $i=0;
+    //                 //                     foreach ($result as $row) {
+
+    //                 //                         $subjects = [
+    //                 //                             'subject_name' => $row->subject_name,
+
+
+    //                 //                         ];
+    //                 //                         if (!isset($data[$row->day])) {
+    //                 //                             $data[$row->day] = [
+    //                 //                                 'day' => $row->day,
+
+    //                 //                                 'table' => [$subjects]
+    //                 //                             ];
+    //                 //                         } else {
+    //                 //                             $data[$row->day]['table'][] = $subjects;
+    //                 //                         }
+    //                 //                     }
+    //                 //                     $data2=array();
+    //                 //                     foreach($data as $d){
+    //                 // array_push($data2,$d);
+    //                 //                     }
+    //                 $data = array('code' => 1, 'msg' => 'success', 'data' => $result, 'total_count' => count($result));
+    //                 return    $this->respond($data, 200);
+    //             } else {
+    //                 $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
+    //                 return    $this->respond($data, 200);
+    //             }
+    //         } else {
+    //             $result = array(
+    //                 'code' => $result['code'], 'msg' => $result['messages'],
+    //             );
+    //             return $this->respond($result, 400);
+    //         }
+    //     } else {
+    //         $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
+    //         return    $this->respond($data, 200);
+    //     }
+    // }
     public function GetParentExamTable()
     {
 
@@ -1747,7 +1751,7 @@ class Schools extends BaseController
         (new Gates_Api())->sendSMS('http://www.smsscript.net/index.php/api/sendsms/', 'nobalaa', '123456', '966500000000', 'lasttest', 'sendername');
     }
 
-    
+
     public function setSchoolGate()
     {
         if ($this->request->getMethod() == 'post') {
@@ -2033,7 +2037,7 @@ class Schools extends BaseController
         $faildSentPublicMessagesArchive = [];
         $successSentPublicMessagesArchive = [];
 
-        $sentMessageNum =0;
+        $sentMessageNum = 0;
 
         foreach ($unsentMessages as $key => $value) {
 
@@ -2082,7 +2086,7 @@ class Schools extends BaseController
         $model->updatePublicMessagesArchiveMessagesStatus($successSentPublicMessagesArchive, 1);
 
         $result = [
-            'msg' => $sentMessageNum > 0? $sentMessageNum.' message has been sent.' : 'There is no messages to sent!',
+            'msg' => $sentMessageNum > 0 ? $sentMessageNum . ' message has been sent.' : 'There is no messages to sent!',
         ];
         return $this->respond($result, 200);
     }
@@ -2098,7 +2102,7 @@ class Schools extends BaseController
                 $name = $this->request->getVar('name');
 
                 $code = $this->request->getVar('code');
-                
+
                 if (!$code) {
                     $result = array('code' => -1, 'msg' => 'الرجاء تحديد الرمز ');
                     return $this->respond($result, 400);
@@ -2121,7 +2125,6 @@ class Schools extends BaseController
                     $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
                     return    $this->respond($data, 400);
                 }
-
             } else {
                 $result = array(
                     'code' => $result['code'], 'msg' => $result['messages'],
@@ -2133,7 +2136,7 @@ class Schools extends BaseController
             return    $this->respond($data, 200);
         }
     }
-    
+
 
     public function updateClass()
     {
@@ -2147,7 +2150,7 @@ class Schools extends BaseController
                 $code = $this->request->getVar('code');
 
                 $id = $this->request->getVar('id');
-                
+
                 if (!$code) {
                     $result = array('code' => -1, 'msg' => 'الرجاء تحديد الرمز ');
                     return $this->respond($result, 400);
@@ -2177,7 +2180,6 @@ class Schools extends BaseController
                     $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
                     return    $this->respond($data, 400);
                 }
-
             } else {
                 $result = array(
                     'code' => $result['code'], 'msg' => $result['messages'],
@@ -2189,7 +2191,7 @@ class Schools extends BaseController
             return    $this->respond($data, 200);
         }
     }
-    
+
     public function deleteClass()
     {
         if ($this->request->getMethod() == 'delete') {
@@ -2225,7 +2227,7 @@ class Schools extends BaseController
             return    $this->respond($data, 200);
         }
     }
-    
+
 
 
     public function getNotificationServiceData()
@@ -2286,7 +2288,7 @@ class Schools extends BaseController
             return    $this->respond($data, 400);
         }
     }
-    
+
     public function updatePeriod()
     {
 
@@ -2330,7 +2332,6 @@ class Schools extends BaseController
                     $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
                     return    $this->respond($data, 400);
                 }
-
             } else {
                 $result = array(
                     'code' => $result['code'], 'msg' => $result['messages'],
@@ -2379,5 +2380,300 @@ class Schools extends BaseController
             return    $this->respond($data, 200);
         }
     }
+
+
+    public function GetSchoolExamTable()
+    {
+
+        if ($this->request->getMethod() == 'get') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $page = $this->request->getVar('page');
+
+                $limit = $this->request->getVar('limit');
+                
+
+                $key = $this->request->getVar('key');
+                if (empty($key) || $key != 'all') {
+                    if (!$page) {
+                        $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل الصفحة ');
+                        return $this->respond($result, 400);
+                        exit;
+                    }
+                    if (!$limit) {
+                        $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل عدد العناصر ');
+                        return $this->respond($result, 400);
+                        exit;
+                    }
+                }
+                $school_id = $this->request->getVar('school_id');
+                if (!$school_id) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+                $model = new SchoolModel();
+                $result = $model->get_school_exam_table($limit, $page, $key, $school_id);
+
+                if (!empty($result)) {
+
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => $result, 'total_count' => count($result));
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
+                    return    $this->respond($data, 200);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
+    public function DeleteSchoolExamTable()
+    {
+
+        if ($this->request->getMethod() == 'delete') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $input = $this->request->getRawInput();;
+                $id = isset($input['id']) ? $input['id'] : '';
+                if (!$id) {
+                    $data = array('code' => -1, 'msg' => 'Please insert id flied', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+                $model = new SchoolModel();
+
+                $delete = $model->delete_school_exam_table($id);
+                if ($delete == 1) {
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be Delete', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
+
+    public function DeleteSchoolTable()
+    {
+
+        if ($this->request->getMethod() == 'delete') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $input = $this->request->getRawInput();;
+                $id = isset($input['id']) ? $input['id'] : '';
+                if (!$id) {
+                    $data = array('code' => -1, 'msg' => 'Please insert id flied', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+                $model = new SchoolModel();
+
+                $delete = $model->delete_school_table($id);
+                if ($delete == 1) {
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be Delete', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+    
+
+
+    public function GetSchoolTable()
+    {
+
+        if ($this->request->getMethod() == 'get') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $page = $this->request->getVar('page');
+
+                $limit = $this->request->getVar('limit');
+                $school_id = $this->request->getVar('school_id');
+
+                if (!$school_id) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+                $key = $this->request->getVar('key');
+                if (empty($key) || $key != 'all') {
+                    if (!$page) {
+                        $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل الصفحة ');
+                        return $this->respond($result, 400);
+                        exit;
+                    }
+                    if (!$limit) {
+                        $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل عدد العناصر ');
+                        return $this->respond($result, 400);
+                        exit;
+                    }
+                }
+                $model = new SchoolModel();
+                $result = $model->get_school_table($limit, $page, $school_id, $key);
+
+                if (!empty($result)) {
+
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => $result, 'total_count' => count($result));
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
+                    return    $this->respond($data, 200);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
+
+    public function AddSchoolTable()
+    {
+
+
+        if ($this->request->getMethod() == 'post') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+
+                $school_id = $this->request->getVar('school_id');
+                if (!$school_id) {
+                    $data = array('code' => -1, 'msg' => 'يرجى تحديد المدرسة', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+
+                $class = $this->request->getVar('class');
+                if (!$class) {
+                    $data = array('code' => -1, 'msg' => 'يرجى تحديد الصف', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+
+                $semester = $this->request->getVar('semester');
+                if (!$semester) {
+                    $data = array('code' => -1, 'msg' => 'يرجى تحديد الفصل', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+
+                if (empty($_FILES['file']['name'])) {
+                    $data = array('code' => -1, 'msg' => 'يرجى تحميل الملف!', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+
+
+                $input = $this->validate([
+                    'file' => [
+                        'uploaded[file]',
+                        // 'mime_in[file,image/jpg,image/jpeg,image/png]',
+                        'max_size[file,10240]',
+                    ]
+                ]);
+
+                if (!$input) {
+                    $data = array('code' => -1, 'msg' => 'اقصى حجم للملف هو 10MB ', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+
+
+                $model = new SchoolModel();
+
+
+                if ($file = $this->request->getFile('file')) {
+                    if ($file->isValid() && !$file->hasMoved()) {
+
+                        // Get file name and extension
+                        $name = $file->getName();
+                        $ext = $file->getClientExtension();
+
+                        // Get random file name
+                        $newName = $file->getRandomName();
+
+                        // Store file in public/uploads/ folder
+                        $file->move('./assets/files', $newName);
+
+                        // File path to display preview
+                        $filepath = base_url() . "/assets/files/" . $newName;
+
+                        // var_dump($filepath);
+                        // dd($filepath);
+                
+
+                        $data = [
+                            'school_id' => $school_id,
+                            'class_id' => $class,
+                            'semester_id' => $semester,
+                            'file_path' => $filepath
+                        ];
+                        if ($model->add_table_school($data)) {
+
+                            $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                            return    $this->respond($data, 200);
+                        } else {
+                            $data = array('code' => 1, 'msg' => 'حصل خطأ ما الرجاء المحاولة لاحقا', 'data' => []);
+                            return    $this->respond($data, 400);
+                        }
+                    }
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
 
 }

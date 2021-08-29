@@ -105,6 +105,8 @@ $routes->group('', ['filter' => 'authenticateUsers:2'], function ($routes) {
 	$routes->get('school/partners/offers', 'SchoolView::partnersOffers');
 	$routes->get('school/partners/support', 'SchoolView::partnersSupport');
 	$routes->get('school/partner/support/technical/ticket/(:num)', 'SchoolView::viewPartnerTicket/$1');
+	$routes->get('school/services/tinyLinks', 'SchoolView::tinyLinks');
+	$routes->get('school/services/gallery', 'SchoolView::gallery');
 });
 
 
