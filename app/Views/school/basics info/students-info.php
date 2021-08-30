@@ -889,11 +889,11 @@
         $.each(data, function(index, val) {
             classSelectorsAdd.append($('<option>', {
                 value: val.id,
-                text: val.name,
+                text: val.name + ' (' + val.code +')',
             }));
             classSelectorsEdit.append($('<option>', {
                 value: val.id,
-                text: val.name + ' ' + val.code,
+                text: val.name + ' (' + val.code +')',
             }));
         });
     }

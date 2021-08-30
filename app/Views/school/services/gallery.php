@@ -55,10 +55,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <!-- <div class="col-sm-3 align-self-center"> -->
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
                     <button type="submit" id="image-to-upload-btn" style="width: inherit;" class="btn btn-primary">حفظ</button>
-                    <!-- </div> -->
                 </div>
             </form>
         </div>
@@ -68,7 +66,6 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-
             <div class="card-body p-2" style="overflow-x: scroll;">
                 <table id="content-table" class="table table-striped " style="width:100%">
                     <thead>
@@ -78,7 +75,6 @@
                             <th>الرابط </th>
                             <th>الرابط المختصر</th>
                             <th>تاريخ الرفع </th>
-
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -165,13 +161,19 @@
                     data: 'image_url',
                     name: 'image_url',
                     className: 'text-center t-image_url align-middle max-w-150',
-                    title: 'رابط طويل'
+                    title: 'رابط طويل',
+                    render: function(data, type, row, meta) {
+                        return `<a href="${data}" > ${data} </a>`;
+                    }
                 },
                 {
                     data: 'tiny_image_url',
                     name: 'tiny_image_url',
                     className: 'text-center t-tiny_image_url align-middle max-w-150',
-                    title: 'رابط قصير'
+                    title: 'رابط قصير',
+                    render: function(data, type, row, meta) {
+                        return `<a href="${data}" > ${data} </a>`;
+                    }
                 },
                 {
                     data: 'date',

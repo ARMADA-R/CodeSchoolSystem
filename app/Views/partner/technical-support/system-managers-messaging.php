@@ -584,15 +584,15 @@
             })
             .fail(function(response) {
                 $("#spinner-control").attr('style', 'display: none !important');
-                console.log(response);
                 toastr.error('حدث خطأ ما اثناء تحميل بيانات الردود!', 'خطأ');
             });
 
     }
 
     function setReplies(replies) {
-        // typeof()
-        if ((replies =! 'undefined')) {
+
+        if ((typeof(replies) == 'object')) {
+            // console.log(replies);
             for (let i = 0; i < replies.reply.length; i++) {
                 // console.log(replies[i]);
                 $("#modal-replies").append(`<div class="card">

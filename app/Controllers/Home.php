@@ -22,6 +22,18 @@ class Home extends BaseController
 		return view('register');
 	}
 
+
+	public function showSendResetPasswordForm()
+	{
+		return view('forgetPassword');
+	}
+
+
+	public function showResetPasswordForm()
+	{
+		return view('resetPassword');
+	}
+
 	//--------------------------------------------------------------------
 
 }

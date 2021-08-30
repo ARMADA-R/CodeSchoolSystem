@@ -263,27 +263,28 @@
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form method="POST" id="signup-form" action="<?= site_url('login') ?>" onsubmit="//register(this); return false;" class="signup-form">
-                        <h2 class="form-title">تسجيل الدخول</h2>
+                    <form method="POST" id="signup-form" action="<?= site_url('password/reset') ?>" onsubmit="//register(this); return false;" class="signup-form">
+                    <input type="hidden" value="<?= $data->token ?>" name="token" id="token" />
+                    <input type="hidden" value="<?= $data->email ?>" name="email"/>
+                        <h2 class="form-title">اعادة تعيين كلمة المرور</h2>
 
                         <div id="form-content">
                             <div class="form-group">
-                                <input type="email" class="form-input" name="email" id="email" placeholder="البريد الإلكتروني" />
+                                <input type="text" value="<?= $data->email ?>" class="form-input" id="email" disabled placeholder="البريد الإلكتروني" />
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-input" name="password" id="password" min="8" placeholder="كلمة المرور" />
                                 <span toggle="#password" class="zmdi zmdi-eye-off field-icon float-right toggle-password"></span>
                             </div>
                             <div class="form-group">
-                                <input type="submit" name="submit" id="submit" class="form-submit" value="تسجيل دخول" />
+                                <input type="password" class="form-input" name="password_confirmation" id="password-confirmation" min="8" placeholder="تأكيد كلمة المرور" />
+                                <span toggle="#password-confirmation" class="zmdi zmdi-eye-off field-icon float-right toggle-password-confirmation"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" id="submit" class="form-submit" value="اعادة تعيين" />
                             </div>
                         </div>
                     </form>
-                    <p class="loginhere">
-                        <a href="<?php echo base_url() . '/public/'; ?>password/forget" class="loginhere-link">نسيت كلمة المرور</a>
-                        <br>
-                        <a href="<?= site_url('') ?>" class="loginhere-link">الرئيسية</a>
-                    </p>
                 </div>
             </div>
         </section>
@@ -300,8 +301,8 @@
     <script src="<?php echo base_url() . '/public/'; ?>design/js/toastr.js"></script>
 
     <script>
-        var msg = '<?php echo isset($data['msg']) ? $data['msg'] : '' ?>';
-        var code = '<?php echo isset($data['msg']) ? $data['code'] : 0 ?>';
+        // var msg = '<?php //echo isset($data['msg']) ? $data['msg'] : '' ?>';
+        // var code = '<?php //echo isset($data['msg']) ? $data['code'] : 0 ?>';
         // var user_data = '<?php //dd(session('user_data')) 
                             ?>'
         (function($) {

@@ -71,13 +71,26 @@ $routes->get('/admin/classes', 'AdminView::classes');
 
 
 //Home routes
-$routes->get('login', 'Home::showLoginForm');
+$routes->get('login', 'Home::showLoginForm', ['as' => 'login']);
 
 $routes->post('login', 'Authentication::login');
 
 $routes->get('register', 'Home::showRegisterForm');
 
 $routes->post('logout', 'Authentication::logout');
+
+$routes->post('password/forget', 'Authentication::sendResetPassword');
+
+$routes->get('password/forget', 'Home::showSendResetPasswordForm', ['as' => 'forgetPassword']);
+
+$routes->get('password/reset', 'Authentication::checkAndShowResetPasswordForm');
+
+$routes->post('password/reset', 'Authentication::resetPassword');
+
+$routes->get('mail', function(){
+return view('mail/resetPasswordEmail', ['link' => 'http://localhost/codeigniter/CodeSchoolSystem/password/reset?token=252f4b1a6e6e577bbd7306eca71b8b004d1a957ed9b85400e9f68862bae2&email=admin%40admin.com']);
+});
+
 
 $routes->group('', ['filter' => 'authenticateUsers:2'], function ($routes) {
 

@@ -61,7 +61,7 @@ class EmployeeExtends extends Employee
                             $model->add_employee([
                                 'school_id' => $school_id,
                                 'name' => $value['name'],
-                                'phone' => $value['phone'],
+                                'phone' => str_replace("$", "", $value['phone']),
                             ]);
 
                             $addedSuccessNum++;

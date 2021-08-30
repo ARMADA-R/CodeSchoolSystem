@@ -88,9 +88,9 @@ class StudentsExtends extends Students
 
                             $model->add_student([
                                 'school_id' => $school_id,
-                                'student_number' => $value['student_number'],
+                                'student_number' => str_replace("$", "", $value['student_number']),
                                 'full_name' => $value['full_name'],
-                                'phone' => $value['phone'],
+                                'phone' => str_replace("$", "", $value['phone']),
                                 'class_id' => !empty($classesData[$value['class']]) ? $classesData[$value['class']] : null,
                                 'semestar_id' => !empty($semestersData[$value['semestar']]) ? $semestersData[$value['semestar']] : null,
                             ]);

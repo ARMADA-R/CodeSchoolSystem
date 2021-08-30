@@ -165,13 +165,19 @@
                     data: 'url',
                     name: 'url',
                     className: 'text-center t-url align-middle max-w-150',
-                    title: 'الرابط'
+                    title: 'الرابط',
+                    render: function(data, type, row, meta) {
+                        return `<a href="${data}" > ${data} </a>`;
+                    }
                 },
                 {
                     data: 'tiny_url',
                     name: 'tiny_url',
                     className: 'text-center t-tiny_url align-middle max-w-150',
-                    title: 'رابط قصير'
+                    title: 'رابط قصير',
+                    render: function(data, type, row, meta) {
+                        return `<a href="${data}" > ${data} </a>`;
+                    }
                 },
                 {
                     data: 'date',

@@ -62,7 +62,7 @@ class CoursesExtends extends Courses
                             $model->add_course([
                                 'user_id' => $user_id,
                                 'school_id' => $school_id,
-                                'student_number' => $value['student_number'],
+                                'student_number' => str_replace("$", "", $value['student_number']),
                                 'student_name' => $value['student_name'],
                                 'phone' => $value['phone']
                             ]);

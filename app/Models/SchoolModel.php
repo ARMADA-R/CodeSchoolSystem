@@ -742,4 +742,31 @@ class SchoolModel extends Model
         return $query->getResult();
     }
 
+
+    
+    public function delete_semaster(array $data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('semaster');
+        $builder->whereIn('id', $data);
+        $builder->delete();
+        return $db->affectedRows();
+    }
+    
+    public function update_semaster(array $data, $id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('semaster');
+        $builder->where('id', $id);
+        return  $builder->update($data);
+    }
+    
+    public function add_semaster(array $data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('semaster');
+
+        return $builder->insert($data);
+    }
+
 }

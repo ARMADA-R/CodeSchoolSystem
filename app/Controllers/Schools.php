@@ -2675,5 +2675,128 @@ class Schools extends BaseController
         }
     }
 
+    
+    public function addSemester()
+    {
+        if ($this->request->getMethod() == 'post') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $name = $this->request->getVar('name');
+
+                if (!$name) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء تحديد اسم الفصل');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
+                $model = new SchoolModel();
+
+                $data = ['name' => $name];
+                if ($model->add_semaster($data)) {
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
+
+    public function updateSemester()
+    {
+        if ($this->request->getMethod() == 'post') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+
+                $name = $this->request->getVar('name');
+                $id = $this->request->getVar('id');
+
+                if (!$name) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء تحديد اسم الفصل');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
+                if (!$id) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء تحديد معرف الفصل');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
+                $model = new SchoolModel();
+
+                $data = ['name' => $name];
+
+                if ($model->update_semaster($data, $id)) {
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
+    public function deleteSemester()
+    {
+        if ($this->request->getMethod() == 'delete') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $input = $this->request->getRawInput();;
+                $id = isset($input['id']) ? $input['id'] : '';
+                if (!$id) {
+                    $data = array('code' => -1, 'msg' => 'Please insert id flied', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+                $model = new SchoolModel();
+
+                $delete = $model->delete_semaster([$id]);
+                if ($delete == 1) {
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be Delete', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
+
+
 
 }

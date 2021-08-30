@@ -65,7 +65,6 @@
                             <th>م</th>
                             <th>الاسم </th>
                             <th>الجوال</th>
-                            <th>خيارات</th>
                         </tr>
                     </thead>
                 </table>
@@ -140,15 +139,6 @@
                     name: 'phone',
                     className: 'text-center t-phone align-middle',
                     title: 'الجوال'
-                },
-                {
-                    data: null,
-                    name: '',
-                    className: 'text-center align-middle',
-                    title: 'خيارات',
-                    render: function(data, type, row, meta) {
-                        return `<button class="btn btn-link" style="color: #212529;" onclick="sendTeacherNotification(${row.id})">ارسال</button>`;
-                    }
                 },
             ],
             "language": {
@@ -387,7 +377,7 @@
                 [25, 50, 100, 500]
             ],
             order: [
-                [2, 'asc']
+                [1, 'asc']
             ],
 
             responsive: true,
@@ -432,15 +422,6 @@
                     title: 'الجوال',
                     render: function(data, type, row, meta) {
                         return `<div id="phone-${row.id}">${data}</div>`;
-                    }
-                },
-                {
-                    data: null,
-                    name: 'date',
-                    className: 'text-center align-middle',
-                    title: 'خيارات',
-                    render: function(data, type, row, meta) {
-                        return `<button class="btn btn-link ${row.id}" style="color: #212529;" id="button-date-${row.id}" onclick="sendStudentNotification(${row.id})">ارسال</button>`;
                     }
                 },
             ],
@@ -650,7 +631,7 @@
                 [25, 50, 100, 500]
             ],
             order: [
-                [2, 'asc']
+                [1, 'asc']
             ],
 
             responsive: true,
@@ -695,15 +676,6 @@
                     title: 'الجوال',
                     render: function(data, type, row, meta) {
                         return `<div id="phone-${row.id}">${data}</div>`;
-                    }
-                },
-                {
-                    data: null,
-                    name: '',
-                    className: 'text-center align-middle',
-                    title: 'خيارات',
-                    render: function(data, type, row, meta) {
-                        return `<button class="btn btn-link" style="color: #212529;" onclick="sendTeacherNotification(${row.id})">ارسال</button>`;
                     }
                 },
             ],
@@ -912,7 +884,7 @@
                 [25, 50, 100, 500]
             ],
             order: [
-                [2, 'asc']
+                [1, 'asc']
             ],
 
             responsive: true,
@@ -957,15 +929,6 @@
                     title: 'الجوال',
                     render: function(data, type, row, meta) {
                         return `<div id="phone-${row.id}">${data}</div>`;
-                    }
-                },
-                {
-                    data: null,
-                    name: 'date',
-                    className: 'text-center align-middle',
-                    title: 'خيارات',
-                    render: function(data, type, row, meta) {
-                        return `<button class="btn btn-link " style="color: #212529;" onclick="sendEmployeeNotification(${row.id})">ارسال</button>`;
                     }
                 },
             ],

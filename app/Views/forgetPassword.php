@@ -263,31 +263,21 @@
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form method="POST" id="signup-form" action="<?= site_url('login') ?>" onsubmit="//register(this); return false;" class="signup-form">
-                        <h2 class="form-title">تسجيل الدخول</h2>
+                    <form method="POST" id="signup-form" action="<?= site_url('password/forget') ?>" onsubmit="//register(this); return false;" class="signup-form">
+                        <h2 class="form-title">نسيت كلمة المرور</h2>
 
                         <div id="form-content">
                             <div class="form-group">
                                 <input type="email" class="form-input" name="email" id="email" placeholder="البريد الإلكتروني" />
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-input" name="password" id="password" min="8" placeholder="كلمة المرور" />
-                                <span toggle="#password" class="zmdi zmdi-eye-off field-icon float-right toggle-password"></span>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" name="submit" id="submit" class="form-submit" value="تسجيل دخول" />
+                                <input type="submit" name="submit" id="submit" class="form-submit" value="تحقق" />
                             </div>
                         </div>
                     </form>
-                    <p class="loginhere">
-                        <a href="<?php echo base_url() . '/public/'; ?>password/forget" class="loginhere-link">نسيت كلمة المرور</a>
-                        <br>
-                        <a href="<?= site_url('') ?>" class="loginhere-link">الرئيسية</a>
-                    </p>
                 </div>
             </div>
         </section>
-
     </div>
     <!-- jQuery 3.4.1 -->
     <script src="<?php echo base_url() . '/public/'; ?>design/js/jquery-3.4.1.min.js"></script>
@@ -301,7 +291,11 @@
 
     <script>
         var msg = '<?php echo isset($data['msg']) ? $data['msg'] : '' ?>';
-        var code = '<?php echo isset($data['msg']) ? $data['code'] : 0 ?>';
+        var code = '<?php echo isset($data['msg']) ? $data['code'] : 404 ?>';
+
+        sessionDataMsg = '<?php echo isset(session('data')['msg']) ? session('data')['msg'] : '' ?>';
+        sessionDataCode = '<?php echo isset(session('data')['code']) ? session('data')['code'] : 404 ?>';
+
         // var user_data = '<?php //dd(session('user_data')) 
                             ?>'
         (function($) {
@@ -341,6 +335,16 @@
             if (code == -1) {
                 toastr.error(msg);
             }
+
+            if (code == 1) {
+                toastr.success(msg);
+            }
+            
+
+            if (sessionDataCode == 0) {
+                toastr.info(sessionDataMsg);
+            }
+            
         });
     </script>
 </body>

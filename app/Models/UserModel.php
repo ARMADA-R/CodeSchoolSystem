@@ -4,6 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Model;
+use DateTime;
 
 class UserModel extends Model
 {
@@ -43,15 +44,14 @@ class UserModel extends Model
     }
     public function resetpassword($email, $password)
     {
-        $db      = \Config\Database::connect();
+        $db = \Config\Database::connect();
         $builder = $db->table('users');
         $builder->where('email', $email);
-        $builder->update($password);
-        return  $db->affectedRows();;
+        $builder->update(['password' => md5($password)]);
+        return  $db->affectedRows();
     }
     public function get_user_role($user_id)
     {
-
         $db      = \Config\Database::connect();
 
         $builder = $db->table('users');
@@ -61,6 +61,7 @@ class UserModel extends Model
         $query   = $builder->get();
         return $query->getRow();
     }
+
     public function get_user_parent($email)
     {
 
@@ -79,11 +80,63 @@ class UserModel extends Model
         $db      = \Config\Database::connect();
 
         $builder = $db->table('users');
-        $builder->select('school_id');
+
         $builder->join('students', 'users.id = students.parent_id');
         $builder->where('email', $email);
         $builder->where('role', 3);
         $query   = $builder->get();
         return $query->getResult();
     }
+    public function setResetPasswordCredentials($data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('reset_passwords');
+        $builder->where('email', $data['email']);
+        $query   = $builder->get();
+        $res = $query->getResult();
+
+        if ($res) {
+
+            $builder->where('email', $data['email']);
+            $data["create_date"] = $this->getCurrentDatabaseDateTime();
+
+            return $builder->update($data);
+        }
+
+        return $builder->insert($data);
+    }
+
+
+    public function getCurrentDatabaseDateTime()
+    {
+        $db = \Config\Database::connect();
+        $query = $db->query('SELECT CURRENT_TIMESTAMP FROM `users`');
+        $currentTime = $query->getResult();
+        return $currentTime[0]->CURRENT_TIMESTAMP;
+    }
+
+
+    public function getResetPasswordCredentials($email)
+    {
+        $db = \Config\Database::connect();
+
+        $builder = $db->table('reset_passwords');
+
+        $builder->where('email', $email);
+        $builder->where('create_date >', $email);
+        $query   = $builder->get();
+
+        return $query->getResult();
+    }
+
+       
+    public function delete_resetPassword_record($email)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('reset_passwords');
+        $builder->where('email', $email);
+        $builder->delete();
+        return $db->affectedRows();
+    }
+    
 }

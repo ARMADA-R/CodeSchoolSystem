@@ -63,8 +63,8 @@ class TeachersExtends extends Teachers
                             $model->add_teacher([
                                 'school_id' => $school_id,
                                 'full_name' => $value['full_name'],
-                                'teacher_number' => $value['teacher_number'],
-                                'phone' => $value['phone'],
+                                'teacher_number' => str_replace("$", "", $value['teacher_number']),
+                                'phone' => str_replace("$", "", $value['phone']),
                             ]);
 
                             $addedSuccessNum++;
