@@ -4,10 +4,10 @@
 <div class="content-header my-2 bg-white">
 
     <div class="row ">
-        <div class="col  d-flex align-items-center ">
+        <div class="col-sm  d-flex align-items-center ">
             مراسلة مدير النظام
         </div>
-        <div class="col-3">
+        <div class="col-sm-4">
             <button type="button" style="width: inherit; padding: .375rem .75rem;" class="btn btn-light" data-toggle="modal" data-target="#add-ticket">
                 إضافة تذكرة جديدة
             </button>

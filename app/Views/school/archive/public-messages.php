@@ -4,8 +4,11 @@
 <div class="content-header my-2 bg-white">
 
     <div class="row ">
-        <div class="col ">
+        <div class="col-md ">
             أرشيف الرسائل العامة
+        </div>
+        <div class="col-md-4 d-flex justify-content-end">
+            <button type="button" onclick="reSendToSelected()" class="btn btn-light">اعادة ارسال للمحدد</button>
         </div>
     </div>
 </div>
@@ -438,7 +441,19 @@
                     "orderable": false,
                     searchable: false,
                     exportable: false,
-                    "defaultContent": ''
+                    "defaultContent": '',
+                    render: function(data, type, row, meta) {
+                        return `
+                        <form id="user-${row.id}-archive-${row.archive_id}-form">
+                            <input type="hidden" value="${row.id}" name="user_id" >
+                            <input type="hidden" value="${row.message}" name="message" >
+                            <input type="hidden" value="${row.phone}" name="phone" >
+                            <input type="hidden" value="${row.archive_id}" name="archive_id" >
+                            <input type="hidden" value="${row.send_status}" name="send_status" >
+                            <input type="hidden" value="publicMessage" name="type" >
+                        </form>
+                        `;
+                    }
                 },
                 {
                     data: 'id',
@@ -448,7 +463,7 @@
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
-                        return `<input type="checkbox" class='align-middle selected_data' value='${data}' name="selected_data[]" id="${data}"/>`;
+                        return `<input type="checkbox" class='align-middle selected_data' value='${data},${row.archive_id}' name="selected_data[]" id="${data}"/>`;
                     }
                 },
                 {
@@ -543,7 +558,7 @@
                                     $(value).css('display', '');
 
                                 });
-                                
+
 
                                 tableContainer.find('th').each(function(index, value) {
                                     $(value).css('border', ' 1px solid #dee2e6');
@@ -563,7 +578,7 @@
                                                     </div>
                                                     <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
                                                         <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: left!important; ">
-                                                            <h6> يوم `+moment().format("dddd")+` الموافق ل `+moment().format("iDD-iMM-iYYYY")+` </h6>
+                                                            <h6> يوم ` + moment().format("dddd") + ` الموافق ل ` + moment().format("iDD-iMM-iYYYY") + ` </h6>
                                                         </div>
                                                     </div>
                                                 </div>`;
@@ -622,7 +637,7 @@
                                                     </div>
                                                     <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
                                                         <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: left!important; ">
-                                                            <h6> يوم `+moment().format("dddd")+` الموافق ل `+moment().format("iDD-iMM-iYYYY")+` </h6>
+                                                            <h6> يوم ` + moment().format("dddd") + ` الموافق ل ` + moment().format("iDD-iMM-iYYYY") + ` </h6>
                                                         </div>
                                                     </div>
                                                 </div>`;
@@ -636,7 +651,7 @@
                                     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
                                     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
                                     <style>table {width: 100%;margin-bottom: 1rem;color: #212529;background-color: transparent;text-align: center!important;}table th,table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}table tbody + tbody {border-top: 2px solid #dee2e6;}table {border: 1px solid #dee2e6;}table th,table td {border: 1px solid #dee2e6;}table thead th,table thead td {border-bottom-width: 2px;}table tbody tr:nth-of-type(odd) {background-color: rgba(0, 0, 0, 0.05);}</style>` +
-                                    '</head><body style="padding-top: 4rem">'+bodyHeader + tableContainer[0].outerHTML + '</body></html>');
+                                    '</head><body style="padding-top: 4rem">' + bodyHeader + tableContainer[0].outerHTML + '</body></html>');
                                 win.document.close();
                                 win.print();
                                 win.close();
@@ -868,7 +883,19 @@
                     searchable: false,
                     exportable: false,
                     "data": null,
-                    "defaultContent": ''
+                    "defaultContent": '',
+                    render: function(data, type, row, meta) {
+                        return `
+                        <form id="user-${row.id}-archive-${row.archive_id}-form">
+                            <input type="hidden" value="${row.id}" name="user_id" >
+                            <input type="hidden" value="${row.message}" name="message" >
+                            <input type="hidden" value="${row.phone}" name="phone" >
+                            <input type="hidden" value="${row.archive_id}" name="archive_id" >
+                            <input type="hidden" value="${row.send_status}" name="send_status" >
+                            <input type="hidden" value="publicMessage" name="type" >
+                        </form>
+                        `;
+                    }
                 },
                 {
                     data: 'id',
@@ -878,7 +905,7 @@
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
-                        return `<input type="checkbox" class='align-middle' value='${data}' name="selected_data[]" id="${data}"/>`;
+                        return `<input type="checkbox" class='align-middle' value='${data},${row.archive_id}' name="selected_data[]" id="${data}"/>`;
                     }
                 },
                 {
@@ -992,7 +1019,7 @@
                                                     </div>
                                                     <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
                                                         <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: left!important; ">
-                                                            <h6> يوم `+moment().format("dddd")+` الموافق ل `+moment().format("iDD-iMM-iYYYY")+` </h6>
+                                                            <h6> يوم ` + moment().format("dddd") + ` الموافق ل ` + moment().format("iDD-iMM-iYYYY") + ` </h6>
                                                         </div>
                                                     </div>
                                                 </div>`;
@@ -1006,7 +1033,7 @@
                                     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
                                     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
                                     <style>table {width: 100%;margin-bottom: 1rem;color: #212529;background-color: transparent;text-align: center!important;}table th,table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}table tbody + tbody {border-top: 2px solid #dee2e6;}table {border: 1px solid #dee2e6;}table th,table td {border: 1px solid #dee2e6;}table thead th,table thead td {border-bottom-width: 2px;}table tbody tr:nth-of-type(odd) {background-color: rgba(0, 0, 0, 0.05);}</style>` +
-                                    '</head><body style="padding-top: 4rem">'+bodyHeader + tableContainer[0].outerHTML + '</body></html>');
+                                    '</head><body style="padding-top: 4rem">' + bodyHeader + tableContainer[0].outerHTML + '</body></html>');
                                 win.document.close();
                                 win.print();
                                 win.close();
@@ -1050,7 +1077,7 @@
                                                     </div>
                                                     <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
                                                         <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: left!important; ">
-                                                            <h6> يوم `+moment().format("dddd")+` الموافق ل `+moment().format("iDD-iMM-iYYYY")+` </h6>
+                                                            <h6> يوم ` + moment().format("dddd") + ` الموافق ل ` + moment().format("iDD-iMM-iYYYY") + ` </h6>
                                                         </div>
                                                     </div>
                                                 </div>`;
@@ -1063,7 +1090,7 @@
                                     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
                                     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
                                     <style>table {width: 100%;margin-bottom: 1rem;color: #212529;background-color: transparent;text-align: center!important;}table th,table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}table tbody + tbody {border-top: 2px solid #dee2e6;}table {border: 1px solid #dee2e6;}table th,table td {border: 1px solid #dee2e6;}table thead th,table thead td {border-bottom-width: 2px;}table tbody tr:nth-of-type(odd) {background-color: rgba(0, 0, 0, 0.05);}</style>` +
-                                    '</head><body style="padding-top: 4rem">'+bodyHeader + tableContainer[0].outerHTML + '</body></html>');
+                                    '</head><body style="padding-top: 4rem">' + bodyHeader + tableContainer[0].outerHTML + '</body></html>');
                                 win.document.close();
                                 win.print();
                                 win.close();
@@ -1295,7 +1322,19 @@
                     searchable: false,
                     exportable: false,
                     "data": null,
-                    "defaultContent": ''
+                    "defaultContent": '',
+                    render: function(data, type, row, meta) {
+                        return `
+                        <form id="user-${row.id}-archive-${row.archive_id}-form">
+                            <input type="hidden" value="${row.id}" name="user_id" >
+                            <input type="hidden" value="${row.message}" name="message" >
+                            <input type="hidden" value="${row.phone}" name="phone" >
+                            <input type="hidden" value="${row.archive_id}" name="archive_id" >
+                            <input type="hidden" value="${row.send_status}" name="send_status" >
+                            <input type="hidden" value="publicMessage" name="type" >
+                        </form>
+                        `;
+                    }
                 }, {
                     data: 'id',
                     className: 'text-center align-middle',
@@ -1304,7 +1343,7 @@
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
-                        return `<input type="checkbox" class='align-middle' value='${data}' name="selected_data[]" id="${data}"/>`;
+                        return `<input type="checkbox" class='align-middle' value='${data},${row.archive_id}' name="selected_data[]" id="${data}"/>`;
                     }
                 },
                 {
@@ -1419,7 +1458,7 @@
                                                     </div>
                                                     <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
                                                         <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: left!important; ">
-                                                            <h6> يوم `+moment().format("dddd")+` الموافق ل `+moment().format("iDD-iMM-iYYYY")+` </h6>
+                                                            <h6> يوم ` + moment().format("dddd") + ` الموافق ل ` + moment().format("iDD-iMM-iYYYY") + ` </h6>
                                                         </div>
                                                     </div>
                                                 </div>`;
@@ -1432,7 +1471,7 @@
                                     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
                                     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
                                     <style>table {width: 100%;margin-bottom: 1rem;color: #212529;background-color: transparent;text-align: center!important;}table th,table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}table tbody + tbody {border-top: 2px solid #dee2e6;}table {border: 1px solid #dee2e6;}table th,table td {border: 1px solid #dee2e6;}table thead th,table thead td {border-bottom-width: 2px;}table tbody tr:nth-of-type(odd) {background-color: rgba(0, 0, 0, 0.05);}</style>` +
-                                    '</head><body style="padding-top: 4rem">'+ bodyHeader+ tableContainer[0].outerHTML + '</body></html>');
+                                    '</head><body style="padding-top: 4rem">' + bodyHeader + tableContainer[0].outerHTML + '</body></html>');
                                 win.document.close();
                                 win.print();
                                 win.close();
@@ -1476,7 +1515,7 @@
                                                     </div>
                                                     <div style="display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: -15px; margin-right: -15px; margin-top: -50px;">
                                                         <div style=" -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-positive: 1; flex-grow: 1; max-width: 100%; position: relative; width: 100%; padding-left: 15px; padding-right: 15px; text-align: left!important; ">
-                                                            <h6> يوم `+moment().format("dddd")+` الموافق ل `+moment().format("iDD-iMM-iYYYY")+` </h6>
+                                                            <h6> يوم ` + moment().format("dddd") + ` الموافق ل ` + moment().format("iDD-iMM-iYYYY") + ` </h6>
                                                         </div>
                                                     </div>
                                                 </div>`;
@@ -1489,7 +1528,7 @@
                                     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
                                     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/RTL/dist/css/custom.css">
                                     <style>table {width: 100%;margin-bottom: 1rem;color: #212529;background-color: transparent;text-align: center!important;}table th,table td {padding: 0.75rem;vertical-align: top;border-top: 1px solid #dee2e6;}table thead th {vertical-align: bottom;border-bottom: 2px solid #dee2e6;}table tbody + tbody {border-top: 2px solid #dee2e6;}table {border: 1px solid #dee2e6;}table th,table td {border: 1px solid #dee2e6;}table thead th,table thead td {border-bottom-width: 2px;}table tbody tr:nth-of-type(odd) {background-color: rgba(0, 0, 0, 0.05);}</style>` +
-                                    '</head><body style="padding-top: 4rem">' +bodyHeader+ tableContainer[0].outerHTML + '</body></html>');
+                                    '</head><body style="padding-top: 4rem">' + bodyHeader + tableContainer[0].outerHTML + '</body></html>');
                                 win.document.close();
                                 win.print();
                                 win.close();
@@ -1737,5 +1776,86 @@
             $(ele[i]).closest('.datatable-row').removeClass('toprint');
             $(ele[i]).closest('.datatable-row').addClass('notToExcel');
         }
+    }
+
+
+
+    function getSelectedUsers() {
+        var selectedUsers = [];
+        var usersCheckBoxes = document.getElementsByName('selected_data[]');
+        for (var i = 0; i < usersCheckBoxes.length; i++) {
+            if (usersCheckBoxes[i].type == 'checkbox' && usersCheckBoxes[i].checked) {
+                selectedUsers.push(usersCheckBoxes[i].value.split(','))
+            }
+        }
+
+        return selectedUsers;
+    }
+
+    function getSelectedUsersData() {
+        var selectedUsers = getSelectedUsers();
+        var usersData = [];
+
+        for (let i = 0; i < selectedUsers.length; i++) {
+
+            var element = $('#user-' + selectedUsers[i][0] + '-archive-' + selectedUsers[i][1] + '-form');
+
+            formData = element.serializeArray().reduce(function(obj, item) {
+                obj[item.name] = item.value;
+                return obj;
+            }, {});
+
+            usersData.push({
+                "user_id": formData.user_id,
+                "message": formData.message,
+                "phone": formData.phone,
+                "school_id": school_id,
+                "archive_id": formData.archive_id,
+                "send_status": formData.send_status,
+                "type": formData.type,
+            });
+        }
+
+        return usersData;
+
+    }
+
+
+    function reSendToSelected() {
+        var selected = getSelectedUsersData();
+        if (selected.length > 0) {
+            sendNotifications(selected);
+        } else {
+            toastr.error('يجب تحديد عناصر اولا!');
+        }
+    }
+
+    function sendNotifications(data = []) {
+        console.log(data);
+        var jqxhr = $.ajax({
+                "url": "<?= site_url('') ?>Schools/reSendArchiveMessage",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": token,
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                "data": {
+                    "school_id": school_id,
+                    "data": data,
+                }
+            })
+            .done(function(response) {
+                // refreshContentTable();
+                console.log(response);
+                toastr.success(response.msg);
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error(response.responseJSON.msg, 'خطأ');
+            }).always(function() {
+                $('#edit-employee-submit').removeAttr('disabled');
+                $('#edit-spinner').hide();
+            });
     }
 </script>

@@ -127,7 +127,7 @@
 
 
 <script>
-    var school_id = 24;
+    
     var dataTable = null;
 
     $(document).ready(function() {

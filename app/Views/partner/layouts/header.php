@@ -22,6 +22,10 @@
     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/css/toastr.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+    
+    
+    <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>Hijri-date/css/bootstrap-datetimepicker.css">
+
     <style>
         .card-title {
             float: right;

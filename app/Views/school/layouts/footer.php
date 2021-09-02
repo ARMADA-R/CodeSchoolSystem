@@ -122,8 +122,10 @@
       })
       .done(function(response) {
         console.log(response);
-        $("#notification-service-userName").html(response.data.name);
-        $("#sms-balance").html(parseInt(response.data.sms_balance));
+        if (response.data.name || response.data.sms_balance) {
+          $("#notification-service-userName").html(response.data.name);
+          $("#sms-balance").html(parseInt(response.data.sms_balance));
+        }
       })
       .fail(function(response) {
         console.log(response);

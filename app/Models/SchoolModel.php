@@ -283,7 +283,7 @@ class SchoolModel extends Model
         $page = ($page - 1) * $limit;
         $db = \Config\Database::connect();
         $builder = $db->table('absence_and_lag');
-        $builder->select('students.id student_id,full_name,student_number,users.phone parent_phone,classes.name class_name,semaster.name semaster_name,monitoring_case,period,date,message,send_status');
+        $builder->select('absence_and_lag.id as archive_id,students.id student_id,full_name,student_number,users.phone parent_phone,classes.name class_name,semaster.name semaster_name,monitoring_case,period,date,message,send_status');
         $builder->join('students', 'absence_and_lag.student_id = students.id');
         $builder->join('users', 'students.parent_id = users.id');
         $builder->join('classes', 'students.class_id = classes.id');
@@ -668,6 +668,7 @@ class SchoolModel extends Model
         $builder->select(
                 "gates.name as gates_name,".
                 "gates.method as gates_method,".
+                "gates.success_code,".
                 "gates.arabic_link as gates_arabic_link,".
                 "gates.latin_link as gates_latin_link,".
                 "gates.isReturnStatus as gates_isReturnStatus,".

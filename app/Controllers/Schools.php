@@ -1940,82 +1940,166 @@ class Schools extends BaseController
         }
     }
 
+    public function reSendArchiveMessage()
+    {
+        if ($this->request->getMethod() == 'post') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+
+                $messagesData = $this->request->getVar('data');
+
+                $school_id = $this->request->getVar('school_id');
+
+
+                if (!$school_id) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة  ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
+                if (!$messagesData) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء تحديد بيانات المستخدمين');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
+                $model = new SchoolModel();
+                $schoolGate = $this->getSchoolActiveGateById($school_id)[0];
+                $addedToSendCounter = 0;
+                foreach ($messagesData as $studentMessagesData) {
+
+                    if ($studentMessagesData['send_status'] != 1 && $studentMessagesData['send_status'] != -1) {
+
+                        $user_id = $studentMessagesData['user_id'];
+                        $message = $studentMessagesData['message'];
+                        $phone = $studentMessagesData['phone'];
+                        $school_id = $studentMessagesData['school_id'];
+                        $archive_id = $studentMessagesData['archive_id'];
+                        $archivetype = $studentMessagesData['type'];
+
+                        if ($archivetype == 'absenceAndLag') {
+                            $model->updateAbsenceArchiveMessagesStatus([$archive_id], null);
+                        } else if ($archivetype == 'publicMessage') {
+                            $model->updatePublicMessagesArchiveMessagesStatus([$archive_id], null);
+                        }
+
+                        $model->add_toSent([
+                            "user_id" => $user_id,
+                            "message" =>  $message,
+                            "phone" =>  $phone,
+                            "school_id" => $school_id,
+                            "message_archive_id" => $archive_id,
+                            "school_gate_id" => $schoolGate->id,
+                            "type" => $archivetype,
+                        ]);
+
+                        $addedToSendCounter++;
+                    }
+                }
+
+                $data = ['code' => 1, 'msg' => 'تم طلب اعادة الارسال ل' . $addedToSendCounter . ' طالب' . '   سيتم ارسال الاشعارات بأقرب وقت ممكن.', 'data' => []];
+                return    $this->respond($data, 200);
+
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be Delete', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
     public function SendAbsenceAndLagNotifications()
     {
         if ($this->request->getMethod() == 'post') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
 
-            $absenceAndLagData = $this->request->getVar('data');
+            if ($result['code'] == 1) {
 
-            $school_id = $this->request->getVar('school_id');
+                $absenceAndLagData = $this->request->getVar('data');
 
-
-            if (!$school_id) {
-                $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة  ');
-                return $this->respond($result, 400);
-                exit;
-            }
-
-            if (!$absenceAndLagData) {
-                $result = array('code' => -1, 'msg' => 'الرجاء تحديد بيانات الرصد  ');
-                return $this->respond($result, 400);
-                exit;
-            }
-
-            $model = new SchoolModel();
-            $student_model = new StudentsModel();
-            $savedRecords = 0;
-            $schoolGate = $this->getSchoolActiveGateById($school_id)[0];
-
-            foreach ($absenceAndLagData as $studentAbsenceAndLagData) {
-
-                $isToSend = $studentAbsenceAndLagData['isToSend'];
-                $student_id = $studentAbsenceAndLagData['studentId'];
-                $class_id = $studentAbsenceAndLagData['class_id'];
-                $semster_id = $studentAbsenceAndLagData['semaster_id'];
-                $monitoring_case = $studentAbsenceAndLagData['attendance_status'];
-                $period = $studentAbsenceAndLagData['period'];
-                $day = $studentAbsenceAndLagData['day'];
-                $date = $studentAbsenceAndLagData['date'];
-                $school_id = $studentAbsenceAndLagData['school'];
-                $phone = $studentAbsenceAndLagData['phone'];
-                $message = $studentAbsenceAndLagData['message'];
-
-                $data = [
-                    'student_id' => $student_id,
-                    'class_id' => $class_id,
-                    'semster_id' => $semster_id,
-                    'monitoring_case' => $monitoring_case,
-                    'period' => $period,
-                    'day' => $day,
-                    'date' => $date,
-                    'school_id' => $school_id,
-                    'message' => $message,
-                    'send_status' => $isToSend == "1" ? null : -1,
-                ];
-
-                $temp = $model->add_asbense($data);
+                $school_id = $this->request->getVar('school_id');
 
 
-                if ($temp) {
-                    $savedRecords++;
+                if (!$school_id) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة  ');
+                    return $this->respond($result, 400);
+                    exit;
                 }
 
-                if ($isToSend == "1") {
-                    $model->add_toSent([
-                        "user_id" => $student_id,
-                        "message" =>  $message,
-                        "phone" =>  $phone,
-                        "school_id" => $school_id,
-                        "message_archive_id" => $temp->connID->insert_id,
-                        "school_gate_id" => $schoolGate->id,
-                        "type" => 'absenceAndLag',
-                    ]);
+                if (!$absenceAndLagData) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء تحديد بيانات الرصد  ');
+                    return $this->respond($result, 400);
+                    exit;
                 }
+
+                $model = new SchoolModel();
+                $student_model = new StudentsModel();
+                $savedRecords = 0;
+                $schoolGate = $this->getSchoolActiveGateById($school_id)[0];
+
+                foreach ($absenceAndLagData as $studentAbsenceAndLagData) {
+
+                    $isToSend = $studentAbsenceAndLagData['isToSend'];
+                    $student_id = $studentAbsenceAndLagData['studentId'];
+                    $class_id = $studentAbsenceAndLagData['class_id'];
+                    $semster_id = $studentAbsenceAndLagData['semaster_id'];
+                    $monitoring_case = $studentAbsenceAndLagData['attendance_status'];
+                    $period = $studentAbsenceAndLagData['period'];
+                    $day = $studentAbsenceAndLagData['day'];
+                    $date = $studentAbsenceAndLagData['date'];
+                    $school_id = $studentAbsenceAndLagData['school'];
+                    $phone = $studentAbsenceAndLagData['phone'];
+                    $message = $studentAbsenceAndLagData['message'];
+
+                    $data = [
+                        'student_id' => $student_id,
+                        'class_id' => $class_id,
+                        'semster_id' => $semster_id,
+                        'monitoring_case' => $monitoring_case,
+                        'period' => $period,
+                        'day' => $day,
+                        'date' => $date,
+                        'school_id' => $school_id,
+                        'message' => $message,
+                        'send_status' => $isToSend == "1" ? null : -1,
+                    ];
+
+                    $temp = $model->add_asbense($data);
+
+
+                    if ($temp) {
+                        $savedRecords++;
+                    }
+
+                    if ($isToSend == "1") {
+                        $model->add_toSent([
+                            "user_id" => $student_id,
+                            "message" =>  $message,
+                            "phone" =>  $phone,
+                            "school_id" => $school_id,
+                            "message_archive_id" => $temp->connID->insert_id,
+                            "school_gate_id" => $schoolGate->id,
+                            "type" => 'absenceAndLag',
+                        ]);
+                    }
+                }
+
+
+                $data = ['code' => 1, 'msg' => 'تم حفظ حالة الغياب ل' . $savedRecords . ' مستخدم' . '   سيتم ارسال الاشعارات بأقرب وقت ممكن.', 'data' => []];
+                return    $this->respond($data, 200);
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
             }
-
-
-            $data = ['code' => 1, 'msg' => 'تم حفظ حالة الغياب ل' . $savedRecords . ' طالب' . '   سيتم ارسال الاشعارات بأقرب وقت ممكن.', 'data' => []];
-            return    $this->respond($data, 200);
         } else {
             $result = array(
                 'code' => -1, 'msg' => 'Method must be POST',
@@ -2038,12 +2122,13 @@ class Schools extends BaseController
         $successSentPublicMessagesArchive = [];
 
         $sentMessageNum = 0;
+        $sentMessagesResponsees = [];
 
         foreach ($unsentMessages as $key => $value) {
 
             $res = (new Gates_Api)->sendSMS($value->gates_arabic_link, $value->username, $value->password, $value->phone, $value->message, $value->sender_name, $value->gates_method);
-
-            if ($res == "ok" || $res == 100) {
+            $sentMessagesResponsees[] = $res;
+            if ($res == $value->success_code) {
                 $sentMessages[] = $value->unsent_message_id;
 
                 if ($value->type == "absenceAndLag") {
@@ -2086,11 +2171,10 @@ class Schools extends BaseController
         $model->updatePublicMessagesArchiveMessagesStatus($successSentPublicMessagesArchive, 1);
 
         $result = [
-            'msg' => $sentMessageNum > 0 ? $sentMessageNum . ' message has been sent.' : 'There is no messages to sent!',
+            'msg' => $sentMessageNum > 0 ? $sentMessageNum . ' message has been sent.' : 'There is no messages to sent!', 'data' => $sentMessagesResponsees
         ];
         return $this->respond($result, 200);
     }
-
 
     public function addClass()
     {
@@ -2257,10 +2341,11 @@ class Schools extends BaseController
                 }
 
 
-                $gate = $model->getSchoolActiveGatesById($school_id)[0];
+                $gate = $model->getSchoolActiveGatesById($school_id);
 
 
                 if (!empty($gate)) {
+                    $gate = $model->getSchoolActiveGatesById($school_id)[0];
                     $name = $gate->sender_name;
                     $sms_balance = (new Gates_Api())->getUserNotificationBalance($gate->username, $gate->password, $gate->balance_link);
 
@@ -2393,7 +2478,7 @@ class Schools extends BaseController
                 $page = $this->request->getVar('page');
 
                 $limit = $this->request->getVar('limit');
-                
+
 
                 $key = $this->request->getVar('key');
                 if (empty($key) || $key != 'all') {
@@ -2511,7 +2596,7 @@ class Schools extends BaseController
             return    $this->respond($data, 200);
         }
     }
-    
+
 
 
     public function GetSchoolTable()
@@ -2564,6 +2649,113 @@ class Schools extends BaseController
             }
         } else {
             $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
+
+    public function AddExamTable()
+    {
+
+
+        if ($this->request->getMethod() == 'post') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+
+                $school_id = $this->request->getVar('school_id');
+                if (!$school_id) {
+                    $data = array('code' => -1, 'msg' => 'يرجى تحديد المدرسة', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+
+                $class = $this->request->getVar('class');
+                if (!$class) {
+                    $data = array('code' => -1, 'msg' => 'يرجى تحديد الصف', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+
+                $semester = $this->request->getVar('semester');
+                if (!$semester) {
+                    $data = array('code' => -1, 'msg' => 'يرجى تحديد الفصل', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+
+                if (empty($_FILES['file']['name'])) {
+                    $data = array('code' => -1, 'msg' => 'يرجى تحميل الملف!', 'data' => []);
+                    return    $this->respond($data, 400);
+                    exit;
+                }
+
+
+                $input = $this->validate([
+                    'file' => [
+                        'uploaded[file]',
+                        // 'mime_in[file,image/jpg,image/jpeg,image/png]',
+                        'max_size[file,10240]',
+                    ]
+                ]);
+
+                if (!$input) {
+                    $data = array('code' => -1, 'msg' => 'اقصى حجم للملف هو 10MB ', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+
+
+                $model = new SchoolModel();
+
+
+                if ($file = $this->request->getFile('file')) {
+                    if ($file->isValid() && !$file->hasMoved()) {
+
+                        // Get file name and extension
+                        $name = $file->getName();
+                        $ext = $file->getClientExtension();
+
+                        // Get random file name
+                        $newName = $file->getRandomName();
+
+                        // Store file in public/uploads/ folder
+                        $file->move('./assets/files', $newName);
+
+                        // File path to display preview
+                        $filepath = base_url() . "/assets/files/" . $newName;
+
+                        // var_dump($filepath);
+                        // dd($filepath);
+
+
+                        $data = [
+                            'school_id' => $school_id,
+                            'class_id' => $class,
+                            'semester_id' => $semester,
+                            'file_path' => $filepath
+                        ];
+                        if ($model->add_exam_table_school($data)) {
+
+                            $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                            return    $this->respond($data, 200);
+                        } else {
+                            $data = array('code' => 1, 'msg' => 'حصل خطأ ما الرجاء المحاولة لاحقا', 'data' => []);
+                            return    $this->respond($data, 400);
+                        }
+                    }
+                } else {
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
             return    $this->respond($data, 200);
         }
     }
@@ -2642,7 +2834,7 @@ class Schools extends BaseController
 
                         // var_dump($filepath);
                         // dd($filepath);
-                
+
 
                         $data = [
                             'school_id' => $school_id,
@@ -2675,7 +2867,7 @@ class Schools extends BaseController
         }
     }
 
-    
+
     public function addSemester()
     {
         if ($this->request->getMethod() == 'post') {
@@ -2795,8 +2987,4 @@ class Schools extends BaseController
             return    $this->respond($data, 200);
         }
     }
-
-
-
-
 }

@@ -169,6 +169,9 @@
                 "headers": {
                     "Authorization": token
                 },
+                data:{
+                    user_id: user_id,
+                }
             }).done(function(response) {
                 setPartnersOptions(response.data);
             })

@@ -84,7 +84,7 @@
         $("#phone").val(response.data.phone);
 
         }).fail(function(response) {
-            toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
+            toastr.error(response.responseJSON.msg, 'خطأ');
         });
     });
 
@@ -111,7 +111,7 @@
             toastr.success('تم تحديث البيانات بنجاح');
 
         }).fail(function(response) {
-            toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
+            toastr.error(response.responseJSON.msg, 'خطأ');
         });
     }
 

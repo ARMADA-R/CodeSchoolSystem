@@ -7,77 +7,40 @@
 <div class="card">
 
     <div class="card-header ">
-    <i class="far fa-user-circle"></i>  <h6 class=" text-bold d-inline-flex">إدارة شركاء النجاح«الأعضاء»</h6> 
- 
-
+        <i class="far fa-user-circle"></i>
+        <h6 class=" text-bold d-inline-flex">إدارة شركاء النجاح«العروض»</h6>
     </div>
-    <!-- start card body1 -->
 
-    <div class="card-body">
-   
-<div class="row">
-    <div class="col-12">
-        <div class="card">
+    <div class="card-body p-2" style="overflow-x: scroll;">
+        <table id="content-table" class="table table-striped " style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>م</th>
+                    <th>الشريك</th>
+                    <th>المدينة</th>
+                    <th>المنطقة</th>
+                    <th> اسم الخدمة</th>
+                    <th class="small-cell text-center t-image_url align-middle w-100"> توضيح الخدمة
+                    </th>
+                    <th>سعر الخدمة</th>
+                    <th>السعر بعد الخصم</th>
+                    <th>مقدار الخصم</th>
+                    <th>الحالة</th>
+                    <th>انشاء كوبون الخصم</th>
+                    <th>تاريخ الانتهاء</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
 
-            <div class="card-body p-2"  style="overflow-x: scroll;">
-                <table id="content-table" class="table table-striped " style="width:100%">
-                    <thead>
-
-                        <tr>
-                            <th></th>
-                            <th>م</th>
-                            <th>الشريك</th>
-                            <th>المدينة</th>
-                            <th>المنطقة</th>
-                            <th> اسم الخدمة</th>
-                            <th class="small-cell text-center t-image_url align-middle w-100"> توضيح الخدمة
-                                <br> «<sm all> صورة/فيديو قصير جدا /نص</small>»
-                            </th>
-                            <th>سعر الخدمة</th>
-                            <th>السعر بعد الخصم</th>
-                            <th>مقدار الخصم</th>
-                            <th>انشاء كوبون الخصم</th>
-                            <th>تاريخ الانتهاء</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-
-                </table>
-            </div>
-        </div>
+        </table>
     </div>
-</div>
-<!-- end row1 -->
 
-    </div>
-   <!-- end card body1 -->
 
 
 </div>
 
 <!-- end card1 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -97,8 +60,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
-    var school_id = 24;
-    var user_id = 24;
+    
     var dataTable = null;
     var studentsData = [];
 
@@ -170,9 +132,9 @@
                     data: 'image_url',
                     name: 'image_url',
                     className: 'text-center t-image_url align-middle w-100',
-                    title: ` توضيح الخدمة <br> «<sm all> صورة/فيديو قصير جدا /نص</small>»`,
+                    title: `توضيح الخدمة`,
                     render: function(data, type, row, meta) {
-                        return `<a href='${data}'></a>`;
+                        return `<a href='${data}'><i class="fas fa-photo-video"></i></a>`;
                     }
                 },
                 {
@@ -194,16 +156,34 @@
                     title: 'مقدار الخصم'
                 },
                 {
+                    data: 'status',
+                    name: 'status',
+                    className: 'text-center t-status',
+                    title: 'الحالة',
+                    render: function(data, type, row, meta) {
+                        var checked = (row.status == 1) ? `checked` : ``;
+                        var text = (row.status == 1) ? `مفعل` : `غير مفعل`; 
+
+                        return `<div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input"  ${checked} onchange="updateOfferStatus(${row.id},this)" id="customSwitch-${row.id}">
+                                    <label id="status-text" class="custom-control-label" for="customSwitch-${row.id}">${text}</label>
+                                </div>`;
+                    }
+                },
+                {
                     data: 'cubon',
                     name: 'cubon',
                     className: 'text-center t-cubon',
-                    title: 'انشاء كوبون الخصم'
+                    title: 'كوبون الخصم'
                 },
                 {
                     data: 'end_date',
                     name: 'end_date',
                     className: 'text-center t-end_date',
-                    title: 'تاريخ الانتهاء'
+                    title: 'تاريخ الانتهاء',
+                    render: function(data, type, row, meta) {
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
+                    }
                 },
             ],
             buttons: [{
@@ -411,11 +391,11 @@
 
 
     $(document).ready(function() {
-        getArchiveData();
+        getPartnersData();
     });
 
 
-    function getArchiveData() {
+    function getPartnersData() {
         var jqxhr = $.ajax({
                 "url": "<?= site_url('') ?>Partners/GetPartners?page=1&limit=2",
                 "method": "GET",
@@ -423,6 +403,9 @@
                 "headers": {
                     "Authorization": token
                 },
+                data:{
+                    user_id: user_id,
+                }
             })
             .done(function(response) {
                 dataTable.clear().rows.add(response.data).draw()
@@ -433,16 +416,34 @@
             });
     }
 
+    
+    function updateOfferStatus(id, element) {
+        var status = element.checked;
+
+        console.log(status);
+        var jqxhr = $.ajax({
+                "url": "<?= site_url('') ?>Partners/UpdateServiceStatus",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": token,
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                "data": {
+                    "id": id,
+                    "status": status ? 1 : 0,
+                }
+            })
+            .done(function(response) {
+                getPartnersData();
+                toastr.success('تم تحديث حالة النموذج');
+                console.log($(element).parent().find("#status-text"));
+                status ? $(element).parent().find("#status-text").html("مفعل") : $(element).parent().find("#status-text").html("غير مفعل");
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error(response.responseJSON.msg, 'خطأ');
+            });
+    }
+
 </script>
-
-
-
-
-
-
-
-
-
-
-
-

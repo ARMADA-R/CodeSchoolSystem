@@ -331,6 +331,7 @@ class Gates_Api extends BaseController
 			if ($result['code'] == 1) {
 				$gate_name = $this->request->getVar('gate_name');
 				$method = $this->request->getVar('method');
+				$success_code = $this->request->getVar('success_code');
 				$isNeedPlusSign = $this->request->getVar('isNeedPlusSign');
 				$isReturnStatus = $this->request->getVar('isReturnStatus');
 				$doubleEnter = $this->request->getVar('doubleEnter');
@@ -345,6 +346,12 @@ class Gates_Api extends BaseController
 				}
 				if (!$method) {
 					$result = array('code' => -1, 'msg' => 'الرجاء تحديد طريقة الارسال ');
+					return $this->respond($result, 400);
+					exit;
+				}
+				
+				if (!$success_code) {
+					$result = array('code' => -1, 'msg' => 'الرجاء تحديد كود نجاح الارسال ');
 					return $this->respond($result, 400);
 					exit;
 				}
@@ -372,6 +379,7 @@ class Gates_Api extends BaseController
 					'isNeedPlusSign' => $isNeedPlusSign === 'true',
 					'isReturnStatus' => $isReturnStatus === 'true',
 					'doubleEnter' => $doubleEnter === 'true',
+					'success_code' => $success_code,
 					'arabic_link' => $arabic_messages_link,
 					'latin_link' => $latin_messages_link,
 					'balance_link' => $balance_link,
@@ -407,6 +415,7 @@ class Gates_Api extends BaseController
 				$id = $this->request->getVar('id');
 				$gate_name = $this->request->getVar('gate_name');
 				$method = $this->request->getVar('method');
+				$success_code = $this->request->getVar('success_code');
 				$isNeedPlusSign = $this->request->getVar('isNeedPlusSign');
 				$isReturnStatus = $this->request->getVar('isReturnStatus');
 				$doubleEnter = $this->request->getVar('doubleEnter');
@@ -427,6 +436,11 @@ class Gates_Api extends BaseController
 				}
 				if (!$method) {
 					$result = array('code' => -1, 'msg' => 'الرجاء تحديد طريقة الارسال ');
+					return $this->respond($result, 400);
+					exit;
+				}
+				if (!$success_code) {
+					$result = array('code' => -1, 'msg' => 'الرجاء تحديد كود نجاح الارسال ');
 					return $this->respond($result, 400);
 					exit;
 				}
@@ -454,6 +468,7 @@ class Gates_Api extends BaseController
 					'isNeedPlusSign' => $isNeedPlusSign === 'true',
 					'isReturnStatus' => $isReturnStatus === 'true',
 					'doubleEnter' => $doubleEnter === 'true',
+					'success_code' => $success_code,
 					'arabic_link' => $arabic_messages_link,
 					'latin_link' => $latin_messages_link,
 					'balance_link' => $balance_link,
@@ -482,6 +497,7 @@ class Gates_Api extends BaseController
 	{
 		// if ($mehod == "GET") {
 			$url =  str_replace("@MESSAGE@", urlencode($message), str_replace("@RECEIVENUMBER@", $to, str_replace("@SENDERNAME@", $sender, str_replace("@PASSWORD@", $password, str_replace("@USERNAME@", $user, $gate_url)))));
+
 			return HTTPRequester::HTTPGet($url);
 		// } else if($mehod == "POST"){
 

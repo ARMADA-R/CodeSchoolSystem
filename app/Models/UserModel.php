@@ -23,6 +23,19 @@ class UserModel extends Model
         $query   = $builder->get();
         return $query->getRow();
     }
+    public function get_user_username($username)
+    {
+
+        $db      = \Config\Database::connect();
+
+        $builder = $db->table('users');
+        $builder->select('username,id');
+        $builder->where('username', $username);
+
+        $query   = $builder->get();
+
+        return $query->getRow();
+    }
     public function add_user($data)
     {
         $db      = \Config\Database::connect();
@@ -39,7 +52,10 @@ class UserModel extends Model
         $builder->select('email,role,id,username');
         $builder->where('email', $email);
         $builder->where('password', md5($password));
+        $builder->orWhere('username', $email);
+        $builder->where('password', md5($password));
         $query   = $builder->get();
+
         return $query->getRow();
     }
     public function resetpassword($email, $password)

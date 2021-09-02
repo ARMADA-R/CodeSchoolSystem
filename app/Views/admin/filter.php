@@ -61,7 +61,7 @@
             $("#text").val(response.data.text);
 
         }).fail(function(response) {
-            toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
+            toastr.error(response.responseJSON.msg, 'خطأ');
         });
     });
 
@@ -83,7 +83,7 @@
         }).done(function(response) {
             toastr.success('تم تحديث البيانات بنجاح')
         }).fail(function(response) {
-            toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
+            toastr.error(response.responseJSON.msg, 'خطأ');
         });
     }
     

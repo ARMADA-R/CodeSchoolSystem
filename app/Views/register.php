@@ -358,6 +358,9 @@
                                 <input type="email" class="form-input" name="email" id="email" placeholder="البريد الإلكتروني" />
                             </div>
                             <div class="form-group">
+                                <input type="text" class="form-input" name="username" id="username" placeholder="اسم المستخدم" />
+                            </div>
+                            <div class="form-group">
                                 <input type="password" class="form-input" name="password" id="password" min="8" placeholder="كلمة المرور" />
                                 <span toggle="#password" class="zmdi zmdi-eye-off field-icon float-right toggle-password"></span>
                             </div>
@@ -380,6 +383,9 @@
                                             </div>
                                             <div class="form-group">
                                                 <input type="email" class="form-input" name="email" id="email" placeholder="البريد الإلكتروني" />
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-input" name="username" id="username" placeholder="اسم المستخدم" />
                                             </div>
                                             <div class="form-group">
                                                 <input type="password" class="form-input" name="password" id="password" min="8" placeholder="كلمة المرور" />
@@ -420,6 +426,9 @@
                                                 <input type="email" class="form-input" name="email" id="email" placeholder="البريد الإلكتروني" />
                                             </div>
                                             <div class="form-group">
+                                                <input type="text" class="form-input" name="username" id="username" placeholder="اسم المستخدم" />
+                                            </div>
+                                            <div class="form-group">
                                                 <input type="password" class="form-input" name="password" id="password" min="8" placeholder="كلمة المرور" />
                                                 <span toggle="#password" class="zmdi zmdi-eye-off field-icon float-right toggle-password"></span>
                                             </div>
@@ -453,7 +462,7 @@
                 })
                 .fail(function(response) {
                     console.log(response);
-                    toastr.error(response.msg, 'خطأ');
+                    toastr.error(response.responseJSON.msg, 'خطأ');
                 });
 
         }

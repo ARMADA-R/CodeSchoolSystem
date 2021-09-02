@@ -4,12 +4,100 @@
 <div class="content-header my-2 bg-white">
 
     <div class="row ">
-        <div class="col  ">
+        <div class="col   d-flex align-items-center  ">
             عروض شركاء النجاح
+        </div>
+        <div class="col-sm-4">
+
+            <button type="button" class="btn btn-light" style="width: inherit; padding: .375rem .75rem;" data-toggle="modal" data-target="#add-offer">اضف عرض</button>
         </div>
     </div>
 </div>
 <!-- /.content-header -->
+
+
+
+<div class="modal fade" id="add-offer" tabindex="-1" aria-labelledby="add-offerLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add-offerLabel">اضف عرض</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form onsubmit="addOffer(this); return false;">
+                <div class="modal-body p-4">
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="name">اسم العرض</label>
+                                <input required type="text" class="form-control" name="name" id="name">
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="discount">الخصم</label>
+                                <input required type="text" class="form-control" name="discount" id="discount">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="service_price">السعر قبل الخصم</label>
+                                <input required type="text" class="form-control" name="service_price" id="service_price">
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="price_after_discount">السعر بعد الخصم</label>
+                                <input required type="text" class="form-control" name="price_after_discount" id="price_after_discount">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="cobon">الرمز</label>
+                                <input required type="text" class="form-control" name="cobon" id="cobon">
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="hijri-date-picker">تاريخ الانتهاء</label>
+                                <input required type="text" class="form-control" id="hijri-date-picker">
+                                <input required type="hidden" name="date" class="form-control" id="date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="file">الملف</label>
+                                <input required type="file" class="form-control" name="file" id="offer-file" accept="video/*  , image/*">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div>
+                            <div id="add-spinner" style="display: none" class="spinner-border text-secondary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                            <button type="submit" id="add-offer-submit" class="btn btn-primary">حفظ</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 
@@ -50,10 +138,19 @@
 
 <script src="<?php echo base_url() . '/public/'; ?>design/js/datatable.all.js"></script>
 
+<!-- Hijri Date -->
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/moment-with-locales.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/moment-hijri.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/bootstrap-hijri-datetimepicker.js"></script>
+
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
-
-<script>    
+<style>
+    .bg-soft-red{
+        background-color: #ff000036 !important;
+    }
+</style>
+<script>
     var dataTable = null;
     var studentsData = [];
 
@@ -73,8 +170,9 @@
             autoWidth: false,
             rowId: 'id',
             createdRow: function(row, data, index) {
-                $(row).addClass('datatable-row');
-                $(row).addClass('notToExcel');
+                if (data.status == 0) {
+                    $(row).addClass('bg-soft-red');
+                }
             },
             columns: [{
                     "className": 'details-control',
@@ -137,9 +235,9 @@
                     title: 'سعر الخدمة'
                 },
                 {
-                    data: 'price_after_discount',
-                    name: 'price_after_discount',
-                    className: 'text-center t-price_after_discount',
+                    data: 'service_after_discount',
+                    name: 'service_after_discount',
+                    className: 'text-center t-service_after_discount',
                     title: 'السعر بعد الخصم'
                 },
                 {
@@ -158,7 +256,10 @@
                     data: 'end_date',
                     name: 'end_date',
                     className: 'text-center t-end_date',
-                    title: 'تاريخ الانتهاء'
+                    title: 'تاريخ الانتهاء',
+                    render: function(data, type, row, meta) {
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
+                    }
                 },
             ],
             buttons: [{
@@ -378,7 +479,7 @@
                 "headers": {
                     "Authorization": token
                 },
-                data:{
+                data: {
                     key: "all",
                     partner_id: partner_id,
                 }
@@ -390,5 +491,54 @@
                 console.log(response);
                 toastr.error(response.responseJSON.msg, 'خطأ');
             });
+    }
+
+    function addOffer(element) {
+
+        formData = $(element).serializeArray().reduce(function(obj, item) {
+            obj[item.name] = item.value;
+            return obj;
+        }, {});
+
+        var form = new FormData();
+        form.append("service_name", formData.name);
+        form.append("service_price", formData.service_price);
+        form.append("price_after_discount", formData.price_after_discount);
+        form.append("discount", formData.discount);
+        form.append("cubon", formData.cobon);
+        form.append("end_date", formData.date);
+        form.append("status", 0);
+        form.append("partner_id", partner_id);
+        form.append("file", $("#offer-file")[0].files[0]);
+
+        $('#add-offer-submit').attr("disabled", true);
+        $('#add-spinner').show();
+
+        var jqxhr = $.ajax({
+                url: "<?= site_url('') ?>Partners/AddPartnerService",
+                method: "POST",
+                timeout: 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                data: form,
+                headers: {
+                    "Authorization": token,
+                },
+            })
+            .done(function(response) {
+                getPartnersData();
+                toastr.success('تم اضافة البيانات بنجاح')
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error(response.responseJSON.msg, 'خطأ');
+
+            }).always(function() {
+                $('#add-offer-submit').removeAttr('disabled');
+                $('#add-spinner').hide();
+            });
+
+        return false;
     }
 </script>

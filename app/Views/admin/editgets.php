@@ -155,7 +155,7 @@
             }
 
         }).fail(function(response) {
-            toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
+            toastr.error(response.responseJSON.msg, 'خطأ');
         });
     });
    function save1() 
@@ -187,7 +187,7 @@
             
 
         }).fail(function(response) {
-            toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
+            toastr.error(response.responseJSON.msg, 'خطأ');
         });
     };
 

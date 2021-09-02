@@ -96,7 +96,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" />
 
 <script>
-    var school_id = 24;
+    
     var dataTable = null;
     var id= <?php echo $id; ?>
 

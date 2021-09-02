@@ -42,6 +42,14 @@
 <!-- tostar -->
 <script src="<?php echo base_url() . '/public/'; ?>design/js/toastr.js"></script>
 
+
+<!-- Hijri Date -->
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/moment-with-locales.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/moment-hijri.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/bootstrap-hijri-datetimepicker.js"></script>
+
+
+
 <script>
   $("img.lazyload").lazyload();
 </script>

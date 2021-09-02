@@ -366,8 +366,8 @@
         dataTable = $('#content-table').DataTable({
             dom: `<"row d-flex justify-content-end mx-1 my-1 mb-3 "B><"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
-                [25, 50, 100, 500],
-                [25, 50, 100, 500]
+                [25, 50, 100, 500, 1000],
+                [25, 50, 100, 500, 1000]
             ],
             order: [
                 [2, 'asc']
@@ -1213,8 +1213,6 @@
 
         }
 
-        console.log(totalSelectedMessageNumber);
-        console.log(dataToSend);
         if (selectedRows.length > 0) {
             if (confirm(`
              هل انت متأكد من حفظ بيانات الغياب ل${selectedRows.length} طالب

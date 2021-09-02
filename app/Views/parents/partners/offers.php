@@ -130,9 +130,9 @@
                     data: 'image_url',
                     name: 'image_url',
                     className: 'text-center t-image_url align-middle w-100',
-                    title: ` توضيح الخدمة <br> «<sm all> صورة/فيديو قصير جدا /نص</small>»`,
+                    title: ` توضيح الخدمة`,
                     render: function(data, type, row, meta) {
-                        return `<a href='${data}'></a>`;
+                        return `<a href='${data}'><i class="fas fa-photo-video"></i></a>`;
                     }
                 },
                 {
@@ -157,13 +157,16 @@
                     data: 'cubon',
                     name: 'cubon',
                     className: 'text-center t-cubon',
-                    title: 'انشاء كوبون الخصم'
+                    title: 'كوبون الخصم'
                 },
                 {
                     data: 'end_date',
                     name: 'end_date',
                     className: 'text-center t-end_date',
-                    title: 'تاريخ الانتهاء'
+                    title: 'تاريخ الانتهاء',
+                    render: function(data, type, row, meta) {
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
+                    }
                 },
             ],
             buttons: [{
@@ -383,6 +386,9 @@
                 "headers": {
                     "Authorization": token
                 },
+                data:{
+                    user_id: user_id,
+                }
             })
             .done(function(response) {
                 dataTable.clear().rows.add(response.data).draw()

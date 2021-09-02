@@ -6,18 +6,21 @@ class PartnersModel extends Model
 {
   
    
-    public function get_partners($limit,$page,$key){
+    public function get_partners($limit,$page,$key, $whereStatus = 1){
         $db = \Config\Database::connect();
         
         $date=date('Y-m-d');
         $page=($page-1)*$limit;
         $builder = $db->table('users');
         $builder->distinct();
-        $builder->select('username,partner_service.id,service_name,image_url,service_price,service_after_discount,discount,cubon,end_date,city,area');
+        $builder->select('username,partner_service.id,  partner_service.status,service_name,image_url,service_price,service_after_discount,discount,cubon,end_date,city,area');
         $builder->join('partner_service', 'users.id = partner_service.user_id');
         $builder->where('role', 4);
         $builder->where('end_date>=', $date);
         
+        if ($whereStatus != -1) 
+        $builder->where('partner_service.status', $whereStatus);
+
         $builder->orderBy('partner_service.create_date', 'desc');
         if($key=='all'){
             $query   = $builder->get();
@@ -33,10 +36,11 @@ class PartnersModel extends Model
         $page=($page-1)*$limit;
         $builder = $db->table('users');
         $builder->distinct();
-        $builder->select('username,partner_service.user_id,service_name,image_url,service_price,service_after_discount,discount,cubon,end_date');
+        $builder->select('username, partner_service.user_id as id, service_name,  partner_service.status, image_url, service_price, service_after_discount, discount, cubon, end_date, users.city, users.area');
         $builder->join('partner_service', 'users.id = partner_service.user_id');
         $builder->where('role', 4);
-        $builder->where('end_date>=', $date);
+        $builder->where('end_date >=', $date);
+        
         $builder->where('user_id', $user_id);
         $builder->orderBy('partner_service.create_date', 'desc');
         if($key=='all'){

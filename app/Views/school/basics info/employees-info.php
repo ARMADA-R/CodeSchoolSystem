@@ -689,7 +689,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             }).always(function() {
                 $('#edit-employee-submit').removeAttr('disabled');
                 $('#edit-spinner').hide();

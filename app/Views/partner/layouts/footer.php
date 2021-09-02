@@ -42,6 +42,13 @@
 <!-- tostar -->
 <script src="<?php echo base_url() . '/public/'; ?>design/js/toastr.js"></script>
 
+
+<!-- Hijri Date -->
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/moment-with-locales.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/moment-hijri.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/bootstrap-hijri-datetimepicker.js"></script>
+
+
 <script>
   $("img.lazyload").lazyload();
 </script>
@@ -69,6 +76,39 @@
     "toastClass": 'toastr'
   };
 
+
+
+  $(document).ready(function() {
+
+    //Hijri date bicker configration
+    $("#hijri-date-picker").hijriDatePicker({
+      locale: "ar-sa",
+      format: "DD-MM-YYYY",
+      hijriFormat: "iYYYY-iMM-iDD",
+      dayViewHeaderFormat: "MMMM YYYY",
+      hijriDayViewHeaderFormat: "iMMMM iYYYY",
+      showSwitcher: true,
+      allowInputToggle: true,
+      useCurrent: true,
+      isRTL: true,
+      keepOpen: false,
+      hijri: true,
+      debug: false,
+      showClear: true,
+      showTodayButton: true,
+      showClose: true,
+    });
+
+    $("#hijri-date-picker").on('dp.change', function(arg) {
+      if (!arg.date) {
+        $("#date").val('');
+        return;
+      };
+      let date = arg.date;
+      $("input#date").val(date.format("YYYY-MM-DD"));
+    });
+
+  });
 </script>
 </body>
 

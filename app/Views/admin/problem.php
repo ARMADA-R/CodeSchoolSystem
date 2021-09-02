@@ -181,7 +181,7 @@ require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
             y22(response.data);
            
         }).fail(function(response) {
-            toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
+            toastr.error(response.responseJSON.msg, 'خطأ');
         });
     });
 

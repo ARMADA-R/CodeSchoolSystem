@@ -5,11 +5,12 @@ use CodeIgniter\Model;
 class TemplateModel extends Model
 {
   
-    public function get_template($limit,$page,$key){
+    public function get_template($limit,$page,$key, $school_id){
         $page=($page-1)*$limit;
         $db = \Config\Database::connect();
         $builder = $db->table('template');
         $builder->select('id, name, content, letters_number,message_number,sender_type');
+        $builder->where('school_id',$school_id);
         $builder->orderBy('create_date', 'DESC');
         if($key=='all'){
             $query   = $builder->get();

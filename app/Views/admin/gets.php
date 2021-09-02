@@ -101,14 +101,14 @@
                 <input type="hidden" name="id" id="update-record-id">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label for="update-gate-name">اسم البوابة</label>
                                 <input required type="text" name="gate_name" class="form-control" id="update-gate-name">
 
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="send-method">طريقة الارسال</label>
                                 <select required class="form-control" name="method" id="update-send-method">
@@ -116,6 +116,12 @@
                                     <option value="get">GET</option>
                                     <option value="post">POST</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="success_code">رمز نجاح الارسال</label>
+                                <input required type="text" name="success_code" class="form-control" id="success_code">
                             </div>
                         </div>
 
@@ -298,14 +304,14 @@
                 <input type="hidden" name="gate_id" id="add-gates-id">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label for="add-gate-name">اسم البوابة</label>
                                 <input required type="text" name="gate_name" class="form-control" id="add-gate-name">
 
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="send-method">طريقة الارسال</label>
                                 <select required class="form-control" name="method" id="send-method">
@@ -313,6 +319,12 @@
                                     <option value="get">GET</option>
                                     <option value="post">POST</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="success_code_add">رمز نجاح الارسال</label>
+                                <input required type="text" name="success_code" class="form-control" id="success_code_add">
                             </div>
                         </div>
 
@@ -655,6 +667,12 @@
                     }
                 },
                 {
+                    data: 'success_code',
+                    name: 'success_code',
+                    className: 'text-center t-success_code align-middle',
+                    title: 'رمز نجاح الارسال'
+                },
+                {
                     data: "id",
                     name: 'action',
                     title: '&nbsp;&nbsp;&nbsp;&nbsp;خيارات&nbsp;&nbsp;&nbsp;&nbsp;',
@@ -665,7 +683,7 @@
                     render: function(data, type, row, meta) {
                         return `<div class="row justify-content-center  text-white ">
                                     <div class="m-1">
-                                        <button type="button" class="btn btn-sm btn-info " title="edit" style="margin: 0px;" onclick="showUpdateModal('${row.id}', '${row.name}', '${row.method}', '${row.arabic_link}', '${row.latin_link}', '${row.balance_link}', '${row.isReturnStatus}', '${row.isNeedPlusSign}', '${row.doubleEnter}')" class="nav-link">
+                                        <button type="button" class="btn btn-sm btn-info " title="edit" style="margin: 0px;" onclick="showUpdateModal('${row.id}', '${row.name}', '${row.method}', '${row.arabic_link}', '${row.latin_link}', '${row.balance_link}', '${row.isReturnStatus}', '${row.isNeedPlusSign}', '${row.doubleEnter}', '${row.success_code}')" class="nav-link">
 
                                             <i class="far fa-edit"></i>
                                         </button>
@@ -957,7 +975,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             });
 
 
@@ -1012,6 +1030,7 @@
             data: {
                 gate_name: formData.gate_name,
                 method: formData.method,
+                success_code: formData.success_code,
                 isNeedPlusSign: formData.isNeedPlusSign ? true : false,
                 isReturnStatus: formData.isReturnStatus ? true : false,
                 doubleEnter: formData.doubleEnter ? true : false,
@@ -1037,11 +1056,12 @@
         $("#display-link-btn").click();
     }
 
-    function showUpdateModal(id, name, method, arabic_link, latin_link, balance_link, isReturnStatus, isNeedPlusSign, doubleEnter) {
+    function showUpdateModal(id, name, method, arabic_link, latin_link, balance_link, isReturnStatus, isNeedPlusSign, doubleEnter, success_code) {
         // console.log(id, name, method, arabic_link, latin_link, balance_link, isReturnStatus, isNeedPlusSign, doubleEnter);
         $("#update-record-id").val(id);
         $("#update-gate-name").val(name);
         $("#update-send-method").val(method);
+        $("#success_code").val(success_code);
         $("#update-arabic-messages-link").val(arabic_link);
         $("#update-latin-messages-link").val(latin_link);
         $("#update-balance-link").val(balance_link);
@@ -1069,6 +1089,7 @@
                 id: formData.id,
                 gate_name: formData.gate_name,
                 method: formData.method,
+                success_code: formData.success_code,
                 isNeedPlusSign: formData.isNeedPlusSign ? true : false,
                 isReturnStatus: formData.isReturnStatus ? true : false,
                 doubleEnter: formData.doubleEnter ? true : false,
@@ -1084,4 +1105,5 @@
             toastr.error(response.responseJSON.msg, 'خطأ');
         });
     }
+
 </script>

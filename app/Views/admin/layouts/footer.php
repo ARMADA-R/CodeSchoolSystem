@@ -30,10 +30,14 @@
 <!-- Bootstrap 4 rtl -->
 <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
 
-
-
 <!-- tostar -->
 <script src="<?php echo base_url() . '/public/'; ?>design/js/toastr.js"></script>
+
+<!-- Hijri Date -->
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/moment-with-locales.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/moment-hijri.js"></script>
+<script src="<?php echo base_url() . '/public/'; ?>Hijri-date/js/bootstrap-hijri-datetimepicker.js"></script>
+
 
 <script>
   var user_id = '<?= session('user_data')['user_id'] ?>';

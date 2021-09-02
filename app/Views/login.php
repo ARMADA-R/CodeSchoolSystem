@@ -268,7 +268,7 @@
 
                         <div id="form-content">
                             <div class="form-group">
-                                <input type="email" class="form-input" name="email" id="email" placeholder="البريد الإلكتروني" />
+                                <input type="text" class="form-input" name="email" id="email" placeholder="البريد الإلكتروني" />
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-input" name="password" id="password" min="8" placeholder="كلمة المرور" />

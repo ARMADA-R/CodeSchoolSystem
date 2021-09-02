@@ -28,6 +28,9 @@
 
     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/frontend.css">
 
+    
+    <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>Hijri-date/css/bootstrap-datetimepicker.css">
+
     <style>
         .card-title {
             float: right;

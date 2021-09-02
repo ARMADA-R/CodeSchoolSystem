@@ -793,7 +793,7 @@
             })
             .fail(function(response) {
                 console.log(response);
-                toastr.error('حدث خطأ ما اثناء تحديث البيانات!', 'خطأ');
+                toastr.error(response.responseJSON.msg, 'خطأ');
             }).always(function() {
                 $('#edit-student-submit').removeAttr('disabled');
                 $('#edit-spinner').hide();
