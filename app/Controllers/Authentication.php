@@ -173,8 +173,7 @@ class Authentication extends ResourceController
 
                 $mail->setTo($email);
 
-                $mail->setCC('another@another-example.com');
-                $mail->setBCC('them@their-example.com');
+        
 
                 $mail->setSubject('اعادة ضبط كلمة المرور');
 
