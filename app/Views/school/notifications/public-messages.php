@@ -95,8 +95,8 @@
         dataTable = $('#content-table').DataTable({
             dom: `<"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
-                [25, 50, 100, 500],
-                [25, 50, 100, 500]
+                [25, 50, 100, 500, 1000],
+                [25, 50, 100, 500, 1000]
             ],
             order: [
                 [2, 'asc']
@@ -373,8 +373,8 @@
         dataTable = $('#content-table').DataTable({
             dom: `<"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
-                [25, 50, 100, 500],
-                [25, 50, 100, 500]
+                [25, 50, 100, 500, 1000],
+                [25, 50, 100, 500, 1000]
             ],
             order: [
                 [1, 'asc']
@@ -627,8 +627,8 @@
         dataTable = $('#content-table').DataTable({
             dom: `<"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
-                [25, 50, 100, 500],
-                [25, 50, 100, 500]
+                [25, 50, 100, 500, 1000],
+                [25, 50, 100, 500, 1000]
             ],
             order: [
                 [1, 'asc']
@@ -880,8 +880,8 @@
         dataTable = $('#content-table').DataTable({
             dom: `<"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
-                [25, 50, 100, 500],
-                [25, 50, 100, 500]
+                [25, 50, 100, 500, 1000],
+                [25, 50, 100, 500, 1000]
             ],
             order: [
                 [1, 'asc']
