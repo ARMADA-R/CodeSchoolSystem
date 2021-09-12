@@ -1842,7 +1842,7 @@
                 },
                 "data": {
                     "school_id": school_id,
-                    "data": data,
+                    "data": JSON.stringify(data),
                 }
             })
             .done(function(response) {

@@ -1256,7 +1256,7 @@
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 "data": {
-                    "usersData": getUsersData(),
+                    "usersData": JSON.stringify(getUsersData()),
                     "school_id": school_id,
                     "template_id": $('#templates').val(),
                     "group": $('#determinants').val()
@@ -1338,4 +1338,5 @@
                 toastr.error(response.responseJSON.msg, 'خطأ');
             });
     }
+    
 </script>

@@ -47,9 +47,7 @@ class Authentication extends ResourceController
 
                 $a = strtotime($iat . '+1 year');
 
-
                 $exp =  date('Y-m-d', $a);
-
 
                 $payload = array(
                     "iss" => "The_school",
@@ -64,14 +62,16 @@ class Authentication extends ResourceController
                 $output = JWT::encode($payload, $kunci);
                 if ($result->role == 3) {
                     $school = $model->get_parent_school($email);
-
+                    $schools_id = '';
                     if (!empty($school)) {
                         $school = json_decode(json_encode($school), true);
                         // var_dump($school);
                         // exit;
                         $t = array();
                         foreach ($school as $s) {
-                            array_push($t, $s['school_id']);
+                            if (!in_array($s['school_id'], $t)) {
+                                array_push($t, $s['school_id']);
+                            }
                         }
 
                         $schools_id = implode(",", $t);
@@ -91,7 +91,6 @@ class Authentication extends ResourceController
                 $result = array(
                     'code' => 1, 'msg' => 'success', 'data' => $data
                 );
-
 
                 session()->set('user_data', $data);
 
@@ -173,10 +172,7 @@ class Authentication extends ResourceController
 
                 $mail->setTo($email);
 
-        
-
                 $mail->setSubject('اعادة ضبط كلمة المرور');
-
 
                 $mail->setMessage(view('mail/resetPasswordEmail', ['link' => $resetPassLink]));
 

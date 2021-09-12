@@ -43,7 +43,16 @@
     </div>
 
     <div class="col-lg-3">
-        <button type="button" style="width: inherit; background-color: #fff;" onclick="sendNotificationsToSelected()" class="btn btn-light">ارسال للمحدد</button>
+        <button type="button" id="send-btn" style="width: inherit; background-color: #fff;" onclick="sendNotificationsToSelected()" class="btn btn-light">
+            <div id="spinner" style="display: none;">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div id="send-btn-txt">
+                ارسال للمحدد
+            </div>
+
+        </button>
         <div class="form-group">
         </div>
     </div>
@@ -366,8 +375,8 @@
         dataTable = $('#content-table').DataTable({
             dom: `<"row d-flex justify-content-end mx-1 my-1 mb-3 "B><"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
-                [25, 50, 100, 500, 1000],
-                [25, 50, 100, 500, 1000]
+                [25, 50, 100, 200],
+                [25, 50, 100, 200]
             ],
             order: [
                 [2, 'asc']
@@ -1153,6 +1162,10 @@
     function getMessagesNumberForText(messageText) {
         var messageLength = messageText.length;
 
+        if (messageText.includes("@URL@")) {
+            messageLength += 22;
+        }
+
         if (messageText.split(/\r\n|\r|\n/).length > 1) {
             messageLength += (messageText.split(/\r\n|\r|\n/).length - 1);
         }
@@ -1185,11 +1198,11 @@
 
             student_id = selectedRows[i];
 
-            
+
             var toSend = 0;
             var attendance_status = $("#button-status-" + student_id).html();
             var phone = $("#span-phone-" + student_id).html();
-            
+
             if (attendance_status != 'حاضر' && attendance_status != 'تحديد' && phone != 'لا يوجد') {
                 totalSelectedMessageNumber += parseInt($("#t-message-number-" + student_id).html()) ? parseInt($("#t-message-number-" + student_id).html()) : 0;
                 totalNotificationToSend++;
@@ -1229,6 +1242,12 @@
 
     function sendNotifications(data = []) {
 
+
+        $('#send-btn').attr("disabled", true);
+        $('#spinner').show();
+        $('#send-btn-txt').hide();
+
+
         var jqxhr = $.ajax({
                 "url": "<?= site_url('') ?>Schools/SendAbsenceAndLagNotifications",
                 "method": "POST",
@@ -1239,7 +1258,7 @@
                 },
                 "data": {
                     "school_id": school_id,
-                    "data": data,
+                    "data": JSON.stringify(data),
                 }
             })
             .done(function(response) {
@@ -1251,8 +1270,9 @@
                 console.log(response);
                 toastr.error(response.responseJSON.msg, 'خطأ');
             }).always(function() {
-                $('#edit-employee-submit').removeAttr('disabled');
-                $('#edit-spinner').hide();
+                $('#send-btn').removeAttr('disabled');
+                $('#spinner').hide();
+                $('#send-btn-txt').show();
             });
     }
 

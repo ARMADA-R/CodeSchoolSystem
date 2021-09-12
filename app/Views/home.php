@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/AdminLTE/plugins/fontawesome-free/css/all.min.css">
     <!-- toastr  -->
     <link rel="stylesheet" href="<?php echo base_url() . '/public/'; ?>design/css/toastr.css">
-    
+
     <style>
         .bg-navy {
             background-color: #001f3f !important;
@@ -206,22 +206,22 @@
             <div class="container">
                 <!-- <a class="navbar-brand" href="#">Arsail</a> -->
                 <ul class="navbar-nav " style="flex-direction: inherit; padding-inline-start: 10px;">
-                <?php if (!session()->has('user_data')) echo " 
+                    <?php if (!session()->has('user_data')) echo " 
                         <li class='nav-item px-1'>
-                            <a class='nav-link' href='".site_url('login')."'>تسجيل دخول</a>
+                            <a class='nav-link' href='" . site_url('login') . "'>تسجيل دخول</a>
                         </li>
                         <li class='nav-item px-1'>
-                            <a class='nav-link' href='".site_url('register')."'>انشاء حساب</a>
+                            <a class='nav-link' href='" . site_url('register') . "'>انشاء حساب</a>
                         </li>";
 
-                        else {
-                             echo " 
-                             <form id=\"logoutForm\" action=\"".site_url('logout')."\" method=\"post\"></form>
+                    else {
+                        echo " 
+                             <form id=\"logoutForm\" action=\"" . site_url('logout') . "\" method=\"post\"></form>
                         <li class='nav-item px-1'>
                             <a onclick=\"$('#logoutForm').submit()\" style=\"cursor: pointer;\" class='nav-link' >تسجيل خروج</a>
                         </li>";
-                        }
-                        ?>
+                    }
+                    ?>
                 </ul>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -233,15 +233,18 @@
                             <a class="nav-link" href="#">نتيجة الطلاب <span class="sr-only">(current)</span></a>
                         </li> -->
                         <li class="nav-item px-1">
+                            <a class="nav-link" href="#links">روابط</a>
+                        </li>
+                        <li class="nav-item px-1">
                             <a class="nav-link" href="#contact_us_section">تواصل معنا</a>
                         </li>
                         <li class="nav-item px-1">
                             <a class="nav-link" href="#service_section">خدماتنا</a>
                         </li>
                         <li class="nav-item px-1">
-                            <a  class="nav-link" href="#whoWeAre_section">من نحن</a>
+                            <a class="nav-link" href="#whoWeAre_section">من نحن</a>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -439,7 +442,7 @@
             </div>
         </section>
 
-        <section class="py-4" >
+        <section class="py-4">
             <div class="container">
                 <div class="card shadow-sm">
                     <div class="card-body" style="padding-bottom: unset;">
@@ -469,6 +472,51 @@
             </div>
         </section>
 
+        <section class="py-4" id="support">
+            <div class="container">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="p-6">
+                            <h2 class="text-dark mb-8 font-weight-bold">الدعم</h2>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="supportAccordion" class="accordion accordion-light accordion-light-borderless accordion-svg-toggle">
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-4" id="links">
+            <div class="container">
+                <div class="card shadow-sm">
+                    <div class="card-body" style="padding-bottom: unset;">
+                        <div class="">
+                            <div class="col-sm-7">
+                                <h2 class="text-dark font-weight-bolder mb-4">روابط</h2>
+                            </div>
+                            <div class="col-sm-5">
+                            </div>
+                        </div>
+                        <div class="pb-5">
+                            <div class="mt-5 d-flex justify-content-between">
+                                <a href="<?= site_url(); ?>school" class="mx-4 btn btn-outline-primary">المدرسة</a>
+                                <a href="<?= site_url(); ?>parent" class="mx-4 btn btn-outline-primary">ولي الامر</a>
+                                <a href="<?= site_url(); ?>partner" class="mx-4 btn btn-outline-primary">الشركاء</a>
+                                <a href="<?= site_url(); ?>admin" class="mx-4 btn btn-outline-primary">المشرفين</a>
+                                <a href="<?= site_url(""); ?>courses/updateStudent" class="mx-4 btn btn-outline-primary">بيانات طلاب نظام المقررات</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer class="text-muted mt-2">
@@ -482,10 +530,10 @@
         <h1 class="align-self-center">Coming Soon</h1>
     </div>
     <div class="mt-5 d-flex justify-content-center">
-        <a href="<?php echo base_url() . '/public/'; ?>school" class="mx-4 btn btn-outline-primary">المدرسة</a>
-        <a href="<?php echo base_url() . '/public/'; ?>parent" class="mx-4 btn btn-outline-primary">ولي الامر</a>
-        <a href="<?php echo base_url() . '/public/'; ?>partner" class="mx-4 btn btn-outline-primary">الشركاء</a>
-        <a href="<?php echo base_url() . '/public/'; ?>admin" class="mx-4 btn btn-outline-primary">المشرفين</a>
+        <a href="<?= site_url(); ?>school" class="mx-4 btn btn-outline-primary">المدرسة</a>
+        <a href="<?= site_url(); ?>parent" class="mx-4 btn btn-outline-primary">ولي الامر</a>
+        <a href="<?= site_url(); ?>partner" class="mx-4 btn btn-outline-primary">الشركاء</a>
+        <a href="<?= site_url(); ?>admin" class="mx-4 btn btn-outline-primary">المشرفين</a>
     </div>
     -->
 
@@ -523,6 +571,7 @@
         $(document).ready(function() {
             getInfoData();
             getSliderData();
+            getSupportData();
         });
 
         function sendContactUsRequest(form) {
@@ -564,7 +613,22 @@
                     console.log(response);
                     toastr.error(response.responseJSON.msg, 'خطأ');
                 });
+        }
 
+
+        function getSupportData() {
+            var jqxhr = $.ajax({
+                    url: "<?= site_url('') ?>Support/getSupport",
+                    method: "GET",
+                    timeout: 0,
+                })
+                .done(function(response) {
+                    setSupportData(response.data);
+                })
+                .fail(function(response) {
+                    console.log(response);
+                    toastr.error(response.responseJSON.msg, 'خطأ');
+                });
         }
 
         function getInfoData() {
@@ -584,7 +648,6 @@
         }
 
         function setSliderData(data) {
-
             var slides_indicators_container = $("#slides-indicators-container");
             var slides_container = $("#slides-container");
             if (data.length) {
@@ -610,7 +673,29 @@
             $("#phone").html(data.phone);
         }
 
-        
+        function setSupportData(data) {
+
+            data.forEach(element => {
+                $("#supportAccordion").append(`<div class="card" style="border: unset;">
+                                                    <div id="supportHeadingOne${element.id}" style="border: unset;" class="card-header bg-white">
+                                                        <div data-toggle="collapse" data-target="#supportCollapseOne${element.id}" aria-expanded="false" role="button" class="d-flex w-100  card-title collapsed">
+                                                            <span class="svg-icon svg-icon-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                                                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
+                                                                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999)"></path>
+                                                                    </g>
+                                                                </svg></span>
+                                                            <div class="card-label text-dark pl-4">${element.title}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="supportCollapseOne${element.id}" aria-labelledby="supportHeadingOne${element.id}" data-parent="#supportAccordion" class="collapse px-5">
+                                                        <div class="card-body text-dark-50 font-size-lg pl-12 pb-0">${element.description}</div>
+                                                        <a href="${element.link}" class="btn btn-link">الرابط</a>
+                                                    </div>
+                                                </div>`);
+            });
+        }
     </script>
 </body>
 

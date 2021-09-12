@@ -7,7 +7,7 @@ class InfoModel extends Model
     public function get_info(){
         $db = \Config\Database::connect();
         $builder = $db->table('system_info');
-        $builder->select('copyright,phone,logo');
+        $builder->select('copyright ,phone ,logo');
         $query   = $builder->get();  
         return $query->getRow();
     }

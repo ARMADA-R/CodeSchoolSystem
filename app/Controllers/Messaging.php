@@ -399,6 +399,8 @@ class Messaging extends BaseController
 					exit;
 				}
 
+				$usersData = json_decode($usersData, true);
+
 				$school = $user->get_user_role($school_id);
 				if ($school->role != 2) {
 					$result = array('code' => -1, 'msg' => 'يجب ان يكون المستخدم مدرسة');

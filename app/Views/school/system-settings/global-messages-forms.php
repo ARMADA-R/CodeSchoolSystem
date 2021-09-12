@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="message-text-edit" class="col-form-label">متغيرات يمكن استخدامها</label>
+                        <label for="message-text-edit" class="col-form-label">متغيرات يمكن استخدامها لقوالب الرصد</label>
                         <ul class="list-group list-group-horizontal">
                             <li class="list-group-item w-100">حالة الرصد</li>
                             <li class="list-group-item w-100">@STATUS@</li>
@@ -78,6 +78,10 @@
                         <ul class="list-group list-group-horizontal">
                             <li class="list-group-item w-100">الحصة</li>
                             <li class="list-group-item w-100"> @PERIOD@</li>
+                        </ul>
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item w-100">رابط الرد</li>
+                            <li class="list-group-item w-100">@URL@</li>
                         </ul>
 
                     </div>
@@ -141,7 +145,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="message-text-edit" class="col-form-label">متغيرات يمكن استخدامها</label>
+                        <label for="message-text-edit" class="col-form-label">متغيرات يمكن استخدامها لقوالب الرصد</label>
                         <ul class="list-group list-group-horizontal">
                             <li class="list-group-item w-100">حالة الرصد</li>
                             <li class="list-group-item w-100">@STATUS@</li>
@@ -161,6 +165,10 @@
                         <ul class="list-group list-group-horizontal">
                             <li class="list-group-item w-100">الحصة</li>
                             <li class="list-group-item w-100"> @PERIOD@</li>
+                        </ul>
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item w-100">رابط الرد</li>
+                            <li class="list-group-item w-100">@URL@</li>
                         </ul>
 
                     </div>

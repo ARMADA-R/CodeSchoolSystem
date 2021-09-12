@@ -17,7 +17,7 @@
     <div class="col-12">
         <div class="card">
 
-            <div class="card-body p-2"  style="overflow-x: scroll;">
+            <div class="card-body p-2" style="overflow-x: scroll;">
                 <table id="content-table" class="table table-striped " style="width:100%">
                     <thead>
 
@@ -34,6 +34,7 @@
                             <th>مقدار الخصم</th>
                             <th>انشاء كوبون الخصم</th>
                             <th>تاريخ الانتهاء</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -57,8 +58,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
-    
-    
     var dataTable = null;
     var studentsData = [];
 
@@ -92,9 +91,8 @@
 
                 {
                     data: 'id',
-                    name: 'id',
                     title: 'م',
-                    className: 'text-center t-id',
+                    className: 'text-center',
                     // orderable: false,
                     searchable: false,
                     exportable: false,
@@ -166,6 +164,21 @@
                     title: 'تاريخ الانتهاء',
                     render: function(data, type, row, meta) {
                         return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
+                    }
+                },
+                {
+                    data: 'id',
+                    name: 'id',
+                    className: 'text-center t-id',
+                    title: 'خيارات',
+                    render: function(data, type, row, meta) {
+                        return `<div class="row justify-content-center  text-white ">
+                                    <div class="m-1">
+                                        <a type="button" class="btn btn-sm btn-info offer-` + data + `" title="edit" style="margin: 0px;" id="offer-` + data + `"  onclick="getOffer('` + data + `')">
+                                            الحصول على الخدمة
+                                        </a>
+                                    </div>
+                                </div>`;
                     }
                 },
             ],
@@ -379,6 +392,7 @@
 
 
     function getPartnersData() {
+
         var jqxhr = $.ajax({
                 "url": "<?= site_url('') ?>Partners/GetPartners?page=1&limit=2000",
                 "method": "GET",
@@ -386,7 +400,7 @@
                 "headers": {
                     "Authorization": token
                 },
-                data:{
+                data: {
                     user_id: user_id,
                 }
             })
@@ -396,6 +410,48 @@
             .fail(function(response) {
                 console.log(response);
                 toastr.error(response.responseJSON.msg, 'خطأ');
+            });
+    }
+
+
+    var sending = false;
+    function getOffer(id) {
+
+        if (sending) {
+            toastr.info("يتم الان الطلب يرجى الانتظار");
+            return false;
+        }
+        sending = true;
+
+        $(".offer-" + id).each(function(index) {
+            $(this).attr("disabled", true);
+        });
+
+        var jqxhr = $.ajax({
+                "url": "<?= site_url('') ?>Partners/getPartnerOfferForUser",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": token
+                },
+                data: {
+                    user_id: user_id,
+                    offerId: id,
+                }
+            })
+            .done(function(response) {
+                toastr.success(response.msg);
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error(response.responseJSON.msg, 'خطأ');
+
+            }).always(function(response) {
+                sending = false;
+                $(".offer-" + id).each(function(index) {
+                    $(this).removeAttr("disabled");
+                });
+
             });
     }
 </script>

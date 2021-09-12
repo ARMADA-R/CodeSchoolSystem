@@ -106,28 +106,50 @@ class Students extends BaseController
           return $this->respond($result, 400);
           exit;
         }
+        $parent = null;
         if ($parent_email) {
           $user = new UserModel();
           $check_email = $user->get_user_parent($parent_email);
           if (empty($check_email)) {
-            $result = array('code' => -1, 'msg' => 'ايميل ولي الأمر غير موجود الرجاء تسجيل الحساب');
-            return $this->respond($result, 400);
-            exit;
+            // $result = array('code' => -1, 'msg' => 'ايميل ولي الأمر غير موجود الرجاء تسجيل الحساب');
+            // return $this->respond($result, 400);
+            // exit;
+            $parent = null;
           } else {
-            $parent_email = $check_email->id;
+            
+            $parent = $check_email->id;
           }
         }
+
+        if ($parent == null) {
+          $user = new UserModel();
+          $check_phone = $user->get_parent_by_phone($phone);
+          if (empty($check_phone)) {
+            // $result = array('code' => -1, 'msg' => 'ايميل ولي الأمر غير موجود الرجاء تسجيل الحساب');
+            // return $this->respond($result, 400);
+            // exit;
+            $parent = null;
+          } else {
+            $parent = $check_phone->id;
+          }
+        }
+
+
+
+
         $model = new StudentsModel();
-        $data = array('school_id' => $school_id, 'full_name' => $full_name, 'student_number' => $student_number, 'phone' => $phone, 'class_id' => $class, 'semestar_id' => $semestar, 'parent_id' => $parent_email);
+        $data = array('school_id' => $school_id, 'full_name' => $full_name, 'student_number' => $student_number, 'phone' => $phone, 'class_id' => $class, 'semestar_id' => $semestar, 'parent_id' => $parent);
         $save = $model->add_student($data);
         if ($save > 0) {
-          if (!empty($parent_email)) {
-            $data2 = array('school_id' => $school_id, 'parent_id' => $parent_email);
+          if (!empty($parent)) {
+
+            $data2 = array('school_id' => $school_id, 'parent_id' => $parent);
             $school = new SchoolModel();
             if ($school->add_parent_to_school($data2)) {
               $data = array('code' => 1, 'msg' => 'success', 'data' => []);
               return  $this->respond($data, 200);
             }
+
           }
           $data = array('code' => 1, 'msg' => 'success', 'data' => []);
           return  $this->respond($data, 200);
@@ -347,4 +369,7 @@ class Students extends BaseController
       return  $this->respond($data, 200);
     }
   }
+
+
+ 
 }

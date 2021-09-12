@@ -23,6 +23,29 @@ class UserModel extends Model
         $query   = $builder->get();
         return $query->getRow();
     }
+
+    public function get_user_by_id($id)
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->select('*');
+        $builder->where('id', $id);
+        $query   = $builder->get();
+        return $query->getRow();
+    }
+
+    public function get_parent_by_phone($phone)
+    {
+
+        $db      = \Config\Database::connect();
+
+        $builder = $db->table('users');
+        $builder->select('phone,id');
+        $builder->where('phone', $phone);
+        $builder->where('role', 3);
+        $query   = $builder->get();
+        return $query->getRow();
+    }
     public function get_user_username($username)
     {
 
@@ -36,6 +59,20 @@ class UserModel extends Model
 
         return $query->getRow();
     }
+
+    
+    public function get_user_by_phone($phone)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->select('*');
+        $builder->where('phone', $phone);
+
+        $query   = $builder->get();
+        return $query->getRow();
+    }
+
+
     public function add_user($data)
     {
         $db      = \Config\Database::connect();
@@ -97,7 +134,7 @@ class UserModel extends Model
 
         $builder = $db->table('users');
 
-        $builder->join('students', 'users.id = students.parent_id');
+        $builder->join('students', 'users.phone = students.phone');
         $builder->where('email', $email);
         $builder->where('role', 3);
         $query   = $builder->get();
@@ -139,7 +176,7 @@ class UserModel extends Model
         $builder = $db->table('reset_passwords');
 
         $builder->where('email', $email);
-        $builder->where('create_date >', $email);
+        // $builder->where('create_date >', $email);
         $query   = $builder->get();
 
         return $query->getResult();

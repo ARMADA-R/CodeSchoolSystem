@@ -35,6 +35,7 @@ class CoursesModel extends Model
         $builder->update($data);
        return $db->affectedRows();
     }
+    
     public function get_course_by_id($id){
         $db = \Config\Database::connect();
         $builder = $db->table('courses');
@@ -42,8 +43,31 @@ class CoursesModel extends Model
         $builder->where('id',$id);
         $query   = $builder->get();  
         return $query->getRow();
+    }
+    
+    
+    public function get_course_if_updated($id){
+        $db = \Config\Database::connect();
+        $builder = $db->table('courses');
+        $builder->select('courses.id, level, division, user_id');
+        $builder->where('id',$id);
+        $builder->where('level','IS NOT NULL');
+        $builder->where('division','IS NOT NULL');
+        $query   = $builder->get();  
+        return $query->getRow();
+    }
+
+
+    public function get_school_student_by_number($student_number, $school_id){
+        $db = \Config\Database::connect();
+        $builder = $db->table('courses');
+        $builder->where('student_number',$student_number);
+        $builder->where('school_id',$school_id);
+        $query = $builder->get();  
+        return $query->getRow();
        
     }
+
     public function delete_course($id){
         $db = \Config\Database::connect();
         $builder = $db->table('courses');

@@ -453,6 +453,7 @@
             })
             .done(function(response) {
                 toastr.success('تم اضافة النموذج');
+                getFormsData();
             })
             .fail(function(response) {
                 console.log(response);

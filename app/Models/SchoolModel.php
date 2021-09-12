@@ -90,6 +90,7 @@ class SchoolModel extends Model
         $query   = $builder->get();
         return $query->getResult();
     }
+    
     public function get_school_by_id($id)
     {
         $db = \Config\Database::connect();
@@ -101,6 +102,19 @@ class SchoolModel extends Model
         $query   = $builder->get();
         return $query->getRow();
     }
+
+    public function get_school_by_number($number)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->select('users.id,education_type,category,school_number,username,email,city,phone,school_name');
+        $builder->join('school_info', 'users.id = school_info.school_id');
+        $builder->where('role', 2);
+        $builder->where('school_info.school_number', $number);
+        $query   = $builder->get();
+        return $query->getRow();
+    }
+
     public function delete_school($id)
     {
         $db = \Config\Database::connect();
@@ -236,6 +250,15 @@ class SchoolModel extends Model
         // $builder->insert($data);
         return $builder->insert($data);
     }
+
+    public function update_asbense($data, $id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('absence_and_lag');
+        $builder->where('id', $id);
+        return  $builder->update($data);
+    }
+
     public function add_table_school($data)
     {
         $db = \Config\Database::connect();
@@ -258,11 +281,12 @@ class SchoolModel extends Model
         $page = ($page - 1) * $limit;
         $db = \Config\Database::connect();
         $builder = $db->table('students');
-        $builder->select('students.id student_id,full_name,student_number,class_id,users.phone AS parent_phone,classes.name class_name,semaster.name ');
-        $builder->join('users', 'students.parent_id = users.id');
+        $builder->select('students.id student_id,full_name,student_number,class_id,students.phone AS parent_phone,classes.name class_name,semaster.name ');
+        // $builder->join('users', 'students.parent_id = users.id');
         $builder->join('classes', 'students.class_id = classes.id');
         $builder->join('semaster', 'students.semestar_id = semaster.id');
-        $builder->where('role', 3);
+        // $builder->where('role', 3);
+
         if (!empty($class_id)) {
             $builder->where('class_id', $class_id);
         }
@@ -283,9 +307,9 @@ class SchoolModel extends Model
         $page = ($page - 1) * $limit;
         $db = \Config\Database::connect();
         $builder = $db->table('absence_and_lag');
-        $builder->select('absence_and_lag.id as archive_id,students.id student_id,full_name,student_number,users.phone parent_phone,classes.name class_name,semaster.name semaster_name,monitoring_case,period,date,message,send_status');
+        $builder->select('absence_and_lag.id as archive_id,students.id student_id,full_name,student_number,students.phone parent_phone,classes.name class_name,semaster.name semaster_name,monitoring_case,period,date,message,send_status');
         $builder->join('students', 'absence_and_lag.student_id = students.id');
-        $builder->join('users', 'students.parent_id = users.id');
+        $builder->join('users', 'students.phone = users.phone');
         $builder->join('classes', 'students.class_id = classes.id');
         $builder->join('semaster', 'students.semestar_id = semaster.id');
         $builder->where('role', 3);
@@ -304,18 +328,32 @@ class SchoolModel extends Model
         $builder = $db->table('absence_and_lag');
         $builder->select('absence_and_lag.id,is_read,students.id student_id,full_name,student_number,users.phone parent_phone,classes.name class_name,semaster.name semaster_name,monitoring_case,period,date,message,reply');
         $builder->join('students', 'absence_and_lag.student_id = students.id');
-        $builder->join('users', 'students.parent_id = users.id');
+        $builder->join('users', 'students.phone = users.phone');
         $builder->join('classes', 'students.class_id = classes.id');
         $builder->join('semaster', 'students.semestar_id = semaster.id');
         $builder->where('role', 3);
         $builder->orderBy('absence_and_lag.create_date', 'DESC');
         if ($key == 'all') {
-            $query   = $builder->get();
+            $query = $builder->get();
         } else {
-            $query   = $builder->get($limit, $page);
+            $query = $builder->get($limit, $page);
         }
         return $query->getResult();
     }
+
+    
+    public function get_asbense_by_id($id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('absence_and_lag');
+        $builder->select('id, is_read, monitoring_case, period, date, message, reply');
+
+        $builder->where('id', $id);
+        $query = $builder->get();
+        return $query->getResult();
+    }
+
+
     public function get_service_by_school_id($school_id)
     {
         $db = \Config\Database::connect();

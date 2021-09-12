@@ -8,7 +8,7 @@ header("Access-Control-Allow-Headers: *");
 
 use App\Models\UserModel;
 use App\Models\SchoolModel;
-
+use App\Models\StudentsModel;
 use CodeIgniter\RESTful\ResourceController;
 // . ' and tickets_reply.id in (select max(id) from tickets_reply group by ticket_id)  order by tickets_reply.id desc's
 use \Firebase\JWT\JWT;
@@ -68,72 +68,85 @@ class Auth extends ResourceController
                     exit;
                 }
 
+
+                if (!$phone) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال رقم الجوال ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
                 $model = new UserModel();
                 $check_email = $model->get_user_email($email);
                 $check_username = $model->get_user_username($username);
+                $check_phone = $model->get_user_by_phone($phone);
 
                 if (empty($check_email)) {
-                    if (empty($check_username)) {
-                        $data = [
+                    if (empty($check_phone)) {
+                        if (empty($check_username)) {
+                            $data = [
 
-                            'email' => $email,
-                            'username' => $username,
-                            'password' => md5($password),
-                            'city' => $city,
-                            'area' => $area,
-                            'phone' => $phone,
-                            'role' => 2,
-                            'status' => 1
-
-                        ];
-
-                        $save = $model->add_user($data);
-
-                        if ($save > 0) {
-                            $data2 = [
-                                'school_name' => $school_name,
-                                'education_type' => $edcution_type,
-                                'school_number' => $school_number,
-                                'school_id' => $save
-
+                                'email' => $email,
+                                'username' => $username,
+                                'password' => md5($password),
+                                'city' => $city,
+                                'area' => $area,
+                                'phone' => $phone,
+                                'role' => 2,
+                                'status' => 1
                             ];
 
-                            $school = new SchoolModel();
-                            $info = $school->add_school_info($data2);
+                            $save = $model->add_user($data);
 
-                            $iat = date('Y-m-d');
+                            if ($save > 0) {
+                                $data2 = [
+                                    'school_name' => $school_name,
+                                    'education_type' => $edcution_type,
+                                    'school_number' => $school_number,
+                                    'school_id' => $save
 
-                            $a = strtotime($iat . '+1 year');
+                                ];
+
+                                $school = new SchoolModel();
+                                $info = $school->add_school_info($data2);
+
+                                $iat = date('Y-m-d');
+
+                                $a = strtotime($iat . '+1 year');
 
 
-                            $exp =  date('Y-m-d', $a);
+                                $exp =  date('Y-m-d', $a);
 
-                            $user = array('user_id' => $save);
-                            $payload = array(
-                                "iss" => "The_school",
-                                "aud" => "The_rewr",
-                                "iat" => $iat,
+                                $user = array('user_id' => $save);
+                                $payload = array(
+                                    "iss" => "The_school",
+                                    "aud" => "The_rewr",
+                                    "iat" => $iat,
 
-                                "exp" => $exp,
-                                "data" => $user,
-                            );
+                                    "exp" => $exp,
+                                    "data" => $user,
+                                );
 
-                            $kunci = 'SChO0lS';
-                            $output = JWT::encode($payload, $kunci);
-                            $result = array(
-                                'code' => 1, 'msg' => 'success', 'token' => $output, 'user_id' => $save
-                            );
+                                $kunci = 'SChO0lS';
+                                $output = JWT::encode($payload, $kunci);
+                                $result = array(
+                                    'code' => 1, 'msg' => 'success', 'token' => $output, 'user_id' => $save
+                                );
 
-                            return $this->respond($result, 200);
+                                return $this->respond($result, 200);
+                            } else {
+                                $result = array(
+                                    'code' => -1, 'msg' => 'fail',
+                                );
+                                return $this->respond($result, 400);
+                                // echo $output;
+                            }
                         } else {
-                            $result = array(
-                                'code' => -1, 'msg' => 'fail',
-                            );
+                            $result = array('code' => -1, 'msg' => 'اسم المستخدم موجود مسبقا');
                             return $this->respond($result, 400);
-                            // echo $output;
+                            exit;
                         }
                     } else {
-                        $result = array('code' => -1, 'msg' => 'اسم المستخدم موجود مسبقا');
+                        $result = array('code' => -1, 'msg' => 'رقم الهاتف موجود مسبقا');
                         return $this->respond($result, 400);
                         exit;
                     }
@@ -147,6 +160,7 @@ class Auth extends ResourceController
 
                 $email = $this->request->getVar('email');
                 $username = $this->request->getVar('username');
+                $phone = $this->request->getVar('phone');
                 $password = $this->request->getVar('password');
 
                 if (!$email) {
@@ -160,65 +174,93 @@ class Auth extends ResourceController
                     return $this->respond($result, 400);
                     exit;
                 }
+
+                if (!$phone) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال رقم الجوال ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
                 if (!$password) {
                     $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل كلمة المرور ');
                     return $this->respond($result, 400);
                     exit;
                 }
 
+                $student = new StudentsModel();
+
+                $parent_students = $student->get_students_by_phone($phone);
+
                 $model = new UserModel();
+                $school = new SchoolModel();
+                
                 $check_email = $model->get_user_email($email);
                 $check_username = $model->get_user_username($username);
+                $check_phone = $model->get_user_by_phone($phone);
+
                 if (empty($check_email)) {
-                    if (empty($check_username)) {
-                        $data = [
-                            
-                            'email' => $email,
-                            'username' => $username,
-                            'password' => md5($password),
-                            
-                            'role' => 3,
-                            'status' => 1
-                        ];
-                        
-                        $save = $model->add_user($data);
+                    if (empty($check_phone)) {
+                        if (empty($check_username)) {
+                            $data = [
+                                'email' => $email,
+                                'username' => $username,
+                                'phone' => $phone,
+                                'password' => md5($password),
 
-                        if ($save > 0) {
+                                'role' => 3,
+                                'status' => 1
+                            ];
+
+                            $save = $model->add_user($data);
+
+                            if ($save > 0) {
+
+                                if ($parent_students) {
+                                    foreach ($parent_students as $value) {
+                                        $data2 = array('school_id' => $value->school_id, 'parent_id' =>  $save);
+                                        if ($school->add_parent_to_school($data2)) {
+                                            $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                                        }
+                                    }
+                                }
+
+                                $iat = date('Y-m-d');
+
+                                $a = strtotime($iat . '+1 year');
 
 
-                            $iat = date('Y-m-d');
+                                $exp =  date('Y-m-d', $a);
 
-                            $a = strtotime($iat . '+1 year');
+                                $user = array('user_id' => $save);
+                                $payload = array(
+                                    "iss" => "The_school",
+                                    "aud" => "The_rewr",
+                                    "iat" => $iat,
 
+                                    "exp" => $exp,
+                                    "data" => $user,
+                                );
 
-                            $exp =  date('Y-m-d', $a);
+                                $kunci = 'SChO0lS';
+                                $output = JWT::encode($payload, $kunci);
+                                $result = array(
+                                    'code' => 1, 'msg' => 'success', 'token' => $output, 'user_id' => $save
+                                );
 
-                            $user = array('user_id' => $save);
-                            $payload = array(
-                                "iss" => "The_school",
-                                "aud" => "The_rewr",
-                                "iat" => $iat,
-
-                                "exp" => $exp,
-                                "data" => $user,
-                            );
-
-                            $kunci = 'SChO0lS';
-                            $output = JWT::encode($payload, $kunci);
-                            $result = array(
-                                'code' => 1, 'msg' => 'success', 'token' => $output, 'user_id' => $save
-                            );
-
-                            return $this->respond($result, 200);
+                                return $this->respond($result, 200);
+                            } else {
+                                $result = array(
+                                    'code' => -1, 'msg' => 'fail',
+                                );
+                                return $this->respond($result, 400);
+                                // echo $output;
+                            }
                         } else {
-                            $result = array(
-                                'code' => -1, 'msg' => 'fail',
-                            );
+                            $result = array('code' => -1, 'msg' => 'اسم المستخدم موجود مسبقا');
                             return $this->respond($result, 400);
-                            // echo $output;
+                            exit;
                         }
                     } else {
-                        $result = array('code' => -1, 'msg' => 'اسم المستخدم موجود مسبقا');
+                        $result = array('code' => -1, 'msg' => 'رقم الهاتف موجود مسبقا');
                         return $this->respond($result, 400);
                         exit;
                     }
@@ -252,64 +294,79 @@ class Auth extends ResourceController
                     exit;
                 }
 
+
+
+                if (!$phone) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال رقم الجوال ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
                 $model = new UserModel();
                 $check_email = $model->get_user_email($email);
                 $check_username = $model->get_user_username($username);
+                $check_phone = $model->get_user_by_phone($phone);
 
                 if (empty($check_email)) {
-                    if (empty($check_username)) {
+                    if (empty($check_phone)) {
+                        if (empty($check_username)) {
 
-                        $data = [
+                            $data = [
 
-                            'email' => $email,
-                            'username' => $username,
-                            'password' => md5($password),
-                            'city' => $city,
-                            'area' => $area,
-                            'phone' => $phone,
-                            'username' => $username,
-                            'role' => 4,
-                            'status' => 1
-                        ];
+                                'email' => $email,
+                                'username' => $username,
+                                'password' => md5($password),
+                                'city' => $city,
+                                'area' => $area,
+                                'phone' => $phone,
+                                'username' => $username,
+                                'role' => 4,
+                                'status' => 1
+                            ];
 
-                        $save = $model->add_user($data);
+                            $save = $model->add_user($data);
 
-                        if ($save > 0) {
-
-
-                            $iat = date('Y-m-d');
-
-                            $a = strtotime($iat . '+1 year');
+                            if ($save > 0) {
 
 
-                            $exp =  date('Y-m-d', $a);
+                                $iat = date('Y-m-d');
 
-                            $user = array('user_id' => $save);
-                            $payload = array(
-                                "iss" => "The_school",
-                                "aud" => "The_rewr",
-                                "iat" => $iat,
+                                $a = strtotime($iat . '+1 year');
 
-                                "exp" => $exp,
-                                "data" => $user,
-                            );
 
-                            $kunci = 'SChO0lS';
-                            $output = JWT::encode($payload, $kunci);
-                            $result = array(
-                                'code' => 1, 'msg' => 'success', 'token' => $output, 'user_id' => $save
-                            );
+                                $exp =  date('Y-m-d', $a);
 
-                            return $this->respond($result, 200);
+                                $user = array('user_id' => $save);
+                                $payload = array(
+                                    "iss" => "The_school",
+                                    "aud" => "The_rewr",
+                                    "iat" => $iat,
+
+                                    "exp" => $exp,
+                                    "data" => $user,
+                                );
+
+                                $kunci = 'SChO0lS';
+                                $output = JWT::encode($payload, $kunci);
+                                $result = array(
+                                    'code' => 1, 'msg' => 'success', 'token' => $output, 'user_id' => $save
+                                );
+
+                                return $this->respond($result, 200);
+                            } else {
+                                $result = array(
+                                    'code' => -1, 'msg' => 'fail',
+                                );
+                                return $this->respond($result, 400);
+                                // echo $output;
+                            }
                         } else {
-                            $result = array(
-                                'code' => -1, 'msg' => 'fail',
-                            );
+                            $result = array('code' => -1, 'msg' => 'اسم المستخدم موجود مسبقا');
                             return $this->respond($result, 400);
-                            // echo $output;
+                            exit;
                         }
                     } else {
-                        $result = array('code' => -1, 'msg' => 'اسم المستخدم موجود مسبقا');
+                        $result = array('code' => -1, 'msg' => 'رقم الهاتف موجود مسبقا');
                         return $this->respond($result, 400);
                         exit;
                     }

@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\SchoolModel;
+
 class SchoolView extends BaseController
 {
 
@@ -216,6 +218,27 @@ class SchoolView extends BaseController
 	public function gallery()
 	{
 		return view('school/services/gallery');
+	}
+
+
+	public function showReplyNotificationForm($seg6)
+	{
+		$model = new SchoolModel();
+
+        $message = $model->get_asbense_by_id($seg6);
+		if(empty($message)){
+			return "There is no message with this number!";
+		}
+
+		return view('school/notifications/notifications_replies', ["message" => $message[0]]);
+	}
+
+
+
+
+	public function showUpdateCoursesStudentForm()
+	{
+		return view('school/basics info/update-courses-data');
 	}
 
 

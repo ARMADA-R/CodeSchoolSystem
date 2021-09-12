@@ -782,8 +782,10 @@ class Schools extends BaseController
                         array_push($asbense, $a);
                     }
 
-                    $data = array('code' => 1, 'msg' => 'success', 'data' => array_unique($asbense, SORT_REGULAR), 'total_count' => count($asbense));
+                    // $data = array('code' => 1, 'msg' => 'success', 'data' => array_unique($asbense, SORT_REGULAR), 'total_count' => count($asbense));
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => $result, 'total_count' => count($result));
                     return    $this->respond($data, 200);
+                    
                 } else {
                     $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
                     return    $this->respond($data, 200);
@@ -1965,6 +1967,8 @@ class Schools extends BaseController
                     exit;
                 }
 
+                $messagesData = json_decode($messagesData, true);
+
                 $model = new SchoolModel();
                 $schoolGate = $this->getSchoolActiveGateById($school_id)[0];
                 $addedToSendCounter = 0;
@@ -2001,7 +2005,6 @@ class Schools extends BaseController
 
                 $data = ['code' => 1, 'msg' => 'تم طلب اعادة الارسال ل' . $addedToSendCounter . ' طالب' . '   سيتم ارسال الاشعارات بأقرب وقت ممكن.', 'data' => []];
                 return    $this->respond($data, 200);
-
             } else {
                 $result = array(
                     'code' => $result['code'], 'msg' => $result['messages'],
@@ -2039,6 +2042,8 @@ class Schools extends BaseController
                     exit;
                 }
 
+                $absenceAndLagData = json_decode($absenceAndLagData, true);
+
                 $model = new SchoolModel();
                 $student_model = new StudentsModel();
                 $savedRecords = 0;
@@ -2058,6 +2063,7 @@ class Schools extends BaseController
                     $phone = $studentAbsenceAndLagData['phone'];
                     $message = $studentAbsenceAndLagData['message'];
 
+                    
                     $data = [
                         'student_id' => $student_id,
                         'class_id' => $class_id,
@@ -2070,25 +2076,34 @@ class Schools extends BaseController
                         'message' => $message,
                         'send_status' => $isToSend == "1" ? null : -1,
                     ];
-
+                    
                     $temp = $model->add_asbense($data);
-
+                    $insert_id = $temp->connID->insert_id;
 
                     if ($temp) {
                         $savedRecords++;
+
+                        if (strpos($message, '@URL@') !== false) {
+                            $url = $this->getShortenURL(site_url('') .'school/notifications/reply/'.$temp->connID->insert_id);
+                            $message = str_replace("@URL@", $url, $message);
+                            $updateData = ['message' => $message];
+                            if ($model->update_asbense($updateData, $insert_id));
+                        }
+
+
+                        if ($isToSend == "1") {
+                            $model->add_toSent([
+                                "user_id" => $student_id,
+                                "message" =>  $message,
+                                "phone" =>  $phone,
+                                "school_id" => $school_id,
+                                "message_archive_id" => $insert_id,
+                                "school_gate_id" => $schoolGate->id,
+                                "type" => 'absenceAndLag',
+                            ]);
+                        }
                     }
 
-                    if ($isToSend == "1") {
-                        $model->add_toSent([
-                            "user_id" => $student_id,
-                            "message" =>  $message,
-                            "phone" =>  $phone,
-                            "school_id" => $school_id,
-                            "message_archive_id" => $temp->connID->insert_id,
-                            "school_gate_id" => $schoolGate->id,
-                            "type" => 'absenceAndLag',
-                        ]);
-                    }
                 }
 
 
@@ -2107,6 +2122,14 @@ class Schools extends BaseController
             return $this->respond($result, 400);
         }
     }
+
+
+    
+    // public function getNotificationMessageReply($msgId)
+    // {
+    //     $model = new SchoolModel();
+    //     return $model->get_asbense_by_id($msgId);
+    // }
 
     // http://localhost/codeigniter/CodeSchoolSystem/public/Schools/checkAndSendSMSToStudents/100
     public function checkAndSendSMSToStudents($num)
@@ -2654,6 +2677,20 @@ class Schools extends BaseController
     }
 
 
+    public function getShortenURL($link)
+    {
+        $ch = curl_init();
+        $timeout = 5;
+        curl_setopt($ch, CURLOPT_URL, 'http://tinyurl.com/api-create.php?url=' . $link);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        $tinyUrl = curl_exec($ch);
+        curl_close($ch);
+        return $tinyUrl;
+    }
+
+
+
     public function AddExamTable()
     {
 
@@ -2984,6 +3021,68 @@ class Schools extends BaseController
             }
         } else {
             $data = array('code' => -1, 'msg' => 'Method must be Delete', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+
+    public function replyToNotificationMessage()
+    {
+        if ($this->request->getMethod() == 'post') {
+
+
+            $reply = $this->request->getVar('reply');
+            $id = $this->request->getVar('id');
+
+            if (!$id) {
+                $result = array('code' => -1, 'msg' => 'الرجاء تحديد الرسالة');
+                return $this->respond($result, 400);
+                exit;
+            }
+
+            if (!$reply) {
+                $result = array('code' => -1, 'msg' => 'الرجاء ادخال الرد');
+                return $this->respond($result, 400);
+                exit;
+            }
+
+            $model = new SchoolModel();
+
+            $message = $model->get_asbense_by_id($id);
+            // dd(!empty($message));
+            if (!empty($message)) {
+
+                if ($message[0]->reply) {
+                    $data = array('code' => -1, 'msg' => '!يوجد رد سابق للرسالة', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+
+                $data = ['reply' => $reply];
+
+                if ($model->update_asbense($data, $id)) {
+                    $data = array('code' => 1, 'msg' => 'تم اضافة الرد بنجاح', 'data' => []);
+                    return    $this->respond($data, 200);
+                } else {
+                    dd($data, $message);
+                    $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                    return    $this->respond($data, 400);
+                }
+
+            } else {
+                $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                return    $this->respond($data, 400);
+            }
+
+            $data = ['name' => $name];
+
+            if ($model->update_semaster($data, $id)) {
+                $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                return    $this->respond($data, 200);
+            } else {
+                $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+                return    $this->respond($data, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
             return    $this->respond($data, 200);
         }
     }

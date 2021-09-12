@@ -122,6 +122,10 @@ $routes->group('', ['filter' => 'authenticateUsers:2'], function ($routes) {
 	$routes->get('school/services/gallery', 'SchoolView::gallery');
 });
 
+$routes->get('school/notifications/reply/(:num)', 'SchoolView::showReplyNotificationForm/$1');
+$routes->post('school/notifications/reply', 'Schools::replyToNotificationMessage');
+
+$routes->get('courses/updateStudent', 'SchoolView::showUpdateCoursesStudentForm');
 
 $routes->group('', ['filter' => 'authenticateUsers:3'], function ($routes) {
 

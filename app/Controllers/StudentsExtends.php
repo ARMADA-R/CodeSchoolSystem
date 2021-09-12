@@ -43,6 +43,8 @@ class StudentsExtends extends Students
                 }
 
                 $excelData = json_decode($excelData, true);
+                $school = new SchoolModel();
+                $user = new UserModel();
 
                 if ($excelData !== []) {
 
@@ -58,7 +60,7 @@ class StudentsExtends extends Students
                         $classesCodes[] = $value['class'];
                     }
 
-                    $tempClassesData = (new SchoolModel())->get_classes_by_codes($classesCodes);
+                    $tempClassesData =  $school->get_classes_by_codes($classesCodes);
 
                     foreach ($tempClassesData as  $value) {
                         $classesData[$value->code] = $value->id;
@@ -71,7 +73,7 @@ class StudentsExtends extends Students
                         $semestersNames[] = $value['semestar'];
                     }
 
-                    $tempSemestersData = (new SchoolModel())->get_semesters_by_names($semestersNames);
+                    $tempSemestersData =  $school->get_semesters_by_names($semestersNames);
 
                     foreach ($tempSemestersData as  $value) {
                         $semestersData[$value->name] = $value->id;
@@ -86,14 +88,33 @@ class StudentsExtends extends Students
                                 throw new Exception();
                             }
 
+                            $phone = str_replace("$", "", $value['phone']);
+
                             $model->add_student([
                                 'school_id' => $school_id,
                                 'student_number' => str_replace("$", "", $value['student_number']),
                                 'full_name' => $value['full_name'],
-                                'phone' => str_replace("$", "", $value['phone']),
+                                'phone' => $phone,
                                 'class_id' => !empty($classesData[$value['class']]) ? $classesData[$value['class']] : null,
                                 'semestar_id' => !empty($semestersData[$value['semestar']]) ? $semestersData[$value['semestar']] : null,
                             ]);
+
+                            $parent = null;
+                            if ($parent == null) {
+                                
+                                $check_phone = $user->get_parent_by_phone($phone);
+                                if (!empty($check_phone)) {
+                                    $parent = $check_phone->id;
+                                }
+                            }
+
+                            if (!empty($parent)) {
+
+                                $data2 = array('school_id' => $school_id, 'parent_id' => $parent);
+                                if ($school->add_parent_to_school($data2)) {
+                                    $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+                                }
+                            }
 
                             $addedSuccessNum++;
                         } catch (\Throwable $th) {
@@ -137,7 +158,7 @@ class StudentsExtends extends Students
 
                 $delete = $model->delete_students($ids);
                 if ($delete >= 1) {
-                    $data = array('code' => 1, 'msg' => 'تم حذف '.$delete.' من السجلات بنجاح.', 'data' => []);
+                    $data = array('code' => 1, 'msg' => 'تم حذف ' . $delete . ' من السجلات بنجاح.', 'data' => []);
                     return  $this->respond($data, 200);
                 } else {
                     $data = array('code' => -1, 'msg' => 'fail', 'data' => []);

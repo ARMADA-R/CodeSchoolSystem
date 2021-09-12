@@ -27,7 +27,7 @@ class Partners extends BaseController
         $page = $this->request->getVar('page');
         $limit = $this->request->getVar('limit');
         $user_id = $this->request->getVar('user_id');
-        
+
         $key = $this->request->getVar('key');
         if (empty($key) || $key != 'all') {
           if (!$page) {
@@ -41,18 +41,18 @@ class Partners extends BaseController
             exit;
           }
         }
-          if (!$user_id) {
-            $result = array('code' => -1, 'msg' => 'الرجاء تحديد المستخدم ');
-            return $this->respond($result, 400);
-            exit;
-          }
+        if (!$user_id) {
+          $result = array('code' => -1, 'msg' => 'الرجاء تحديد المستخدم ');
+          return $this->respond($result, 400);
+          exit;
+        }
 
 
         $model = new PartnersModel();
         $user = new UserModel();
 
         $user_role = $user->get_user_role($user_id)->role;
-        
+
         $new_parnters = array();
 
         if ($user_role == 1) {
@@ -60,7 +60,7 @@ class Partners extends BaseController
         } else {
           $result = $model->get_partners($limit, $page, $key, 1);
         }
-        
+
 
         if (!empty($result)) {
           $i = 0;
@@ -324,7 +324,6 @@ class Partners extends BaseController
             // Store file in public/uploads/ folder
             // File path to display preview
             $filepath = base_url() . "/public/uploads/" . $newName;
-            
           } else {
             $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
             return  $this->respond($data, 400);
@@ -495,6 +494,86 @@ class Partners extends BaseController
       }
     } else {
       $data = array('code' => -1, 'msg' => 'Method must be Delete', 'data' => []);
+      return  $this->respond($data, 200);
+    }
+  }
+
+
+
+  public function getPartnerOfferForUser()
+  {
+
+    if ($this->request->getMethod() == 'post') {
+      $check = new Check(); // Create an instance
+      $result = $check->check();
+
+      if ($result['code'] == 1) {
+        $user_id = $this->request->getVar('user_id');
+        $offerId = $this->request->getVar('offerId');
+
+        if (!$user_id) {
+          $result = array('code' => -1, 'msg' => 'الرجاء تحديد المستخدم ');
+          return $this->respond($result, 400);
+          exit;
+        }
+        if (!$offerId) {
+          $result = array('code' => -1, 'msg' => 'الرجاء تحديد العرض ');
+          return $this->respond($result, 400);
+          exit;
+        }
+
+        $model = new PartnersModel();
+        $usersModel = new UserModel();
+        $new_parnters = array();
+        //parents_partner_service
+
+        $offer = $model->get_service_by_id($offerId);
+        $parent = $usersModel->get_user_by_id($user_id);
+
+        if (!$parent) {
+          $data = array('code' => -1, 'msg' => 'العرض غير متوفر', 'data' => []);
+          return  $this->respond($data, 400);
+        }
+
+        if (!$offer) {
+          $data = array('code' => -1, 'msg' => 'المستخدم غير متوفر', 'data' => []);
+          return  $this->respond($data, 400);
+        }
+
+        $parent_partner_offer = $model->get_parent_partner_offer($user_id, $offerId);
+
+        if ($parent_partner_offer) {
+          $data = array('code' => -1, 'msg' => 'لا يمكن الحصول على العرض اكثر من مرة', 'data' => []);
+          return  $this->respond($data, 400);
+        }
+
+        $mail = \Config\Services::email();
+        $mail->setFrom(env("SYSTEM_EMAIL"), env("SYSTEM_NAME"));
+
+        $mail->setTo($parent->email);
+        $mail->setSubject('عروض الشركاء');
+
+        $mail->setMessage(view('mail/partnerOffer', ['cobon' => $offer->cubon, "service_name" => $offer->service_name]));
+        $mail->send();
+
+
+        $data = [
+          "parent_id" => $parent->id,
+          "partner_service_id" => $offer->id,
+        ];
+
+        $parent_partner_offer = $model->add_parent_partner_offer($data);
+
+        $data = array('code' => 1, 'msg' => 'تم ارسال بريد الكتروني بتفاصيل العرض', 'data' => []);
+        return  $this->respond($data, 200);
+      } else {
+        $result = array(
+          'code' => $result['code'], 'msg' => $result['messages'],
+        );
+        return $this->respond($result, 400);
+      }
+    } else {
+      $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
       return  $this->respond($data, 200);
     }
   }
