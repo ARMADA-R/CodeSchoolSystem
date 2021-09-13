@@ -428,6 +428,7 @@ class Schools extends BaseController
                 }
                 $model = new SchoolModel();
 
+                
                 $delete = $model->delete_school($id);
                 if ($delete == 1) {
                     $data = array('code' => 1, 'msg' => 'success', 'data' => []);

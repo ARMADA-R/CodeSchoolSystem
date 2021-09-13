@@ -90,7 +90,7 @@ class SchoolModel extends Model
         $query   = $builder->get();
         return $query->getResult();
     }
-    
+
     public function get_school_by_id($id)
     {
         $db = \Config\Database::connect();
@@ -123,7 +123,7 @@ class SchoolModel extends Model
         $builder->delete();
         return $db->affectedRows();
     }
-    
+
     public function delete_school_table($id)
     {
         $db = \Config\Database::connect();
@@ -132,7 +132,7 @@ class SchoolModel extends Model
         $builder->delete();
         return $db->affectedRows();
     }
-    
+
     public function delete_school_exam_table($id)
     {
         $db = \Config\Database::connect();
@@ -141,7 +141,7 @@ class SchoolModel extends Model
         $builder->delete();
         return $db->affectedRows();
     }
-    
+
     public function delete_class(array $data)
     {
         $db = \Config\Database::connect();
@@ -150,7 +150,7 @@ class SchoolModel extends Model
         $builder->delete();
         return $db->affectedRows();
     }
-    
+
     public function update_class(array $data, $id)
     {
         $db = \Config\Database::connect();
@@ -158,7 +158,7 @@ class SchoolModel extends Model
         $builder->where('id', $id);
         return  $builder->update($data);
     }
-    
+
     public function add_class(array $data)
     {
         $db = \Config\Database::connect();
@@ -302,7 +302,7 @@ class SchoolModel extends Model
         }
         return $query->getResult();
     }
-    public function get_asbense($limit, $page, $key)
+    public function get_asbense($limit, $page, $school_id, $key)
     {
         $page = ($page - 1) * $limit;
         $db = \Config\Database::connect();
@@ -313,6 +313,7 @@ class SchoolModel extends Model
         $builder->join('classes', 'students.class_id = classes.id');
         $builder->join('semaster', 'students.semestar_id = semaster.id');
         $builder->where('role', 3);
+        $builder->where('absence_and_lag.school_id', $school_id);
         $builder->orderBy('absence_and_lag.create_date', 'DESC');
         if ($key == 'all') {
             $query   = $builder->get();
@@ -321,7 +322,7 @@ class SchoolModel extends Model
         }
         return ($query->getResult());
     }
-    public function get_asbense_reply($limit, $page, $key)
+    public function get_asbense_reply($limit, $page, $school_id, $key)
     {
         $page = ($page - 1) * $limit;
         $db = \Config\Database::connect();
@@ -331,6 +332,7 @@ class SchoolModel extends Model
         $builder->join('users', 'students.phone = users.phone');
         $builder->join('classes', 'students.class_id = classes.id');
         $builder->join('semaster', 'students.semestar_id = semaster.id');
+        $builder->where('absence_and_lag.school_id', $school_id);
         $builder->where('role', 3);
         $builder->orderBy('absence_and_lag.create_date', 'DESC');
         if ($key == 'all') {
@@ -341,7 +343,7 @@ class SchoolModel extends Model
         return $query->getResult();
     }
 
-    
+
     public function get_asbense_by_id($id)
     {
         $db = \Config\Database::connect();
@@ -618,12 +620,12 @@ class SchoolModel extends Model
         $builder = $db->table('schools_gates');
         $builder->where('id', $school_gate_id);
 
-        if ($data['isActive'] ) {
+        if ($data['isActive']) {
             $b = $db->table('schools_gates');
             $b->where('school_id', $data['school_id']);
             $b->update(['isActive' => false]);
         }
-        
+
         return $builder->update($data);
     }
 
@@ -631,12 +633,12 @@ class SchoolModel extends Model
     {
         $db = \Config\Database::connect();
 
-        if ($data['isActive'] ) {
+        if ($data['isActive']) {
             $b = $db->table('schools_gates');
             $b->where('school_id', $data['school_id']);
             $b->update(['isActive' => false]);
         }
-        
+
         $builder = $db->table('schools_gates');
         return  $builder->insert($data);
     }
@@ -704,22 +706,22 @@ class SchoolModel extends Model
         $db      = \Config\Database::connect();
         $builder = $db->table('unsent_messages');
         $builder->select(
-                "gates.name as gates_name,".
-                "gates.method as gates_method,".
-                "gates.success_code,".
-                "gates.arabic_link as gates_arabic_link,".
-                "gates.latin_link as gates_latin_link,".
-                "gates.isReturnStatus as gates_isReturnStatus,".
-                "schools_gates.username,".
-                "schools_gates.sender_name,". 
-                "schools_gates.password,".
-                "unsent_messages.id as unsent_message_id,".
-                "unsent_messages.message_archive_id,".
-                "unsent_messages.message,".
-                "unsent_messages.phone,".
+            "gates.name as gates_name," .
+                "gates.method as gates_method," .
+                "gates.success_code," .
+                "gates.arabic_link as gates_arabic_link," .
+                "gates.latin_link as gates_latin_link," .
+                "gates.isReturnStatus as gates_isReturnStatus," .
+                "schools_gates.username," .
+                "schools_gates.sender_name," .
+                "schools_gates.password," .
+                "unsent_messages.id as unsent_message_id," .
+                "unsent_messages.message_archive_id," .
+                "unsent_messages.message," .
+                "unsent_messages.phone," .
                 "unsent_messages.type"
-            ); //
-        $builder->join('schools_gates','unsent_messages.school_gate_id = schools_gates.id');
+        ); //
+        $builder->join('schools_gates', 'unsent_messages.school_gate_id = schools_gates.id');
         $builder->join('gates', 'gates.id = schools_gates.gate_id');
         $builder->limit($count);
         // $builder->where('schools_gates.isActive', 1);
@@ -782,7 +784,7 @@ class SchoolModel extends Model
     }
 
 
-    
+
     public function delete_semaster(array $data)
     {
         $db = \Config\Database::connect();
@@ -791,7 +793,7 @@ class SchoolModel extends Model
         $builder->delete();
         return $db->affectedRows();
     }
-    
+
     public function update_semaster(array $data, $id)
     {
         $db = \Config\Database::connect();
@@ -799,7 +801,7 @@ class SchoolModel extends Model
         $builder->where('id', $id);
         return  $builder->update($data);
     }
-    
+
     public function add_semaster(array $data)
     {
         $db = \Config\Database::connect();
@@ -807,5 +809,4 @@ class SchoolModel extends Model
 
         return $builder->insert($data);
     }
-
 }

@@ -414,13 +414,13 @@
 
     
     function Deletetebel(id) {
+        console.log(id);
         var jqxhr = $.ajax({
                 url: "<?= site_url('') ?>/Schools/DeleteSchool",
                 method: "DELETE",
                 timeout: 0,
                 data: {
-                    id: $('.nonn').attr('id')
-                    
+                    id: id
                 },
                 headers: {
                   
