@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Model;
 use DateTime;
@@ -86,7 +87,7 @@ class UserModel extends Model
         $db      = \Config\Database::connect();
 
         $builder = $db->table('users');
-        $builder->select('email,role,id,username');
+        // $builder->select('email,role,id,username');
         $builder->where('email', $email);
         $builder->where('password', md5($password));
         $builder->orWhere('username', $email);
@@ -127,19 +128,25 @@ class UserModel extends Model
         $query   = $builder->get();
         return $query->getRow();
     }
-    public function get_parent_school($email)
-    {
 
-        $db      = \Config\Database::connect();
+    public function get_parent_school($phone)
+    {
+        $db = \Config\Database::connect();
+
+        // $subBuilder = $db->table('students');
+        // $subBuilder->select('school_id');
+        // $subBuilder->where('phone', $phone);
+        // $sub_query = $subBuilder->get_compiled_select();
 
         $builder = $db->table('users');
-
-        $builder->join('students', 'users.phone = students.phone');
-        $builder->where('email', $email);
-        $builder->where('role', 3);
-        $query   = $builder->get();
+        $builder->whereIn('users.id', function (BaseBuilder $subBuilder) use ($phone) {
+            return $subBuilder->select('school_id')->distinct()->from('students')->where('students.phone', $phone);
+        });
+        $query = $builder->get();
         return $query->getResult();
+
     }
+
     public function setResetPasswordCredentials($data)
     {
         $db = \Config\Database::connect();

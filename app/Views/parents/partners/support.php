@@ -118,7 +118,7 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="partner" class="col-form-label">شريك النجاح</label>
-                                <select required class="form-control" name="partner" id="partner">
+                                <select required class="form-control" name="partner" id="partners">
                                     <option value=""></option>
                                 </select>
                             </div>
@@ -191,7 +191,7 @@
 
     function getPartners() {
         $.ajax({
-                "url": "<?= site_url('') ?>Partners/GetPartners?key=all",
+                "url": "<?= site_url('') ?>Partners/GetPartnersData?key=all",
                 "method": "GET",
                 "timeout": 0,
                 "headers": {

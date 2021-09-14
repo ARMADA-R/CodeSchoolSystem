@@ -57,11 +57,12 @@ class Authentication extends ResourceController
                     "exp" => $exp,
                     "data" => $result->id,
                 );
-
+                
                 $kunci = 'SChO0lS';
                 $output = JWT::encode($payload, $kunci);
                 if ($result->role == 3) {
-                    $school = $model->get_parent_school($email);
+                    $school = $model->get_parent_school($result->phone);
+
                     $schools_id = '';
                     if (!empty($school)) {
                         $school = json_decode(json_encode($school), true);
@@ -69,8 +70,8 @@ class Authentication extends ResourceController
                         // exit;
                         $t = array();
                         foreach ($school as $s) {
-                            if (!in_array($s['school_id'], $t)) {
-                                array_push($t, $s['school_id']);
+                            if (!in_array($s['id'], $t)) {
+                                array_push($t, $s['id']);
                             }
                         }
 

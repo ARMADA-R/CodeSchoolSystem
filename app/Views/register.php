@@ -354,7 +354,14 @@
         function setFormContent(type) {
             if (type == 3) {
                 $("#form-content").html('');
-                $("#form-content").append(`<div class="form-group">
+                $("#form-content").append(`
+                            <div class="form-group">
+                                <input type="text" class="form-input" name="city" id="city" placeholder="المدينة" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-input" name="area" id="aria" placeholder="المنطقة" />
+                            </div>
+                            <div class="form-group">
                                 <input type="email" class="form-input" name="email" id="email" placeholder="البريد الإلكتروني" />
                             </div>
                             <div class="form-group">

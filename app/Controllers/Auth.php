@@ -162,6 +162,8 @@ class Auth extends ResourceController
                 $username = $this->request->getVar('username');
                 $phone = $this->request->getVar('phone');
                 $password = $this->request->getVar('password');
+                $city = $this->request->getVar('city');
+                $area = $this->request->getVar('area');
 
                 if (!$email) {
                     $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل الايميل ');
@@ -186,6 +188,17 @@ class Auth extends ResourceController
                     exit;
                 }
 
+                if (!$city) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال المدينة ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+                if (!$area) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال المنطقة ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+
                 $student = new StudentsModel();
 
                 $parent_students = $student->get_students_by_phone($phone);
@@ -205,7 +218,8 @@ class Auth extends ResourceController
                                 'username' => $username,
                                 'phone' => $phone,
                                 'password' => md5($password),
-
+                                'city' => $city,
+                                'area' => $area,
                                 'role' => 3,
                                 'status' => 1
                             ];
@@ -432,19 +446,24 @@ class Auth extends ResourceController
                 $kunci = 'SChO0lS';
                 $output = JWT::encode($payload, $kunci);
                 if ($result->role == 3) {
-                    $school = $model->get_parent_school($email);
+                    $school = $model->get_parent_school($result->phone);
 
+                    $schools_id = '';
+                    
                     if (!empty($school)) {
                         $school = json_decode(json_encode($school), true);
                         // var_dump($school);
                         // exit;
                         $t = array();
                         foreach ($school as $s) {
-                            array_push($t, $s['school_id']);
+                            if (!in_array($s['id'], $t)) {
+                                array_push($t, $s['id']);
+                            }
                         }
 
                         $schools_id = implode(",", $t);
                     }
+
                     $data = array('email' => $result->email, 'user_id' => $result->id, 'role' => $result->role, 'token' => $output, 'school_id' => $schools_id, 'username' => $result->username);
                 } else {
                     $data = array('email' => $result->email, 'user_id' => $result->id, 'role' => $result->role, 'token' => $output, 'username' => $result->username);
