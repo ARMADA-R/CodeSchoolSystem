@@ -397,7 +397,7 @@
 
     function getPartnersData() {
         var jqxhr = $.ajax({
-                "url": "<?= site_url('') ?>Partners/GetPartners?page=1&limit=2",
+                "url": "<?= site_url('') ?>Partners/GetPartners?page=1&limit=2000",
                 "method": "GET",
                 "timeout": 0,
                 "headers": {

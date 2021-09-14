@@ -18,7 +18,6 @@ class Partners extends BaseController
   use ResponseTrait;
   public function GetPartners()
   {
-
     if ($this->request->getMethod() == 'get') {
       $check = new Check(); // Create an instance
       $result = $check->check();
@@ -49,16 +48,23 @@ class Partners extends BaseController
 
 
         $model = new PartnersModel();
-        $user = new UserModel();
+        $userModel = new UserModel();
 
-        $user_role = $user->get_user_role($user_id)->role;
+        $user = $userModel->get_user_by_id($user_id);
+
+        if (!$user) {
+          $data = array('code' => -1, 'msg' => 'المستخدم غير متوفر', 'data' => []);
+          return  $this->respond($data, 400);
+        }
+
+        $user_role = $user->role;
 
         $new_parnters = array();
 
         if ($user_role == 1) {
-          $result = $model->get_partners($limit, $page, $key, -1);
+          $result = $model->get_partners_offers($limit, $page, $key, -1);
         } else {
-          $result = $model->get_partners($limit, $page, $key, 1);
+          $result = $model->get_partners_offers($limit, $page, $key, 1, $user);
         }
 
 
@@ -103,6 +109,81 @@ class Partners extends BaseController
       return  $this->respond($data, 200);
     }
   }
+  public function GetPartnersData()
+  {
+    if ($this->request->getMethod() == 'get') {
+      $check = new Check(); // Create an instance
+      $result = $check->check();
+
+      if ($result['code'] == 1) {
+        $page = $this->request->getVar('page');
+        $limit = $this->request->getVar('limit');
+        $user_id = $this->request->getVar('user_id');
+
+        $key = $this->request->getVar('key');
+        if (empty($key) || $key != 'all') {
+          if (!$page) {
+            $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل الصفحة ');
+            return $this->respond($result, 400);
+            exit;
+          }
+          if (!$limit) {
+            $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل عدد العناصر ');
+            return $this->respond($result, 400);
+            exit;
+          }
+        }
+        if (!$user_id) {
+          $result = array('code' => -1, 'msg' => 'الرجاء تحديد المستخدم ');
+          return $this->respond($result, 400);
+          exit;
+        }
+
+
+        $model = new PartnersModel();
+        $userModel = new UserModel();
+
+        $user = $userModel->get_user_by_id($user_id);
+
+        if (!$user) {
+          $data = array('code' => -1, 'msg' => 'المستخدم غير متوفر', 'data' => []);
+          return  $this->respond($data, 400);
+        }
+
+        $user_role = $user->role;
+
+        $new_parnters = array();
+
+        if ($user_role == 1) {
+          $result = $model->get_partners($limit, $page, $key);
+        } else {
+          $result = $model->get_partners($limit, $page, $key, $user);
+        }
+
+
+        if (!empty($result)) {
+          
+
+          $data = array('code' => 1, 'msg' => 'success', 'data' => $result, 'total_count' => count($result));
+          return  $this->respond($data, 200);
+        } else {
+          $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
+          return  $this->respond($data, 200);
+        }
+      } else {
+        $result = array(
+          'code' => $result['code'], 'msg' => $result['messages'],
+        );
+        return $this->respond($result, 400);
+      }
+    } else {
+      $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
+      return  $this->respond($data, 200);
+    }
+  }
+
+
+
   public function GetServicePartner()
   {
 
@@ -531,12 +612,12 @@ class Partners extends BaseController
         $parent = $usersModel->get_user_by_id($user_id);
 
         if (!$parent) {
-          $data = array('code' => -1, 'msg' => 'العرض غير متوفر', 'data' => []);
+          $data = array('code' => -1, 'msg' => 'المستخدم غير متوفر', 'data' => []);
           return  $this->respond($data, 400);
         }
 
         if (!$offer) {
-          $data = array('code' => -1, 'msg' => 'المستخدم غير متوفر', 'data' => []);
+          $data = array('code' => -1, 'msg' => 'العرض غير متوفر', 'data' => []);
           return  $this->respond($data, 400);
         }
 

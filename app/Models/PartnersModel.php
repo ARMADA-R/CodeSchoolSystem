@@ -9,7 +9,7 @@ class PartnersModel extends Model
 {
 
 
-    public function get_partners($limit, $page, $key, $whereStatus = 1)
+    public function get_partners_offers($limit, $page, $key, $whereStatus = 1, $user = null)
     {
         $db = \Config\Database::connect();
 
@@ -20,8 +20,13 @@ class PartnersModel extends Model
         $builder->select('username,partner_service.id,  partner_service.status,service_name,image_url,service_price,service_after_discount,discount,cubon,end_date,city,area');
         $builder->join('partner_service', 'users.id = partner_service.user_id');
         $builder->where('role', 4);
-        $builder->where('end_date>=', $date);
+        $builder->where('end_date >=', $date);
 
+        if ($user != null) {
+            $builder->where('city', $user->city );
+            $builder->where('area', $user->area );
+        }
+        
         if ($whereStatus != -1)
             $builder->where('partner_service.status', $whereStatus);
 
@@ -33,6 +38,31 @@ class PartnersModel extends Model
         }
         return $query->getResult();
     }
+
+    public function get_partners($limit, $page, $key, $user = null)
+    {
+        $db = \Config\Database::connect();
+
+        $date = date('Y-m-d');
+        $page = ($page - 1) * $limit;
+        $builder = $db->table('users');
+        $builder->where('role', 4);
+
+        if ($user != null) {
+            $builder->where('city', $user->city );
+            $builder->where('area', $user->area );
+        }
+       
+        if ($key == 'all') {
+            $query   = $builder->get();
+        } else {
+            $query   = $builder->get($limit, $page);
+        }
+        return $query->getResult();
+    }
+
+
+
     public function get_service($user_id, $limit, $page, $key)
     {
         $db = \Config\Database::connect();
