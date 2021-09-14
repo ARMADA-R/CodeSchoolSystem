@@ -57,32 +57,60 @@
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="text" class="col-form-label">نص التذكرة</label>
-                                <input required type="text" class="form-control" id="ticket_text">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="department" class="col-form-label">القسم</label>
-                                <input required type="text" name="department" class="form-control" id="department">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="type" class="col-form-label">النمط</label>
-                                <input required type="text" name="type" class="form-control" id="type">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="prority" class="col-form-label">الأولوية</label>
-                                <input required type="text" name="prority" class="form-control" id="prority">
+                            <label for="text" class="col-form-label">نص التذكرة</label>
+
+<textarea name="" id="ticket_text" cols="30" rows="3" class=" form-control"></textarea>
+   
+
+       </div>
+   </div>
+</div>
+<div class="row">
+   <div class="col-md">
+       <div class="form-group">
+           <label for="department" class="col-form-label">القسم</label>
+       
+           
+   <select id="department" name="department"  class="custom-select" id="inputGroupSelect02" style="cursor: pointer;">
+   <option value="" selected> أختر...</option>
+   <option value="1">اقتراحات</option>
+   <option value="2">استفسارات</option>
+   <option value="3">شكوى</option>
+   <option value="4">اخرى</option>
+
+   </select>
+       </div>
+   </div>
+</div>
+<div class="row">
+   <div class="col-md">
+       <div class="form-group">
+           <label for="type" class="col-form-label">النمط</label>
+
+                      
+   <select id="type" name="type"  class="custom-select" id="inputGroupSelect02" style="cursor: pointer;">
+
+   <option value="-"selected>--</option>
+  
+
+   </select>
+       </div>
+   </div>
+</div>
+<div class="row">
+   <div class="col-md">
+       <div class="form-group">
+           <label for="prority" class="col-form-label">الأولوية</label>
+        
+                                           
+   <select  required id="prority" name="prority"  class="custom-select" id="inputGroupSelect02" style="cursor: pointer; ">
+   <option value="" selected> أختر...</option>
+   <option value="1">منخفض </option>
+   <option value="2">متوسط </option>
+   <option value="3">هام جدا </option>
+
+
+   </select>
                             </div>
                         </div>
                     </div>
