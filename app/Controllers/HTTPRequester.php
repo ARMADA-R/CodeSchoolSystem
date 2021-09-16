@@ -17,6 +17,7 @@ class HTTPRequester
      */
     public static function HTTPGet($url)
     {
+        log_message("info", "Notifications URL: ". $url);
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
