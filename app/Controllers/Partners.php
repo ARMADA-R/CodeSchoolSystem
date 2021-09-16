@@ -109,6 +109,7 @@ class Partners extends BaseController
       return  $this->respond($data, 200);
     }
   }
+
   public function GetPartnersData()
   {
     if ($this->request->getMethod() == 'get') {
@@ -162,7 +163,6 @@ class Partners extends BaseController
 
 
         if (!empty($result)) {
-          
 
           $data = array('code' => 1, 'msg' => 'success', 'data' => $result, 'total_count' => count($result));
           return  $this->respond($data, 200);
@@ -581,6 +581,7 @@ class Partners extends BaseController
 
 
 
+
   public function getPartnerOfferForUser()
   {
 
@@ -655,6 +656,122 @@ class Partners extends BaseController
       }
     } else {
       $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
+      return  $this->respond($data, 200);
+    }
+  }
+
+  public function EditPartner()
+  {
+    if ($this->request->getMethod() == 'post') {
+      $check = new Check(); // Create an instance
+      $result = $check->check();
+
+      if ($result['code'] == 1) {
+        $id = $this->request->getVar('id');
+        $username = $this->request->getVar('username');
+        $email = $this->request->getVar('email');
+        $city = $this->request->getVar('city');
+        $phone = $this->request->getVar('phone');
+        $area = $this->request->getVar('area');
+        $user_id = $this->request->getVar('user_id');
+
+        if (!$id) {
+          $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل التعرفة ');
+          return $this->respond($result, 400);
+          exit;
+        }
+
+        if (!$username) {
+          $result = array('code' => -1, 'msg' => 'الرجاء إدخال اسم المستخدم');
+          return $this->respond($result, 400);
+          exit;
+        }
+        if (!$email) {
+          $result = array('code' => -1, 'msg' => 'الرجاء إدخال البريد الالكتروني');
+          return $this->respond($result, 400);
+          exit;
+        }
+        if (!$city) {
+          $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدينة');
+          return $this->respond($result, 400);
+          exit;
+        }
+        if (!$phone) {
+          $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل الجوال');
+          return $this->respond($result, 400);
+          exit;
+        }
+        if (!$area) {
+          $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المنطقة');
+          return $this->respond($result, 400);
+          exit;
+        }
+
+        $data = [
+          'username' => $username,
+          'email' => $email,
+          'city' => $city,
+          'phone' => $phone,
+          'area' => $area,
+        ];
+
+
+        $model = new PartnersModel();
+        $update = $model->edit_partner($data, $id);
+
+        if ($update == 1) {
+          $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+          return  $this->respond($data, 200);
+        } else {
+          $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+          return  $this->respond($data, 400);
+        }
+      } else {
+        $result = array(
+          'code' => $result['code'], 'msg' => $result['messages'],
+        );
+        return $this->respond($result, 400);
+      }
+    } else {
+      $data = array('code' => -1, 'msg' => 'Method must be POST', 'data' => []);
+      return  $this->respond($data, 200);
+    }
+  }
+
+
+  public function DeletePartner()
+  {
+
+    if ($this->request->getMethod() == 'delete') {
+      $check = new Check(); // Create an instance
+      $result = $check->check();
+
+      if ($result['code'] == 1) {
+        $input = $this->request->getRawInput();;
+        $id = isset($input['id']) ? $input['id'] : '';
+        if (!$id) {
+          $data = array('code' => -1, 'msg' => 'Please insert id flied', 'data' => []);
+          return  $this->respond($data, 400);
+          exit;
+        }
+        $model = new PartnersModel();
+
+        $delete = $model->delete_partners([$id]);
+        if ($delete == 1) {
+          $data = array('code' => 1, 'msg' => 'success', 'data' => []);
+          return  $this->respond($data, 200);
+        } else {
+          $data = array('code' => -1, 'msg' => 'fail', 'data' => []);
+          return  $this->respond($data, 400);
+        }
+      } else {
+        $result = array(
+          'code' => $result['code'], 'msg' => $result['messages'],
+        );
+        return $this->respond($result, 400);
+      }
+    } else {
+      $data = array('code' => -1, 'msg' => 'Method must be Delete', 'data' => []);
       return  $this->respond($data, 200);
     }
   }

@@ -1,9 +1,78 @@
 <?php require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
 
 
-<!-- start row1 -->
+<div class="modal fade" id="edit-partner" tabindex="-1" aria-labelledby="edit-partnerLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-partnerLabel">تعديل طالب</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form onsubmit="UpdatePartner(this); return false;">
+                <input type="hidden" name="id" id="record-id-edit">
+                <div class="modal-body p-4">
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="username-edit">اسم المستخدم</label>
+                                <input required type="text" class="form-control" name="username" id="username-edit">
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="email-edit">البريد الالكتروني</label>
+                                <input required type="text" class="form-control" name="email" id="email-edit">
+                            </div>
+                        </div>
+                    </div>
 
-<!-- start card1 -->
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="phone-edit">رقم الجوال</label>
+                                <input required type="number" class="form-control" name="phone" id="phone-edit">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="area-edit">المنطقة</label>
+                                <input required class="form-control" id="area-edit" name="area">
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="city-edit">المدينة</label>
+                                <input required type="text" class="form-control" name="city" id="city-edit">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div>
+                            <div id="edit-spinner" style="display: none" class="spinner-border text-secondary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                            <button type="submit" id="edit-partner-submit" class="btn btn-primary">حفظ</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<button id="edit-partner-btn" style="display: none;" class="btn btn-light" data-toggle="modal" data-target="#edit-partner"></button>
+
+
 <div class="card">
 
     <div class="card-header ">
@@ -63,8 +132,8 @@
         dataTable = $('#content-table').DataTable({
             dom: `<"row d-flex justify-content-end mx-1 my-1 mb-3 "B><"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
-                [25, 50, 100, 500, -1],
-                [25, 50, 100, 500, 'الكل']
+                [25, 50, 100, 500],
+                [25, 50, 100, 500]
             ],
             order: [
                 [1, 'asc']
@@ -85,7 +154,6 @@
                     "data": null,
                     "defaultContent": ''
                 },
-
                 {
                     data: 'id',
                     name: 'id',
@@ -102,7 +170,19 @@
                     data: 'username',
                     name: 'username',
                     className: 'text-center t-username',
-                    title: 'الشريك'
+                    title: 'اسم المستخدم'
+                },
+                {
+                    data: 'email',
+                    name: 'email',
+                    className: 'text-center t-email',
+                    title: 'البريد الالكتروني'
+                },
+                {
+                    data: 'phone',
+                    name: 'phone',
+                    className: 'text-center t-phone',
+                    title: 'الجوال'
                 },
                 {
                     data: 'city',
@@ -117,68 +197,30 @@
                     title: 'المنطقة'
                 },
                 {
-                    data: 'service_name',
-                    name: 'service_name',
-                    className: 'text-center t-service_name',
-                    title: ' اسم الخدمة'
-                },
-                {
-                    data: 'image_url',
-                    name: 'image_url',
-                    className: 'text-center t-image_url align-middle w-100',
-                    title: `توضيح الخدمة`,
+                    data: 'id',
+                    name: 'action',
+                    title: '&nbsp;&nbsp;&nbsp;&nbsp;خيارات&nbsp;&nbsp;&nbsp;&nbsp;',
+                    className: 'text-center ',
+                    orderable: false,
+                    searchable: false,
+                    printable: false,
                     render: function(data, type, row, meta) {
-                        return `<a href='${data}'><i class="fas fa-photo-video"></i></a>`;
-                    }
-                },
-                {
-                    data: 'service_price',
-                    name: 'service_price',
-                    className: 'text-center t-service_price',
-                    title: 'سعر الخدمة'
-                },
-                {
-                    data: 'price_after_discount',
-                    name: 'price_after_discount',
-                    className: 'text-center t-price_after_discount',
-                    title: 'السعر بعد الخصم'
-                },
-                {
-                    data: 'discount',
-                    name: 'discount',
-                    className: 'text-center t-discount',
-                    title: 'مقدار الخصم'
-                },
-                {
-                    data: 'status',
-                    name: 'status',
-                    className: 'text-center t-status',
-                    title: 'الحالة',
-                    render: function(data, type, row, meta) {
-                        var checked = (row.status == 1) ? `checked` : ``;
-                        var text = (row.status == 1) ? `مفعل` : `غير مفعل`; 
+                        return `<div class="row justify-content-center  text-white ">
+                                    <div class="m-1">
+                                        <a type="button" class="btn btn-sm btn-info " title="edit" style="margin: 0px;" id="` + data + `"  onclick="editPartner('` + row.id + `','` + row.username + `','` + row.email + `','` + row.phone + `','` + row.city + `','` + row.area + `')">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                    </div>
 
-                        return `<div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input"  ${checked} onchange="updateOfferStatus(${row.id},this)" id="customSwitch-${row.id}">
-                                    <label id="status-text" class="custom-control-label" for="customSwitch-${row.id}">${text}</label>
+                                    <div class="m-1">
+                                        <a type="button" class="btn btn-sm btn-danger " title="delete" style="margin: 0px;" onclick="deleteRecord(${data})">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+                                    </div>
+
                                 </div>`;
                     }
-                },
-                {
-                    data: 'cubon',
-                    name: 'cubon',
-                    className: 'text-center t-cubon',
-                    title: 'كوبون الخصم'
-                },
-                {
-                    data: 'end_date',
-                    name: 'end_date',
-                    className: 'text-center t-end_date',
-                    title: 'تاريخ الانتهاء',
-                    render: function(data, type, row, meta) {
-                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
-                    }
-                },
+                }
             ],
             buttons: [{
                     extend: 'collection',
@@ -388,10 +430,9 @@
         getPartnersData();
     });
 
-
     function getPartnersData() {
         var jqxhr = $.ajax({
-                "url": "<?= site_url('') ?>Partners/GetPartners?page=1&limit=2000",
+                "url": "<?= site_url('') ?>Partners/GetPartnersData?page=1&limit=10000",
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
@@ -408,36 +449,85 @@
                 console.log(response);
                 toastr.error(response.responseJSON.msg, 'خطأ');
             });
+    } 
+
+    function deleteRecord(id) {
+        if (confirm('هل انت متأكد من انك تريد حذف هذا السجل')) {
+            var jqxhr = $.ajax({
+                    "url": "<?= site_url('') ?>Partners/DeletePartner",
+                    "method": "DELETE",
+                    "timeout": 0,
+                    "headers": {
+                        "Authorization": token,
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    "data": {
+                        "id": id
+                    }
+                })
+                .done(function(response) {
+                    dataTable.row($('tr#' + id)).remove().draw();
+                    toastr.success('تم حذف السجل بنجاح!')
+                })
+                .fail(function(response) {
+                    console.log(response);
+                    toastr.error('حدث خطأ ما اثناء حذف البيانات!', 'خطأ');
+                })
+        }
+    }
+    
+    function editPartner(id, username, email, phone, city, area) {
+        // var row = $('tr#' + id);
+        console.log(id, username, email, phone, city, area);
+        $('#username-edit').val(username);
+        $('#email-edit').val(email);
+        $('#city-edit').val(city);
+        $('#phone-edit').val(phone);
+
+        $('#area-edit').val(area);
+
+        $('#record-id-edit').val(id);
+        $('#edit-partner-btn').click();
     }
 
-    
-    function updateOfferStatus(id, element) {
-        var status = element.checked;
+    function UpdatePartner(element) {
+        formData = $(element).serializeArray().reduce(function(obj, item) {
+            obj[item.name] = item.value;
+            return obj;
+        }, {});
 
-        console.log(status);
+        $('#edit-partner-submit').attr("disabled", true);
+        $('#edit-spinner').show();
         var jqxhr = $.ajax({
-                "url": "<?= site_url('') ?>Partners/UpdateServiceStatus",
-                "method": "POST",
-                "timeout": 0,
-                "headers": {
-                    "Authorization": token,
-                    "Content-Type": "application/x-www-form-urlencoded"
+                url: "<?= site_url('') ?>Partners/EditPartner",
+                method: "POST",
+                timeout: 0,
+                data: {
+                    "id": formData.id,
+                    "username": formData.username,
+                    "email": formData.email,
+                    "city": formData.city,
+                    "phone": formData.phone,
+                    "area": formData.area,
+                    "user_id": user_id,
                 },
-                "data": {
-                    "id": id,
-                    "status": status ? 1 : 0,
-                }
+                headers: {
+                    "Authorization": token,
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
             })
             .done(function(response) {
                 getPartnersData();
-                toastr.success('تم تحديث حالة النموذج');
-                console.log($(element).parent().find("#status-text"));
-                status ? $(element).parent().find("#status-text").html("مفعل") : $(element).parent().find("#status-text").html("غير مفعل");
+                toastr.success('تم تحديث البيانات بنجاح')
             })
             .fail(function(response) {
                 console.log(response);
                 toastr.error(response.responseJSON.msg, 'خطأ');
+            }).always(function() {
+                $('#edit-partner-submit').removeAttr('disabled');
+                $('#edit-spinner').hide();
             });
+        return false;
     }
 
 </script>

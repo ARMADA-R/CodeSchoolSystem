@@ -867,7 +867,7 @@ class SchoolModel extends Model
                 "unsent_messages.message," .
                 "unsent_messages.phone," .
                 "unsent_messages.type"
-        ); //
+        );
         $builder->join('schools_gates', 'unsent_messages.school_gate_id = schools_gates.id');
         $builder->join('gates', 'gates.id = schools_gates.gate_id');
         $builder->limit($count);

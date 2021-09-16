@@ -149,4 +149,25 @@ class PartnersModel extends Model
         $builder = $db->table('parents_partner_service');
         return $builder->insert($data);
     }
+    
+    public function edit_partner($data, $id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->where('id', $id);
+        $builder->where('role', 4);
+        $builder->update($data);
+        return $db->affectedRows();
+    }
+
+    public function delete_partners($ids)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->whereIn('id', $ids);
+        $builder->where('role', 4);
+        $builder->delete();
+        return $db->affectedRows();
+    }
+
 }

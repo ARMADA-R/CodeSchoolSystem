@@ -1873,10 +1873,10 @@ class Schools extends BaseController
     }
 
 
-    public function sendSMSToStudents($students = [])
-    {
-        (new Gates_Api())->sendSMS('http://www.smsscript.net/index.php/api/sendsms/', 'nobalaa', '123456', '966500000000', 'lasttest', 'sendername');
-    }
+    // public function sendSMSToStudents($students = [])
+    // {
+    //     (new Gates_Api())->sendSMS('http://www.smsscript.net/index.php/api/sendsms/', 'nobalaa', '123456', '966500000000', 'lasttest', 'sendername');
+    // }
 
 
     public function setSchoolGate()
@@ -2428,7 +2428,6 @@ class Schools extends BaseController
                 $faildSentPublicMessagesArchive = [];
                 $successSentPublicMessagesArchive = [];
             }
-
             $sentMessageNum++;
         }
 
