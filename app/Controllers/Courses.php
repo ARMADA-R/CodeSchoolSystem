@@ -21,7 +21,11 @@ class Courses extends BaseController
 			$result = $check->check();
 
 			if ($result['code'] == 1) {
+
 				$school_id = $this->request->getVar('school_id');
+				$level = $this->request->getVar('level_id');
+				$division = $this->request->getVar('division_id');
+				
 				if (!$school_id) {
 					$result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
 					return $this->respond($result, 400);
@@ -44,7 +48,7 @@ class Courses extends BaseController
 						exit;
 					}
 				}
-				$result = $model->get_courses($school_id, $limit, $page, $key);
+				$result = $model->get_courses($school_id, $limit, $page, $key, $division, $level);
 				if (!empty($result)) {
 					$data = array('code' => 1, 'msg' => 'success', 'data' => $result, 'total_count' => count($result));
 					return	$this->respond($data, 200);

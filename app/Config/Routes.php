@@ -45,6 +45,7 @@ $routes->get('/admin/partner', 'AdminView::partner');
 $routes->get('/admin/schooledit/(:num)', 'AdminView::schooledit/$1');
 $routes->get('/admin/adminemail', 'AdminView::adminemail');
 $routes->get('/admin/user', 'AdminView::user');
+$routes->get('/admin/partners', 'AdminView::partners');
 $routes->get('/admin/mangeschool', 'AdminView::mangeschool');
 $routes->get('/admin/callus', 'AdminView::callus');
 $routes->get('/admin/gets', 'AdminView::gets');
@@ -120,16 +121,18 @@ $routes->group('', ['filter' => 'authenticateUsers:2'], function ($routes) {
 	$routes->get('school/partner/support/technical/ticket/(:num)', 'SchoolView::viewPartnerTicket/$1');
 	$routes->get('school/services/tinyLinks', 'SchoolView::tinyLinks');
 	$routes->get('school/services/gallery', 'SchoolView::gallery');
+	$routes->get('school/courses/division-levels', 'SchoolView::levelsAndDivisions');
 });
 
 $routes->get('school/notifications/reply/(:num)', 'SchoolView::showReplyNotificationForm/$1');
 $routes->post('school/notifications/reply', 'Schools::replyToNotificationMessage');
 
+$routes->get('school/course/notifications/reply/(:num)', 'SchoolView::showReplyCourseNotificationForm/$1');
+$routes->post('school/course/notifications/reply', 'Schools::replyToCourseNotificationMessage');
+
 $routes->get('courses/updateStudent', 'SchoolView::showUpdateCoursesStudentForm');
 
 $routes->group('', ['filter' => 'authenticateUsers:3'], function ($routes) {
-
-
 	// parents routes
 
 	$routes->get('/parent', 'ParentsView::examsTables');

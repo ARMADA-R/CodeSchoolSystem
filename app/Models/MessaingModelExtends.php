@@ -34,6 +34,29 @@ class MessaingModelExtends extends MessaingModel
         return $query->getResult();
     }
     
+
+    public function get_course_students_messages_archive($school_id, $date = null, $limit, $page, $key) {
+        $page = ($page - 1) * $limit;
+        $db = \Config\Database::connect();
+        $builder = $db->table('courses');
+        $builder->select('public_messages.id as archive_id, courses.id, courses.student_name, courses.phone,CAST(public_messages.create_date As Date) send_date,public_messages.message, public_messages.send_status');
+        $builder->join('public_messages', 'courses.id = public_messages.user_id');
+        $builder->where('public_messages.school_id', $school_id);
+        $builder->where('public_messages.user_type', "coursesStudents");
+        $builder->orderBy('public_messages.create_date', 'DESC');
+
+        if (!empty($date)) {
+            $search_where = "CAST(public_messages.create_date As Date) = '" . $date . "'";
+            $builder->where($search_where);
+        }
+        if ($key == 'all') {
+            $query   = $builder->get();
+        } else {
+            $query   = $builder->get($limit, $page);
+        }
+        return $query->getResult();
+    }
+    
     public function get_teacher_messages_archive($school_id, $date = null, $limit, $page, $key) {
 
         $page = ($page - 1) * $limit;

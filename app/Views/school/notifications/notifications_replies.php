@@ -265,6 +265,7 @@
                 <div class="signup-content">
                     <form method="POST" onsubmit="setReplyToMessage(this); return false;" id="signup-form" class="signup-form">
                         <input type="hidden" value="<?= $message->id ?>" name="id" id="id" />
+                        <input type="hidden" value="<?= $type ?>" name="notification_type" id="notification_type" />
 
                         <h2 class="form-title">الرد على الاشعارات</h2>
 
@@ -351,13 +352,19 @@
                 return obj;
             }, {});
 
+            var url = 'Schools/replyToNotificationMessage';
+            
+            if (formData.notification_type == 'courses') {
+                url = 'Schools/replyToCourseNotificationMessage';
+            }
+
 
             $('#submit').attr("disabled", true);
             $('#spinner').show();
             $('#submit-btn-txt').hide();
 
             var jqxhr = $.ajax({
-                    "url": "<?= site_url('') ?>Schools/replyToNotificationMessage",
+                    "url": "<?= site_url('') ?>" + url,
                     "method": "POST",
                     "timeout": 0,
                     "headers": {

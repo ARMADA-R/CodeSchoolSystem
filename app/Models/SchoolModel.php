@@ -177,6 +177,79 @@ class SchoolModel extends Model
         return $query->getResult();
     }
 
+    public function delete_level(array $ids)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('school_levels');
+        $builder->whereIn('id', $ids);
+        $builder->delete();
+        return $db->affectedRows();
+    }
+
+    public function update_level(array $data, $id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('school_levels');
+        $builder->where('id', $id);
+        return  $builder->update($data);
+    }
+
+    public function add_level(array $data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('school_levels');
+
+        return $builder->insert($data);
+    }
+
+    public function get_levels($school_id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('school_levels');
+        $builder->where('school_id', $school_id);
+        $query   = $builder->get();
+        return $query->getResult();
+    }
+
+
+
+    public function delete_division(array $ids)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('schools_divisions');
+        $builder->whereIn('id', $ids);
+        $builder->delete();
+        return $db->affectedRows();
+    }
+
+    public function update_division(array $data, $id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('schools_divisions');
+        $builder->where('id', $id);
+        return  $builder->update($data);
+    }
+
+    public function add_division(array $data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('schools_divisions');
+
+        return $builder->insert($data);
+    }
+
+    public function get_divisions($school_id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('schools_divisions');
+        $builder->where('school_id', $school_id);
+        $query   = $builder->get();
+        return $query->getResult();
+    }
+
+
+
+
     public function get_classes_by_codes(array $codes)
     {
         $db = \Config\Database::connect();
@@ -251,6 +324,15 @@ class SchoolModel extends Model
         return $builder->insert($data);
     }
 
+    public function add_course_asbense($data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('courses_absence_and_lag');
+
+        // $builder->insert($data);
+        return $builder->insert($data);
+    }
+
     public function update_asbense($data, $id)
     {
         $db = \Config\Database::connect();
@@ -258,6 +340,71 @@ class SchoolModel extends Model
         $builder->where('id', $id);
         return  $builder->update($data);
     }
+
+    public function update_course_asbense($data, $id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('courses_absence_and_lag');
+        $builder->where('id', $id);
+        return  $builder->update($data);
+    }
+
+    public function get_course_asbense($limit, $page, $school_id, $key)
+    {
+        $page = ($page - 1) * $limit;
+        $db = \Config\Database::connect();
+        $builder = $db->table('courses_absence_and_lag');
+        $builder->select('courses_absence_and_lag.id as archive_id,courses.id student_id,student_name,student_number,courses.phone parent_phone,school_levels.title level_name,schools_divisions.title division_name,monitoring_case,period,date,message,send_status');
+        $builder->join('courses', 'courses_absence_and_lag.student_id = courses.id');
+        $builder->join('users', 'courses.phone = users.phone');
+        $builder->join('school_levels', 'courses.level = school_levels.id');
+        $builder->join('schools_divisions', 'courses.division = schools_divisions.id');
+        $builder->where('role', 3);
+        $builder->where('courses_absence_and_lag.school_id', $school_id);
+        $builder->orderBy('courses_absence_and_lag.create_date', 'DESC');
+        if ($key == 'all') {
+            $query   = $builder->get();
+        } else {
+            $query   = $builder->get($limit, $page);
+        }
+        
+        return ($query->getResult());
+    }
+
+    public function get_course_asbense_reply($limit, $page, $school_id, $key)
+    {
+        $page = ($page - 1) * $limit;
+        $db = \Config\Database::connect();
+        $builder = $db->table('courses_absence_and_lag');
+        $builder->select('courses_absence_and_lag.id,is_read,courses.id student_id,student_name,student_number,users.phone parent_phone,school_levels.title level_name,schools_divisions.title division_name,monitoring_case,period,date,message,reply');
+        $builder->join('courses', 'courses_absence_and_lag.student_id = courses.id');
+        $builder->join('users', 'courses.phone = users.phone');
+        $builder->join('school_levels', 'courses.level = school_levels.id');
+        $builder->join('schools_divisions', 'courses.division = schools_divisions.id');
+        $builder->where('courses_absence_and_lag.school_id', $school_id);
+        $builder->where('role', 3);
+        $builder->orderBy('courses_absence_and_lag.create_date', 'DESC');
+        if ($key == 'all') {
+            $query = $builder->get();
+        } else {
+            $query = $builder->get($limit, $page);
+        }
+        
+        return $query->getResult();
+    }
+
+    public function get_course_asbense_by_id($id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('courses_absence_and_lag');
+        $builder->select('id, is_read, monitoring_case, period, date, message, reply');
+        $builder->where('id', $id);
+        $query = $builder->get();
+        return $query->getResult();
+    }
+
+
+
 
     public function add_table_school($data)
     {
@@ -746,6 +893,16 @@ class SchoolModel extends Model
 
         $db = \Config\Database::connect();
         $builder = $db->table('absence_and_lag');
+        $builder->whereIn('id', $ids);
+        return  $builder->update(["send_status" => $status]);
+    }
+
+    public function updateCourseAbsenceArchiveMessagesStatus($ids, $status)
+    {
+        if (count($ids) < 1) return;
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('courses_absence_and_lag');
         $builder->whereIn('id', $ids);
         return  $builder->update(["send_status" => $status]);
     }

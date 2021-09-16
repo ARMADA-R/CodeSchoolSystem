@@ -24,6 +24,8 @@ class Students extends BaseController
 
       if ($result['code'] == 1) {
         $school_id = $this->request->getVar('school_id');
+        $class_id = $this->request->getVar('class_id');
+        $semester_id = $this->request->getVar('semester_id');
         if (!$school_id) {
           $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل المدرسة ');
           return $this->respond($result, 400);
@@ -45,9 +47,12 @@ class Students extends BaseController
             exit;
           }
         }
+
         $model = new StudentsModel();
-        $result = $model->get_students($school_id, $limit, $page, $key);
-        $count = $model->get_students_count($school_id);
+
+        $result = $model->get_students($school_id, $limit, $page, $key, $class_id, $semester_id);
+        $count = $model->get_students_count($school_id, $class_id, $semester_id);
+
         if (!empty($result)) {
           $data = array('code' => 1, 'msg' => 'success', 'data' => $result, 'total_count' => $count->count);
           return  $this->respond($data, 200);
@@ -66,6 +71,8 @@ class Students extends BaseController
       return  $this->respond($data, 200);
     }
   }
+
+  
   public function AddStudent()
   {
 

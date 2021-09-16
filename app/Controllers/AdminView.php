@@ -54,6 +54,14 @@ class AdminView extends BaseController
     {
         return view('admin/user');
     }
+
+    
+    public function partners()
+    {
+        return view('admin/partners');
+    }
+
+
     public function mangeschool()
     {
         return view('admin/mangeschool');

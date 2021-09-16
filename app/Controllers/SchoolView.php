@@ -230,7 +230,19 @@ class SchoolView extends BaseController
 			return "There is no message with this number!";
 		}
 
-		return view('school/notifications/notifications_replies', ["message" => $message[0]]);
+		return view('school/notifications/notifications_replies', ["message" => $message[0], "type" => "general"]);
+	}
+
+	public function showReplyCourseNotificationForm($seg6)
+	{
+		$model = new SchoolModel();
+
+        $message = $model->get_course_asbense_by_id($seg6);
+		if(empty($message)){
+			return "There is no message with this number!";
+		}
+
+		return view('school/notifications/notifications_replies', ["message" => $message[0], "type" => "courses"]);
 	}
 
 
@@ -239,6 +251,14 @@ class SchoolView extends BaseController
 	public function showUpdateCoursesStudentForm()
 	{
 		return view('school/basics info/update-courses-data');
+	}
+
+
+
+
+	public function levelsAndDivisions()
+	{
+		return view('school/courses-system/levels-divisions');
 	}
 
 

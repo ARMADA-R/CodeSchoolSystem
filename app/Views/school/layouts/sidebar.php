@@ -59,10 +59,10 @@
                 <li class="nav-header">البيانات الأساسية</li>
                 <li class="nav-item">
                     <a href="<?= site_url() ?>school/students/info" class="nav-link <?php echo strpos(current_url(),'school/students/info')? 'active' :''; ?>">
-                        <i class="text-navy nav-icon fas fa-chevron-left" style="display:  <?php echo strpos(current_url(),'school/students/info')? 'none' :''; ?>;"></i>
-                        <p>
-                            بيانات الطلاب
-                        </p>
+                    <i class="text-navy nav-icon fas fa-chevron-left" style="display:  <?php echo strpos(current_url(),'school/students/info')? 'none' :''; ?>;"></i>
+                    <p>
+                        بيانات الطلاب
+                    </p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -81,12 +81,20 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-header">بيانات نظام المقررات</li>
                 <li class="nav-item">
                     <a href="<?= site_url() ?>school/subjects/info" class="nav-link <?php echo strpos(current_url(),'school/subjects/info')? 'active' :''; ?>">
                         <i class="text-navy nav-icon fas fa-chevron-left" style="display:  <?php echo strpos(current_url(),'school/subjects/info')? 'none' :''; ?>;"></i>
                         <p>
-                            بيانات نظام المقررات
-
+                            طلاب نظام المقررات
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= site_url() ?>school/courses/division-levels" class="nav-link <?php echo strpos(current_url(),'school/courses/division-levels')? 'active' :''; ?>">
+                        <i class="text-navy nav-icon fas fa-chevron-left" style="display:  <?php echo strpos(current_url(),'school/courses/division-levels')? 'none' :''; ?>;"></i>
+                        <p>
+                            المستويات والشعب
                         </p>
                     </a>
                 </li>

@@ -8,7 +8,7 @@
 
     <div class="card-header ">
         <i class="far fa-user-circle"></i>
-        <h6 class=" text-bold d-inline-flex">إدارة عروض شركاء النجاح</h6>
+        <h6 class=" text-bold d-inline-flex">إدارة شركاء النجاح«</h6>
     </div>
 
     <div class="card-body p-2" style="overflow-x: scroll;">
@@ -17,18 +17,12 @@
                 <tr>
                     <th></th>
                     <th>م</th>
-                    <th>الشريك</th>
+                    <th>الاسم</th>
+                    <th>اسم المستخدم</th>
+                    <th>البريد الالكتروني</th>
+                    <th>الجوال</th>
                     <th>المدينة</th>
                     <th>المنطقة</th>
-                    <th> اسم الخدمة</th>
-                    <th class="small-cell text-center t-image_url align-middle w-100"> توضيح الخدمة
-                    </th>
-                    <th>سعر الخدمة</th>
-                    <th>السعر بعد الخصم</th>
-                    <th>مقدار الخصم</th>
-                    <th>الحالة</th>
-                    <th>انشاء كوبون الخصم</th>
-                    <th>تاريخ الانتهاء</th>
                 </tr>
             </thead>
             <tbody></tbody>

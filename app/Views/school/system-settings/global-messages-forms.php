@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="submit-type-edit">نوع الارسال</label>
+                                <label  class="col-form-label"  for="submit-type-edit">نوع الارسال</label>
                                 <select required class="form-control" name="sender_type" id="submit-type-edit">
                                     <option value="">--</option>
                                     <option value="1">رسالة نصية</option>
@@ -64,11 +64,11 @@
                             <li class="list-group-item w-100">@STATUS@</li>
                         </ul>
                         <ul class="list-group list-group-horizontal">
-                            <li class="list-group-item w-100">اسم الطالب</li>
+                            <li class="list-group-item w-100">اسم الطالب (رسائل عامة)</li>
                             <li class="list-group-item w-100"> @STUDENT@</li>
                         </ul>
                         <ul class="list-group list-group-horizontal">
-                            <li class="list-group-item w-100">التاريخ</li>
+                            <li class="list-group-item w-100">التاريخ (رسائل عامة)</li>
                             <li class="list-group-item w-100"> @DATE@</li>
                         </ul>
                         <ul class="list-group list-group-horizontal">
@@ -126,7 +126,7 @@
                         </div>
                         <div class="col-md">
                             <div class="form-group">
-                                <label for="submit-type">نوع الارسال</label>
+                                <label class="col-form-label" for="submit-type">نوع الارسال</label>
                                 <select required class="form-control" name="sender_type" id="submit-type">
                                     <option value="">--</option>
                                     <option value="1">رسالة نصية</option>
@@ -151,11 +151,11 @@
                             <li class="list-group-item w-100">@STATUS@</li>
                         </ul>
                         <ul class="list-group list-group-horizontal">
-                            <li class="list-group-item w-100">اسم الطالب</li>
+                            <li class="list-group-item w-100">اسم الطالب (رسائل عامة)</li>
                             <li class="list-group-item w-100"> @STUDENT@</li>
                         </ul>
                         <ul class="list-group list-group-horizontal">
-                            <li class="list-group-item w-100">التاريخ</li>
+                            <li class="list-group-item w-100">التاريخ (رسائل عامة)</li>
                             <li class="list-group-item w-100"> @DATE@</li>
                         </ul>
                         <ul class="list-group list-group-horizontal">

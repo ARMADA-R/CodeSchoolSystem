@@ -27,6 +27,7 @@
                 <option value="1">الطلاب</option>
                 <option value="2">المعلمين</option>
                 <option value="3">الاداريين</option>
+                <option value="4">طلاب نظام المقررات</option>
             </select>
         </div>
 
@@ -410,10 +411,312 @@
                 dataTable.destroy();
                 buildEmployeesTable();
                 getArchiveData(3);
+            } else if ($('#determinants').val() == '4') {
+                dataTable.destroy();
+                buildCourseStudentsTable();
+                getArchiveData(4);
             }
             setListeners();
         });
     });
+
+    
+    function buildCourseStudentsTable() {
+        $('#table-title').html('بيانات طلاب نظام المقررات');
+
+        dataTable = $('#content-table').DataTable({
+            dom: `<"row d-flex justify-content-between mx-1 "fl>rtip`,
+            "lengthMenu": [
+                [25, 50, 100, 500, 1000],
+                [25, 50, 100, 500, 1000]
+            ],
+            order: [
+                [2, 'asc']
+            ],
+
+            responsive: true,
+            autoWidth: false,
+            rowId: 'id',
+            columns: [
+                {
+                    "data": null,
+                    "className": 'details-control align-middle',
+                    "orderable": false,
+                    searchable: false,
+                    exportable: false,
+                    "defaultContent": '',
+                    render: function(data, type, row, meta) {
+                        return `
+                        <form id="user-${row.id}-archive-${row.archive_id}-form">
+                            <input type="hidden" value="${row.id}" name="user_id" >
+                            <input type="hidden" value="${row.message}" name="message" >
+                            <input type="hidden" value="${row.phone}" name="phone" >
+                            <input type="hidden" value="${row.archive_id}" name="archive_id" >
+                            <input type="hidden" value="${row.send_status}" name="send_status" >
+                            <input type="hidden" value="publicMessage" name="type" >
+                        </form>
+                        `;
+                    }
+                },
+                {
+                    data: 'id',
+                    className: 'text-center align-middle',
+                    title: `<input type="checkbox" class="select-all"  id="select-all">`,
+                    orderable: false,
+                    searchable: false,
+                    exportable: false,
+                    render: function(data, type, row, meta) {
+                        return `<input type="checkbox" class='align-middle selected_data' value='${data},${row.archive_id}' name="selected_data[]" id="${data}"/>`;
+                    }
+                },
+                {
+                    data: 'id',
+                    name: 'id',
+                    title: 'م',
+                    className: 'text-center t-id align-middle',
+                    // orderable: false,
+                    searchable: false,
+                    exportable: false,
+                    render: function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    data: 'student_name',
+                    name: 'student_name',
+                    className: 'text-center t-student_name align-middle',
+                    title: 'اسم الطالب',
+                    render: function(data, type, row, meta) {
+                        return `<div id="name-${row.id}">${data}</div>`;
+                    }
+                },
+                {
+                    data: 'phone',
+                    name: 'phone',
+                    className: 'text-center t-phone align-middle',
+                    title: 'الجوال'
+                },
+                {
+                    data: 'message',
+                    name: 'message',
+                    className: 'text-center t-message align-middle',
+                    title: 'نص الرسالة'
+                },
+                {
+                    data: 'send_date',
+                    name: 'send_date',
+                    className: 'text-center t-send_date align-middle',
+                    title: 'تاريخ الارسال',
+                    render: function(data, type, row, meta) {
+
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
+                    }
+                },
+                {
+                    data: 'send_status',
+                    className: 'text-center align-middle',
+                    title: 'حالة الارسال',
+                    render: function(data, type, row, meta) {
+                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`));
+                    }
+                },
+            
+            ],
+
+            "language": {
+                "emptyTable": "ليست هناك بيانات متاحة في الجدول",
+                "loadingRecords": "جارٍ التحميل...",
+                "processing": "جارٍ التحميل...",
+                "lengthMenu": "أظهر _MENU_ مدخلات",
+                "zeroRecords": "لم يعثر على أية سجلات",
+                "info": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                "infoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                "infoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                "search": "ابحث:",
+                "paginate": {
+                    "first": "الأول",
+                    "previous": "السابق",
+                    "next": "التالي",
+                    "last": "الأخير"
+                },
+                "aria": {
+                    "sortAscending": ": تفعيل لترتيب العمود تصاعدياً",
+                    "sortDescending": ": تفعيل لترتيب العمود تنازلياً"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d قيمة محددة",
+                        "0": "",
+                        "1": "1 قيمة محددة"
+                    },
+                    "1": "%d سطر محدد",
+                    "_": "%d أسطر محددة",
+                    "cells": {
+                        "1": "1 خلية محددة",
+                        "_": "%d خلايا محددة"
+                    },
+                    "columns": {
+                        "1": "1 عمود محدد",
+                        "_": "%d أعمدة محددة"
+                    }
+                },
+                "buttons": {
+                    "print": "طباعة",
+                    "copyKeys": "زر <i>ctrl<\/i> أو <i>⌘<\/i> + <i>C<\/i> من الجدول<br>ليتم نسخها إلى الحافظة<br><br>للإلغاء اضغط على الرسالة أو اضغط على زر الخروج.",
+                    "copySuccess": {
+                        "_": "%d قيمة نسخت",
+                        "1": "1 قيمة نسخت"
+                    },
+                    "pageLength": {
+                        "-1": "اظهار الكل",
+                        "_": "إظهار %d أسطر"
+                    },
+                    "collection": "مجموعة",
+                    "copy": "نسخ",
+                    "copyTitle": "نسخ إلى الحافظة",
+                    "csv": "CSV",
+                    "excel": "Excel",
+                    "pdf": "PDF",
+                    "colvis": "إظهار الأعمدة",
+                    "colvisRestore": "إستعادة العرض"
+                },
+                "autoFill": {
+                    "cancel": "إلغاء",
+                    "info": "مثال عن الملئ التلقائي",
+                    "fill": "املأ جميع الحقول بـ <i>%d&lt;\\\/i&gt;<\/i>",
+                    "fillHorizontal": "تعبئة الحقول أفقيًا",
+                    "fillVertical": "تعبئة الحقول عموديا"
+                },
+                "searchBuilder": {
+                    "add": "اضافة شرط",
+                    "clearAll": "ازالة الكل",
+                    "condition": "الشرط",
+                    "data": "المعلومة",
+                    "logicAnd": "و",
+                    "logicOr": "أو",
+                    "title": [
+                        "منشئ البحث"
+                    ],
+                    "value": "القيمة",
+                    "conditions": {
+                        "date": {
+                            "after": "بعد",
+                            "before": "قبل",
+                            "between": "بين",
+                            "empty": "فارغ",
+                            "equals": "تساوي",
+                            "not": "ليس",
+                            "notBetween": "ليست بين",
+                            "notEmpty": "ليست فارغة"
+                        },
+                        "number": {
+                            "between": "بين",
+                            "empty": "فارغة",
+                            "equals": "تساوي",
+                            "gt": "أكبر من",
+                            "gte": "أكبر وتساوي",
+                            "lt": "أقل من",
+                            "lte": "أقل وتساوي",
+                            "not": "ليست",
+                            "notBetween": "ليست بين",
+                            "notEmpty": "ليست فارغة"
+                        },
+                        "string": {
+                            "contains": "يحتوي",
+                            "empty": "فاغ",
+                            "endsWith": "ينتهي ب",
+                            "equals": "يساوي",
+                            "not": "ليست",
+                            "notEmpty": "ليست فارغة",
+                            "startsWith": " تبدأ بـ "
+                        }
+                    },
+                    "button": {
+                        "0": "فلاتر البحث",
+                        "_": "فلاتر البحث (%d)"
+                    },
+                    "deleteTitle": "حذف فلاتر"
+                },
+                "searchPanes": {
+                    "clearMessage": "ازالة الكل",
+                    "collapse": {
+                        "0": "بحث",
+                        "_": "بحث (%d)"
+                    },
+                    "count": "عدد",
+                    "countFiltered": "عدد المفلتر",
+                    "loadMessage": "جارِ التحميل ...",
+                    "title": "الفلاتر النشطة"
+                },
+                "searchPlaceholder": "ابحث ...",
+                "infoThousands": ",",
+                "datetime": {
+                    "previous": "السابق",
+                    "next": "التالي",
+                    "hours": "الساعة",
+                    "minutes": "الدقيقة",
+                    "seconds": "الثانية",
+                    "unknown": "-",
+                    "amPm": [
+                        "صباحا",
+                        "مساءا"
+                    ],
+                    "weekdays": [
+                        "الأحد",
+                        "الإثنين",
+                        "الثلاثاء",
+                        "الأربعاء",
+                        "الخميس",
+                        "الجمعة",
+                        "السبت"
+                    ],
+                    "months": [
+                        "يناير",
+                        "فبراير",
+                        "مارس",
+                        "أبريل",
+                        "مايو",
+                        "يونيو",
+                        "يوليو",
+                        "أغسطس",
+                        "سبتمبر",
+                        "أكتوبر",
+                        "نوفمبر",
+                        "ديسمبر"
+                    ]
+                },
+                "editor": {
+                    "close": "إغلاق",
+                    "create": {
+                        "button": "إضافة",
+                        "title": "إضافة جديدة",
+                        "submit": "إرسال"
+                    },
+                    "edit": {
+                        "button": "تعديل",
+                        "title": "تعديل السجل",
+                        "submit": "تحديث"
+                    },
+                    "remove": {
+                        "button": "حذف",
+                        "title": "حذف",
+                        "submit": "حذف",
+                        "confirm": {
+                            "_": "هل أنت متأكد من رغبتك في حذف السجلات %d المحددة؟",
+                            "1": "هل أنت متأكد من رغبتك في حذف السجل؟"
+                        }
+                    },
+                    "error": {
+                        "system": "حدث خطأ ما"
+                    },
+                    "multi": {
+                        "title": "قيم متعدية",
+                        "restore": "تراجع"
+                    }
+                }
+            }
+        });
+    }
 
     function buildStudentsTable() {
         $('#table-title').html('بيانات الطلاب');

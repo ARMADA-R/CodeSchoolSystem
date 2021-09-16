@@ -14,6 +14,7 @@ use App\Models\TeachersModel;
 use App\Models\EmployeeModel;
 use CodeIgniter\HTTP\RequestInterface;
 use App\Controllers\Check;
+use App\Models\CoursesModel;
 use App\Models\MessaingModelExtends;
 use App\Models\SchoolModel;
 use App\Models\TemplateModel;
@@ -319,7 +320,7 @@ class Messaging extends BaseController
 						exit;
 					}
 				}
-				if ($group == 1 || $group == 2 || $group == 3) {
+				if ($group == 1 || $group == 2 || $group == 3 || $group == 4) {
 					$model = new MessaingModelExtends();
 					if ($group == 1) {
 
@@ -336,6 +337,11 @@ class Messaging extends BaseController
 					if ($group == 3) {
 						// 	$model=new EmployeeModel();
 						$result = $model->get_employee_messages_archive($school_id, $date, $limit, $page, $key);
+						$data = array('code' => 1, 'msg' => 'success', 'data' => $result, 'total_count' => count($result));
+						return	$this->respond($data, 200);
+					} if ($group == 4) {
+						// 	$model=new EmployeeModel();
+						$result = $model->get_course_students_messages_archive($school_id, $date, $limit, $page, $key);
 						$data = array('code' => 1, 'msg' => 'success', 'data' => $result, 'total_count' => count($result));
 						return	$this->respond($data, 200);
 					} else {
@@ -424,23 +430,34 @@ class Messaging extends BaseController
 					$userType = 'teachers';
 				} else if ($group == 3) {
 					$userType = 'employees';
+				} else if ($group == 4) {
+					$userType = 'coursesStudents';
 				}
 
 
 				if ($template != null && $userType != null) {
 					foreach ($usersData as $user) {
 
+						if ($user['phone'] == null) {
+							continue;
+						}
+						$message = $template->content;
+
+						$message = str_replace("@STUDENT@", $user['name'], $message);
+						$message = str_replace("@DATE@", $user['date'], $message);
+
 						$temp = $model->add_general_message([
 							"user_id" => $user['id'],
 							"user_type" => $userType,
-							"message" => $template->content,
+							"message" => $message,
 							"school_id" => $school_id,
 						]);
+
 
 						// add messages to send queue
 						$school_modal->add_toSent([
 							"user_id" => $user['id'],
-							"message" => $template->content,
+							"message" => $message,
 							"phone" => $user['phone'],
 							"school_id" => $school_id,
 							"message_archive_id" => $temp->connID->insert_id,
@@ -480,6 +497,7 @@ class Messaging extends BaseController
 				$template_id = $this->request->getVar('template_id');
 				$usersData = $this->request->getVar('usersData');
 				$group = $this->request->getVar('group');
+				$date = $this->request->getVar('date');
 
 				if (!$group) {
 					$result = array('code' => -1, 'msg' => 'الرجاء تحديد المجموعة ');
@@ -528,15 +546,35 @@ class Messaging extends BaseController
 
 					$usersData = (new EmployeeModel())->get_employee($school_id, 0, 0, "all");
 					$userType = 'employees';
+
+				} else if ($group == 4) {
+					$usersData = (new CoursesModel())->get_courses($school_id, 0, 0, "all");
+					$userType = 'coursesStudents';
 				}
 
 				if ($template != null && $userType != null) {
 					foreach ($usersData as $user) {
 
+						$message = $template->content;
+
+						if ($userType == 'employees') {
+							$message = str_replace("@STUDENT@", $user->name, $message);
+						} else if($userType == 'coursesStudents') {
+							$message = str_replace("@STUDENT@", $user->student_name, $message);
+						} else {
+							$message = str_replace("@STUDENT@", $user->full_name, $message);
+						}
+
+						if ($user->phone == null) {
+							continue;
+						}
+						
+						$message = str_replace("@DATE@", $date, $message);
+
 						$temp = $model->add_general_message([
 							"user_id" => $user->id,
 							"user_type" => $userType,
-							"message" => $template->content,
+							"message" => $message,
 							
 							"school_id" => $school_id,
 						]);
@@ -544,7 +582,7 @@ class Messaging extends BaseController
 						// add messages to send queue
 						$school_modal->add_toSent([
 							"user_id" => $user->id,
-							"message" => $template->content,
+							"message" => $message,
 							"phone" => $user->phone,
 							"school_id" => $school_id,
 							"message_archive_id" => $temp->connID->insert_id,

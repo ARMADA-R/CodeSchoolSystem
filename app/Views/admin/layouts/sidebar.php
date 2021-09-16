@@ -116,6 +116,18 @@
 
                         <i class="text-navy nav-icon fas fa-users"></i>
                         <p>
+                            العروض
+                            <span class="badge badge-info right"></span>
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+
+                    <a href="<?php echo base_url() . '/public/admin/partners'; ?>" class="nav-link">
+
+                        <i class="text-navy nav-icon fas fa-users"></i>
+                        <p>
                             الأعضاء
                             <span class="badge badge-info right"></span>
                         </p>
