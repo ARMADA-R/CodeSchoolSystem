@@ -55,13 +55,19 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="level">المستوى</label>
-                                <input required type="text" class="form-control" name="level" id="level">
+                                <!-- <input required type="text" class="form-control" name="level" id="level"> -->
+                                <select required class="form-control" name="level" id="level">
+                                    <option value=""></option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="division">الشعبة</label>
-                                <input required type="text" class="form-control" name="division" id="division">
+                                <!-- <input required type="text" class="form-control" name="division" id="division"> -->
+                                <select required class="form-control" name="division" id="division">
+                                    <option value=""></option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -205,13 +211,17 @@
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="level">المستوى</label>
-                                <input required type="text" class="form-control" name="level" id="level-edit">
+                                <!-- <input required type="text" class="form-control" name="level" id="level-edit"> -->
+                                <select required class="form-control" name="level" id="level-edit">
+                                </select>
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-group">
                                 <label for="division">الشعبة</label>
-                                <input required type="text" class="form-control" name="division" id="division-edit">
+                                <!-- <input required type="text" class="form-control" name="division" id="division-edit"> -->
+                                <select required class="form-control" name="division" id="division-edit">
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -604,6 +614,8 @@
 
     $(document).ready(function() {
         refreshContentTable();
+        levels();
+        divisions();
         $('#select-all').change(function() {
             if (this.checked) {
                 selects();
@@ -818,6 +830,78 @@
             });
 
         return false;
+    }
+
+
+
+    function levels() {
+        var jqxhr = $.ajax({
+                url: "<?= site_url('') ?>schools/GetLevels",
+                method: "GET",
+                timeout: 0,
+                data: {
+                    school_id: school_id
+                }
+            })
+            .done(function(response) {
+                setLevelsOptions(response.data)
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error(response.responseJSON.msg, 'خطأ');
+            });
+
+    }
+
+    function divisions() {
+        var jqxhr = $.ajax({
+                url: "<?= site_url('') ?>Schools/GetDivisions",
+                method: "GET",
+                timeout: 0,
+                data: {
+                    school_id: school_id
+                }
+            })
+            .done(function(response) {
+                setDivisionsOptions(response.data);
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error(response.responseJSON.msg,
+                    'خطأ ');
+            });
+
+    }
+
+    function setLevelsOptions(data) {
+        var levelSelect = $('#level-edit');
+        var levelAddSelect = $('#level');
+        $.each(data, function(index, val) {
+            levelSelect.append($('<option>', {
+                value: val.id,
+                text: val.title
+            }));
+            levelAddSelect.append($('<option>', {
+                value: val.id,
+                text: val.title
+            }));
+        });
+    }
+
+    function setDivisionsOptions(data) {
+        var divisionSelect = $('#division-edit');
+        var divisionAddSelect = $('#division');
+        $.each(data, function(index, val) {
+            console.log(val.id);
+            divisionSelect.append($('<option>', {
+                value: val.id,
+                text: val.title,
+            }));
+            divisionAddSelect.append($('<option>', {
+                value: val.id,
+                text: val.title,
+            }));
+        });
     }
 </script>
 

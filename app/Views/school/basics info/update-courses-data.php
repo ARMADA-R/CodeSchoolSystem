@@ -289,8 +289,8 @@
 
                     <div id="student_info" style="display: none;">
                         <form method="POST" id="update-data-form" action="" onsubmit="updateStudent(this); return false;" class="signup-form">
-                            <input type="hidden" class="form-input" name="student_id" id="student_id"/>
-                            <input type="hidden" class="form-input" name="school_id" id="school_id"/>
+                            <input type="hidden" class="form-input" name="student_id" id="student_id" />
+                            <input type="hidden" class="form-input" name="school_id" id="school_id" />
                             <div id="content-toShow">
                                 <div class="row">
                                     <div class="col-md-4">
@@ -310,16 +310,21 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div id="form-content">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-input" name="level" id="level" placeholder="الصف" />
+                                            <select required class="form-control" name="level" id="level">
+                                                <option value="">المستوى</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" class="form-input" name="division" id="division" placeholder="الشعبة" />
+                                            <select required class="form-control" name="division" id="division">
+                                                <option value="">الشعبة</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -394,6 +399,8 @@
             }
         });
 
+        var school_id;
+
 
         function getStudent(element) {
             formData = $(element).serializeArray().reduce(function(obj, item) {
@@ -430,6 +437,9 @@
             $("#form-content").css("display", "none");
             $("#student_info").css("display", "unset");
 
+            school_id = data.school_id;
+            levels();
+            divisions();
             console.log(data);
         }
 
@@ -461,6 +471,67 @@
             return false;
         }
 
+
+
+        function levels() {
+            var jqxhr = $.ajax({
+                    url: "<?= site_url('') ?>schools/GetLevels",
+                    method: "GET",
+                    timeout: 0,
+                    data: {
+                        school_id: school_id
+                    }
+                })
+                .done(function(response) {
+                    setLevelsOptions(response.data)
+                })
+                .fail(function(response) {
+                    console.log(response);
+                    toastr.error(response.responseJSON.msg, 'خطأ');
+                });
+
+        }
+
+        function divisions() {
+            var jqxhr = $.ajax({
+                    url: "<?= site_url('') ?>Schools/GetDivisions",
+                    method: "GET",
+                    timeout: 0,
+                    data: {
+                        school_id: school_id
+                    }
+                })
+                .done(function(response) {
+                    setDivisionsOptions(response.data);
+                })
+                .fail(function(response) {
+                    console.log(response);
+                    toastr.error(response.responseJSON.msg,
+                        'خطأ ');
+                });
+
+        }
+
+        function setLevelsOptions(data) {
+            var levelSelect = $('#level');
+            $.each(data, function(index, val) {
+                levelSelect.append($('<option>', {
+                    value: val.id,
+                    text: val.title
+                }));
+            });
+        }
+
+        function setDivisionsOptions(data) {
+            var divisionSelect = $('#division');
+            $.each(data, function(index, val) {
+                console.log(val.id);
+                divisionSelect.append($('<option>', {
+                    value: val.id,
+                    text: val.title,
+                }));
+            });
+        }
     </script>
 </body>
 

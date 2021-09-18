@@ -3405,7 +3405,7 @@ class Schools extends BaseController
             $check = new Check(); // Create an instance
             $result = $check->check();
 
-            if ($result['code'] == 1) {
+            
 
                 $school_id = $this->request->getVar('school_id');
                 if (!$school_id) {
@@ -3423,12 +3423,7 @@ class Schools extends BaseController
                     $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
                     return    $this->respond($data, 200);
                 }
-            } else {
-                $result = array(
-                    'code' => $result['code'], 'msg' => $result['messages'],
-                );
-                return $this->respond($result, 400);
-            }
+            
         } else {
             $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
             return    $this->respond($data, 200);
@@ -3590,10 +3585,7 @@ class Schools extends BaseController
     {
 
         if ($this->request->getMethod() == 'get') {
-            $check = new Check(); // Create an instance
-            $result = $check->check();
-
-            if ($result['code'] == 1) {
+            
 
                 $school_id = $this->request->getVar('school_id');
                 if (!$school_id) {
@@ -3611,12 +3603,7 @@ class Schools extends BaseController
                     $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
                     return    $this->respond($data, 200);
                 }
-            } else {
-                $result = array(
-                    'code' => $result['code'], 'msg' => $result['messages'],
-                );
-                return $this->respond($result, 400);
-            }
+            
         } else {
             $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
             return    $this->respond($data, 200);
