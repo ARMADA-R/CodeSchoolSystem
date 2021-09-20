@@ -205,7 +205,7 @@ class Auth extends ResourceController
 
                 $model = new UserModel();
                 $school = new SchoolModel();
-                
+
                 $check_email = $model->get_user_email($email);
                 $check_username = $model->get_user_username($username);
                 $check_phone = $model->get_user_by_phone($phone);
@@ -449,7 +449,7 @@ class Auth extends ResourceController
                     $school = $model->get_parent_school($result->phone);
 
                     $schools_id = '';
-                    
+
                     if (!empty($school)) {
                         $school = json_decode(json_encode($school), true);
                         // var_dump($school);
@@ -465,6 +465,11 @@ class Auth extends ResourceController
                     }
 
                     $data = array('email' => $result->email, 'user_id' => $result->id, 'role' => $result->role, 'token' => $output, 'school_id' => $schools_id, 'username' => $result->username);
+                }else if ($result->role == 2) {
+
+                    $school_info = (new SchoolModel())->get_school_info_by_id($result->id)[0];
+
+                    $data = array('email' => $result->email, 'user_id' => $result->id, 'role' => $result->role, 'token' => $output, 'username' => $result->username, 'school_name' => $school_info->school_name);
                 } else {
                     $data = array('email' => $result->email, 'user_id' => $result->id, 'role' => $result->role, 'token' => $output, 'username' => $result->username);
                 }
