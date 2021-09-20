@@ -1666,7 +1666,7 @@ class Schools extends BaseController
                     exit;
                 }
                 $model = new SchoolModel();
-                $result = $model->get_parent_exam_table2($limit, $page, $key, $school_id);
+                $result = $model->get_parent_schools_exam_tables($limit, $page, $key, explode(",", $school_id));
                 $asbense = array();
                 if (!empty($result)) {
 
@@ -1721,7 +1721,7 @@ class Schools extends BaseController
                     exit;
                 }
                 $model = new SchoolModel();
-                $result = $model->get_parent_school_table2($limit, $page, $key, $school_id);
+                $result = $model->get_parent_schools_tables($limit, $page, $key, explode(",",$school_id));
                 $asbense = array();
                 if (!empty($result)) {
 

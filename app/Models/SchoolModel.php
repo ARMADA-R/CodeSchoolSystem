@@ -533,6 +533,7 @@ class SchoolModel extends Model
         $query   = $builder->get();
         return $query->getRow();
     }
+    
     public function get_school_table($limit, $page, $school_id, $key)
     {
         $page = ($page - 1) * $limit;
@@ -550,6 +551,34 @@ class SchoolModel extends Model
         }
 
         $builder->where('school_tables.school_id', $school_id);
+        $builder->orderBy('school_tables.create_date', 'DESC');
+        if ($key == 'all') {
+            $query   = $builder->get();
+        } else {
+            $query   = $builder->get($limit, $page);
+        }
+        return $query->getResult();
+    }
+
+
+    public function get_parent_schools_tables($limit, $page, $key, array $school_id)
+    {
+        $page = ($page - 1) * $limit;
+        $db = \Config\Database::connect();
+        $builder = $db->table('school_tables');
+        $builder->select('school_info.school_name, school_tables.id, school_tables.file_path, CAST(school_tables.create_date AS DATE) date, classes.name class_name, semaster.name semester');
+        $builder->join('classes', 'school_tables.class_id = classes.id');
+        $builder->join('semaster', 'school_tables.semester_id = semaster.id');
+        $builder->join('school_info', 'school_tables.school_id = school_info.school_id');
+
+        if (!empty($class)) {
+            $builder->where('class_id', $class);
+        }
+        if (!empty($semaster_id)) {
+            $builder->where('semestar_id', $semaster_id);
+        }
+
+        $builder->whereIn('school_tables.school_id', $school_id);
         $builder->orderBy('school_tables.create_date', 'DESC');
         if ($key == 'all') {
             $query   = $builder->get();
@@ -703,6 +732,8 @@ class SchoolModel extends Model
         $query = $db->query($sql);
         return $query->getResult();
     }
+
+
     public function add_period($data)
     {
         $db = \Config\Database::connect();
@@ -931,6 +962,30 @@ class SchoolModel extends Model
         }
 
         $builder->where('school_exam_table.school_id', $school_id);
+        $builder->orderBy('school_exam_table.create_date', 'DESC');
+        if ($key == 'all') {
+            $query   = $builder->get();
+        } else {
+            $query   = $builder->get($limit, $page);
+        }
+        return $query->getResult();
+    }
+
+    public function get_parent_schools_exam_tables($limit, $page, $key,array $schools_id)
+    {
+        $page = ($page - 1) * $limit;
+        $db = \Config\Database::connect();
+        $builder = $db->table('school_exam_table');
+        $builder->select('school_info.school_name, school_exam_table.id, school_exam_table.file_path, CAST(school_exam_table.create_date AS DATE) date, classes.name class_name, semaster.name semester');
+        $builder->join('classes', 'school_exam_table.class_id = classes.id');
+        $builder->join('semaster', 'school_exam_table.semester_id = semaster.id');
+        $builder->join('school_info', 'school_exam_table.school_id = school_info.school_id');
+
+        if (!empty($class)) {
+            $builder->where('class_id', $class);
+        }
+
+        $builder->whereIn('school_exam_table.school_id', $schools_id);
         $builder->orderBy('school_exam_table.create_date', 'DESC');
         if ($key == 'all') {
             $query   = $builder->get();

@@ -16,17 +16,17 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            
-            <div class="card-body p-2"  style="overflow-x: scroll;">
+
+            <div class="card-body p-2" style="overflow-x: scroll;">
                 <table id="messages_forms" class="table table-striped " style="width:100%">
                     <thead>
 
                         <tr>
-                            <th></th>
                             <th>م</th>
-                            <th>اليوم</th>
-                            <th>الحصة</th>
-                            <th>المادة</th>
+                            <th>الصف</th>
+                            <th>الفصل</th>
+                            <th>الجدول</th>
+                            <th>التاريخ</th>
                             <th>المدرسة</th>
                         </tr>
                     </thead>
@@ -70,18 +70,11 @@
             autoWidth: false,
 
             columns: [{
-                    "className": 'details-control align-middle',
-                    "orderable": false,
-                    searchable: false,
-                    exportable: false,
-                    "data": null,
-                    "defaultContent": ''
-                },{
-                    "data": null,
-                    name: 'null',
+                    data: null,
+                    name: 'id',
                     title: 'م',
                     className: 'text-center t-id',
-                    orderable: false,
+                    // orderable: false,
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
@@ -89,28 +82,40 @@
                     }
                 },
                 {
-                    data: 'day',
-                    name: 'day',
-                    className: 'text-center t-day',
-                    title: 'اليوم'
+                    data: 'class_name',
+                    name: 'class_name',
+                    className: 'text-center t-class_name',
+                    title: 'الصف'
                 },
                 {
-                    data: 'name',
-                    name: 'name',
-                    className: 'text-center t-name',
-                    title: 'الحصة',
+                    data: 'semester',
+                    name: 'semester',
+                    className: 'text-center t-semester',
+                    title: `الفصل`,
                 },
                 {
-                    data: 'subject_name',
-                    name: 'subject_name',
-                    className: 'text-center t-subject_name',
-                    title: `المادة`,
+                    data: 'file_path',
+                    name: 'file_path',
+                    className: 'text-center t-file_path',
+                    title: 'الجدول',
+                    render: function(data, type, row, meta) {
+                        return `<a href="${data}" >عرض</a>`;
+                    }
+                },
+                {
+                    data: 'date',
+                    name: 'date',
+                    className: 'text-center t-date',
+                    title: 'تاريخ الاضافة',
+                    render: function(data, type, row, meta) {
+                        return moment(data, "YYYY-MM-DD").format("iYYYY/iM/iD");
+                    }
                 },
                 {
                     data: 'school_name',
                     name: 'school_name',
                     className: 'text-center t-school_name',
-                    title: 'المدرسة'
+                    title: 'المدرسة',
                 },
             ],
             buttons: [{
@@ -346,5 +351,4 @@
                 toastr.error(response.responseJSON.msg, 'خطأ');
             });
     }
-
 </script>

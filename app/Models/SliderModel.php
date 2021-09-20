@@ -12,7 +12,7 @@ class SliderModel extends Model
     public function get_slider(){
         $db = \Config\Database::connect();
         $builder = $db->table('sliders');
-        $builder->select('id,concat("'.base_url().'/schools/assets/files/",sliders.image_url)image_url,text');
+        $builder->select('id,sliders.image_url,text');
         $builder->orderBy('create_date', 'DESC');
         $query   = $builder->get();  
         return $query->getResult();

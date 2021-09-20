@@ -509,7 +509,7 @@
                                 <a href="<?= site_url(); ?>parent" class="mx-4 btn btn-outline-primary">ولي الامر</a>
                                 <a href="<?= site_url(); ?>partner" class="mx-4 btn btn-outline-primary">الشركاء</a>
                                 <a href="<?= site_url(); ?>admin" class="mx-4 btn btn-outline-primary">المشرفين</a>
-                                <a href="<?= site_url(""); ?>courses/updateStudent" class="mx-4 btn btn-outline-primary">بيانات طلاب نظام المقررات</a>
+                                <a href="<?= site_url(""); ?>courses/updateStudent" class="mx-4 btn btn-outline-primary">تعديل بيانات طلاب نظام المقررات</a>
                             </div>
                         </div>
                     </div>

@@ -12,8 +12,9 @@ class CoursesModel extends Model
         $page = ($page - 1) * $limit;
         $db = \Config\Database::connect();
         $builder = $db->table('courses');
-        $builder->select('courses.id, level, division, student_name,student_number,phone');
-        // $builder->join('students','courses.user_id=students.id');
+        $builder->select('courses.id, school_levels.title level, schools_divisions.title division, student_name,student_number,phone');
+        $builder->join('school_levels','courses.level = school_levels.id');
+        $builder->join('schools_divisions','courses.division = schools_divisions.id');
         $builder->where('courses.school_id', $school_id);
         
         if ($division != null) {
