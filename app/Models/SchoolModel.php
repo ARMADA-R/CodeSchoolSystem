@@ -841,7 +841,7 @@ class SchoolModel extends Model
     {
         $db = \Config\Database::connect();
         $builder = $db->table('schools_gates');
-        $builder->select('gates.name as gate,gates.id as gate_id,schools_gates.id,schools_gates.username,schools_gates.sender_name,schools_gates.isActive'); //
+        $builder->select('gates.name as gate,gates.id as gate_id,schools_gates.id,schools_gates.password,schools_gates.username,schools_gates.sender_name,schools_gates.isActive'); //
         $builder->join('gates', 'gates.id = schools_gates.gate_id');
         $builder->where('school_id', $school_id);
         $query   = $builder->get();

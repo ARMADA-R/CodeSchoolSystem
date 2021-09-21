@@ -252,7 +252,7 @@
 
                         return `<div class="row justify-content-center  text-white ">
                                     <div class="m-1">
-                                        <a type="button" class="btn btn-sm btn-info " title="edit" style="margin: 0px;" id="` + data + `"  onclick="editRecordModal(${data},'${row.gate_id}')">
+                                        <a type="button" class="btn btn-sm btn-info " title="edit" style="margin: 0px;" id="` + data + `"  onclick="editRecordModal(${data},'${row.gate_id}', '${row.isActive}', '${row.gate}', '${row.password}', '${row.sender_name}', '${row.username}')">
                                             <i class="far fa-edit"></i>
                                         </a>
                                     </div>
@@ -514,13 +514,14 @@
     }
 
 
-    function editRecordModal(id, gate_id) {
+    function editRecordModal(id, gate_id, isActive, gate, password, sender_name, username) {
         var row = $('tr#' + id);
 
         $("#update-gates-id").val(gate_id);
-        $('#update-sender-name').val(row.children('.t-sender_name').html());
-        $('#update-username').val(row.children('.t-username').html());
-        $('#update-status').val(row.children('.t-isActive').html() == 'مفعل' ? 1 : 0);
+        $('#update-sender-name').val(sender_name);
+        $('#update-username').val(username);
+        $('#update-status').val(isActive);
+        $('#update-password').val(password);
         $('#update-record-id').val(id);
         $('#update-gate-btn').click();
     }
