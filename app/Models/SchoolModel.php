@@ -357,8 +357,8 @@ class SchoolModel extends Model
         $builder->select('courses_absence_and_lag.id as archive_id,courses.id student_id,student_name,student_number,courses.phone parent_phone,school_levels.title level_name,schools_divisions.title division_name,monitoring_case,period,date,message,send_status');
         $builder->join('courses', 'courses_absence_and_lag.student_id = courses.id');
         $builder->join('users', 'courses.phone = users.phone');
-        $builder->join('school_levels', 'courses.level = school_levels.id');
-        $builder->join('schools_divisions', 'courses.division = schools_divisions.id');
+        $builder->join('school_levels', 'courses.level = school_levels.id', 'left');
+        $builder->join('schools_divisions', 'courses.division = schools_divisions.id', 'left');
         $builder->where('role', 3);
         $builder->where('courses_absence_and_lag.school_id', $school_id);
         $builder->orderBy('courses_absence_and_lag.create_date', 'DESC');

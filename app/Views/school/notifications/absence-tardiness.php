@@ -2098,6 +2098,7 @@
         var dataToSend = [];
         var totalSelectedMessageNumber = 0;
         var totalNotificationToSend = 0;
+        var eduType = $("#edu-type-selector").val();
 
         for (let i = 0; i < selectedRows.length; i++) {
 
@@ -2115,7 +2116,7 @@
                 toSend = 1;
             }
 
-            if ($("#edu-type-selector").val() == 1) {
+            if (eduType == 1 && toSend == 1) {
                 dataToSend.push({
                     isToSend: toSend,
                     school: school_id,
@@ -2131,7 +2132,7 @@
                     semaster_id: $("#semesters-student-" + student_id).html(),
                 });
 
-            } else if ($("#edu-type-selector").val() == 2) {
+            } else if (eduType == 2 && toSend == 1) {
                 dataToSend.push({
                     isToSend: toSend,
                     school: school_id,
