@@ -453,14 +453,14 @@
                                 tableContainer.css('font-family', 'Arial, Helvetica, sans-serif');
 
                                 tableContainer.find('td').each(function(index, value) {
-                                    $(value).css('border', ' 0.6px solid #dee2e6');
+                                    $(value).css('border', ' 0.6px solid #000');
                                     $(value).css('padding', ' 8px');
                                     $(value).css('display', '');
 
                                 });
 
                                 tableContainer.find('th').each(function(index, value) {
-                                    $(value).css('border', ' 1px solid #dee2e6');
+                                    $(value).css('border', ' 1px solid #000');
                                     $(value).css('display', '');
                                 });
 
@@ -505,7 +505,7 @@
                                 tableContainer.css('font-family', 'Arial, Helvetica, sans-serif');
 
                                 tableContainer.find('td').each(function(index, value) {
-                                    $(value).css('border', ' 0.6px solid #dee2e6');
+                                    $(value).css('border', ' 0.6px solid #000');
                                     $(value).css('padding', ' 8px');
                                     $(value).css('display', '');
 
@@ -517,7 +517,7 @@
                                 });
 
                                 tableContainer.find('th').each(function(index, value) {
-                                    $(value).css('border', ' 1px solid #dee2e6');
+                                    $(value).css('border', ' 1px solid #000');
                                     $(value).css('display', '');
                                 });
 
