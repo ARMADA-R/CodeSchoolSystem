@@ -367,7 +367,7 @@ class SchoolModel extends Model
         } else {
             $query   = $builder->get($limit, $page);
         }
-        
+
         return ($query->getResult());
     }
 
@@ -389,7 +389,7 @@ class SchoolModel extends Model
         } else {
             $query = $builder->get($limit, $page);
         }
-        
+
         return $query->getResult();
     }
 
@@ -533,7 +533,7 @@ class SchoolModel extends Model
         $query   = $builder->get();
         return $query->getRow();
     }
-    
+
     public function get_school_table($limit, $page, $school_id, $key)
     {
         $page = ($page - 1) * $limit;
@@ -853,7 +853,7 @@ class SchoolModel extends Model
     {
         $db = \Config\Database::connect();
         $builder = $db->table('schools_gates');
-        $builder->select('gates.*, schools_gates.username, schools_gates.sender_name, schools_gates.password'); //
+        $builder->select(" gates.name, gates.method, gates.id as gate_id, gates.isNeedPlusSign, gates.isReturnStatus, gates.doubleEnter, gates.success_code, gates.arabic_link, gates.latin_link, gates.balance_link, schools_gates.id, schools_gates.username, schools_gates.sender_name, schools_gates.password"); //
         $builder->join('gates', 'gates.id = schools_gates.gate_id');
         $builder->where('school_id', $school_id);
         $builder->where('isActive', 1);
@@ -904,6 +904,8 @@ class SchoolModel extends Model
         $builder->limit($count);
         // $builder->where('schools_gates.isActive', 1);
         $query   = $builder->get();
+        print_r($count);
+        print_r($query->getResult());
         return $query->getResult();
     }
 
@@ -971,7 +973,7 @@ class SchoolModel extends Model
         return $query->getResult();
     }
 
-    public function get_parent_schools_exam_tables($limit, $page, $key,array $schools_id)
+    public function get_parent_schools_exam_tables($limit, $page, $key, array $schools_id)
     {
         $page = ($page - 1) * $limit;
         $db = \Config\Database::connect();
