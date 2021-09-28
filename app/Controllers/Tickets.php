@@ -834,9 +834,9 @@ class Tickets extends BaseController
                             $r[$i]['status'] = 'مغلقة';
                         }
                         $r[$i]['username'] = $a->username;
-                        $r[$i]['username'] = $a->username;
-                        $r[$i]['email'] = $a->username;
-                        $r[$i]['phone'] = $a->department;
+                        $r[$i]['email'] = $a->email;
+                        $r[$i]['phone'] = $a->phone;
+                        $r[$i]['department'] = $a->department;
                         $r[$i]['type'] = $a->type;
                         $r[$i]['prority'] = $a->prority;
                         $r[$i]['ticket_text'] = $a->ticket_text;

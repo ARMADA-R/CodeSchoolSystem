@@ -300,7 +300,7 @@
                     className: 'text-center t-ticket_text align-middle',
                     title: '<div class="px-5 mx-5">النص</div>',
                     render: function(data, type, row, meta) {
-                        return `<button class="btn btn-link" onclick="showReplyModal('${row.id}','${row.ticket_text}','${row.date}','${row.username}','${row.department}','${row.type}','${row.status}','${row.prority}')">${data}</button>`;
+                        return `<button class="btn btn-link" onclick="showReplyModal('${row.id}',\`${row.ticket_text}\`,'${row.date}','${row.username}','${row.department}','${row.type}','${row.status}','${row.prority}')">${data}</button>`;
                     }
                 },
                 {
@@ -625,6 +625,7 @@
     }
 
     function showReplyModal(id, ticket_text, date, username, department, type, status, prority) {
+        console.log(id, ticket_text, date, username, department, type, status, prority);
         $('#modal-ticket-text').html(ticket_text);
         $('#modal-department').html(department);
         $('#modal-type').html(type);
