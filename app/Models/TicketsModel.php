@@ -8,16 +8,15 @@ use CodeIgniter\Database\BaseBuilder;
 class TicketsModel extends Model
 {
 
-        public function get_schooladminticket($name = null, $status = null, $date = null, $sender_type)
+        public function get_schooladminticket($name = null, $status = null, $date = null, $sender_type = null)
         {
-
 
                 $db = \Config\Database::connect();
                 $builder = $db->table('tickets');
                 $builder->select('users.id,school_info.school_name,users.username,school_info.image_url,category,users.email,users.phone,users.city,users.area');
                 $builder->join('users', 'tickets.sender_id = users.id');
                 $builder->join('users s', 'tickets.reciver_id = s.id');
-                $builder->join('school_info', 'users.id = school_info.school_id', '');
+                $builder->join('school_info', '(users.id = school_info.school_id OR s.id = school_info.school_id)');
                 if (!empty($name) && $sender_type == 1) {
                         $builder->like('school_name', $name);
                 }
@@ -35,7 +34,7 @@ class TicketsModel extends Model
                         $search_where = "CAST(tickets.create_date As Date) = '" . $date . "'";
                         $builder->where($search_where);
                 }
-                $builder->where('sender_type', $sender_type);
+                // $builder->where('sender_type', $sender_type);
 
                 $query   = $builder->get();
 
@@ -296,6 +295,26 @@ class TicketsModel extends Model
                 //        $query=$db->query('Select users.username,a.id, b.* From tickets a left Join( Select 1  From tickets_reply) b On b.ticket_id = a.id left Join  users on b.user_id=users.id  where   (sender_id='.$school_id .' and sender_type='.$sender_type.') ');
                 return $query->getResult();
         }
+        public function getSchoolAdminTicketBySchoolId($school_id)
+        {
+                $db = \Config\Database::connect();
+                $builder = $db->table('tickets');
+                $builder->select(' tickets.id,tickets.status,department,
+                type,prority,ticket_text,reply,CAST(tickets_reply.create_date As Date) date,
+                 users.id as user_id, school_info.school_id,school_info.school_name,users.username,
+                 school_info.image_url,category,users.email,users.phone,users.city,users.area');
+                $builder->join('users', '(tickets.sender_id = users.id OR tickets.reciver_id = users.id)');
+                // $builder->join('users s', 'tickets.reciver_id = s.id');
+                $builder->join('school_info', '(tickets.sender_id = school_info.school_id OR tickets.reciver_id = school_info.school_id)');
+                $builder->join('tickets_reply ',' (tickets.id=tickets_reply.ticket_id  and tickets_reply.id in (select max(id) from tickets_reply group by ticket_id))', 'left');
+
+                $builder->whereIn('sender_type', [1,2]);
+                $builder->where('school_info.school_id', $school_id);
+
+                $query   = $builder->get();
+
+                return $query->getResult();
+        }
         public function get_schoolparentticketbyschoolid($school_id, $sender_type, $limit, $page, $parent_name = null, $date = null, $status = null)
         {
                 $db = \Config\Database::connect();
@@ -361,7 +380,8 @@ class TicketsModel extends Model
                 $db = \Config\Database::connect();
 
 
-                $sql = 'select tickets.id,tickets.status,users.username,department,type,prority,ticket_text,reply,CAST(tickets_reply.create_date As Date) date FROM tickets left join tickets_reply on tickets.id=tickets_reply.ticket_id  and tickets_reply.id in (select max(id) from tickets_reply group by ticket_id) left join users on tickets_reply.user_id=users.id where sender_id=' . $parent_id . ' and reciver_id=' . $school_id . ' and sender_type=' . $sender_type;
+                $sql = 'select tickets.id,tickets.status,users.username,department,type,prority,ticket_text,reply,CAST(tickets_reply.create_date As Date) date FROM tickets 
+                left join tickets_reply on tickets.id=tickets_reply.ticket_id  and tickets_reply.id in (select max(id) from tickets_reply group by ticket_id) left join users on tickets_reply.user_id=users.id where sender_id=' . $parent_id . ' and reciver_id=' . $school_id . ' and sender_type=' . $sender_type;
 
                 $query = $db->query($sql);
                 //  $query =$db->query('select tickets.id,tickets.status,users.username,department,type,prority,ticket_text,reply,c.id reply_id FROM tickets left join tickets_reply c ON c.ticket_id = tickets.id AND c.id = (SELECT MAX(c.id) FROM tickets_reply c2 WHERE c2.ticket_id = tickets.id)    left join users on c.user_id=users.id where sender_id='.$school_id .' and sender_type='.$sender_type);

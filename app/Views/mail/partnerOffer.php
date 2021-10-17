@@ -13,12 +13,18 @@
         <div class="container" style="margin: 10px; text-align: center;">
             <div class="signup-content" style="margin-top: 200px; overflow: hidden;">
                 <span>
-                    بناء على الخدمات المقدمة في نظام راصد وتبعا لطلبكم للاستفادة من العرض 
+                    بناء على الخدمات المقدمة في نظام راصد وتبعا لطلبكم الحصول على 
                 <?= $service_name ?>
-                يمكنكم استخدام الرمز ادناه للاسفادة من العرض
+                المقدم من 
+                <?= $offer->username ?>   <?= $offer->city ?>
+                يمكنكم الكود التالي
                 </span>
                 <br>
                 <?= $cobon ?>
+                امسؤل استقبال شريكنا
+                علما ان نهاية العرض سيكون نهاية دوام يوم 
+                 <?= $offer->end_date ?>
+                 
             </div>
         </div>
     </div>

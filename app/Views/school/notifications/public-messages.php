@@ -162,7 +162,7 @@
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
-                        return `<input type="checkbox" class='align-middle' value='${data}' name="Users[]" id="${data}"/>`;
+                        return `<input type="checkbox" class='align-middle' value='${data}' name="Users[]" id="checkbox-${data}"/>`;
                     }
                 },
                 {
@@ -190,6 +190,16 @@
                     title: 'الجوال'
                 },
             ],
+
+            buttons: [{
+
+                className: 'btn btn-sm ',
+                text: 'إلغاء تحديد الارقام المكررة',
+                action: function(e, dt, node, config) {
+                    deselectDuplicate();
+                }
+
+            }, ],
             "language": {
                 "emptyTable": "ليست هناك بيانات متاحة في الجدول",
                 "loadingRecords": "جارٍ التحميل...",
@@ -440,7 +450,7 @@
         $('#table-title').html('بيانات الطلاب');
 
         dataTable = $('#content-table').DataTable({
-            dom: `<"row d-flex justify-content-between mx-1 "fl>rtip`,
+            dom: `<"row d-flex justify-content-center mx-1 my-1"B><"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
                 [25, 50, 100, 500, 1000],
                 [25, 50, 100, 500, 1000]
@@ -460,7 +470,7 @@
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
-                        return `<input type="checkbox" class='align-middle' value='${data}' name="Users[]" id="${data}"/>`;
+                        return `<input type="checkbox" class='align-middle' value='${data}' name="Users[]" id="checkbox-${data}"/>`;
                     }
                 },
                 {
@@ -495,6 +505,15 @@
                 },
             ],
 
+            buttons: [{
+
+                className: 'btn btn-sm ',
+                text: 'إلغاء تحديد الارقام المكررة',
+                action: function(e, dt, node, config) {
+                    deselectDuplicate();
+                }
+
+            }, ],
             "language": {
                 "emptyTable": "ليست هناك بيانات متاحة في الجدول",
                 "loadingRecords": "جارٍ التحميل...",
@@ -694,7 +713,7 @@
         $('#table-title').html('بيانات طلاب نظام المقررات');
 
         dataTable = $('#content-table').DataTable({
-            dom: `<"row d-flex justify-content-between mx-1 "fl>rtip`,
+            dom: `<"row d-flex justify-content-center mx-1 my-1"B><"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
                 [25, 50, 100, 500, 1000],
                 [25, 50, 100, 500, 1000]
@@ -714,7 +733,7 @@
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
-                        return `<input type="checkbox" class='align-middle' value='${data}' name="Users[]" id="${data}"/>`;
+                        return `<input type="checkbox" class='align-middle' value='${data}' name="Users[]" id="checkbox-${data}"/>`;
                     }
                 },
                 {
@@ -748,6 +767,16 @@
                     }
                 },
             ],
+
+            buttons: [{
+
+                className: 'btn btn-sm ',
+                text: 'إلغاء تحديد الارقام المكررة',
+                action: function(e, dt, node, config) {
+                    deselectDuplicate();
+                }
+
+            }, ],
 
             "language": {
                 "emptyTable": "ليست هناك بيانات متاحة في الجدول",
@@ -948,7 +977,7 @@
         $('#table-title').html('بيانات المدرسين');
 
         dataTable = $('#content-table').DataTable({
-            dom: `<"row d-flex justify-content-between mx-1 "fl>rtip`,
+            dom: `<"row d-flex justify-content-center mx-1 my-1"B><"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
                 [25, 50, 100, 500, 1000],
                 [25, 50, 100, 500, 1000]
@@ -968,7 +997,7 @@
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
-                        return `<input type="checkbox" class='align-middle' value='${data}' name="Users[]" id="${data}"/>`;
+                        return `<input type="checkbox" class='align-middle' value='${data}' name="Users[]" id="checkbox-${data}"/>`;
                     }
                 },
                 {
@@ -1002,6 +1031,16 @@
                     }
                 },
             ],
+
+            buttons: [{
+
+                className: 'btn btn-sm ',
+                text: 'إلغاء تحديد الارقام المكررة',
+                action: function(e, dt, node, config) {
+                    deselectDuplicate();
+                }
+
+            }, ],
             "language": {
                 "emptyTable": "ليست هناك بيانات متاحة في الجدول",
                 "loadingRecords": "جارٍ التحميل...",
@@ -1201,7 +1240,7 @@
         $('#table-title').html('بيانات الموظفين');
 
         dataTable = $('#content-table').DataTable({
-            dom: `<"row d-flex justify-content-between mx-1 "fl>rtip`,
+            dom: `<"row d-flex justify-content-center mx-1 my-1"B><"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
                 [25, 50, 100, 500, 1000],
                 [25, 50, 100, 500, 1000]
@@ -1221,7 +1260,7 @@
                     searchable: false,
                     exportable: false,
                     render: function(data, type, row, meta) {
-                        return `<input type="checkbox" class='align-middle' value='${data}' name="Users[]" id="${data}"/>`;
+                        return `<input type="checkbox" class='align-middle' value='${data}' name="Users[]" id="checkbox-${data}"/>`;
                     }
                 },
                 {
@@ -1255,7 +1294,17 @@
                     }
                 },
             ],
+            
 
+            buttons: [{
+
+            className: 'btn btn-sm ',
+            text: 'إلغاء تحديد الارقام المكررة',
+            action: function(e, dt, node, config) {
+                deselectDuplicate();
+            }
+
+            }, ],
             "language": {
                 "emptyTable": "ليست هناك بيانات متاحة في الجدول",
                 "loadingRecords": "جارٍ التحميل...",
@@ -1811,6 +1860,7 @@
             });
 
     }
+
     // set classes options in classes select box 
     function setClassesOptions(data) {
         var classSelect = $('#classes');
@@ -1821,6 +1871,7 @@
             }));
         });
     }
+
     // set semester options in semesters select box
     function setSemestersOptions(data) {
         var semesterSelect = $('#semesters');
@@ -1835,5 +1886,20 @@
     function setForm(element) {
         console.log(element);
         $("#template-text").html($("#template-num-" + element.value).attr("title"));
+    }
+
+    function deselectDuplicate() {
+        var selectedData = getUsersData();
+        var uniqueData = [];
+        selectedData.forEach(element => {
+
+            if (uniqueData.find(unique => unique == element.phone) == undefined) {
+                uniqueData.push(element.phone);
+            } else {
+                $("#checkbox-" + element.id).prop('checked', false);
+            }
+
+        });
+
     }
 </script>

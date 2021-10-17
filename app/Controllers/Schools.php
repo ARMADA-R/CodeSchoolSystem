@@ -2392,21 +2392,21 @@ class Schools extends BaseController
                 $sentMessages[] = $value->unsent_message_id;
 
                 if ($value->type == "absenceAndLag") {
-                    $successSentAbsenceMessagesArchive[] = $value->message_archive_id;
+                    $successSentAbsenceMessagesArchive[] = ['archive_id' => [$value->message_archive_id], 'responce_code' => $res];
                 } else if ($value->type == "publicMessage") {
-                    $successSentPublicMessagesArchive[] = $value->message_archive_id;
+                    $successSentPublicMessagesArchive[] = ['archive_id' => [$value->message_archive_id], 'responce_code' => $res];
                 } else if ($value->type == "CourseAbsenceAndLag") {
-                    $successSentCourseAbsenceMessagesArchive[] = $value->message_archive_id;
+                    $successSentCourseAbsenceMessagesArchive[] = ['archive_id' => [$value->message_archive_id], 'responce_code' => $res];
                 }
             } else {
                 $sentMessages[] = $value->unsent_message_id;
 
                 if ($value->type == "absenceAndLag") {
-                    $faildSentAbsenceMessagesArchive[] = $value->message_archive_id;
+                    $faildSentAbsenceMessagesArchive[] = ['archive_id' => [$value->message_archive_id], 'responce_code' => $res];
                 } else if ($value->type == "publicMessage") {
-                    $faildSentPublicMessagesArchive[] = $value->message_archive_id;
+                    $faildSentPublicMessagesArchive[] = ['archive_id' => [$value->message_archive_id], 'responce_code' => $res];
                 } else if ($value->type == "CourseAbsenceAndLag") {
-                    $faildSentCourseAbsenceMessagesArchive[] = $value->message_archive_id;
+                    $faildSentCourseAbsenceMessagesArchive[] = ['archive_id' => [$value->message_archive_id], 'responce_code' => $res];
                 }
             }
 

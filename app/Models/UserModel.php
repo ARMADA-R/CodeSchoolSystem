@@ -198,5 +198,19 @@ class UserModel extends Model
         $builder->delete();
         return $db->affectedRows();
     }
+
+       
+    public function get_users_by_role($role = 0)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        if ($role) {
+            $builder->where('role', $role);
+        }
+        $query   = $builder->get();
+        return $query->getResult();
+    }
+
+    
     
 }

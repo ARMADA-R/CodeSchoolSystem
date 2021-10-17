@@ -160,7 +160,7 @@
                     className: 'text-center align-middle',
                     title: 'حالة الارسال',
                     render: function(data, type, row, meta) {
-                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`));
+                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`)) + ' \n'+ row.code;
                     }
                 },
             ],
@@ -517,7 +517,7 @@
                     className: 'text-center align-middle',
                     title: 'حالة الارسال',
                     render: function(data, type, row, meta) {
-                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`));
+                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`)) + ' \n'+ row.code;
                     }
                 },
             
@@ -814,7 +814,7 @@
                     className: 'text-center align-middle',
                     title: 'حالة الارسال',
                     render: function(data, type, row, meta) {
-                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`));
+                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`)) + ' \n'+ row.code;
                     }
                 },
             ],
@@ -1256,7 +1256,7 @@
                     className: 'text-center align-middle',
                     title: 'حالة الارسال',
                     render: function(data, type, row, meta) {
-                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`));
+                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`)) + ' \n'+ row.code;
                     }
                 },
             ],
@@ -1694,7 +1694,7 @@
                     className: 'text-center align-middle',
                     title: 'حالة الارسال',
                     render: function(data, type, row, meta) {
-                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`));
+                        return (data == 1) ? `<div class="text-success">تم الارسال</div>` : ((data == 0) ? `<div class="text-danger">فشل الارسال</div>` : ((data == -1) ? `<div class="text-muted">غير مخصصة للارسال</div>` : `جارٍ الارسال`)) + ' \n'+ row.code;
                     }
                 },
             ],

@@ -1,16 +1,16 @@
 <?php require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
 
 
-<div class="modal fade" id="edit-partner" tabindex="-1" aria-labelledby="edit-partnerLabel" aria-hidden="true">
+<div class="modal fade" id="edit-parent" tabindex="-1" aria-labelledby="edit-parentLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="edit-partnerLabel">تعديل سجل</h5>
+                <h5 class="modal-title" id="edit-parentLabel">تعديل سجل</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form onsubmit="UpdatePartner(this); return false;">
+            <form onsubmit="UpdateParent(this); return false;">
                 <input type="hidden" name="id" id="record-id-edit">
                 <div class="modal-body p-4">
                     <div class="row">
@@ -62,7 +62,7 @@
                         </div>
                         <div>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                            <button type="submit" id="edit-partner-submit" class="btn btn-primary">حفظ</button>
+                            <button type="submit" id="edit-parent-submit" class="btn btn-primary">حفظ</button>
                         </div>
                     </div>
                 </div>
@@ -70,14 +70,14 @@
         </div>
     </div>
 </div>
-<button id="edit-partner-btn" style="display: none;" class="btn btn-light" data-toggle="modal" data-target="#edit-partner"></button>
+<button id="edit-parent-btn" style="display: none;" class="btn btn-light" data-toggle="modal" data-target="#edit-parent"></button>
 
 
 <div class="card">
 
     <div class="card-header ">
         <i class="far fa-user-circle"></i>
-        <h6 class=" text-bold d-inline-flex">إدارة شركاء النجاح«</h6>
+        <h6 class=" text-bold d-inline-flex">إدارة اولياء الامور</h6>
     </div>
 
     <div class="card-body p-2" style="overflow-x: scroll;">
@@ -207,7 +207,7 @@
                     render: function(data, type, row, meta) {
                         return `<div class="row justify-content-center  text-white ">
                                     <div class="m-1">
-                                        <a type="button" class="btn btn-sm btn-info " title="edit" style="margin: 0px;" id="` + data + `"  onclick="editPartner('` + row.id + `','` + row.username + `','` + row.email + `','` + row.phone + `','` + row.city + `','` + row.area + `')">
+                                        <a type="button" class="btn btn-sm btn-info " title="edit" style="margin: 0px;" id="` + data + `"  onclick="editParent('` + row.id + `','` + row.username + `','` + row.email + `','` + row.phone + `','` + row.city + `','` + row.area + `')">
                                             <i class="far fa-edit"></i>
                                         </a>
                                     </div>
@@ -427,12 +427,12 @@
 
 
     $(document).ready(function() {
-        getPartnersData();
+        getParentsData();
     });
 
-    function getPartnersData() {
+    function getParentsData() {
         var jqxhr = $.ajax({
-                "url": "<?= site_url('') ?>Partners/GetPartnersData?page=1&limit=10000",
+                "url": "<?= site_url('') ?>Parents/GetParents?page=1&limit=10000",
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
@@ -454,7 +454,7 @@
     function deleteRecord(id) {
         if (confirm('هل انت متأكد من انك تريد حذف هذا السجل')) {
             var jqxhr = $.ajax({
-                    "url": "<?= site_url('') ?>Partners/DeletePartner",
+                    "url": "<?= site_url('') ?>Parents/DeleteParent",
                     "method": "DELETE",
                     "timeout": 0,
                     "headers": {
@@ -476,7 +476,7 @@
         }
     }
     
-    function editPartner(id, username, email, phone, city, area) {
+    function editParent(id, username, email, phone, city, area) {
         // var row = $('tr#' + id);
         console.log(id, username, email, phone, city, area);
         $('#username-edit').val(username);
@@ -487,19 +487,19 @@
         $('#area-edit').val(area);
 
         $('#record-id-edit').val(id);
-        $('#edit-partner-btn').click();
+        $('#edit-parent-btn').click();
     }
 
-    function UpdatePartner(element) {
+    function UpdateParent(element) {
         formData = $(element).serializeArray().reduce(function(obj, item) {
             obj[item.name] = item.value;
             return obj;
         }, {});
 
-        $('#edit-partner-submit').attr("disabled", true);
+        $('#edit-parent-submit').attr("disabled", true);
         $('#edit-spinner').show();
         var jqxhr = $.ajax({
-                url: "<?= site_url('') ?>Partners/EditPartner",
+                url: "<?= site_url('') ?>Parents/EditParent",
                 method: "POST",
                 timeout: 0,
                 data: {
@@ -517,14 +517,14 @@
                 },
             })
             .done(function(response) {
-                getPartnersData();
+                getParentsData();
                 toastr.success('تم تحديث البيانات بنجاح')
             })
             .fail(function(response) {
                 console.log(response);
                 toastr.error(response.responseJSON.msg, 'خطأ');
             }).always(function() {
-                $('#edit-partner-submit').removeAttr('disabled');
+                $('#edit-parent-submit').removeAttr('disabled');
                 $('#edit-spinner').hide();
             });
         return false;

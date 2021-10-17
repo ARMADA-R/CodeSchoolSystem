@@ -46,6 +46,7 @@ $routes->get('/admin/schooledit/(:num)', 'AdminView::schooledit/$1');
 $routes->get('/admin/adminemail', 'AdminView::adminemail');
 $routes->get('/admin/user', 'AdminView::user');
 $routes->get('/admin/partners', 'AdminView::partners');
+$routes->get('/admin/parents', 'AdminView::parents');
 $routes->get('/admin/mangeschool', 'AdminView::mangeschool');
 $routes->get('/admin/callus', 'AdminView::callus');
 $routes->get('/admin/gets', 'AdminView::gets');

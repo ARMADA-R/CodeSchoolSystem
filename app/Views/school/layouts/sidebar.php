@@ -7,7 +7,7 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar hide-scrollbar">
+    <div class="sidebar ">
         <!-- Sidebar user panel (optional) -->
         <!-- <div class="user-panel mx-2 mt-3 pb-3 mb-3 d-flex">
             <div class="image">

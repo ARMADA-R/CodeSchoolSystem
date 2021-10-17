@@ -4,6 +4,8 @@ namespace App\Models;
 
 use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Model;
+use DateInterval;
+use DateTime;
 
 class SchoolModel extends Model
 {
@@ -354,7 +356,7 @@ class SchoolModel extends Model
         $page = ($page - 1) * $limit;
         $db = \Config\Database::connect();
         $builder = $db->table('courses_absence_and_lag');
-        $builder->select('courses_absence_and_lag.id as archive_id,courses.id student_id,student_name,student_number,courses.phone parent_phone,school_levels.title level_name,schools_divisions.title division_name,monitoring_case,period,date,message,send_status');
+        $builder->select('courses_absence_and_lag.id as archive_id, courses_absence_and_lag.code,courses.id student_id,student_name,student_number,courses.phone parent_phone,school_levels.title level_name,schools_divisions.title division_name,monitoring_case,period,date,message,send_status');
         $builder->join('courses', 'courses_absence_and_lag.student_id = courses.id');
         $builder->join('users', 'courses.phone = users.phone');
         $builder->join('school_levels', 'courses.level = school_levels.id', 'left');
@@ -454,7 +456,7 @@ class SchoolModel extends Model
         $page = ($page - 1) * $limit;
         $db = \Config\Database::connect();
         $builder = $db->table('absence_and_lag');
-        $builder->select('absence_and_lag.id as archive_id,students.id student_id,full_name,student_number,students.phone parent_phone,classes.name class_name,semaster.name semaster_name,monitoring_case,period,date,message,send_status');
+        $builder->select('absence_and_lag.id as archive_id,bsence_and_lag.code,students.id student_id,full_name,student_number,students.phone parent_phone,classes.name class_name,semaster.name semaster_name,monitoring_case,period,date,message,send_status');
         $builder->join('students', 'absence_and_lag.student_id = students.id');
         $builder->join('users', 'students.phone = users.phone');
         $builder->join('classes', 'students.class_id = classes.id');
@@ -883,6 +885,8 @@ class SchoolModel extends Model
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('unsent_messages');
+        $db->transStart();
+
         $builder->select(
             "gates.name as gates_name," .
                 "gates.method as gates_method," .
@@ -902,11 +906,24 @@ class SchoolModel extends Model
         $builder->join('schools_gates', 'unsent_messages.school_gate_id = schools_gates.id');
         $builder->join('gates', 'gates.id = schools_gates.gate_id');
         $builder->limit($count);
-        // $builder->where('schools_gates.isActive', 1);
+        $builder->groupStart();
+        $builder->where('unsent_messages.last_processing IS NULL', null, false);
+        $builder->orWhere('unsent_messages.last_processing <', (new DateTime())->sub(new DateInterval('P0Y0M0DT0H30M0S'))->format('Y-m-d H:i:s'));
+        $builder->groupEnd();
         $query   = $builder->get();
-        print_r($count);
-        print_r($query->getResult());
-        return $query->getResult();
+        $res = $query->getResult();
+
+        $selectedRowsIDs = [];
+        foreach ($res as $value) {
+            $selectedRowsIDs[] = $value->unsent_message_id;
+        }
+        if (!empty($selectedRowsIDs)) {
+            $builder = $db->table('unsent_messages');
+            $builder->whereIn('id', $selectedRowsIDs);
+            $builder->update(["last_processing" => (new DateTime())->format('Y-m-d H:i:s')]);
+        }
+        $db->transComplete();
+        return $res;
     }
 
     public function deleteFromUnsentMessage($ids)
@@ -920,34 +937,43 @@ class SchoolModel extends Model
         return $db->affectedRows();
     }
 
-    public function updateAbsenceArchiveMessagesStatus($ids, $status)
+    public function updateAbsenceArchiveMessagesStatus($data, $status)
     {
-        if (count($ids) < 1) return;
-
+        if (count($data) < 1) return;
         $db = \Config\Database::connect();
         $builder = $db->table('absence_and_lag');
-        $builder->whereIn('id', $ids);
-        return  $builder->update(["send_status" => $status]);
+        foreach ($data as $value) {
+            $builder->whereIn('id', $value["archive_id"]);
+            $builder->update(["send_status" => $status, "code" => $value['responce_code']]);
+        }
+
+        return;
     }
 
-    public function updateCourseAbsenceArchiveMessagesStatus($ids, $status)
+    public function updateCourseAbsenceArchiveMessagesStatus($data, $status)
     {
-        if (count($ids) < 1) return;
+        if (count($data) < 1) return;
 
         $db = \Config\Database::connect();
         $builder = $db->table('courses_absence_and_lag');
-        $builder->whereIn('id', $ids);
-        return  $builder->update(["send_status" => $status]);
+        foreach ($data as $value) {
+            $builder->whereIn('id', $value["archive_id"]);
+            $builder->update(["send_status" => $status, "code" => $value['responce_code']]);
+        }
+        return;
     }
 
-    public function updatePublicMessagesArchiveMessagesStatus($ids, $status)
+    public function updatePublicMessagesArchiveMessagesStatus($data, $status)
     {
-        if (count($ids) < 1) return;
+        if (count($data) < 1) return;
 
         $db = \Config\Database::connect();
         $builder = $db->table('public_messages');
-        $builder->whereIn('id', $ids);
-        return  $builder->update(["send_status" => $status]);
+        foreach ($data as $value) {
+            $builder->whereIn('id', $value["archive_id"]);
+            $builder->update(["send_status" => $status, "code" => $value['responce_code']]);
+        }
+        return ;
     }
 
     public function get_school_exam_table($limit, $page, $key, $school_id)

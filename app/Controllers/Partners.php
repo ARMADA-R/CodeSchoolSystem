@@ -635,7 +635,7 @@ class Partners extends BaseController
         $mail->setTo($parent->email);
         $mail->setSubject('عروض الشركاء');
 
-        $mail->setMessage(view('mail/partnerOffer', ['cobon' => $offer->cubon, "service_name" => $offer->service_name]));
+        $mail->setMessage(view('mail/partnerOffer', ['cobon' => $offer->cubon, "service_name" => $offer->service_name, 'offer' => $offer]));
         $mail->send();
 
 

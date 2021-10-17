@@ -29,7 +29,7 @@ class Tickets extends BaseController
                 $status = $this->request->getVar('status');
                 $date = $this->request->getVar('date');
                 $model = new TicketsModel();
-                $result = $model->get_schooladminticket($school_name, $status, $date, 1);
+                $result = $model->get_schooladminticket(null , $status, $date);
                 if (!empty($result)) {
                     $data = array('code' => 1, 'msg' => 'success', 'data' => $result);
                     return    $this->respond($data, 200);
@@ -767,6 +767,78 @@ class Tickets extends BaseController
                         $r[$i]['type'] = $a->type;
                         $r[$i]['prority'] = $a->prority;
                         $r[$i]['ticket_text'] = $a->ticket_text;
+                        $r[$i]['reply'] = $a->reply;
+                        $r[$i]['date'] = $a->date;
+                        $i++;
+                    }
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => $r);
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
+                    return    $this->respond($data, 200);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+    public function getAdminsSchoolsTicketsBySchoolId()
+    {
+
+
+        if ($this->request->getMethod() == 'get') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $school_id = $this->request->getVar('school_id');
+                if (!$school_id) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل  المدرسة ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+                $page = $this->request->getVar('page');
+
+                $limit = $this->request->getVar('limit');
+
+                if (!$page) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل الصفحة ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+                if (!$limit) {
+                    $result = array('code' => -1, 'msg' => 'الرجاء إدخال حقل عدد العناصر ');
+                    return $this->respond($result, 400);
+                    exit;
+                }
+                $ticket_name = $this->request->getVar('ticket_name');
+                $status = $this->request->getVar('status');
+                $date = $this->request->getVar('date');
+                $model = new TicketsModel();
+                $a = array();
+                $result = $model->getSchoolAdminTicketBySchoolId($school_id);
+
+                if (!empty($result)) {
+                    $i = 0;
+                    foreach ($result as $a) {
+                        $r[$i]['id'] = $a->id;
+                        if ($a->status == 0) {
+                            $r[$i]['status'] = 'مفتوحة';
+                        }
+                        if ($a->status == 1) {
+                            $r[$i]['status'] = 'مغلقة';
+                        }
+                        $r[$i]['username'] = $a->username;
+                        $r[$i]['department'] = $a->department;
+                        $r[$i]['type'] = $a->type;
+                        $r[$i]['prority'] = $a->prority;
+                        $r[$i]['ticket_text'] = str_replace('\n', ' ', $a->ticket_text);
                         $r[$i]['reply'] = $a->reply;
                         $r[$i]['date'] = $a->date;
                         $i++;

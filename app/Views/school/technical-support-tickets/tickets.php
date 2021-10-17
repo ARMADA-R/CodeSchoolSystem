@@ -133,13 +133,9 @@
 </style>
 
 
-
-
-
 <script src="<?php echo base_url() . '/public/'; ?>Excel/jquery.table2excel.js"></script>
 
 <script src="<?php echo base_url() . '/public/'; ?>design/js/datatable.all.js"></script>
-
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 

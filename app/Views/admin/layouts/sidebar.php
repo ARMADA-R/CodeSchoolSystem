@@ -7,7 +7,7 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar hide-scrollbar">
+    <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <!-- <div class="user-panel mx-2 mt-3 pb-3 mb-3 d-flex">
             <div class="image">
@@ -135,10 +135,25 @@
                 </li>
 
 
+
+                <!-- end إدارة المدارس-->
+                <li class="nav-header"> إعدادات اولياء الامور
+                </li>
+
+                <li class="nav-item">
+
+                    <a href="<?php echo base_url() . '/public/admin/parents'; ?>" class="nav-link">
+                        <i class="text-navy nav-icon fas fa-users"></i>
+                        <p>
+                            الأعضاء
+                            <span class="badge badge-info right"></span>
+                        </p>
+                    </a>
+                </li>
+
                 <!-- end إدارة المدارس-->
 
                 <li class="nav-header"> تذاكر الدعم الفني للمدارس</li>
-
                 <li class="nav-item">
                     <a href="<?php echo base_url() . '/public/admin/ticket'; ?>" class="nav-link">
                         <i class="text-navy nav-icon far fa-address-card"></i>
