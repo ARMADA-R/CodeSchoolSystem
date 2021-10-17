@@ -153,7 +153,7 @@
 
                 <!-- end إدارة المدارس-->
 
-                <li class="nav-header"> تذاكر الدعم الفني للمدارس</li>
+                <li class="nav-header"> تذاكر الدعم الفني </li>
                 <li class="nav-item">
                     <a href="<?php echo base_url() . '/public/admin/ticket'; ?>" class="nav-link">
                         <i class="text-navy nav-icon far fa-address-card"></i>
@@ -167,7 +167,7 @@
                     <a href="<?php echo base_url() . '/public/admin/parent'; ?>" class="nav-link">
                         <i class="text-navy nav-icon far fa-address-card"></i>
                         <p>
-                            مدارس وأولياء الأمور
+                            أولياء الأمور
                         </p>
                     </a>
                 </li>

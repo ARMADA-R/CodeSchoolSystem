@@ -287,8 +287,6 @@ class Tickets extends BaseController
     }
     public function GetSchoolsParentsTickets()
     {
-
-
         if ($this->request->getMethod() == 'get') {
             $check = new Check(); // Create an instance
             $result = $check->check();
@@ -400,7 +398,7 @@ class Tickets extends BaseController
                 $status = $this->request->getVar('status');
                 $date = $this->request->getVar('date');
                 $model = new TicketsModel();
-                $result = $model->get_schooladminticket($partner_name, $status, $date, 3);
+                $result = $model->get_partnersAdminTicket($partner_name, $status, $date, 3);
                 if (!empty($result)) {
                     $data = array('code' => 1, 'msg' => 'success', 'data' => $result);
                     return    $this->respond($data, 200);
@@ -585,7 +583,7 @@ class Tickets extends BaseController
             return    $this->respond($data, 200);
         }
     }
-    public function GetParentsAdminTickets()
+    public function GetParentAdminTickets()
     {
 
 
@@ -605,6 +603,38 @@ class Tickets extends BaseController
                 }
                 $model = new TicketsModel();
                 $result = $model->get_parnetadminticket($parent_name, $status, $date, 5, $parent_id);
+                if (!empty($result)) {
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => $result);
+                    return    $this->respond($data, 200);
+                } else {
+                    $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);
+                    return    $this->respond($data, 200);
+                }
+            } else {
+                $result = array(
+                    'code' => $result['code'], 'msg' => $result['messages'],
+                );
+                return $this->respond($result, 400);
+            }
+        } else {
+            $data = array('code' => -1, 'msg' => 'Method must be GET', 'data' => []);
+            return    $this->respond($data, 200);
+        }
+    }
+    public function GetParentsAdminTickets()
+    {
+
+
+        if ($this->request->getMethod() == 'get') {
+            $check = new Check(); // Create an instance
+            $result = $check->check();
+
+            if ($result['code'] == 1) {
+                $parent_name = $this->request->getVar('parent_name');
+                $status = $this->request->getVar('status');
+                $date = $this->request->getVar('date');
+                $model = new TicketsModel();
+                $result = $model->get_parentsAdminTicket();
                 if (!empty($result)) {
                     $data = array('code' => 1, 'msg' => 'success', 'data' => $result);
                     return    $this->respond($data, 200);

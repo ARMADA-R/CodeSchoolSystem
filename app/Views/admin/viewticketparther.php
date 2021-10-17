@@ -1,71 +1,117 @@
 <?php require(APPPATH . 'Views/admin/layouts/preContent.php') ?>
 
 
-<!-- start row1 -->
 
-<!-- start card1 -->
-<div class="card">
+<button id="reply-to-ticket-btn" type="button" style="display: none;" class="btn btn-light" data-toggle="modal" data-target="#reply-to-ticket"></button>
 
-    <div class="card-header ">
-    <i class="fas fa-desktop"></i>  <h6 class=" text-bold d-inline-flex">مشاهدة التذاكر
-</h6> 
- 
-
+<!-- Modal -->
+<div class="modal fade" id="reply-to-ticket" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="reply-to-ticketLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reply-to-ticketLabel">عرض تذكرة</h5>
+                <div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <button type="button" style="padding: 2px;" class="btn btn-link" onclick="refreshTicketReplies()">
+                        <span aria-hidden="true" style="font-size: .9rem; font-weight: bolder;"><i class="fas fa-redo"></i></span>
+                    </button>
+                </div>
+                <input type="hidden" name="" id="modal-id">
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 id="modal-ticket-text">
+                        </h4>
+                        <small id="modal-date"></small>
+                    </div>
+                </div>
+                <!-- <hr class="pt-3"> -->
+                <div class="row">
+                    <div class="col-sm-3" id="">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>القسم</h6>
+                                <small id="modal-department"></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3" id="">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>النوع</h6>
+                                <small id="modal-type"></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3" id="">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>الحالة</h6>
+                                <small id="modal-status"></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3" id="">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>الأولوية</h6>
+                                <small id="modal-prority"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="spinner-control" class="d-flex justify-content-center">
+                    <div class="spinner-border m-5" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <div id="modal-replies">
+                </div>
+                <div id="">
+                    <div class="form-group">
+                        <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
+                        <textarea class="form-control" placeholder="اكتب ردك هنا..." id="user-reply" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="sendTicketReply()">ارسال</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">اغلاق</button>
+                <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+            </div>
+        </div>
     </div>
-    <!-- start card body1 -->
+</div>
 
-    <div class="card-body">
-    <div class="row">
-            <div class="col-lg-12" style="overflow-x: scroll;">
 
-                <table id="employee-table" class="table table-striped " style="width:100% ">
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+
+            <div class="card-body p-2" style="overflow-x: scroll;">
+                <table id="content-table" class="table table-striped " style="width:100%">
                     <thead>
                         <tr>
-                                <th>م</th>
-                                <th></th>
-                                <th ></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-
+                            <th></th>
+                            <th>رقم التذكرة</th>
+                            <th>النص</th>
+                            <th>آخر تحديث</th>
+                            <th>آخر من رد</th>
+                            <th>القسم</th>
+                            <th>النوع</th>
+                            <th>الحالة</th>
+                            <th>الأولوية</th>
                         </tr>
                     </thead>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
-        <!-- end row1 -->
-
     </div>
-    <!-- end card body1 -->
-
-
 </div>
-
-<!-- end card1 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -96,16 +142,16 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" />
 
 <script>
-    
     var dataTable = null;
-    var id= <?php echo $id; ?>
+    var id = <?php echo $id; ?>
 
     $(document).ready(function() {
-        dataTable = $('#employee-table').DataTable({
-            dom: `<"row d-flex justify-content-end mx-1 my-1 mb-3 "B><"row d-flex justify-content-between mx-1 "fl>rtip`,
+
+        dataTable = $('#content-table').DataTable({
+            dom: `<"row d-flex justify-content-between mx-1 "fl>rtip`,
             "lengthMenu": [
-                [25, 50, 100, 500],
-                [25, 50, 100, 500]
+                [25, 50, 100, 500, -1],
+                [25, 50, 100, 500, 'الكل']
             ],
             order: [
                 [1, 'asc']
@@ -114,84 +160,70 @@
             responsive: true,
             autoWidth: false,
             rowId: 'id',
-
+            createdRow: function(row, data, index) {
+                // $(row).addClass('clickable-row');
+            },
             columns: [{
-                    data: null,
-                    name: '',
-                    title: 'رقم التذكرة',
-                    className: 'text-center ',
-                    orderable: false,
+                    "className": 'details-control align-middle ',
+                    "orderable": false,
                     searchable: false,
                     exportable: false,
-                    render: function(data, type, row, meta) {
-                        return meta.row + meta.settings._iDisplayStart + 1;
-                    }
+                    "data": null,
+                    "defaultContent": ''
+                },
+                {
+                    data: 'id',
+                    name: 'id',
+                    title: 'رقم التذكرة',
+                    className: 'text-center t-id align-middle',
                 },
                 {
                     data: 'ticket_text',
                     name: 'ticket_text',
-                    className: 'text-center',
-                    title: '',
+                    className: 'text-center t-ticket_text align-middle',
+                    title: '<div class="px-5 mx-5">النص</div>',
                     render: function(data, type, row, meta) {
-                        return `
-                        <a href="<?php echo base_url() . '/public/';?>admin/problem/<?php echo $id; ?>">${data}</a>
-
-                        
-                        `;
+                        return `<button class="btn btn-link" onclick="showReplyModal('${row.id}',\`${row.ticket_text}\`,'${row.date}','${row.username}','${row.department}','${row.type}','${row.status}','${row.prority}')">${data}</button>`;
                     }
                 },
-               
                 {
                     data: 'date',
                     name: 'date',
-                    className: 'text-center ',
-                    title: 'آخر تحديث'
+                    className: 'text-center t-date align-middle',
+                    title: 'اخر تحديث'
                 },
                 {
-                    data: 'reply',
-                    name: 'reply',
-                    className: 'text-center ',
-                    title: 'آخر من رد'
+                    data: 'username',
+                    name: 'username',
+                    className: 'text-center t-username align-middle',
+                    title: 'اخر من رد'
                 },
                 {
                     data: 'department',
                     name: 'department',
-                    className: 'text-center ',
+                    className: 'text-center t-department align-middle',
                     title: 'القسم'
                 },
-                
                 {
                     data: 'type',
                     name: 'type',
-                    className: 'text-center ',
+                    className: 'text-center t-type align-middle',
                     title: 'النوع'
                 },
                 {
                     data: 'status',
                     name: 'status',
-                    className: 'text-center ',
+                    className: 'text-center t-status align-middle',
                     title: 'الحالة'
                 },
                 {
                     data: 'prority',
                     name: 'prority',
-                    className: 'text-center',
-                    title: ' الأولوية'
+                    className: 'text-center t-prority align-middle',
+                    title: 'الاولوية'
                 },
-
-               
             ],
-            buttons: [{
-                    extend: 'collection',
-                    text: 'تصدير',
-                    className: 'btn btn-sm',
-                    buttons: [{
-                        extend: 'excel',
 
-                    }, ]
-                },
-                'colvis'
-            ],
             "language": {
                 "emptyTable": "ليست هناك بيانات متاحة في الجدول",
                 "loadingRecords": "جارٍ التحميل...",
@@ -385,9 +417,7 @@
                 }
             }
         });
-
     });
-
     $(document).ready(function() {
         manegTable();
     });
@@ -402,7 +432,7 @@
                     partner_id: id,
                     page: "1",
                     limit: "10000",
-                   
+
                 },
                 headers: {
                     "Authorization": token
@@ -418,8 +448,109 @@
 
     }
 
+    $(document).ready(function() {
 
-    
+        $('#status').change(function() {
+            getTicketsData();
+        });
+        getTicketsData();
+    });
 
-  
+
+
+    function showReplyModal(id, ticket_text, date, username, department, type, status, prority) {
+
+        $('#modal-ticket-text').html(ticket_text);
+        $('#modal-department').html(department);
+        $('#modal-type').html(type);
+        $('#modal-status').html(status);
+        $('#modal-prority').html(prority);
+        $('#modal-date').html(date);
+        $('#modal-id').val(id);
+
+        $('#reply-to-ticket-btn').click();
+
+        getTicketReplies(id);
+    }
+
+    function getTicketReplies(id) {
+        $("#modal-replies").html('');
+        $("#spinner-control").attr('style', 'display: .');
+
+        var jqxhr = $.ajax({
+                url: "<?= site_url('') ?>Tickets/GetTicketsReply",
+                method: "GET",
+                timeout: 0,
+                data: {
+                    ticket_id: id,
+                },
+                headers: {
+                    "Authorization": token
+                },
+            })
+            .done(function(response) {
+                $("#spinner-control").attr('style', 'display: none !important');
+                setReplies(response.data);
+            })
+            .fail(function(response) {
+                $("#spinner-control").attr('style', 'display: none !important');
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء تحميل بيانات الردود!', 'خطأ');
+            });
+
+    }
+
+    function setReplies(replies) {
+        console.log(replies.reply);
+
+
+        for (let i = 0; i < replies.reply.length; i++) {
+            // console.log(replies[i]);
+            $("#modal-replies").append(`<div class="card">
+                <div class="card-header" style="background-color: rgb(0 0 0 / 0%);">
+                    <h6 class="">مستخدم
+                        <<<small>${replies.reply[i].username}</small>>>
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <h6>${replies.reply[i].reply}</h6>
+
+                    <div class="float-right">
+                        <small>${moment(replies.reply[i].date).format("YYYY-MM-DD")}</small>
+                    </div>
+                </div>
+            </div>`);
+        }
+    }
+
+    function sendTicketReply() {
+        var reply = $("#user-reply").val();
+
+        $.ajax({
+                "url": "<?= site_url('') ?>Tickets/ReplyTicket",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": token,
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                "data": {
+                    "ticket_id": $("#modal-id").val(),
+                    "user_id": user_id,
+                    "reply": reply
+                }
+            }).done(function(response) {
+                refreshTicketReplies();
+                toastr.success('تم اضافة رد!')
+            })
+            .fail(function(response) {
+                console.log(response);
+                toastr.error('حدث خطأ ما اثناء ارسال الرد!', 'خطأ');
+            });
+    }
+
+    function refreshTicketReplies() {
+        var id = $("#modal-id").val();
+        getTicketReplies(id)
+    }
 </script>

@@ -14,8 +14,9 @@ class TicketsModel extends Model
                 $db = \Config\Database::connect();
                 $builder = $db->table('tickets');
                 $builder->select('users.id,school_info.school_name,users.username,school_info.image_url,category,users.email,users.phone,users.city,users.area');
-                $builder->join('users', 'tickets.sender_id = users.id OR tickets.reciver_id = users.id');
-                $builder->join('school_info', '(tickets.sender_id = school_info.school_id OR tickets.reciver_id = school_info.school_id)');
+                $builder->join('users', '(tickets.sender_id = users.id)');
+                $builder->join('users s', '(tickets.reciver_id = s.id)');
+                $builder->join('school_info', '(tickets.sender_id = school_info.school_id)');
                 if (!empty($name) && $sender_type == 1) {
                         $builder->like('school_name', $name);
                 }
@@ -34,6 +35,7 @@ class TicketsModel extends Model
                         $builder->where($search_where);
                 }
                 $builder->whereIn('users.role', [1,2]);
+                $builder->whereIn('s.role', [1,2]);
                 $builder->distinct();
 
                 $query   = $builder->get();
@@ -139,27 +141,94 @@ class TicketsModel extends Model
 
                 $db = \Config\Database::connect();
                 $builder = $db->table('tickets');
-                $builder->select('users.id parent_id,users.username,users.email,users.phone,users.city,users.area');
+                $builder->select('tickets.*,users.id parent_id,users.username,users.email,users.phone,users.city,users.area');
                 $builder->join('users', 'tickets.sender_id = users.id');
-                $builder->join('users s', 'tickets.reciver_id = s.id');
+                // $builder->join('users s', 'tickets.reciver_id = s.id');
+                // if (!empty($name) && $sender_type == 2) {
+                //         $builder->like('school_name', $name);
+                // }
+                // if (!empty($name) && $sender_type == 5) {
 
-                if (!empty($name) && $sender_type == 2) {
-                        $builder->like('school_name', $name);
-                }
-                if (!empty($name) && $sender_type == 5) {
-
-                        $builder->like('users.username', $name);
-                }
-                if (strlen($status) != 0) {
-                        $builder->where('tickets.status', $status);
-                }
-                if (!empty($date)) {
-                        $search_where = "CAST(tickets.create_date As Date) = '" . $date . "'";
-                        $builder->where($search_where);
-                }
-                $builder->where('sender_type', $sender_type);
+                //         $builder->like('users.username', $name);
+                // }
+                // if (strlen($status) != 0) {
+                //         $builder->where('tickets.status', $status);
+                // }
+                // if (!empty($date)) {
+                //         $search_where = "CAST(tickets.create_date As Date) = '" . $date . "'";
+                //         $builder->where($search_where);
+                // }
+                // $builder->where('sender_type', $sender_type);
+                $builder->distinct();
+                $builder->whereIn('users.role', [3]);
                 $builder->where('users.id', $parnet_id);
 
+                $query   = $builder->get();
+
+                return $query->getResult();
+        }
+        public function get_parentsAdminTicket($name = null, $status = null, $date = null, $sender_type = 0)
+        {
+
+
+                $db = \Config\Database::connect();
+                $builder = $db->table('tickets');
+                $builder->select('users.id parent_id,users.username,users.email,users.phone,users.city,users.area');
+                $builder->join('users', 'tickets.sender_id = users.id');
+                // $builder->join('users s', 'tickets.reciver_id = s.id','left');
+
+                // if (!empty($name) && $sender_type == 2) {
+                //         $builder->like('school_name', $name);
+                // }
+                // if (!empty($name) && $sender_type == 5) {
+
+                //         $builder->like('users.username', $name);
+                // }
+                // if (strlen($status) != 0) {
+                //         $builder->where('tickets.status', $status);
+                // }
+                // if (!empty($date)) {
+                //         $search_where = "CAST(tickets.create_date As Date) = '" . $date . "'";
+                //         $builder->where($search_where);
+                // }
+                // $builder->where('sender_type', $sender_type);
+                // $builder->where('users.id', $parnet_id);
+                $builder->distinct();
+                $builder->whereIn('users.role', [1,3]);
+                // $builder->whereIn('s.role', [1,3]);
+                $query   = $builder->get();
+
+                return $query->getResult();
+        }
+        public function get_partnersAdminTicket($name = null, $status = null, $date = null, $sender_type = 0)
+        {
+
+
+                $db = \Config\Database::connect();
+                $builder = $db->table('tickets');
+                $builder->select('users.id,users.username,users.email,users.phone,users.city,users.area');
+                $builder->join('users', 'tickets.sender_id = users.id');
+                // $builder->join('users s', 'tickets.reciver_id = s.id','left');
+
+                // if (!empty($name) && $sender_type == 2) {
+                //         $builder->like('school_name', $name);
+                // }
+                // if (!empty($name) && $sender_type == 5) {
+
+                //         $builder->like('users.username', $name);
+                // }
+                // if (strlen($status) != 0) {
+                //         $builder->where('tickets.status', $status);
+                // }
+                // if (!empty($date)) {
+                //         $search_where = "CAST(tickets.create_date As Date) = '" . $date . "'";
+                //         $builder->where($search_where);
+                // }
+                // $builder->where('sender_type', $sender_type);
+                // $builder->where('users.id', $parnet_id);
+                $builder->distinct();
+                $builder->whereIn('users.role', [4]);
+                // $builder->whereIn('s.role', [1,3]);
                 $query   = $builder->get();
 
                 return $query->getResult();
@@ -303,12 +372,14 @@ class TicketsModel extends Model
                 type,prority,ticket_text,reply,CAST(tickets_reply.create_date As Date) date,
                  users.id as user_id, school_info.school_id,school_info.school_name,users.username,
                  school_info.image_url,category,users.email,users.phone,users.city,users.area');
-                $builder->join('users', '(tickets.sender_id = users.id OR tickets.reciver_id = users.id)');
-                // $builder->join('users s', 'tickets.reciver_id = s.id');
+                $builder->join('users', 'tickets.sender_id = users.id');
+                $builder->join('users s', 'tickets.reciver_id = s.id');
                 $builder->join('school_info', '(tickets.sender_id = school_info.school_id OR tickets.reciver_id = school_info.school_id)');
                 $builder->join('tickets_reply ',' (tickets.id=tickets_reply.ticket_id  and tickets_reply.id in (select max(id) from tickets_reply group by ticket_id))', 'left');
 
                 $builder->whereIn('sender_type', [1,2]);
+                $builder->whereIn('users.role', [1,2]);
+                $builder->whereIn('s.role', [1,2]);
                 $builder->where('school_info.school_id', $school_id);
 
                 $query   = $builder->get();

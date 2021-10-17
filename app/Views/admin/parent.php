@@ -123,7 +123,7 @@
     });
     function getTicketsParents() {
         $.ajax({
-                "url": "<?= site_url('') ?>Tickets/GetSchoolsParentsTickets",
+                "url": "<?= site_url('') ?>Tickets/GetParentsAdminTickets",
                 "method": "GET",
                 "timeout": 0,
                 "headers": {
@@ -156,18 +156,11 @@
                 `<div class="col-lg-4">
 
    <div class="card" style="">
-        <div class=""><h6 class="text-center" id="school_name">${data[i].school_name}</h6></div>
+        
     <div class="card-header " >
     <div class="row">
                    
-                    <div class="col-lg-12">
-                        <img src="${data[i].image_url}" class="img-thumbnail d-flex justify-content-lg-around  " style="  
-    height:250px;
-    object-fit: scale-down;
-
-"></div>
-
-                        </div>
+                                        </div>
 
                       <!-- <h2 class="d-flex justify-content-end"> </h2> -->
                       </div>
@@ -211,7 +204,7 @@
         <div class="d-flex justify-content-center">
             <a class="btn btn-success m-2" style="color: #fff;
     background-color: #1bc5bd;
-    border-color: #1bc5bd;" href="<?php echo base_url() . '/public/' ;?>admin/viewticketparent/${data[i].id}" onclick="viewt()">استعراض التذاكر</a>
+    border-color: #1bc5bd;" href="<?php echo base_url() . '/public/' ;?>admin/viewticketparent/${data[i].parent_id}" onclick="viewt()">استعراض التذاكر</a>
 
 
 </div>     

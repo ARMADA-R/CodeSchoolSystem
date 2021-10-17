@@ -111,8 +111,6 @@
         </div>
     </div>
 </div>
-<button class="btn btn-link" onclick="showReplyModal('54','السلام عليكم نامل اعادة ربط الحساب ببوابة الاشعارات','2021-09-28','school','3','-','مفتوحة','3')">السلام عليكم 
-نامل اعادة ربط الحساب ببوابة الاشعارات</button>
 
 
 <?php require(APPPATH . 'Views/admin/layouts/postContent.php'); ?>

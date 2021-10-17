@@ -13,8 +13,6 @@
     <div class="card-body">
         <div class="row">
 
-
-
             <div class="col-lg-4">
 
                 <label class="sr-only" for="searsh">إبحث عن مدرسة</label>
@@ -75,7 +73,6 @@
                 getTickets();
             });
             $('#searsh').change(function() {
-
                 getTickets();
             });
             $('#datee').change(function() {
@@ -92,7 +89,6 @@
                         "Authorization": token
                     },
                     data: {
-
                         page: 1,
                         limit: 10000,
                         status: $('#status').val(),
@@ -124,9 +120,6 @@
                         <div class="card-header " >
                     <div class="row">
                    
-                    <div class="col-lg-12">
-                        <img src="${data[i].image_url}" class="img-thumbnail img2 d-flex " style="width: 100%; id=imge"></div>
-
                         </div>
 
                       <!-- <h2 class="d-flex justify-content-end"> </h2> -->

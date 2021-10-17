@@ -250,7 +250,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
-    var partner_id = 23;
     var dataTable = null;
 
     $(document).ready(function() {
@@ -660,6 +659,7 @@
     }
 
     function addTicket() {
+        console.log(partner_id);
         $("#send-ticket-btn").attr('disabled', 'true');
         $("#send-ticket-btn").html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                     <span class="sr-only">جارٍ الارسال...</span>`);
