@@ -50,58 +50,19 @@
                         <label class="input-group-text" for="inputGroupSelect02">حالة التذاكر</label>
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
-
-
-
-
-
-
-
-
         <!-- father tiket -->
         <div class="row" id="tickets-container">
-
-
-
-
             <div class="col-lg-4"></div>
-
-
-
-
-
-
-
-
-
             <!--  end  tiket2 -->
             <div class="col-lg-4"></div>
 
             <!--  end  tiket3 -->
-
-
         </div>
-
-
     </div>
 
     <!-- end crad bady -->
-
-
-
-
-
-
-
-
-
-
 
     <?php require(APPPATH . 'Views/admin/layouts/postContent.php'); ?>
     <script>
@@ -134,16 +95,12 @@
 
                         page: 1,
                         limit: 10000,
-
-
                         status: $('#status').val(),
                         school_name: $('#searsh').val(),
                         date: $('#datee').val(),
                     }
                 }).done(function(response) {
                     displayTickets(response.data);
-
-
                 })
                 .fail(function(response) {
                     console.log(response);
@@ -162,10 +119,10 @@
 
                     `<div class="col-lg-4">
 
-   <div class="card" style="">
-        <div class=""><h6 class="text-center" id="school_name">${data[i].school_name}</h6></div>
-    <div class="card-header " >
-    <div class="row">
+                    <div class="card" style="">
+                            <div class=""><h6 class="text-center" id="school_name">${data[i].school_name}</h6></div>
+                        <div class="card-header " >
+                    <div class="row">
                    
                     <div class="col-lg-12">
                         <img src="${data[i].image_url}" class="img-thumbnail img2 d-flex " style="width: 100%; id=imge"></div>

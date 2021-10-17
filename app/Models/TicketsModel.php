@@ -14,9 +14,8 @@ class TicketsModel extends Model
                 $db = \Config\Database::connect();
                 $builder = $db->table('tickets');
                 $builder->select('users.id,school_info.school_name,users.username,school_info.image_url,category,users.email,users.phone,users.city,users.area');
-                $builder->join('users', 'tickets.sender_id = users.id');
-                $builder->join('users s', 'tickets.reciver_id = s.id');
-                $builder->join('school_info', '(users.id = school_info.school_id OR s.id = school_info.school_id)');
+                $builder->join('users', 'tickets.sender_id = users.id OR tickets.reciver_id = users.id');
+                $builder->join('school_info', '(tickets.sender_id = school_info.school_id OR tickets.reciver_id = school_info.school_id)');
                 if (!empty($name) && $sender_type == 1) {
                         $builder->like('school_name', $name);
                 }
@@ -34,7 +33,8 @@ class TicketsModel extends Model
                         $search_where = "CAST(tickets.create_date As Date) = '" . $date . "'";
                         $builder->where($search_where);
                 }
-                // $builder->where('sender_type', $sender_type);
+                $builder->whereIn('users.role', [1,2]);
+                $builder->distinct();
 
                 $query   = $builder->get();
 
