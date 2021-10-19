@@ -97,12 +97,12 @@
                     title: 'العنوان'
                 },
                 {
-                    "data": null,
-                    name: 'link',
+                    data: 'short_link',
+                    name: 'short_link',
                     className: 'text-center t-link',
                     title: 'استعراض',
                     render: function(data, type, row, meta) {
-                        return `<a style="color: #212529;" href="${row.link}"><i class="far fa-eye"></i></a>`;
+                        return `<a style="color: #212529;" href="${row.short_link}"><i class="far fa-eye"></i></a>`;
                     }
                 },
                 

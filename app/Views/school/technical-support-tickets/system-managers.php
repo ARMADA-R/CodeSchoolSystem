@@ -66,10 +66,10 @@
                                 
                         <select id="department" name="department"  class="custom-select" id="inputGroupSelect02" style="cursor: pointer;">
                         <option value="" selected> أختر...</option>
-                        <option value="1">اقتراحات</option>
-                        <option value="2">استفسارات</option>
-                        <option value="3">شكوى</option>
-                        <option value="4">اخرى</option>
+                        <option value="اقتراحات">اقتراحات</option>
+                        <option value="استفسارات">استفسارات</option>
+                        <option value="شكوى">شكوى</option>
+                        <option value="اخرى">اخرى</option>
 
                         </select>
                             </div>
@@ -98,9 +98,9 @@
                                                                 
                         <select  required id="prority" name="prority"  class="custom-select" id="inputGroupSelect02" style="cursor: pointer; ">
                         <option value="" selected> أختر...</option>
-                        <option value="1">منخفض </option>
-                        <option value="2">متوسط </option>
-                        <option value="3">هام جدا </option>
+                        <option value="منخفض">منخفض </option>
+                        <option value="متوسط">متوسط </option>
+                        <option value="هام جدا">هام جدا </option>
             
 
                         </select>

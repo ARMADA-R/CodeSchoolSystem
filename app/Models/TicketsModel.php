@@ -34,8 +34,8 @@ class TicketsModel extends Model
                         $search_where = "CAST(tickets.create_date As Date) = '" . $date . "'";
                         $builder->where($search_where);
                 }
-                $builder->whereIn('users.role', [1,2]);
-                $builder->whereIn('s.role', [1,2]);
+                $builder->whereIn('users.role', [1, 2]);
+                $builder->whereIn('s.role', [1, 2]);
                 $builder->distinct();
 
                 $query   = $builder->get();
@@ -194,7 +194,7 @@ class TicketsModel extends Model
                 // $builder->where('sender_type', $sender_type);
                 // $builder->where('users.id', $parnet_id);
                 $builder->distinct();
-                $builder->whereIn('users.role', [1,3]);
+                $builder->whereIn('users.role', [1, 3]);
                 // $builder->whereIn('s.role', [1,3]);
                 $query   = $builder->get();
 
@@ -239,9 +239,9 @@ class TicketsModel extends Model
 
                 $db = \Config\Database::connect();
                 $builder = $db->table('tickets');
-                $builder->select('s.id school_id,school_info.school_name,users.username,school_info.image_url,category,users.email,users.phone,users.city,users.area');
-                $builder->join('users', 'tickets.sender_id = users.id');
-                $builder->join('users s', 'tickets.reciver_id = s.id');
+                $builder->select('s.id school_id,school_info.school_name,s.username,school_info.image_url,category,s.email,s.phone,s.city,s.area');
+                $builder->join('users', 'tickets.sender_id = users.id AND users.role = 3');
+                $builder->join('users s', 'tickets.reciver_id = s.id AND users.role = 3');
                 $builder->join('school_info', 's.id = school_info.school_id', '');
                 if (!empty($name) && $sender_type == 2) {
                         $builder->like('school_name', $name);
@@ -259,6 +259,7 @@ class TicketsModel extends Model
                 }
                 $builder->where('sender_type', $sender_type);
                 $builder->where('users.id', $parnet_id);
+                $builder->distinct();
 
                 $query   = $builder->get();
 
@@ -322,11 +323,12 @@ class TicketsModel extends Model
                 }
                 $builder->where('sender_type', $sender_type);
                 $builder->where('users.id', $parnet_id);
-
+                $builder->distinct();
                 $query   = $builder->get();
 
                 return $query->getResult();
         }
+
         public function getparentpartnerticketbyid($page, $limit, $parent_id, $sender_type, $partner_id)
         {
 
@@ -337,6 +339,7 @@ class TicketsModel extends Model
 
                 return $query->getResult();
         }
+
         public function get_schooladminticketbyschoolid($school_id, $sender_type, $limit, $page, $ticket = null, $date = null, $status = null)
         {
 
@@ -364,6 +367,7 @@ class TicketsModel extends Model
                 //        $query=$db->query('Select users.username,a.id, b.* From tickets a left Join( Select 1  From tickets_reply) b On b.ticket_id = a.id left Join  users on b.user_id=users.id  where   (sender_id='.$school_id .' and sender_type='.$sender_type.') ');
                 return $query->getResult();
         }
+
         public function getSchoolAdminTicketBySchoolId($school_id)
         {
                 $db = \Config\Database::connect();
@@ -375,22 +379,23 @@ class TicketsModel extends Model
                 $builder->join('users', 'tickets.sender_id = users.id');
                 $builder->join('users s', 'tickets.reciver_id = s.id');
                 $builder->join('school_info', '(tickets.sender_id = school_info.school_id OR tickets.reciver_id = school_info.school_id)');
-                $builder->join('tickets_reply ',' (tickets.id=tickets_reply.ticket_id  and tickets_reply.id in (select max(id) from tickets_reply group by ticket_id))', 'left');
+                $builder->join('tickets_reply ', ' (tickets.id=tickets_reply.ticket_id  and tickets_reply.id in (select max(id) from tickets_reply group by ticket_id))', 'left');
 
-                $builder->whereIn('sender_type', [1,2]);
-                $builder->whereIn('users.role', [1,2]);
-                $builder->whereIn('s.role', [1,2]);
+                $builder->whereIn('sender_type', [1, 2]);
+                $builder->whereIn('users.role', [1, 2]);
+                $builder->whereIn('s.role', [1, 2]);
                 $builder->where('school_info.school_id', $school_id);
 
                 $query   = $builder->get();
 
                 return $query->getResult();
         }
+
         public function get_schoolparentticketbyschoolid($school_id, $sender_type, $limit, $page, $parent_name = null, $date = null, $status = null)
         {
                 $db = \Config\Database::connect();
                 $builder = $db->table('tickets');
-                $builder->select('users.id,users.email,users.phone,users.username,department,type,prority,ticket_text,tickets.status');
+                $builder->select('users.id,users.email,users.phone,users.username');
                 $builder->join('users', 'tickets.sender_id = users.id');
                 $builder->where('reciver_id', $school_id);
                 $builder->where('sender_type', $sender_type);
@@ -398,14 +403,18 @@ class TicketsModel extends Model
                 if (!empty($parent_name)) {
                         $builder->like('users.username', $parent_name);
                 }
+
                 if (strlen($status) != 0) {
                         $builder->where('tickets.status', $status);
                 }
+
                 if (!empty($date)) {
                         $search_where = "CAST(tickets.create_date As Date) = '" . $date . "'";
                         $builder->where($search_where);
                 }
-                $query   = $builder->get();
+
+                $builder->distinct();
+                $query = $builder->get();
 
                 return $query->getResult();
 
@@ -518,7 +527,7 @@ class TicketsModel extends Model
                 }
                 $builder->where('sender_type', $sender_type);
                 $builder->where('s.id', $partner_id);
-
+                $builder->distinct();
                 $query   = $builder->get();
 
                 return $query->getResult();

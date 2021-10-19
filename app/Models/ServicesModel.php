@@ -100,14 +100,15 @@ class ServicesModel extends Model
         return $query->getResult();
     }
 
-    public function get_parent_survey($school_id, $limit, $page, $key)
+    public function get_parent_survey($school_ids, $limit, $page, $key)
     {
         $page = ($page - 1) * $limit;
         $db = \Config\Database::connect();
         $builder = $db->table('survey');
-        $builder->select('survey.id,title, ( SELECT COUNT(*) FROM anwser_user_survey m WHERE survey.id=m.survey_id group by survey_id)count,status');
+        $builder->select('survey.id,title, short_link');
 
-        $builder->where('school_id', $school_id);
+        $builder->whereIn('school_id', $school_ids);
+        
         $builder->where('status', 1);
 
         $builder->orderBy('survey.create_date', 'DESC');

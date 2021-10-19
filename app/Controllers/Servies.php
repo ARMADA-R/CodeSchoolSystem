@@ -568,22 +568,11 @@ class Servies extends BaseController
                     }
                 }
                 $model = new ServicesModel();
-                $result = $model->get_parent_survey($school_id, $limit, $page, $key);
+                $school_ids = explode(',', $school_id);
+                $result = $model->get_parent_survey($school_ids, $limit, $page, $key);
                 if (!empty($result)) {
-                    $i = 0;
-                    foreach ($result as $r) {
-                        $survey[$i]['id'] = $r->id;
-                        $survey[$i]['title'] = $r->title;
-                        $survey[$i]['count'] = $r->count;
-                        if ($r->status == 0) {
-                            $survey[$i]['status'] = 'مفتوحة';
-                        }
-                        if ($r->status == 1) {
-                            $survey[$i]['status'] = 'مغلقة';
-                        }
-                        $i++;
-                    }
-                    $data = array('code' => 1, 'msg' => 'success', 'data' => $survey, 'total_count' => count($result));
+                    
+                    $data = array('code' => 1, 'msg' => 'success', 'data' => $result, 'total_count' => count($result));
                     return    $this->respond($data, 200);
                 } else {
                     $data = array('code' => 1, 'msg' => 'no data found', 'data' => []);

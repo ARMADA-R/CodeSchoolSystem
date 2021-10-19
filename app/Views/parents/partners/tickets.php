@@ -470,11 +470,11 @@
 
     function getTicketsData() {
         var jqxhr = $.ajax({
-                url: "<?= site_url('') ?>Tickets/GetSchoolPartnersTicketsByPartnerId",
+                url: "<?= site_url('') ?>Tickets/GetParentPartnerTicketsById",
                 method: "GET",
                 timeout: 0,
                 data: {
-                    school_id: school_id,
+                    parent_id: parent_id,
                     page: "1",
                     limit: "7000",
                     partner_id: partner_id,

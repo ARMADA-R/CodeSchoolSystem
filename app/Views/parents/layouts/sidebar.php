@@ -47,7 +47,7 @@
                         </p>
                     </a>
                 </li>
-                
+<!--                 
                 <li class="nav-item">
                     <a href="<?= site_url() ?>parent/school/notification" class="nav-link <?php echo strpos(current_url(),'parent/school/notification')? 'active' :''; ?>">
                         <i class="text-navy nav-icon fas fa-bell" style="color:  <?php echo strpos(current_url(),'parent/school/notification')? '#f4f6f9' :''; ?>;"></i>
@@ -55,7 +55,7 @@
                             التنبيهات المدرسية
                         </p>
                     </a>
-                </li>
+                </li> -->
 
 
                 <li class="nav-header">الدعم الفني</li>

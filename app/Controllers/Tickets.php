@@ -893,7 +893,6 @@ class Tickets extends BaseController
     public function GetSchoolsParentTicketsBySchoolId()
     {
 
-
         if ($this->request->getMethod() == 'get') {
             $check = new Check(); // Create an instance
             $result = $check->check();
@@ -906,7 +905,6 @@ class Tickets extends BaseController
                     exit;
                 }
                 $page = $this->request->getVar('page');
-
                 $limit = $this->request->getVar('limit');
 
                 if (!$page) {
@@ -929,19 +927,9 @@ class Tickets extends BaseController
                     $i = 0;
                     foreach ($result as $a) {
                         $r[$i]['id'] = $a->id;
-                        if ($a->status == 0) {
-                            $r[$i]['status'] = 'مفتوحة';
-                        }
-                        if ($a->status == 1) {
-                            $r[$i]['status'] = 'مغلقة';
-                        }
                         $r[$i]['username'] = $a->username;
                         $r[$i]['email'] = $a->email;
                         $r[$i]['phone'] = $a->phone;
-                        $r[$i]['department'] = $a->department;
-                        $r[$i]['type'] = $a->type;
-                        $r[$i]['prority'] = $a->prority;
-                        $r[$i]['ticket_text'] = $a->ticket_text;
 
 
                         $i++;

@@ -456,7 +456,7 @@ class SchoolModel extends Model
         $page = ($page - 1) * $limit;
         $db = \Config\Database::connect();
         $builder = $db->table('absence_and_lag');
-        $builder->select('absence_and_lag.id as archive_id,bsence_and_lag.code,students.id student_id,full_name,student_number,students.phone parent_phone,classes.name class_name,semaster.name semaster_name,monitoring_case,period,date,message,send_status');
+        $builder->select('absence_and_lag.id as archive_id,absence_and_lag.code,students.id student_id,full_name,student_number,students.phone parent_phone,classes.name class_name,semaster.name semaster_name,monitoring_case,period,date,message,send_status');
         $builder->join('students', 'absence_and_lag.student_id = students.id');
         $builder->join('users', 'students.phone = users.phone');
         $builder->join('classes', 'students.class_id = classes.id');

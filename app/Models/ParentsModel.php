@@ -53,4 +53,20 @@ class ParentsModel extends Model
         return $db->affectedRows();
     }
 
+    
+    public function parents_search($key)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('users');
+        $builder->select('`id`, CONCAT(username, " | ", email, " | ", phone) AS text');
+        $builder->where('role', 3);
+        $builder->groupStart();
+        $builder->like('username', $key );
+        $builder->orlike('email', $key);
+        $builder->orlike('phone', $key);
+        $builder->groupEnd();
+        $query   = $builder->get();
+        return $query->getResult();
+    }
+
 }

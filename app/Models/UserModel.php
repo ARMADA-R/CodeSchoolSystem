@@ -61,7 +61,7 @@ class UserModel extends Model
         return $query->getRow();
     }
 
-    
+
     public function get_user_by_phone($phone)
     {
         $db = \Config\Database::connect();
@@ -144,7 +144,6 @@ class UserModel extends Model
         });
         $query = $builder->get();
         return $query->getResult();
-
     }
 
     public function setResetPasswordCredentials($data)
@@ -189,7 +188,7 @@ class UserModel extends Model
         return $query->getResult();
     }
 
-       
+
     public function delete_resetPassword_record($email)
     {
         $db = \Config\Database::connect();
@@ -199,7 +198,7 @@ class UserModel extends Model
         return $db->affectedRows();
     }
 
-       
+
     public function get_users_by_role($role = 0)
     {
         $db = \Config\Database::connect();
@@ -211,6 +210,5 @@ class UserModel extends Model
         return $query->getResult();
     }
 
-    
-    
+
 }

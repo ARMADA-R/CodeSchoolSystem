@@ -47,60 +47,60 @@
                     <div class="row">
                         <div class="col-md">
                             <div class="form-group">
-                            <label for="text" class="col-form-label">نص التذكرة</label>
+                                <label for="text" class="col-form-label">نص التذكرة</label>
 
-<textarea name="" id="ticket_text" cols="30" rows="3" class=" form-control"></textarea>
-   
-
-       </div>
-   </div>
-</div>
-<div class="row">
-   <div class="col-md">
-       <div class="form-group">
-           <label for="department" class="col-form-label">القسم</label>
-       
-           
-   <select id="department" name="department"  class="custom-select" id="inputGroupSelect02" style="cursor: pointer;">
-   <option value="" selected> أختر...</option>
-   <option value="1">اقتراحات</option>
-   <option value="2">استفسارات</option>
-   <option value="3">شكوى</option>
-   <option value="4">اخرى</option>
-
-   </select>
-       </div>
-   </div>
-</div>
-<div class="row">
-   <div class="col-md">
-       <div class="form-group">
-           <label for="type" class="col-form-label">النمط</label>
-
-                      
-   <select id="type" name="type"  class="custom-select" id="inputGroupSelect02" style="cursor: pointer;">
-
-   <option value="-"selected>--</option>
-  
-
-   </select>
-       </div>
-   </div>
-</div>
-<div class="row">
-   <div class="col-md">
-       <div class="form-group">
-           <label for="prority" class="col-form-label">الأولوية</label>
-        
-                                           
-   <select  required id="prority" name="prority"  class="custom-select" id="inputGroupSelect02" style="cursor: pointer; ">
-   <option value="" selected> أختر...</option>
-   <option value="1">منخفض </option>
-   <option value="2">متوسط </option>
-   <option value="3">هام جدا </option>
+                                <textarea name="" id="ticket_text" cols="30" rows="3" class=" form-control"></textarea>
 
 
-   </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="department" class="col-form-label">القسم</label>
+
+
+                                <select id="department" name="department" class="custom-select" id="inputGroupSelect02" style="cursor: pointer;">
+                                    <option value="" selected> أختر...</option>
+                                    <option value="اقتراحات">اقتراحات</option>
+                                    <option value="استفسارات">استفسارات</option>
+                                    <option value="شكوى">شكوى</option>
+                                    <option value="اخرى">اخرى</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="type" class="col-form-label">النمط</label>
+
+
+                                <select id="type" name="type" class="custom-select" id="inputGroupSelect02" style="cursor: pointer;">
+
+                                    <option value="-" selected>--</option>
+
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label for="prority" class="col-form-label">الأولوية</label>
+
+
+                                <select required id="prority" name="prority" class="custom-select" id="inputGroupSelect02" style="cursor: pointer; ">
+                                    <option value="" selected> أختر...</option>
+                                    <option value="منخفض">منخفض </option>
+                                    <option value="متوسط">متوسط </option>
+                                    <option value="هام جدا">هام جدا </option>
+
+
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -204,7 +204,7 @@
     <div class="col-12">
         <div class="card">
 
-            <div class="card-body p-2"  style="overflow-x: scroll;">
+            <div class="card-body p-2" style="overflow-x: scroll;">
                 <table id="content-table" class="table table-striped " style="width:100%">
                     <thead>
                         <tr>
@@ -256,7 +256,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . '/public/'; ?>design/css/datatable.all.css" />
 
 <script>
-    
     var dataTable = null;
     var studentsData = [];
 
@@ -644,7 +643,7 @@
 
     function setReplies(replies) {
         // typeof()
-        if ((replies =! 'undefined')) {
+        if ((replies = !'undefined')) {
             for (let i = 0; i < replies.reply.length; i++) {
                 // console.log(replies[i]);
                 $("#modal-replies").append(`<div class="card">
